@@ -3,19 +3,15 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
 import { HoverButton } from "./styles";
+import useSingUp from "../../../hooks/useSingIn";
 
 function LoginForm() {
   const {
     email, setEmail,
     password, setPassword,
   } = useContext(SingContext)
+  const { handleSubmit } = useSingUp()
   const navigate = useNavigate()
-
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    console.log(email, password)
-  }
 
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
