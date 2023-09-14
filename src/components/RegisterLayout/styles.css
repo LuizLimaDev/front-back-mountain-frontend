@@ -1,0 +1,27 @@
+.MuiStepConnector-line.MuiStepConnector-lineVertical.css-8t49rw-MuiStepConnector-line{
+    border-color: #0E8750;
+    border-width: 2px;
+    margin-left: 0.45rem;
+}
+
+.layout-container{
+    display: flex;
+}
+
+.aside-step{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    min-height: 100dvh;
+    width: 31.3rem;
+    padding-top: 10.88rem;
+
+    background-color: #F0F0F5;
+}
+
+.stepImage{
+    margin-left: 4px;
+    width: 2rem;
+    height: 2rem;
+}
