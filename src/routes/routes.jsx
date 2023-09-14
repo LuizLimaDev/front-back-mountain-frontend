@@ -1,22 +1,18 @@
 
-import { createBrowserRouter } from "react-router-dom";
-import Login from "../pages/Login/Login"
-import SingUp from "../pages/SingUp/SingUp"
-import Home from "../pages/Home/Home"
+import { Route, Routes } from "react-router-dom";
+import Home from "../pages/Home/Home";
+import SingIn from "../pages/SingIn/SingIn";
+import SingUp from "../pages/SingUp/SingUp";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />
-  },
-  {
-    path: "/singup",
-    element: <SingUp />
-  },
-  {
-    path: "/home",
-    element: <Home />
-  },
-])
+function MainRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<SingIn />} />
+      <Route path="/singup" element={<SingUp />} />
 
-export default router
+      <Route path="/home" element={<Home />} />
+    </Routes>
+  );
+}
+
+export default MainRoutes;
