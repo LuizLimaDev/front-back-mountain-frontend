@@ -1,21 +1,20 @@
-import { Box, FormControl, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Stack, TextField, Typography } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
-import { HoverButton } from "./styles";
+import useSingUp from "../../../hooks/useSingIn";
 
 function LoginForm() {
   const {
     email, setEmail,
     password, setPassword,
   } = useContext(SingContext)
+  const { handleSubmit } = useSingUp()
   const navigate = useNavigate()
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  // TODO - E-mail não existe no cadastro (/email/:email)
+  // TODO -  Senha incorreta para o e-mail
 
-    console.log(email, password)
-  }
 
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
@@ -29,7 +28,7 @@ function LoginForm() {
 
       <FormControl
         component="form"
-        sx={{ width: "100%" }}
+        // sx={{ width: "100%" }}
         onSubmit={handleSubmit}
       >
         <Box>
@@ -108,7 +107,7 @@ function LoginForm() {
           />
         </Box>
 
-        <HoverButton
+        <Button
           variant="contained"
           type="submit"
           sx={{
@@ -124,11 +123,16 @@ function LoginForm() {
             fontSize: "1.25rem",
             textTransform: "capitalize",
 
-            backgroundColor: "SCPink"
+            backgroundColor: "SCPink",
+
+            '&:hover': {
+              backgroundColor: "SCPink",
+              opacity: ".7"
+            }
           }}
         >
           Entrar
-        </HoverButton>
+        </Button>
       </FormControl>
 
       <Box sx={{ display: "flex", justifyContent: "center", gap: ".25rem" }}>

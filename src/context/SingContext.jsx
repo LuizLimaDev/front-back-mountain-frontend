@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
+import { useLocalStorage } from "react-use";
 
 export const SingContext = createContext()
 
 export const SingProvider = ({ children }) => {
+  const [value, setValue, remove] = useLocalStorage('token')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setCConfirmPassword] = useState('');
@@ -24,6 +26,7 @@ export const SingProvider = ({ children }) => {
       email, setEmail,
       password, setPassword,
       confirmPassword, setCConfirmPassword,
+      value, setValue, remove
       steps, setSteps,
       errorNameMessage, setErrorNameMessage,
       errorEmailMessage, setErrorEmailMessage,

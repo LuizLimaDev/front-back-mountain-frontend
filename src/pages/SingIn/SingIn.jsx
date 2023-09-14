@@ -5,15 +5,17 @@ import LoginForm from '../../components/Form/LoginForm/index';
 
 function SingIn() {
   return (
-    <Grid container sx={{ width: "1440px", height: "894px" }}>
+    <Grid container sx={{ minWidth: "1440px", height: "894px", overflowX: "hidden" }}>
       <Grid
         item
         lg={4}
         sx={{
-          width: "100%",
-          height: "100%",
+          // width: "100%",
+          // height: "100%",
 
           backgroundImage: `url('${backgroundLogin}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
         }}
       >
         <Typography

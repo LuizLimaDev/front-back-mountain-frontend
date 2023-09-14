@@ -6,12 +6,14 @@ import './index.css'
 import MainRoutes from './routes/routes'
 import { theme } from "./styles/muiTheme.jsx"
 import { SingProvider } from './context/SingContext'
+import { CssBaseline } from '@mui/material'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <SingProvider >
+          <CssBaseline />
           <MainRoutes />
         </SingProvider>
       </ThemeProvider>
