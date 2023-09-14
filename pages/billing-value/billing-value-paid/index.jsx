@@ -1,9 +1,9 @@
 import './style.css';
 
-function header() {
+function billingValuePaid() {
   return (
     <h1>Hello World!</h1>
   )
 }
 
-export default header;
+export default billingValuePaid;
