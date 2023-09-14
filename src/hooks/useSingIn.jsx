@@ -19,7 +19,6 @@ export default function useSingUp() {
       })
 
       setValue(data)
-      console.log('Hook use SingUp')
 
     } catch (error) {
       console.log(error.response.data)
