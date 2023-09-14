@@ -8,20 +8,12 @@
     width: calc(100% - 31.25rem);
 }
 
-.register-name__title{
-    margin-bottom: 2rem;
-}
-
 .register-name__form{
     display: flex;
     flex-direction: column;
 
     min-width: 23rem;
     margin-bottom: 17.25rem;
-}
-
-.form-label{
-    margin-bottom: 0.38rem;
 }
 
 .navigation-list{

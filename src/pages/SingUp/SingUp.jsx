@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import {
   Link,
-  NavLink
+  useNavigate
 } from "react-router-dom";
 
 
@@ -17,19 +17,23 @@ function SingUp() {
     errorNameMessage, setErrorNameMessage,
     errorEmailMessage, setErrorEmailMessage,
     form, setForm,
-    setSteps
+    steps, setSteps
   } = useContext(SingContext);
+
+  const navigate = useNavigate();
 
 
   function handleSubmit(event){
     event.preventDefault();
     if(!form.name){
-        setErrorNameMessage(true);
+        return setErrorNameMessage(true);
     }
 
     if(!form.email){
-        setErrorEmailMessage(true);
+        return setErrorEmailMessage(true);
     }
+    setSteps(1);
+    navigate("/password");
 }
 
 function handleChange(event){
@@ -56,8 +60,6 @@ return(
 
         <form className="register-name__form" onSubmit={ handleSubmit } >
             <Typography
-            className="form-label"
-            htmlFor="input-name"
             sx={{
                 fontFamily: "Nunito",
                 fontSize: "0.875rem",
@@ -71,11 +73,11 @@ return(
             id="input-name" 
             variant="outlined" 
             placeholder="Digite seu nome" 
-            className="form__input-name" 
             sx={{mb: "1.25rem"}} 
             error={errorNameMessage && true}
             helperText={errorNameMessage && "O campo de nome é obrigatório."}
             name="name"
+            value={form.name}
             InputProps={{
                 style:{
                     height: "2.75rem",
@@ -87,9 +89,7 @@ return(
             onChange={(event) => handleChange(event)}
             />
 
-<Typography
-            className="form-label"
-            htmlFor="input-name"
+            <Typography
             sx={{
                 fontFamily: "Nunito",
                 fontSize: "0.875rem",
@@ -116,19 +116,20 @@ return(
             helperText={ errorEmailMessage && "O campo de email é obrigatório."} 
             type="email"
             name="email"
+            value={form.email}
             onChange={(event) => handleChange(event)}
             />
 
             <Button 
             variant="contained" 
             sx={{
-                backgroundColor: "#DA0175",
+                backgroundColor: "SCPink",
                 width: "10rem",
                 alignSelf: "center",
                 mb: "0.94rem",
                 borderRadius: "0.63rem",
                 '&:hover':{
-                    backgroundColor: "#DA0175"
+                    backgroundColor: "SCPink"
                 }
             }}
             type="submit"
@@ -141,7 +142,7 @@ return(
                     fontSize: "1.125rem",
                     fontWeight: "400",
                     textAlign: "center"
-                }}> Já possui uma conta? Faça seu <Link to="#" style={{
+                }}> Já possui uma conta? Faça seu <Link to="/signin" style={{
                     color: "#DA0175"
                 }} >
                     Login
@@ -149,24 +150,23 @@ return(
             </Typography>
         </form>
         <nav className="navigation-list" >
-            <NavLink
-            to="/"
-            end
-            className={({isActive}) => isActive ? "selected" : null }
-            onClick={() => setSteps(0)}
-            ></NavLink>
+            <a
+            className={steps === 0 ? "selected" : null }
+            ></a>
 
-            <NavLink
-            to="/password"
-            className={({isActive}) => isActive ? "selected" : null }
-            onClick={() => setSteps(1)}
-            ></NavLink>
+            <a
+            className={steps === 1 ? "selected" : null }
+            onClick={() => {
+                if(form.password && form.passwordConfirm){
+                    setSteps(1);
+                    return navigate("/password");
+                }
+            }}
+            ></a>
 
-            <NavLink
-            to="/success"
-            className={({isActive}) => isActive ? "selected" : null }
-            onClick={() => setSteps(2)}
-            ></NavLink>
+            <a
+            className={steps === 2 ? "selected" : null }
+            ></a>
 
         </nav>
     </main>

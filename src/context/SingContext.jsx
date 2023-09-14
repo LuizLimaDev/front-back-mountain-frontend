@@ -12,8 +12,12 @@ export const SingProvider = ({ children }) => {
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
   const [form, setForm] = useState({
       name: "",
-      email: ""
+      email: "",
+      password: "",
+      passwordConfirm: ""
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorPassword, setErrorPassword] = useState("");
 
   return (
     <SingContext.Provider value={{
@@ -23,7 +27,9 @@ export const SingProvider = ({ children }) => {
       steps, setSteps,
       errorNameMessage, setErrorNameMessage,
       errorEmailMessage, setErrorEmailMessage,
-      form, setForm
+      form, setForm,
+      showPassword, setShowPassword,
+      errorPassword, setErrorPassword
     }}
     >
       {children}

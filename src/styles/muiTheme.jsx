@@ -20,7 +20,7 @@ export const theme = createTheme({
     SCLightYellow: "#FCF6DC",
     SCDarkYellow: "#C5A605",
 
-    SCNormalError: "#E70000v"
+    SCNormalError: "#E70000"
   },
   typography: {
     fontFamily: [
