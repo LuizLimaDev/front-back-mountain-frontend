@@ -26,7 +26,8 @@ export const theme = createTheme({
     fontFamily: [
       'Montserrat',
       'sans-serif',
-      'Nunito'
+      'Nunito',
+      'Inter'
     ].join(','),
   },
 })
