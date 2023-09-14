@@ -5,7 +5,7 @@ import clientsIcon from '../../assets/Menu/Clients-button.png';
 
 function MenuIcon() {
   return (
-    <div>
+    <div className='menu-dashboard'>
       <div className='menu-home'>
         <a placeholder='' className='menu-home-button'>
           <img src={homeIcon} alt='Botão Home' className='menu-icon menu-home-icon'></img>
