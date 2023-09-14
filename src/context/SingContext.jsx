@@ -26,7 +26,7 @@ export const SingProvider = ({ children }) => {
       email, setEmail,
       password, setPassword,
       confirmPassword, setCConfirmPassword,
-      value, setValue, remove
+      value, setValue, remove,
       steps, setSteps,
       errorNameMessage, setErrorNameMessage,
       errorEmailMessage, setErrorEmailMessage,
