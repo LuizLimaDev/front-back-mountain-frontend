@@ -13,10 +13,10 @@ export const SingProvider = ({ children }) => {
   const [errorNameMessage, setErrorNameMessage] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
   const [form, setForm] = useState({
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: ""
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: ""
   });
   const [showPassword, setShowPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState("");
@@ -26,7 +26,7 @@ export const SingProvider = ({ children }) => {
       email, setEmail,
       password, setPassword,
       confirmPassword, setCConfirmPassword,
-      value, setValue, remove
+      value, setValue, remove,
       steps, setSteps,
       errorNameMessage, setErrorNameMessage,
       errorEmailMessage, setErrorEmailMessage,
