@@ -15,7 +15,6 @@ function LoginForm() {
   // TODO - E-mail não existe no cadastro (/email/:email)
   // TODO -  Senha incorreta para o e-mail
 
-
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
       <Typography
@@ -28,7 +27,6 @@ function LoginForm() {
 
       <FormControl
         component="form"
-        // sx={{ width: "100%" }}
         onSubmit={handleSubmit}
       >
         <Box>
@@ -54,8 +52,11 @@ function LoginForm() {
             InputProps={{
               style: {
                 height: "2.75rem",
-                borderRadius: ".625rem",
-                backgroundColor: "SCInputBackground"
+                borderRadius: ".5rem",
+
+                backgroundColor: "SCInputBackground",
+
+                fontFamily: "Inter"
               }
             }}
           />
@@ -101,7 +102,10 @@ function LoginForm() {
               style: {
                 height: "2.75rem",
                 borderRadius: "10px",
-                backgroundColor: "SCInputBackground"
+
+                backgroundColor: "SCInputBackground",
+
+                fontFamily: "Inter"
               }
             }}
           />

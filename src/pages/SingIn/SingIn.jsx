@@ -8,10 +8,8 @@ function SingIn() {
     <Grid container sx={{ minWidth: "1440px", height: "894px", overflowX: "hidden" }}>
       <Grid
         item
-        lg={4}
         sx={{
-          // width: "100%",
-          // height: "100%",
+          width: "31.25rem",
 
           backgroundImage: `url('${backgroundLogin}')`,
           backgroundRepeat: "no-repeat",
@@ -45,8 +43,6 @@ function SingIn() {
           alignItems: "center",
 
           maxWidth: "21.5rem",
-
-          backgroundColor: "SCBackground"
         }}
       >
         <LoginForm />
