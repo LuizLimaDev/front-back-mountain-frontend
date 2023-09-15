@@ -10,12 +10,12 @@ import Success from "../pages/SingUp/Success";
 function MainRoutes() {
   return (
     <Routes>
-      <Route element={ <RegisterLayout /> } >
-        <Route path="/" element={<SingUp />} />
+      <Route element={<RegisterLayout />} >
+        <Route path="/singup" element={<SingUp />} />
         <Route path="/password" element={<Password />} />
         <Route path="/success" element={<Success />} />
       </Route>
-        <Route path="/signin" element={<SingIn />} />
+      <Route path="/" element={<SingIn />} />
 
       <Route path="/home" element={<Home />} />
     </Routes>

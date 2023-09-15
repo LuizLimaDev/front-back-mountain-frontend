@@ -1,21 +1,20 @@
-import "./styles.css";
-import { Outlet } from "react-router-dom";
 import {
-    Step, 
-    Stepper,
-    StepLabel,
+    Step,
     StepContent,
-    StepConnector,
+    StepLabel,
+    Stepper,
     Typography
 } from "@mui/material";
-import ActualStep from "../../assets/actualStep.svg";
-import NextStep from "../../assets/nextStep.svg";
-import DoneStep from "../../assets/doneStep.svg";
 import { useContext } from "react";
+import { Outlet } from "react-router-dom";
+import ActualStep from "../../assets/actualStep.svg";
+import DoneStep from "../../assets/doneStep.svg";
+import NextStep from "../../assets/nextStep.svg";
 import { SingContext } from "../../context/SingContext";
+import "./styles.css";
 
-export default function RegisterLayout(){
-    const { steps, setSteps } = useContext(SingContext);
+export default function RegisterLayout() {
+    const { steps } = useContext(SingContext);
     const stages = [
         {
             label: "Cadastre-se",
@@ -60,28 +59,28 @@ export default function RegisterLayout(){
                                             fontSize: "1.25rem",
                                             color: "SCNormalGreen",
                                         }}
-                                        >
-                                            {stage.label}
-                                        </Typography>
-                                    </StepLabel>
-                                    <StepContent>
-                                        <Typography
+                                    >
+                                        {stage.label}
+                                    </Typography>
+                                </StepLabel>
+                                <StepContent>
+                                    <Typography
                                         sx={{
                                             fontFamily: "Nunito",
                                             fontSize: "1.125ren",
                                             fontWeight: "600",
                                             color: "SCGray6"
                                         }}
-                                        >
-                                            {stage.content}
-                                        </Typography>
-                                    </StepContent>
-                                </Step>
-                            )
-                        })}
-                    </Stepper>
+                                    >
+                                        {stage.content}
+                                    </Typography>
+                                </StepContent>
+                            </Step>
+                        )
+                    })}
+                </Stepper>
             </aside>
-                <Outlet />
+            <Outlet />
         </div>
     )
 }

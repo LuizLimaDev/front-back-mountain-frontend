@@ -10,14 +10,14 @@ import {
 import SuccessImage from "../../../assets/success.svg";
 import { SingContext } from "../../../context/SingContext";
 
-export default function Success(){
+export default function Success() {
     const {
         steps,
     } = useContext(SingContext);
     const navigate = useNavigate();
 
-    return(
-        <main className="register-name" style={{paddingTop: "11rem"}} >
+    return (
+        <main className="register-name" style={{ paddingTop: "11rem" }} >
             <Box
                 sx={{
                     display: "flex",
@@ -33,7 +33,7 @@ export default function Success(){
                     backgroundColor: "SCGray7"
                 }}
             >
-                <img src={ SuccessImage } alt="Success Image" />
+                <img src={SuccessImage} alt="Success Image" />
                 <Typography
                     sx={{
                         fontFamily: "Montserrat",
@@ -48,36 +48,36 @@ export default function Success(){
             </Box>
 
             <Button
-                variant="contained" 
+                variant="contained"
                 sx={{
                     backgroundColor: "SCPink",
                     width: "10rem",
                     alignSelf: "center",
                     mb: "4.31rem",
                     borderRadius: "0.63rem",
-                    '&:hover':{
+                    '&:hover': {
                         backgroundColor: "SCPink"
                     }
                 }}
-                onClick={() => navigate("/signin")}
+                onClick={() => navigate("/")}
             >
                 Ir para Login
             </Button>
 
             <nav className="navigation-list" >
-            <a
-            className={steps === 0 ? "selected" : null }
-            ></a>
+                <a
+                    className={steps === 0 ? "selected" : null}
+                ></a>
 
-            <a
-            className={steps === 1 ? "selected" : null }
-            ></a>
+                <a
+                    className={steps === 1 ? "selected" : null}
+                ></a>
 
-            <a
-            className={steps === 2 ? "selected" : null }
-            ></a>
+                <a
+                    className={steps === 2 ? "selected" : null}
+                ></a>
 
-        </nav>
+            </nav>
         </main>
     )
 }
