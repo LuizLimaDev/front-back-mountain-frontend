@@ -1,21 +1,19 @@
-import { Box, FormControl, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Stack, TextField, Typography } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
-import { HoverButton } from "./styles";
+import useSingUp from "../../../hooks/useSingIn";
 
 function LoginForm() {
   const {
     email, setEmail,
     password, setPassword,
   } = useContext(SingContext)
+  const { handleSubmit } = useSingUp()
   const navigate = useNavigate()
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    console.log(email, password)
-  }
+  // TODO - E-mail não existe no cadastro (/email/:email)
+  // TODO -  Senha incorreta para o e-mail
 
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
@@ -29,7 +27,6 @@ function LoginForm() {
 
       <FormControl
         component="form"
-        sx={{ width: "100%" }}
         onSubmit={handleSubmit}
       >
         <Box>
@@ -55,8 +52,11 @@ function LoginForm() {
             InputProps={{
               style: {
                 height: "2.75rem",
-                borderRadius: ".625rem",
-                backgroundColor: "SCInputBackground"
+                borderRadius: ".5rem",
+
+                backgroundColor: "SCInputBackground",
+
+                fontFamily: "Inter"
               }
             }}
           />
@@ -84,7 +84,9 @@ function LoginForm() {
               sx={{
                 fontSize: ".875rem",
                 fontWeight: "600",
-                textDecoration: "underline"
+                textDecoration: "underline",
+
+                cursor: "pointer"
               }}>
               Esqueceu a senha?
             </Typography>
@@ -102,13 +104,16 @@ function LoginForm() {
               style: {
                 height: "2.75rem",
                 borderRadius: "10px",
-                backgroundColor: "SCInputBackground"
+
+                backgroundColor: "SCInputBackground",
+
+                fontFamily: "Inter"
               }
             }}
           />
         </Box>
 
-        <HoverButton
+        <Button
           variant="contained"
           type="submit"
           sx={{
@@ -124,15 +129,26 @@ function LoginForm() {
             fontSize: "1.25rem",
             textTransform: "capitalize",
 
-            backgroundColor: "SCPink"
+            backgroundColor: "SCPink",
+
+            '&:hover': {
+              backgroundColor: "SCPink",
+              opacity: ".7"
+            }
           }}
         >
           Entrar
-        </HoverButton>
+        </Button>
       </FormControl>
 
       <Box sx={{ display: "flex", justifyContent: "center", gap: ".25rem" }}>
-        <Typography sx={{ fontSize: ".875rem", }}>
+        <Typography
+          sx={{
+            fontFamily: "Nunito",
+            fontSize: "1.125rem",
+            fontWeight: "400",
+          }}
+        >
           Ainda não possui uma conta?
         </Typography>
         <Typography
@@ -140,9 +156,11 @@ function LoginForm() {
           sx={{
             alignSelf: "center",
 
-            fontSize: ".875rem",
+            fontSize: "1rem",
             fontWeight: "600",
-            textDecoration: "underline"
+            textDecoration: "underline",
+
+            cursor: "pointer"
           }}
           onClick={() => navigate("/singup")}
         >

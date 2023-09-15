@@ -5,28 +5,27 @@ import LoginForm from '../../components/Form/LoginForm/index';
 
 function SingIn() {
   return (
-    <Grid container sx={{ width: "1440px", height: "894px" }}>
+    <Grid container sx={{ Width: "1440px", height: "894px" }}>
       <Grid
         item
-        lg={4}
+        xs={4}
         sx={{
-          width: "100%",
-          height: "100%",
-
           backgroundImage: `url('${backgroundLogin}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
         }}
       >
         <Typography
           color="SCDarkGreen"
           sx={{
             position: "absolute",
-            width: "24.25rem",
+            width: "24.2rem",
             margin: "10.18rem 3rem 0 3rem",
 
             fontFamily: 'Montserrat',
             fontSize: '1.5rem',
             fontWeight: '600',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           Gerencie todos os pagamentos da sua empresa em um só lugar.
@@ -35,7 +34,7 @@ function SingIn() {
 
       <Grid
         item
-        lg={8}
+        xs={8}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -43,8 +42,6 @@ function SingIn() {
           alignItems: "center",
 
           maxWidth: "21.5rem",
-
-          backgroundColor: "SCBackground"
         }}
       >
         <LoginForm />
