@@ -5,7 +5,7 @@ import {
     Stepper,
     StepLabel,
     StepContent,
-    StepIcon,
+    StepConnector,
     Typography
 } from "@mui/material";
 import ActualStep from "../../assets/actualStep.svg";
@@ -34,7 +34,11 @@ export default function RegisterLayout(){
     return (
         <div className="layout-container">
             <aside className="aside-step" >
-                    <Stepper activeStep={steps} orientation="vertical">
+                    <Stepper activeStep={steps} orientation="vertical" sx={{
+                        '& .MuiStepConnector-lineVertical': {
+                            display: "none"
+                        }
+                    }} >
                         {stages.map((stage, index) => {
                             return(
                                 <Step key={stage.label} sx={{
@@ -42,7 +46,7 @@ export default function RegisterLayout(){
                                         borderColor: "#0E8750",
                                         borderWidth: "2px",
                                         ml: 2.4,
-                                        minHeight: 10
+                                        minHeight: "3rem",
                                     },
                                 }} >
                                     <StepLabel icon={ <img src={ index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep } className="stepImage"  /> } >
