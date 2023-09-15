@@ -1,13 +1,16 @@
 import './style.css';
+import clientsBilling from '../../../assets/Clients-billing.png'
 
 function ClientsNonpaying() {
   return (
     <div className='table-big'>
       <div className='table-big-title'>
-        <h1 className='table-big-name'>Cobranças Vencidas</h1>
+        <div className='table-big-title-left'>
+          <img src={clientsBilling} alt='Ícone de clientes em dívida'></img>
+          <h1 className='table-big-name'>Cobranças Vencidas</h1>
+        </div>
         <span className='table-big-quantity'>08</span>
       </div>
-
       <div className='table-big-infos-description'>
         <p className='table-big-info'>Cliente</p>
         <p className='table-big-info'>Id da cob.</p>
