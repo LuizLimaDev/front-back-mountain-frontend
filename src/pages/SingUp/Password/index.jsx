@@ -15,6 +15,7 @@ import {
     Link,
     useNavigate
 } from "react-router-dom";
+import api from "../../../services/api";
 
 
 export default function Password() {
@@ -26,8 +27,7 @@ export default function Password() {
     } = useContext(SingContext);
     const navigate = useNavigate();
 
-
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         if (!form.password) {
             return setErrorPassword("Digite o campo de senha.");
@@ -41,8 +41,13 @@ export default function Password() {
             return setErrorPassword("A senhas digitadas não correspondem entre si.")
         }
 
-        setSteps(2);
-        return navigate("/success");
+        try {
+            const response = await api.post("/users", {name: form.name, email: form.email, password: form.password});
+            setSteps(2);
+            return navigate("/success");
+        } catch (error) {
+            setErrorPassword(error.response.data.mensagem);   
+        }
     }
 
     function handleChange(event) {
