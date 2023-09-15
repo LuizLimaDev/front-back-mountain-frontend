@@ -36,17 +36,20 @@ export default function RegisterLayout(){
             <aside className="aside-step" >
                     <Stepper activeStep={steps} orientation="vertical" sx={{
                         '& .MuiStepConnector-lineVertical': {
-                            display: "none"
+                            minHeight: "2rem",
+                            ml: 0.9,
+                            borderColor: "SCNormalGreen",
+                            borderWidth: "2px"
                         }
                     }} >
                         {stages.map((stage, index) => {
                             return(
                                 <Step key={stage.label} sx={{
                                     '& .MuiStepContent-root': {
-                                        borderColor: "#0E8750",
+                                        borderColor: "SCNormalGreen",
                                         borderWidth: "2px",
                                         ml: 2.4,
-                                        minHeight: "3rem",
+                                        minHeight: "0.5rem",
                                     },
                                 }} >
                                     <StepLabel icon={ <img src={ index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep } className="stepImage"  /> } >
