@@ -84,7 +84,9 @@ function LoginForm() {
               sx={{
                 fontSize: ".875rem",
                 fontWeight: "600",
-                textDecoration: "underline"
+                textDecoration: "underline",
+
+                cursor: "pointer"
               }}>
               Esqueceu a senha?
             </Typography>
@@ -140,7 +142,13 @@ function LoginForm() {
       </FormControl>
 
       <Box sx={{ display: "flex", justifyContent: "center", gap: ".25rem" }}>
-        <Typography sx={{ fontSize: ".875rem", }}>
+        <Typography
+          sx={{
+            fontFamily: "Nunito",
+            fontSize: "1.125rem",
+            fontWeight: "400",
+          }}
+        >
           Ainda não possui uma conta?
         </Typography>
         <Typography
@@ -148,9 +156,11 @@ function LoginForm() {
           sx={{
             alignSelf: "center",
 
-            fontSize: ".875rem",
+            fontSize: "1rem",
             fontWeight: "600",
-            textDecoration: "underline"
+            textDecoration: "underline",
+
+            cursor: "pointer"
           }}
           onClick={() => navigate("/singup")}
         >

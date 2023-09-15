@@ -139,7 +139,7 @@ function SingUp() {
                     sx={{
                         fontFamily: "Nunito",
                         fontSize: "1.125rem",
-                        fontWeight: "400",
+                        fontWeight: "600",
                         textAlign: "center"
                     }}> Já possui uma conta? Faça seu <Link to="/" style={{
                         color: "#DA0175"
