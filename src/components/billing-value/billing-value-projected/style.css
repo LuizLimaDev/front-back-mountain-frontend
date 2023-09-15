@@ -1,0 +1,39 @@
+.billing-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    width: 22.5rem;
+    height: 6.9375rem;
+    border-radius: 1.875rem;
+
+    background-color: rgba(252, 246, 220, 1);
+
+    font-family: montserrat, sans-serif;
+    font-weight: 700;
+
+}
+
+.billing-value-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.billing-value-title {
+
+    border: 0;
+    padding: 0 0 0.5rem 0;
+    margin: 0;
+
+    font-size: 1.125rem;
+
+}
+
+.billing-value-value {
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    font-size: 1.5rem;
+}
