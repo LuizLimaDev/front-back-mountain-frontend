@@ -33,19 +33,26 @@ export default function RegisterLayout() {
     return (
         <div className="layout-container">
             <aside className="aside-step" >
-                <Stepper activeStep={steps} orientation="vertical">
-                    {stages.map((stage, index) => {
-                        return (
-                            <Step key={stage.label} sx={{
-                                '& .MuiStepContent-root': {
-                                    borderColor: "#0E8750",
-                                    borderWidth: "2px",
-                                    ml: 2.4,
-                                    minHeight: 10
-                                },
-                            }} >
-                                <StepLabel icon={<img src={index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep} className="stepImage" />} >
-                                    <Typography
+                    <Stepper activeStep={steps} orientation="vertical" sx={{
+                        '& .MuiStepConnector-lineVertical': {
+                            minHeight: "2rem",
+                            ml: 0.9,
+                            borderColor: "SCNormalGreen",
+                            borderWidth: "2px"
+                        }
+                    }} >
+                        {stages.map((stage, index) => {
+                            return(
+                                <Step key={stage.label} sx={{
+                                    '& .MuiStepContent-root': {
+                                        borderColor: "SCNormalGreen",
+                                        borderWidth: "2px",
+                                        ml: 2.4,
+                                        minHeight: "0.5rem",
+                                    },
+                                }} >
+                                    <StepLabel icon={ <img src={ index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep } className="stepImage"  /> } >
+                                        <Typography
                                         sx={{
                                             fontFamily: "Montserrat",
                                             fontWeight: "700",
