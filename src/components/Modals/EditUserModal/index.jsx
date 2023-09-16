@@ -1,33 +1,56 @@
 import { Box, InputLabel, Modal, Paper, Stack, TextField, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import imgCloseModal from "../../../assets/close.svg";
 import { ModalsContext } from '../../../context/ModalsContext';
-import useEmailValidation from '../../../hooks/useEmailValidation';
+// import useEmailValidation from '../../../hooks/useEmailValidation';
 import SCButton from '../../SCButton/indxe';
 import { useTheme } from '@emotion/react';
 
 function EditUserModal() {
   const {
-    setOpenModalEditUser,
+    openModalEditUser,
     name, setName,
     email, setEmail,
     cpf, setCpf,
     phone, setPhone,
-    password, setPassword,
-    confirmPassword, setConfirmPassword
+    handleCloseEditUser
   } = useContext(ModalsContext)
-  const { handleBlur } = useEmailValidation()
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [passwordCombinationError, setPasswordCombinationError] = useState("")
+  const [passwordErrorListener, setPasswordErrorListener] = useState(false)
+  const [confirmPasswordErrorListener, setConfirmPasswordErrorListener] = useState(false)
+  // const { handleBlur } = useEmailValidation()
   const theme = useTheme()
 
-  function emailErrors() {
-    return "Erros da API"
+  function handleSubmit(e) {
+    e.preventDefault()
+    setPasswordCombinationError("")
+    setPasswordErrorListener(false)
+    setConfirmPasswordErrorListener(false)
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      setPasswordCombinationError("As senhas não coincidem!")
+      setPasswordErrorListener(true)
+      setConfirmPasswordErrorListener(true)
+      return
+    }
+
+    console.log({
+      name,
+      email,
+      cpf,
+      phone,
+      password,
+      confirmPassword
+    })
   }
 
   return (
     <Stack    >
       <Modal
-        open={() => setOpenModalEditUser(true)}
-        onClose={() => setOpenModalEditUser(false)}
+        open={openModalEditUser}
+        onClose={handleCloseEditUser}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -78,11 +101,11 @@ function EditUserModal() {
 
           <Stack
             component="form"
+            onSubmit={handleSubmit}
             sx={{
               width: "23.68rem",
             }}
           >
-
             <InputLabel
               htmlFor="name"
               required
@@ -98,7 +121,6 @@ function EditUserModal() {
               fullWidth
               value={name}
               onChange={(e) => setName(e.target.value)}
-              // error={}
               InputProps={{
                 style: {
                   height: "2.75rem",
@@ -125,8 +147,7 @@ function EditUserModal() {
               fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onBluer={handleBlur}
-              // error={emailErrors()}
+              // onBlur={handleBlur}
               InputProps={{
                 style: {
                   height: "2.75rem",
@@ -137,7 +158,6 @@ function EditUserModal() {
               }}
             />
             {/* TODO - Helpertext dos erros de email vindo da API */}
-            {emailErrors()}
 
             <Box
               sx={{
@@ -187,7 +207,6 @@ function EditUserModal() {
                   placeholder='Digite seu Telefone'
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  // error={}
                   InputProps={{
                     style: {
                       width: "11.12rem",
@@ -213,10 +232,10 @@ function EditUserModal() {
               id="pasasword"
               type='password'
               placeholder='Digite a nova senha'
-              fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // error={}
+              error={passwordErrorListener}
+              fullWidth
               InputProps={{
                 style: {
                   height: "2.75rem",
@@ -230,7 +249,7 @@ function EditUserModal() {
             <InputLabel
               htmlFor="confirmPasasword"
               required
-
+              sx={theme.inputModalLabelStyle}
             >
               Confirmar Senha
             </InputLabel>
@@ -239,10 +258,11 @@ function EditUserModal() {
               id="confirmPasasword"
               type='password'
               placeholder='Confirme a nova senha'
-              fullWidth
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              // error={}
+              error={confirmPasswordErrorListener}
+              helperText={passwordCombinationError && `${passwordCombinationError}`}
+              fullWidth
               InputProps={{
                 style: {
                   height: "2.75rem",
@@ -252,16 +272,13 @@ function EditUserModal() {
                 }
               }}
             />
-
             <SCButton>
               Aplicar
             </SCButton>
-
           </Stack>
         </Paper>
-
       </Modal>
-    </Stack>
+    </Stack >
   );
 }
 
