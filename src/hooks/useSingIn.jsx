@@ -9,7 +9,7 @@ export default function useSingUp() {
     password,
     setValue,
     setErrorEmailMessage,
-    setApiErrors
+    apiErrors, setApiErrors
   } = useContext(SingContext)
   const navigate = useNavigate()
 
@@ -32,10 +32,33 @@ export default function useSingUp() {
 
     } catch (error) {
       setApiErrors(error.response.data.message)
+      console.log(error.response)
     }
   }
 
+  function emailErrors() {
+    if (apiErrors === 'Usuário não encontrado' || apiErrors === 'O campo email é obrigatório') {
+      return true
+    }
+
+    return false
+  }
+
+  function passwordErrors() {
+    if (
+      apiErrors === 'O campo senha é obrigatório'
+      || apiErrors === 'A senha precisa conter, no mínimo, 5 caracteres'
+      || apiErrors === "Senha inválida") {
+      return true
+    }
+
+    return false
+
+  }
+
   return {
-    handleSubmit
+    handleSubmit,
+    emailErrors,
+    passwordErrors
   }
 }

@@ -3,19 +3,16 @@ import { Box, Button, FormControl, Stack, TextField, Typography } from "@mui/mat
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
-import useEmailValidation from "../../../hooks/useEmailValidation";
-import useSingUp from "../../../hooks/useSingIn";
+import useSingIn from "../../../hooks/useSingIn";
 
 function LoginForm() {
   const {
     email, setEmail,
     password, setPassword,
-    errorEmailMessage,
     apiErrors
   } = useContext(SingContext)
-  const { handleSubmit } = useSingUp()
+  const { handleSubmit, emailErrors, passwordErrors } = useSingIn()
   const navigate = useNavigate()
-  const { handleBlur } = useEmailValidation()
   const theme = useTheme()
 
   return (
@@ -51,8 +48,7 @@ function LoginForm() {
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            onBlur={handleBlur}
-            error={errorEmailMessage ? true : false}
+            error={emailErrors()}
             InputProps={{
               style: {
                 height: "2.75rem",
@@ -101,6 +97,7 @@ function LoginForm() {
             type='password'
             placeholder="Digite sua senha"
             fullWidth
+            error={passwordErrors()}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             InputProps={{
