@@ -1,10 +1,10 @@
+import { useTheme } from '@emotion/react';
 import { Box, InputLabel, Modal, Paper, Stack, TextField, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import imgCloseModal from "../../../assets/close.svg";
 import { ModalsContext } from '../../../context/ModalsContext';
 import useEmailValidation from '../../../hooks/useEmailValidation';
 import SCButton from '../../SCButton/indxe';
-import { useTheme } from '@emotion/react';
 
 function EditUserModal() {
   const {
@@ -15,24 +15,70 @@ function EditUserModal() {
     phone, setPhone,
     handleCloseEditUser
   } = useContext(ModalsContext)
+  const {
+    handleBlur,
+    existingEmailListener, setExistingEmailListener,
+    existingEmailError, setExistingEmailError
+  } = useEmailValidation()
+
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [passwordCombinationError, setPasswordCombinationError] = useState("")
+
+  const [nameError, setNameError] = useState(false)
+  const [nameErrorMessage, setNameErrorMessage] = useState("")
+
   const [passwordErrorListener, setPasswordErrorListener] = useState(false)
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
+
+  const [passwordCombinationError, setPasswordCombinationError] = useState("")
   const [confirmPasswordErrorListener, setConfirmPasswordErrorListener] = useState(false)
-  const { handleBlur, existingEmailListener, existingEmailError } = useEmailValidation()
+
   const theme = useTheme()
 
+  // TODO - msg de erro para erro no formato de email
   function handleSubmit(e) {
     e.preventDefault()
+    setNameError(false)
+    setNameErrorMessage("")
+
+    setExistingEmailListener(false)
+    setExistingEmailError("")
+
     setPasswordCombinationError("")
+
     setPasswordErrorListener(false)
+    setPasswordErrorMessage("")
+
     setConfirmPasswordErrorListener(false)
 
     if (password && confirmPassword && password !== confirmPassword) {
       setPasswordCombinationError("As senhas não coincidem!")
       setPasswordErrorListener(true)
       setConfirmPasswordErrorListener(true)
+      return
+    }
+
+    if (!name) {
+      setNameError(true)
+      setNameErrorMessage("Este campo deve ser preenchido!")
+      return
+    }
+
+    if (!email) {
+      setExistingEmailListener(true)
+      setExistingEmailError("Este campo deve ser preenchido!")
+      return
+    }
+
+    if (password && !confirmPassword) {
+      setConfirmPasswordErrorListener(true)
+      setPasswordCombinationError("Este campo deve ser preenchido!")
+      return
+    }
+
+    if (confirmPassword && !password) {
+      setPasswordErrorListener(true)
+      setPasswordErrorMessage("Este campo deve ser preenchido!")
       return
     }
 
@@ -114,18 +160,18 @@ function EditUserModal() {
               Nome
             </InputLabel>
             <TextField
-              required
               id="name"
               type='text'
               placeholder='Digite seu nome'
               fullWidth
               value={name}
               onChange={(e) => setName(e.target.value)}
+              error={nameError}
+              helperText={nameErrorMessage && `${nameErrorMessage}`}
               InputProps={{
                 style: {
                   height: "2.75rem",
                   borderRadius: ".5rem",
-                  marginBottom: "1.25rem",
 
                   fontFamily: "Inter",
                 }
@@ -136,11 +182,11 @@ function EditUserModal() {
               htmlFor="email"
               required
               sx={theme.inputModalLabelStyle}
+              style={{ marginTop: "1.25rem", }}
             >
               E-mail
             </InputLabel>
             <TextField
-              required
               id="email"
               type='email'
               placeholder='Digite seu e-mail'
@@ -154,6 +200,7 @@ function EditUserModal() {
                 style: {
                   height: "2.75rem",
                   borderRadius: ".5rem",
+
 
                   fontFamily: "Inter"
                 }
@@ -200,8 +247,8 @@ function EditUserModal() {
                   htmlFor="phone"
                   sx={theme.inputModalLabelStyle}
                 >
-                  Telefon
-                  e</InputLabel>
+                  Telefone
+                </InputLabel>
                 <TextField
                   id="phone"
                   type='text'
@@ -229,19 +276,18 @@ function EditUserModal() {
               Nova Senha
             </InputLabel>
             <TextField
-              required
               id="pasasword"
               type='password'
               placeholder='Digite a nova senha'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               error={passwordErrorListener}
+              helperText={passwordErrorMessage}
               fullWidth
               InputProps={{
                 style: {
                   height: "2.75rem",
                   borderRadius: ".5rem",
-                  marginBottom: "1.25rem",
 
                   fontFamily: "Inter"
                 }
@@ -251,11 +297,11 @@ function EditUserModal() {
               htmlFor="confirmPasasword"
               required
               sx={theme.inputModalLabelStyle}
+              style={{ marginTop: "1.25rem" }}
             >
               Confirmar Senha
             </InputLabel>
             <TextField
-              required
               id="confirmPasasword"
               type='password'
               placeholder='Confirme a nova senha'

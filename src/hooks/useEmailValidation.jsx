@@ -38,7 +38,7 @@ export default function useEmailValidation() {
   return {
     handleBlur,
     setReceivedEmail,
-    existingEmailError,
-    existingEmailListener
+    existingEmailListener, setExistingEmailListener,
+    existingEmailError, setExistingEmailError,
   }
 }
