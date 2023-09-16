@@ -4,6 +4,7 @@ export const theme = createTheme({
   palette: {
     SCBackground: "#F0F0F5",
     SCInputBackground: "#F0F0F5",
+    SCBackgroundWhite: "#FFFFFF",
 
     SCLightGreen: "#1FA7AF",
     SCNormalGreen: '#0E8750',
@@ -35,4 +36,9 @@ export const theme = createTheme({
     fontSize: ".875rem",
     color: "SCNormalError"
   },
+  inputModalLabelStyle: {
+    fontFamily: "Nunito",
+    fontWeight: "bold",
+    fontSize: ".875rem",
+  }
 })
