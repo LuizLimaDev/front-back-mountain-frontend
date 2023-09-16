@@ -1,19 +1,22 @@
+import { useTheme } from "@emotion/react";
 import { Box, Button, FormControl, Stack, TextField, Typography } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
+import useEmailValidation from "../../../hooks/useEmailValidation";
 import useSingUp from "../../../hooks/useSingIn";
 
 function LoginForm() {
   const {
     email, setEmail,
     password, setPassword,
+    errorEmailMessage,
+    apiErrors
   } = useContext(SingContext)
   const { handleSubmit } = useSingUp()
   const navigate = useNavigate()
-
-  // TODO - E-mail não existe no cadastro (/email/:email)
-  // TODO -  Senha incorreta para o e-mail
+  const { handleBlur } = useEmailValidation()
+  const theme = useTheme()
 
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
@@ -42,13 +45,14 @@ function LoginForm() {
             E-mail
           </Typography>
           <TextField
-            required
             id="email"
             type='email'
             placeholder="Digite seu e-mail"
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onBlur={handleBlur}
+            error={errorEmailMessage ? true : false}
             InputProps={{
               style: {
                 height: "2.75rem",
@@ -93,7 +97,6 @@ function LoginForm() {
           </Box>
 
           <TextField
-            required
             id="password"
             type='password'
             placeholder="Digite sua senha"
@@ -111,6 +114,15 @@ function LoginForm() {
               }
             }}
           />
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {
+            apiErrors &&
+            <Typography
+              sx={theme.errorMessageStyle}>
+              {apiErrors}
+            </Typography>
+          }
         </Box>
 
         <Button
@@ -167,7 +179,7 @@ function LoginForm() {
           Cadastre-se
         </Typography>
       </Box>
-    </Stack>
+    </Stack >
   );
 }
 

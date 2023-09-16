@@ -5,11 +5,14 @@ import LoginForm from '../../components/Form/LoginForm/index';
 
 function SingIn() {
   return (
-    <Grid container sx={{ Width: "1440px", height: "894px" }}>
+    <Grid container sx={{ width: "100vw", height: "100vh" }}>
       <Grid
         item
         xs={4}
         sx={{
+          display: "flex",
+          justifyContent: "center",
+
           backgroundImage: `url('${backgroundLogin}')`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -19,8 +22,8 @@ function SingIn() {
           color="SCDarkGreen"
           sx={{
             position: "absolute",
-            width: "24.2rem",
-            margin: "10.18rem 3rem 0 3rem",
+            width: "27vw",
+            marginTop: "10.18rem",
 
             fontFamily: 'Montserrat',
             fontSize: '1.5rem',
