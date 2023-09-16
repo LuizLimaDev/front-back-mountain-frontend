@@ -2,7 +2,7 @@ import { Box, InputLabel, Modal, Paper, Stack, TextField, Typography } from '@mu
 import { useContext, useState } from 'react';
 import imgCloseModal from "../../../assets/close.svg";
 import { ModalsContext } from '../../../context/ModalsContext';
-// import useEmailValidation from '../../../hooks/useEmailValidation';
+import useEmailValidation from '../../../hooks/useEmailValidation';
 import SCButton from '../../SCButton/indxe';
 import { useTheme } from '@emotion/react';
 
@@ -20,7 +20,7 @@ function EditUserModal() {
   const [passwordCombinationError, setPasswordCombinationError] = useState("")
   const [passwordErrorListener, setPasswordErrorListener] = useState(false)
   const [confirmPasswordErrorListener, setConfirmPasswordErrorListener] = useState(false)
-  // const { handleBlur } = useEmailValidation()
+  const { handleBlur, existingEmailListener, existingEmailError } = useEmailValidation()
   const theme = useTheme()
 
   function handleSubmit(e) {
@@ -147,7 +147,9 @@ function EditUserModal() {
               fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // onBlur={handleBlur}
+              onBlur={handleBlur}
+              error={existingEmailListener}
+              helperText={existingEmailError && `${existingEmailError}`}
               InputProps={{
                 style: {
                   height: "2.75rem",
@@ -157,7 +159,6 @@ function EditUserModal() {
                 }
               }}
             />
-            {/* TODO - Helpertext dos erros de email vindo da API */}
 
             <Box
               sx={{

@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import useEmailValidation from "../hooks/useEmailValidation";
+import api from "../services/api";
 
 export const ModalsContext = createContext({})
 
@@ -15,11 +17,26 @@ export const ModalsProvider = ({ children }) => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [apiErrors, setApiErrors] = useState("")
-  const [passwordCombinationError, setPasswordCombinationError] = useState("")
 
-  if (password !== confirmPassword) {
-    setPasswordCombinationError("As senhas não coincidem!")
+  const { setReceivedEmail } = useEmailValidation()
+  async function getData() {
+    try {
+      const { data } = await api.get("/users/profile", {
+        headers: {
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ5MDU0NTksImV4cCI6MTY5NDkzNDI1OSwic3ViIjoiMyJ9.kcH-ELExImOQeV0yN4KOuMGBi0XrBYzwhnZ_uwK1Py8`
+        }
+      })
+
+      console.log(data)
+      setReceivedEmail(data.email)
+    } catch (error) {
+      console.log(error.response.data)
+    }
   }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <ModalsContext.Provider value={{
@@ -32,7 +49,6 @@ export const ModalsProvider = ({ children }) => {
       confirmPassword, setConfirmPassword,
       apiErrors, setApiErrors,
       handleOpenEditUser, handleCloseEditUser,
-      passwordCombinationError
     }}
     >
       {children}

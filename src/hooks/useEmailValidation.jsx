@@ -6,9 +6,13 @@ export default function useEmailValidation() {
   const { setErrorEmailMessage } = useContext(SingContext)
   const [receivedEmail, setReceivedEmail] = useState("")
   const [existingEmailError, setExistingEmailError] = useState("")
+  const [existingEmailListener, setExistingEmailListener] = useState(false)
 
   async function handleBlur(e) {
     setErrorEmailMessage("")
+    setExistingEmailError("")
+    setExistingEmailListener("")
+
     const emailInput = e.target.value
 
     if (!emailInput) {
@@ -21,11 +25,11 @@ export default function useEmailValidation() {
       setErrorEmailMessage('E-mail inválido!')
 
     } catch (error) {
-      setExistingEmailError("")
-      console.log(error.response.data)
 
       if (receivedEmail !== emailInput) {
+        console.log('email api: ', receivedEmail, 'email input: ', emailInput)
         setExistingEmailError(error.response.data.message)
+        setExistingEmailListener(true)
         return
       }
     }
@@ -34,6 +38,7 @@ export default function useEmailValidation() {
   return {
     handleBlur,
     setReceivedEmail,
-    existingEmailError
+    existingEmailError,
+    existingEmailListener
   }
 }
