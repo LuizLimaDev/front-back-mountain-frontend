@@ -10,6 +10,8 @@ import {
     Link,
     useNavigate
 } from "react-router-dom";
+import ClientModal from "../../components/ClientModal";
+import api from "../../services/api";
 
 function SingUp() {
     const {
@@ -21,17 +23,28 @@ function SingUp() {
 
     const navigate = useNavigate();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         if (!form.name) {
-            return setErrorNameMessage(true);
+            return setErrorNameMessage("O campo de nome é obrigatório.");
         }
 
         if (!form.email) {
-            return setErrorEmailMessage(true);
+            return setErrorEmailMessage("O campo de e-mail é obrigatório.");
         }
-        setSteps(1);
-        navigate("/password");
+
+        try {
+
+            const response = await api.get(`/email/${form.email}`);
+            setSteps(1);
+            return navigate("/password");
+
+        } catch (error) {
+            if(error.response.status === 400){
+                return setErrorEmailMessage("Insira um e-mail válido.")
+            }
+            setErrorEmailMessage(error.response.data.message);
+        }
     }
 
     function handleChange(event) {
@@ -73,7 +86,7 @@ function SingUp() {
                     placeholder="Digite seu nome"
                     sx={{ mb: "1.25rem" }}
                     error={errorNameMessage && true}
-                    helperText={errorNameMessage && "O campo de nome é obrigatório."}
+                    helperText={ errorNameMessage }
                     name="name"
                     value={form.name}
                     InputProps={{
@@ -112,7 +125,7 @@ function SingUp() {
                         }
                     }}
                     error={errorEmailMessage && true}
-                    helperText={errorEmailMessage && "O campo de email é obrigatório."}
+                    helperText={ errorEmailMessage }
                     type="email"
                     name="email"
                     value={form.email}
@@ -168,6 +181,7 @@ function SingUp() {
                 ></a>
 
             </nav>
+            <ClientModal />
         </main>
     )
 }
