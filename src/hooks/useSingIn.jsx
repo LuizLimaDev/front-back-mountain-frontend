@@ -45,15 +45,11 @@ export default function useSingUp() {
   }
 
   function passwordErrors() {
-    if (
-      apiErrors === 'O campo senha é obrigatório'
-      || apiErrors === 'A senha precisa conter, no mínimo, 5 caracteres'
-      || apiErrors === "Senha inválida") {
+    if (apiErrors) {
       return true
     }
 
     return false
-
   }
 
   return {

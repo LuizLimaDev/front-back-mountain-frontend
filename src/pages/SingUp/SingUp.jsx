@@ -1,17 +1,16 @@
-import "./styles.css"
-import { useContext } from "react";
-import { SingContext } from "../../context/SingContext";
 import {
-    TextField,
     Button,
+    TextField,
     Typography,
 } from "@mui/material";
+import { useContext } from "react";
 import {
     Link,
     useNavigate
 } from "react-router-dom";
-import ClientModal from "../../components/ClientModal";
+import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
+import "./styles.css";
 
 function SingUp() {
     const {
@@ -35,12 +34,12 @@ function SingUp() {
 
         try {
 
-            const response = await api.get(`/email/${form.email}`);
+            await api.get(`/email/${form.email}`);
             setSteps(1);
             return navigate("/password");
 
         } catch (error) {
-            if(error.response.status === 400){
+            if (error.response.status === 400) {
                 return setErrorEmailMessage("Insira um e-mail válido.")
             }
             setErrorEmailMessage(error.response.data.message);
@@ -86,7 +85,7 @@ function SingUp() {
                     placeholder="Digite seu nome"
                     sx={{ mb: "1.25rem" }}
                     error={errorNameMessage && true}
-                    helperText={ errorNameMessage }
+                    helperText={errorNameMessage}
                     name="name"
                     value={form.name}
                     InputProps={{
@@ -125,7 +124,7 @@ function SingUp() {
                         }
                     }}
                     error={errorEmailMessage && true}
-                    helperText={ errorEmailMessage }
+                    helperText={errorEmailMessage}
                     type="email"
                     name="email"
                     value={form.email}
@@ -181,7 +180,6 @@ function SingUp() {
                 ></a>
 
             </nav>
-            <ClientModal />
         </main>
     )
 }

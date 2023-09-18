@@ -14,7 +14,7 @@ export const SingProvider = ({ children }) => {
   const [errorPassword, setErrorPassword] = useState("");
   const [errorNameMessage, setErrorNameMessage] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
-  const [openClientModal, setOpenClientModal] = useState(true);
+  const [openClientModal, setOpenClientModal] = useState(false);
   const [apiErrors, setApiErrors] = useState("")
   const [form, setForm] = useState({
     name: "",
@@ -55,7 +55,7 @@ export const SingProvider = ({ children }) => {
       errorPassword, setErrorPassword,
       openClientModal, setOpenClientModal,
       clientForm, setClientForm,
-      clientErrors, setClientErrors
+      clientErrors, setClientErrors,
       apiErrors, setApiErrors
     }}
     >
