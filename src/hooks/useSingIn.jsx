@@ -27,7 +27,7 @@ export default function useSingUp() {
         password
       })
 
-      setValue(data)
+      setValue(data.token)
       navigate("/home")
 
     } catch (error) {
@@ -37,7 +37,7 @@ export default function useSingUp() {
   }
 
   function emailErrors() {
-    if (apiErrors === 'Usuário não encontrado' || apiErrors === 'O campo email é obrigatório') {
+    if (apiErrors) {
       return true
     }
 

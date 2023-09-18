@@ -9,8 +9,8 @@ function HeaderDashBoard() {
         <h1>Resumo das cobranças</h1>
       </div>
       <div className='dashboard-user'>
-        <spam className='dashboard-user-icon'>LR</spam>
-        <spam className='dashboard-user-name'>Lorena</spam>
+        <span className='dashboard-user-icon'>LR</span>
+        <span className='dashboard-user-name'>Lorena</span>
         <a>
           <img src={ChevronDown} alt='Botão mais' className='dashboard-user-chevron'></img>
         </a>
