@@ -1,9 +1,11 @@
 import { useTheme } from '@emotion/react';
 import { Box, InputLabel, Modal, Paper, Stack, TextField, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import imgCloseModal from "../../../assets/close.svg";
 import { ModalsContext } from '../../../context/ModalsContext';
+import { SingContext } from '../../../context/SingContext';
 import useEmailValidation from '../../../hooks/useEmailValidation';
+import api from '../../../services/api';
 import SCButton from '../../SCButton/indxe';
 
 function EditUserModal() {
@@ -15,6 +17,7 @@ function EditUserModal() {
     phone, setPhone,
     handleCloseEditUser
   } = useContext(ModalsContext)
+  const { value } = useContext(SingContext)
   const {
     handleBlur,
     existingEmailListener, setExistingEmailListener,
@@ -35,8 +38,27 @@ function EditUserModal() {
 
   const theme = useTheme()
 
-  // TODO - msg de erro para erro no formato de email
-  function handleSubmit(e) {
+  async function userGetData() {
+    try {
+      const { data } = await api.get("/users/profile", {
+        headers: {
+          Authorization: `Bearer ${value.token}`
+        }
+      })
+
+      setName(data.name)
+      setEmail(data.email)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    userGetData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  async function handleSubmit(e) {
     e.preventDefault()
     setNameError(false)
     setNameErrorMessage("")
@@ -82,14 +104,25 @@ function EditUserModal() {
       return
     }
 
-    console.log({
+    const userEdit = {
       name,
       email,
       cpf,
       phone,
       password,
       confirmPassword
-    })
+    }
+
+    try {
+      await api.put("/users", userEdit, {
+        headers: {
+          Authorization: `Bearer ${value.token}`
+        }
+      })
+
+    } catch (error) {
+      console.log(error.response.data)
+    }
   }
 
   return (
