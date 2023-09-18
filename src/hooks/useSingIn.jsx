@@ -1,16 +1,25 @@
 import { useContext } from "react"
 import api from "../services/api"
 import { SingContext } from "../context/SingContext"
+import { useNavigate } from "react-router-dom"
 
 export default function useSingUp() {
   const {
     email,
     password,
-    setValue
+    setValue,
+    setErrorEmailMessage,
+    apiErrors, setApiErrors
   } = useContext(SingContext)
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
+    setErrorEmailMessage("")
     e.preventDefault()
+
+    if (!email) {
+      setErrorEmailMessage("O campo de E-mail não pode estar vazio!")
+    }
 
     try {
       const { data } = await api.post('/users/sessions', {
@@ -19,13 +28,37 @@ export default function useSingUp() {
       })
 
       setValue(data)
+      navigate("/home")
 
     } catch (error) {
-      console.log(error.response.data)
+      setApiErrors(error.response.data.message)
+      console.log(error.response)
     }
   }
 
+  function emailErrors() {
+    if (apiErrors === 'Usuário não encontrado' || apiErrors === 'O campo email é obrigatório') {
+      return true
+    }
+
+    return false
+  }
+
+  function passwordErrors() {
+    if (
+      apiErrors === 'O campo senha é obrigatório'
+      || apiErrors === 'A senha precisa conter, no mínimo, 5 caracteres'
+      || apiErrors === "Senha inválida") {
+      return true
+    }
+
+    return false
+
+  }
+
   return {
-    handleSubmit
+    handleSubmit,
+    emailErrors,
+    passwordErrors
   }
 }

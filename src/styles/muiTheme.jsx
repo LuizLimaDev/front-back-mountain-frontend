@@ -32,4 +32,9 @@ export const theme = createTheme({
       'Inter'
     ].join(','),
   },
+  errorMessageStyle: {
+    fontFamily: "Inter",
+    fontSize: ".875rem",
+    color: "SCNormalError"
+  },
 })

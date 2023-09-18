@@ -5,22 +5,23 @@ import { useLocalStorage } from "react-use";
 export const SingContext = createContext()
 
 export const SingProvider = ({ children }) => {
-  const [value, setValue, remove] = useLocalStorage('token')
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setCConfirmPassword] = useState('');
+  const [value, setValue, remove] = useLocalStorage("token")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setCConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [steps, setSteps] = useState(0);
+  const [errorPassword, setErrorPassword] = useState("");
   const [errorNameMessage, setErrorNameMessage] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
+  const [openClientModal, setOpenClientModal] = useState(true);
+  const [apiErrors, setApiErrors] = useState("")
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
     passwordConfirm: ""
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
-  const [openClientModal, setOpenClientModal] = useState(true);
   const [clientForm, setClientForm] = useState({
     name: "",
     email: "",
@@ -55,6 +56,7 @@ export const SingProvider = ({ children }) => {
       openClientModal, setOpenClientModal,
       clientForm, setClientForm,
       clientErrors, setClientErrors
+      apiErrors, setApiErrors
     }}
     >
       {children}
