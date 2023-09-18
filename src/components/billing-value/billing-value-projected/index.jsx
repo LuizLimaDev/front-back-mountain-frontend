@@ -1,8 +1,11 @@
 import './style.css';
 import pendingIcon from '../../../assets/Pending-icon.png'
+import useMetrics from '../../../hooks/useMetricsDashboard';
 
 
 function BillingValueProjected() {
+  const { metrics } = useMetrics();
+
   return (
     <div className='billing-value'>
       <div className='billing-value-icon'>
@@ -11,7 +14,7 @@ function BillingValueProjected() {
 
       <div className='billing-value-content'>
         <p className='billing-value-title'>Cobranças Previstas</p>
-        <p className='billing-value-value'>R$ 10.000</p>
+        <p className='billing-value-value'>R$ {metrics.totalPrices.valueProjected}</p>
       </div>
 
     </div>
