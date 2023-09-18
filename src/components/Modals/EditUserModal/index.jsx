@@ -42,14 +42,14 @@ function EditUserModal() {
     try {
       const { data } = await api.get("/users/profile", {
         headers: {
-          Authorization: `Bearer ${value.token}`
+          Authorization: `Bearer ${value}`
         }
       })
 
       setName(data.name)
       setEmail(data.email)
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data)
     }
   }
 
