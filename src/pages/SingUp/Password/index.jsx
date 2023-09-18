@@ -46,7 +46,7 @@ export default function Password() {
             setSteps(2);
             return navigate("/success");
         } catch (error) {
-            setErrorPassword(error.response.data.mensagem);   
+            setErrorPassword(error.response.data.message);   
         }
     }
 
@@ -54,7 +54,7 @@ export default function Password() {
         setForm((prevState) => {
             return ({ ...prevState, [event.target.name]: event.target.value })
         });
-        setErrorPassword("");
+        setErrorPassword(false);
     }
 
     function handleShowPassword() {

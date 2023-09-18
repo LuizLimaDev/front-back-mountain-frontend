@@ -14,6 +14,7 @@ export const SingProvider = ({ children }) => {
   const [errorPassword, setErrorPassword] = useState("");
   const [errorNameMessage, setErrorNameMessage] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
+  const [openClientModal, setOpenClientModal] = useState(true);
   const [apiErrors, setApiErrors] = useState("")
   const [form, setForm] = useState({
     name: "",
@@ -21,6 +22,24 @@ export const SingProvider = ({ children }) => {
     password: "",
     passwordConfirm: ""
   });
+  const [clientForm, setClientForm] = useState({
+    name: "",
+    email: "",
+    cpf: "",
+    phone: "",
+    zipcode: "",
+    street: "",
+    complement: "",
+    neighborhood: "",
+    city: "",
+    state: ""
+  });
+  const [clientErrors, setClientErrors] = useState({
+    name: false,
+    email: false,
+    cpf: false,
+    phone: false
+  })
 
   return (
     <SingContext.Provider value={{
@@ -34,6 +53,9 @@ export const SingProvider = ({ children }) => {
       form, setForm,
       showPassword, setShowPassword,
       errorPassword, setErrorPassword,
+      openClientModal, setOpenClientModal,
+      clientForm, setClientForm,
+      clientErrors, setClientErrors
       apiErrors, setApiErrors
     }}
     >

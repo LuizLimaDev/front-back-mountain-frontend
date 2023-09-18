@@ -11,8 +11,10 @@ export const theme = createTheme({
 
     SCPink: "#DA0175",
 
-    ScGray6: "#DEDEE9",
+    SCGray6: "#DEDEE9",
     SCGray7: "#F0F0F5",
+    SCGray8: "#F8F8F9",
+    SCGray2: "#3F3F55",
 
     SCLightRed: "#FFEFEF",
     SCDarkRed: "#971D1D",
