@@ -69,7 +69,7 @@ export default function RegisterLayout() {
                                             fontFamily: "Nunito",
                                             fontSize: "1.125ren",
                                             fontWeight: "600",
-                                            color: "SCGray6"
+                                            color: "SCGray2"
                                         }}
                                     >
                                         {stage.content}
