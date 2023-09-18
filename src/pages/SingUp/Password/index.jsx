@@ -147,6 +147,18 @@ export default function Password() {
                     }
                     onChange={(event) => handleChange(event)}
                 />
+                {errorPassword && <Typography
+                    sx={{
+                        fontFamily: "Nunito",
+                        fontSize: "1.125rem",
+                        fontWeight: "400",
+                        textAlign: "center",
+                        mt: "-1.5rem",
+                        mb: "0.5rem",
+                        color: "SCNormalError"
+                    }}>
+                    {errorPassword}
+                </Typography>}
 
                 <Button
                     variant="contained"
@@ -176,17 +188,6 @@ export default function Password() {
                         Login
                     </Link>
                 </Typography>
-                {errorPassword && <Typography
-                    sx={{
-                        fontFamily: "Nunito",
-                        fontSize: "1.125rem",
-                        fontWeight: "400",
-                        textAlign: "center",
-                        mt: "0.94rem",
-                        color: "SCNormalError"
-                    }}>
-                    {errorPassword}
-                </Typography>}
             </form>
             <nav className="navigation-list" >
                 <a
