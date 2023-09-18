@@ -2,8 +2,6 @@ import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import backgroundLogin from '../../assets/background-login.png';
 import LoginForm from '../../components/Form/LoginForm/index';
-import EditUserModal from '../../components/Modals/EditUserModal';
-import { ModalsProvider } from '../../context/ModalsContext';
 
 function SingIn() {
   return (
@@ -49,9 +47,6 @@ function SingIn() {
           maxWidth: "21.5rem",
         }}
       >
-        <ModalsProvider>
-          <EditUserModal />
-        </ModalsProvider>
         <LoginForm />
       </Grid>
     </Grid >

@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import useEmailValidation from "../hooks/useEmailValidation";
 import api from "../services/api";
+import { SingContext } from "./SingContext";
 
 export const ModalsContext = createContext({})
 
 export const ModalsProvider = ({ children }) => {
-  const [openModalEditUser, setOpenModalEditUser] = useState(true)
+  const { value } = useContext(SingContext)
+  const [openModalEditUser, setOpenModalEditUser] = useState(false)
   const handleOpenEditUser = () => setOpenModalEditUser(true);
   const handleCloseEditUser = () => setOpenModalEditUser(false);
 
@@ -23,11 +25,10 @@ export const ModalsProvider = ({ children }) => {
     try {
       const { data } = await api.get("/users/profile", {
         headers: {
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ5MDU0NTksImV4cCI6MTY5NDkzNDI1OSwic3ViIjoiMyJ9.kcH-ELExImOQeV0yN4KOuMGBi0XrBYzwhnZ_uwK1Py8`
+          Authorization: `Bearer ${value}`
         }
       })
 
-      console.log(data)
       setReceivedEmail(data.email)
     } catch (error) {
       console.log(error.response.data)

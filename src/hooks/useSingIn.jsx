@@ -32,7 +32,6 @@ export default function useSingUp() {
 
     } catch (error) {
       setApiErrors(error.response.data.message)
-      console.log(error.response)
     }
   }
 
