@@ -9,7 +9,7 @@ function ClientsNonpaying() {
           <img src={clientsBilling} alt='Ícone de clientes em dívida'></img>
           <h1 className='table-big-name'>Cobranças Vencidas</h1>
         </div>
-        <span className='table-big-quantity'>08</span>
+        <span className='table-big-quantity-nonpaying'>08</span>
       </div>
       <div className='table-big-infos-description'>
         <p className='table-big-info'>Cliente</p>

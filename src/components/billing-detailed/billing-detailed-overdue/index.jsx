@@ -5,7 +5,7 @@ function BillingDetailedOverdue() {
     <div className='table-small'>
       <div className='table-title'>
         <h1 className='table-name'>Cobranças Vencidas</h1>
-        <span className='quantity'>08</span>
+        <span className='quantity-overdue'>08</span>
       </div>
 
       <div className='table-infos-description'>

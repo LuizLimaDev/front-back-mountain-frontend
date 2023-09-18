@@ -4,7 +4,7 @@ import payedIcon from '../../../assets/Payed-icon.png'
 
 function BillingValuePaid() {
   return (
-    <div className='billing-value'>
+    <div className='billing-value-paid'>
       <div className='billing-value-icon'>
         <img src={payedIcon} alt='Ícone de confirmação de pagamento'></img>
       </div>

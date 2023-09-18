@@ -5,7 +5,7 @@ function BillingDetailedPaid() {
     <div className='table-small'>
       <div className='table-title'>
         <h1 className='table-name'>Cobranças Pagas</h1>
-        <span className='quantity'>10</span>
+        <span className='quantity-paid'>10</span>
       </div>
 
       <div className='table-infos-description'>
