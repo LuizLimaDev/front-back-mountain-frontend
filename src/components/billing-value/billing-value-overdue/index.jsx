@@ -4,7 +4,7 @@ import overdueIcon from '../../../assets/Nonpayed-icon.png'
 
 function BillingValueOverdue() {
   return (
-    <div className='billing-value'>
+    <div className='billing-value-overdue'>
       <div className='billing-value-icon'>
         <img src={overdueIcon} alt='Ícone de pagamento vencido'></img>
       </div>
