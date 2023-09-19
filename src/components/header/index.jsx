@@ -52,7 +52,6 @@ function HeaderDashBoard() {
     userGetData()
 
     if (editFinished) {
-      console.log("Atualizou")
       userGetData()
     }
 

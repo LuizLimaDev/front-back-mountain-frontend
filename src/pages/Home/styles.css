@@ -1,14 +1,24 @@
 .content {
-	margin-bottom: 2.5rem;
+	display: flex;
+	gap: 2rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.19rem;
 }
 
 .dashboard {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
 
-.tables-dashboard {
-	justify-content: space-between;
-	padding: 1.5rem 0 0 5rem;
-	gap: 1.8125rem;
+.billing-detailed-dashboard{
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+.clients-dashboard.tables-dashboard{
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
 }
