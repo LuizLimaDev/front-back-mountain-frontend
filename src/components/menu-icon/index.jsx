@@ -5,11 +5,13 @@ import billingIcon from '../../assets/Menu/Billing-button.png';
 import clientsIconActive from '../../assets/Menu/clients_active.icon.png';
 import clientsIcon from '../../assets/Menu/Clients-button.png';
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { SingContext } from '../../context/SingContext';
 
 // eslint-disable-next-line react/prop-types
 function MenuIcon() {
-  const [active, setActive] = useState("");
+  const { active, setActive } = useContext(SingContext)
+
   return (
     <div className='menu-dashboard'>
       <div className={`menu-home menu_icon ${active === "home" ? "active_menu" : ""}`} >

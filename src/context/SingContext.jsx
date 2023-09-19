@@ -39,7 +39,8 @@ export const SingProvider = ({ children }) => {
     email: false,
     cpf: false,
     phone: false
-  })
+  });
+  const [active, setActive] = useState("home");
 
   return (
     <SingContext.Provider value={{
@@ -56,7 +57,8 @@ export const SingProvider = ({ children }) => {
       openClientModal, setOpenClientModal,
       clientForm, setClientForm,
       clientErrors, setClientErrors,
-      apiErrors, setApiErrors
+      apiErrors, setApiErrors,
+      active, setActive
     }}
     >
       {children}

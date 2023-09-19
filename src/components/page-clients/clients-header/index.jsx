@@ -1,5 +1,5 @@
 import './style.css';
-import ChevronDown from '../../../assets/chevron-Down.png';
+import ChevronDown from '../../../assets/chevron-down.png';
 
 function HeaderClient() {
   return (
@@ -11,7 +11,7 @@ function HeaderClient() {
         <span className='client-header-user-icon'>LR</span>
         <span className='client-header-user-name'>Lorena</span>
         <a>
-          <img src={ ChevronDown } alt='Botão mais' className='client-header-user-chevron'></img>
+          <img src={ChevronDown} alt='Botão mais' className='client-header-user-chevron'></img>
         </a>
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function HomeLayout(){
     return(
         <div className="clients-dashboard">
             <div>
-                <MenuIcon active="clients" />
+                <MenuIcon />
             </div>
             <div>
                 <HeaderDashBoard />

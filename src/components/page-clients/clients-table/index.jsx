@@ -2,128 +2,75 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import ChevronUpDown from '../../../assets/chevron-Up-Down.png'
 import CreateBilling from '../../../assets/create-billing.png'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
-function ClientsTable() {
-
-    return (
-        <div className='clients-table-page'>
-            <div className='clients-table-header'>
-                <div className='clients-table-image-header clients-table-header-content'>
-                    <img src={ChevronUpDown} alt='Setas para baixo e para cima'></img>
-                    <h3>Cliente</h3>
-                </div>
-                <h3 className='clients-table-header-content'>CPF</h3>
-                <h3 className='clients-table-header-content'>E-mail</h3>
-                <h3 className='clients-table-header-content'>Telefone</h3>
-                <h3 className='clients-table-header-content'>Status</h3>
-                <h3 className='clients-table-header-content'>Criar Cobrança</h3>
-            </div>
-            <div className='clients-table-content'>
-                <div className='clients-table-content-line'>
-                    <span className='clients-table-content-line-name'>Sara da Silva</span>
-                    <span className='clients-table-content-cpf'>054 365 255 87</span>
-                    <span className='clients-table-content-line-email'>sarasilva@cubos.io</span>
-                    <span className='clients-table-content-line-phone'>71 9 9462 8654</span>
-                    <span className='clients-table-content-line-status'>inadimplente</span>
-                    <a className='clients-table-content-line-add'>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>inadimplente</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>inadimplente</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>inadimplente</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>em dia</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>em dia</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>em dia</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>em dia</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>em dia</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-                <div className='clients-table-content-line'>
-                    <span>Sara da Silva</span>
-                    <span>054 365 255 87</span>
-                    <span>sarasilva@cubos.io</span>
-                    <span>71 9 9462 8654</span>
-                    <span>em dia</span>
-                    <a>
-                        <img src={CreateBilling} alt='Criar cobrança'></img>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    )
+function createData(name, cpf, email, phone, status) {
+    if (status === "inadimplente") {
+        status = red;
+    }
+    else { status = green }
+    return { name, cpf, email, phone, status };
 }
 
-export default ClientsTable;
+let red = <div className='red'>Inadimplente</div>;
+let green = <div className='green'>Em dia</div>;
+
+const rows = [
+    createData('Sara da Silva', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'inadimplente'),
+    createData('Antonio Moreira', '039 746 383 24', 'sarasilva@gmail.com', '34 9 9876 5432', 'inadimplente'),
+    createData('Ana Nguyen', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'inadimplente'),
+    createData('Antonio Moreira', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'inadimplente'),
+    createData('Sara da Silva', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'em dia'),
+    createData('Sara da Silva', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'em dia'),
+    createData('Antonio Moreira', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'em dia'),
+    createData('Ana Nguyen', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'em dia'),
+    createData('Antonio Moreira', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'em dia'),
+    createData('Sara da Silva', '039 746 383 28', 'sarasilva@gmail.com', '34 9 9876 5432', 'em dia'),
+];
+
+export default function ClientsTable() {
+    return (
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+
+                        <TableCell>
+                            <div className='client-icon'><img src={ChevronUpDown} /> Cliente</div>
+                        </TableCell>
+
+                        <TableCell align="left">CPF</TableCell>
+                        <TableCell align="left">E-mail</TableCell>
+                        <TableCell align="left">Telefone</TableCell>
+                        <TableCell align="left">Status</TableCell>
+                        <TableCell align="left">Criar Cobrança</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map((row) => (
+                        <TableRow
+                            key={row.name}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row">
+                                {row.name}
+                            </TableCell>
+                            <TableCell align="left">{row.cpf}</TableCell>
+                            <TableCell align="left">{row.email}</TableCell>
+                            <TableCell align="left">{row.phone}</TableCell>
+                            <TableCell align="left">{row.status}</TableCell>
+                            <TableCell align="left"><a><img src={CreateBilling}></img></a></TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
+}

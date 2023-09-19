@@ -1,26 +1,23 @@
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Box } from '@mui/material';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
-import ChevronDown from '../../assets/chevron-down.png';
-import editImg from "../../assets/edit.svg";
-import LogoutIcon from '@mui/icons-material/Logout';
-import './style.css';
 import { useNavigate } from "react-router-dom";
-import { SingContext } from '../../context/SingContext';
+import editImg from "../../assets/edit.svg";
 import { ModalsContext } from '../../context/ModalsContext';
+import { SingContext } from '../../context/SingContext';
 import api from '../../services/api';
+import Avatar from './Avatar';
+import './style.css';
 
 function HeaderDashBoard() {
   const { value, remove } = useContext(SingContext)
-  const { handleOpenEditUser, editFinished } = useContext(ModalsContext)
+  const { handleOpenEditUser, editFinished } = useContext(ModalsContext);
+  const { active } = useContext(SingContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [username, setUsername] = useState("");
   const navigate = useNavigate()
-
-  function handleClick(e) {
-    setAnchorEl(e.currentTarget);
-  }
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -63,19 +60,15 @@ function HeaderDashBoard() {
   return (
     <div className='dashboard-header'>
       <div>
-        <h1>Resumo das cobranças</h1>
+        <h1
+          className={active === "clients" && "state-client"}
+        >{ active === "home" ? "Resumo das cobranças" : active === "clients" ? "Clientes" : null}</h1>
       </div>
       <div className='dashboard-user'>
-        <span className='dashboard-user-icon'>{`${initialsName[0]}${initialsName[2]}`}</span>
-        <span className='dashboard-user-name'>{username}</span>
-        <a>
-          <img
-            src={ChevronDown}
-            alt='Botão mais'
-            className='dashboard-user-chevron'
-            onClick={handleClick}
-          />
-        </a>
+        {username ?
+          <Avatar setAnchorEl={setAnchorEl} initialsName={initialsName} username={username} />
+          : ""
+        }
 
         <Popover
           id={id}

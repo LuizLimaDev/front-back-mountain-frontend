@@ -48,7 +48,7 @@ export const MetricsDasboardProvider = ({ children }) => {
         noPaymentsList, 
         setNoPaymentsList,
         onPaymentsList, 
-        setOnPaymentsList,
+        setOnPaymentsList
     }}
     >
       {children}

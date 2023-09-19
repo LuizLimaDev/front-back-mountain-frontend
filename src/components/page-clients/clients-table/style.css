@@ -1,77 +1,29 @@
-.clients-table-page {
+* {
+    font-family: Nunito, sans-serif;
+}
+
+.red {
     display: flex;
     flex-direction: column;
-    text-align: center;
     align-items: center;
-    justify-content: center;
 
-    height: 40.15rem;
-    width: 69.75rem;
-    background-color: palegoldenrod;
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+    width: 6.2rem;
 
-    border-radius: 1.875rem;
+    color: rgba(151, 29, 29, 1);
+    background-color: rgba(255, 239, 239, 1);
 }
 
-.clients-table-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-
-}
-
-.clients-table-header-content {
-    width: 10.625rem;
-    /* Largura fixa para todas as colunas */
-    text-align: center;
-}
-
-.clients-table-image-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.clients-table-content {
+.green {
     display: flex;
     flex-direction: column;
-}
-
-.clients-table-content-line {
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
 
-    padding-left: 1rem;
-}
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+    width: 6.2rem;
 
-.clients-table-content-line-name {
-    text-align: start;
-    width: 11.625rem;
-}
-
-.clients-table-content-cpf {
-    text-align: start;
-    width: 12.625rem;
-}
-
-.clients-table-content-line-email {
-    text-align: start;
-    width: 12.4375rem;
-}
-
-.clients-table-content-line-phone {
-    text-align: start;
-    width: 12.0625rem;
-}
-
-.clients-table-content-line-status {
-    text-align: start;
-    width: 10.0625rem;
-}
-
-.clients-table-content-line-add {
-    text-align: start;
-    width: 7.9375rem;
+    color: rgba(31, 167, 175, 1);
+    background-color: rgba(238, 246, 246, 1);
 }
