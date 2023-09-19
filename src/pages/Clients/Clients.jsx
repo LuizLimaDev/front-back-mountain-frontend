@@ -9,7 +9,7 @@ function Clients() {
     return (
         <div className='clients-dashboard'>
             <div>
-                <MenuIcon />
+                <MenuIcon active="clients" />
             </div>
 
             <ClientsTable />

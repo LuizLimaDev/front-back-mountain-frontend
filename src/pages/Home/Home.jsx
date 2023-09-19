@@ -19,7 +19,7 @@ function Home() {
       <ModalsProvider>
         <div className='dashboard'>
           <div>
-            <MenuIcon />
+            <MenuIcon active="home" />
           </div>
           <div className='content'>
             <div>
