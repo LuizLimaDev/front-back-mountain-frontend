@@ -1,20 +1,20 @@
 import { Modal, Stack } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { ModalsContext } from '../../../context/ModalsContext';
 import { SingContext } from '../../../context/SingContext';
 import api from '../../../services/api';
-import Sucess from './Sucess';
 import Form from './Form';
+import Sucess from './Sucess';
 
 function EditUserModal() {
   const {
     openModalEditUser,
     setName,
     setEmail,
-    handleCloseEditUser
+    handleCloseEditUser,
+    editFinished, SetEditFinished
   } = useContext(ModalsContext)
   const { value } = useContext(SingContext)
-  const [editFinished, SetEditFinished] = useState(false)
 
   async function userGetDataInfo() {
     try {
