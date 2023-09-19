@@ -15,7 +15,9 @@ function BillingValueOverdue() {
 			<div className="billing-value-content">
 				<p className="billing-value-title">Cobranças Vencidas</p>
 				<p className="billing-value-value">
-					{moneyFormat.format(metrics.totalPrices.valueOverdue)}
+					{moneyFormat
+						.format(metrics.totalPrices.valueOverdue)
+						.replace(/^(\D+)/, "$1 ")}
 				</p>
 			</div>
 		</div>
