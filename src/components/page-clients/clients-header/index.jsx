@@ -1,5 +1,5 @@
 import './style.css';
-import ChevronDown from '../../../assets/chevron-Down.png';
+import ChevronDown from '../../../assets/chevron-down.png';
 
 function HeaderClient() {
   return (
