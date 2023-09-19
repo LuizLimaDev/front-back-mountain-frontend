@@ -17,11 +17,11 @@ function BillingDetailedPaid() {
       </div>
 
       {
-        metrics.listBillings.paid.slice(0,5).map((billing) => {
+        metrics.listBillings.paid.slice(0, 5).map((billing) => {
           return (<div className='table-content' key={billing.id}>
-            <p>{billing.name}</p>
-            <p>{billing.id}</p>
-            <p>R$ {billing.value}</p>
+            <p className='data-name'>{billing.name}</p>
+            <p className='data-id'>{billing.id}</p>
+            <p className='data-value'>R$ {billing.value}</p>
           </div>)
         })
       }

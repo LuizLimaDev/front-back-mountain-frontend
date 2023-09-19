@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ChevronDown from '../../assets/chevron-down.png';
 import editImg from "../../assets/edit.svg";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -9,15 +9,16 @@ import './style.css';
 import { useNavigate } from "react-router-dom";
 import { SingContext } from '../../context/SingContext';
 import { ModalsContext } from '../../context/ModalsContext';
+import api from '../../services/api';
 
 function HeaderDashBoard() {
-  const { remove } = useContext(SingContext)
+  const { value, remove } = useContext(SingContext)
   const { handleOpenEditUser } = useContext(ModalsContext)
   const [anchorEl, setAnchorEl] = useState(null);
+  const [username, setUsername] = useState("");
   const navigate = useNavigate()
 
   function handleClick(e) {
-
     setAnchorEl(e.currentTarget);
   }
 
@@ -33,14 +34,35 @@ function HeaderDashBoard() {
     remove('token')
   }
 
+  async function userGetData() {
+    try {
+      const { data } = await api.get("/users/profile", {
+        headers: {
+          Authorization: `Bearer ${value}`
+        }
+      })
+
+      setUsername(data.name)
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+
+  useEffect(() => {
+    userGetData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const initialsName = [...username]
+
   return (
     <div className='dashboard-header'>
       <div>
         <h1>Resumo das cobranças</h1>
       </div>
       <div className='dashboard-user'>
-        <span className='dashboard-user-icon'>LR</span>
-        <span className='dashboard-user-name'>Lorena</span>
+        <span className='dashboard-user-icon'>{`${initialsName[0]}${initialsName[2]}`}</span>
+        <span className='dashboard-user-name'>{username}</span>
         <a>
           <img
             src={ChevronDown}

@@ -20,12 +20,12 @@ function ClientsPaying() {
       </div>
 
       {
-        metrics.clientsList.onPayments.slice(0,5).map((client) => {
+        metrics.clientsList.onPayments.slice(0, 5).map((client) => {
           return (<div className='table-big-content' key={client.id}>
-          <p>{client.name}</p>
-          <p>{client.id}</p>
-          <p>{client.cpf}</p>
-        </div>)
+            <p className='data-name'>{client.name}</p>
+            <p className='data-id client-id'>{client.id}</p>
+            <p className='data-cpf'>{client.cpf}</p>
+          </div>)
         })
       }
 

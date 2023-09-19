@@ -109,14 +109,13 @@ function EditUserModal() {
       email,
       cpf,
       phone,
-      password,
-      confirmPassword
+      newPassword: password,
     }
 
     try {
       await api.put("/users", userEdit, {
         headers: {
-          Authorization: `Bearer ${value.token}`
+          Authorization: `Bearer ${value}`
         }
       })
 
@@ -173,8 +172,11 @@ function EditUserModal() {
                 top: "1.5rem",
                 right: "1.5rem",
 
-                width: "2rem"
+                width: "2rem",
+
+                cursor: "pointer"
               }}
+              onClick={() => handleCloseEditUser()}
             />
           </Box>
 

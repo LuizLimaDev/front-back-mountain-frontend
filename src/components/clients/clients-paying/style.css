@@ -73,6 +73,10 @@
     font-weight: 800;
 }
 
+.table-big-info {
+    padding-right: 3rem;
+}
+
 .table-big-btn {
     display: flex;
     align-items: center;
