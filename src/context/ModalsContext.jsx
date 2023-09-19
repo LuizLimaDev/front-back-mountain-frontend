@@ -19,6 +19,7 @@ export const ModalsProvider = ({ children }) => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [apiErrors, setApiErrors] = useState("")
+  const [editFinished, SetEditFinished] = useState(false)
 
   const { setReceivedEmail } = useEmailValidation()
   async function getData() {
@@ -50,6 +51,7 @@ export const ModalsProvider = ({ children }) => {
       confirmPassword, setConfirmPassword,
       apiErrors, setApiErrors,
       handleOpenEditUser, handleCloseEditUser,
+      editFinished, SetEditFinished
     }}
     >
       {children}

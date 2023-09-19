@@ -13,7 +13,7 @@ import api from '../../services/api';
 
 function HeaderDashBoard() {
   const { value, remove } = useContext(SingContext)
-  const { handleOpenEditUser } = useContext(ModalsContext)
+  const { handleOpenEditUser, editFinished } = useContext(ModalsContext)
   const [anchorEl, setAnchorEl] = useState(null);
   const [username, setUsername] = useState("");
   const navigate = useNavigate()
@@ -50,8 +50,14 @@ function HeaderDashBoard() {
 
   useEffect(() => {
     userGetData()
+
+    if (editFinished) {
+      console.log("Atualizou")
+      userGetData()
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [editFinished])
 
   const initialsName = [...username]
 
