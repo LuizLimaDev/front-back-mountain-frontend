@@ -1,28 +1,54 @@
 * {
-	margin: 0px;
-	padding: 0px;
-	box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
 .menu-dashboard {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4.5rem;
 
-	background-color: rgba(240, 240, 245, 1);
+    background-color: rgba(240, 240, 245, 1);
 
-	padding: 2.25rem 0;
-	width: 6.75rem;
-	height: 100%;
+    padding: 2.25rem 0;
+    width: 6.75rem;
+    height: 100%;
 }
 
 .menu-home {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-	width: 7rem;
-	height: 5.125rem;
-	border-right: 0.125rem solid rgba(218, 1, 117, 1);
+    width: 7rem;
+    height: 5.125rem;
+    border-right: 0.125rem solid transparent;
+}
+
+.menu-clients {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 7rem;
+    height: 5.125rem;
+    border-right: 0.125rem solid transparent;
+}
+
+.menu-billings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 7rem;
+    height: 5.125rem;
+    border-right: 0.125rem solid transparent;
+}
+
+
+
+.active_menu {
+    border-right: 0.125rem solid rgba(218, 1, 117, 1);
 }
