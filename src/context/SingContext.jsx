@@ -15,6 +15,7 @@ export const SingProvider = ({ children }) => {
   const [errorNameMessage, setErrorNameMessage] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
   const [openClientModal, setOpenClientModal] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
   const [apiErrors, setApiErrors] = useState("")
   const [form, setForm] = useState({
     name: "",
@@ -58,7 +59,8 @@ export const SingProvider = ({ children }) => {
       clientForm, setClientForm,
       clientErrors, setClientErrors,
       apiErrors, setApiErrors,
-      active, setActive
+      active, setActive,
+      openModalEdit, setOpenModalEdit
     }}
     >
       {children}

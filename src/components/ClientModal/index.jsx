@@ -70,6 +70,7 @@ export default function ClientModal(){
                     Authorization: `Bearer ${value}`
                 }
             });
+            setOpenClientModal(false);
         } catch (error) {
             setClientErrors((prevState) => {
                 return {...prevState, cpf: error.response.data.message}

@@ -16,7 +16,6 @@ import './styles.css';
 function Home() {
   return (
     <MetricsDasboardProvider>
-      <ModalsProvider>
         <div className='dashboard'>
             <div className='billing-value-dashboard tables-dashboard dashboard'>
               <div className='content'>
@@ -37,7 +36,6 @@ function Home() {
         </div >
 
         <EditUserModal />
-      </ModalsProvider>
     </MetricsDasboardProvider>
   );
 }

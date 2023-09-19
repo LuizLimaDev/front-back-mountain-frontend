@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ClientIcon from '../../../assets/Clients-icon.png';
 import Statics from '../../../assets/Statics.png';
 // import SearchIcon from '../../../assets/Search-icon.png'
 import './style.css';
+import { SingContext } from '../../../context/SingContext';
 
 function ClientHeader() {
     const [search, setSearch] = useState('');
+    const { setOpenClientModal } = useContext(SingContext)
 
     const handleInputChange = (event) => {
         setSearch(event.target.value);
@@ -23,7 +25,10 @@ function ClientHeader() {
                     <h1>Clientes</h1>
                 </div>
                 <div className='client-header-right'>
-                    <button className='client-button-add'>+ Adicionar cliente</button>
+                    <button
+                        className='client-button-add'
+                        onClick={() => { setOpenClientModal(true) }}
+                    >+ Adicionar cliente</button>
                     <button className='client-button-statics'><img src={Statics} alt='Ícone Estatísticas' /></button>
                     <form onSubmit={handleSubmit}>
                         <input
