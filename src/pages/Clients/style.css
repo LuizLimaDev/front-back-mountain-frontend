@@ -1,0 +1,8 @@
+body {
+    background-color: rgba(248, 248, 249, 1);
+}
+
+.clients-dashboard {
+    display: flex;
+    gap: 6.25rem;
+}

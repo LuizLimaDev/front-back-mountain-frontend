@@ -1,0 +1,92 @@
+.table-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    width: 22.5rem;
+    height: 24.8rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    font-family: Montserrat, sans-serif;
+    color: rgba(63, 63, 85, 1);
+}
+
+.table-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    width: 100%;
+    height: 3.625rem;
+    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+}
+
+.table-name {
+    font-weight: 600;
+    font-size: 1.125rem;
+
+}
+
+.quantity {
+
+    padding: 0.05rem 0.9375rem;
+    border-radius: 0.5rem;
+    background-color: rgba(252, 246, 220, 1);
+    color: rgba(197, 166, 5, 1);
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+
+}
+
+
+.table-infos-description {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 3.625rem;
+    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+
+    font-family: Nunito, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.table-info {}
+
+
+.table-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 3rem;
+    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+
+    color: rgba(110, 110, 133, 1);
+    font-family: Nunito, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+
+.table-btn {
+    display: flex;
+    align-items: center;
+
+    margin: 0.5rem;
+
+    color: rgba(218, 1, 117, 1);
+    font-family: Nunito, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+}

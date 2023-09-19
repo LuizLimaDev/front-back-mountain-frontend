@@ -1,0 +1,28 @@
+body {
+    background-color: rgba(248, 248, 249, 1);
+}
+
+.content {
+	display: flex;
+	gap: 2rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.19rem;
+}
+
+.dashboard {
+	display: flex;
+	flex-direction: column;
+}
+
+.billing-detailed-dashboard{
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+.clients-dashboard.tables-dashboard{
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+}

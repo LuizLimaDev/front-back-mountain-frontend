@@ -1,0 +1,48 @@
+.dashboard-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.0625rem solid rgba(172, 217, 197, 1);
+}
+
+.dashboard-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(14, 135, 80, 1);
+
+    text-transform: capitalize;
+}
+
+.dashboard-user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3rem;
+    height: 3rem;
+
+    text-transform: uppercase;
+
+    border-radius: 50%;
+    background-color: rgba(222, 222, 233, 1);
+}
+
+.dashboard-user-chevron{
+    cursor: pointer;
+}
+
+.state-client{
+    position: absolute;
+    bottom: 0.25rem;
+    left: 1.5rem;
+    font-family: "Inter";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    color: #0E8750;
+    align-self: flex-end;
+}

@@ -1,0 +1,90 @@
+.table-big {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    width: 34.75rem;
+    height: 24.8rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    font-family: Montserrat, sans-serif;
+    color: rgba(63, 63, 85, 1);
+}
+
+.table-big-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 3.625rem;
+    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+}
+
+.table-big-title-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    padding-left: 1.5rem;
+
+}
+
+.table-big-name {
+    font-weight: 700;
+    font-size: 1.125rem;
+
+}
+
+.table-big-quantity {
+
+    padding: 0.05rem 0.9375rem;
+    border-radius: 0.5rem;
+    background-color: rgba(238, 246, 246, 1);
+    color: rgba(31, 167, 175, 1);
+
+    margin-right: 1.5rem;
+
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+
+}
+
+
+.table-big-infos-description {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 3.625rem;
+    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+
+    font-family: Nunito, sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.table-big-info {
+    padding-right: 3rem;
+}
+
+.table-big-btn {
+    display: flex;
+    align-items: center;
+
+    margin: 0.5rem;
+
+    color: rgba(218, 1, 117, 1);
+    font-family: Nunito, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+}
