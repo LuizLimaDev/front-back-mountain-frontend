@@ -13,7 +13,8 @@ import './style.css';
 
 function HeaderDashBoard() {
   const { value, remove } = useContext(SingContext)
-  const { handleOpenEditUser, editFinished } = useContext(ModalsContext)
+  const { handleOpenEditUser, editFinished } = useContext(ModalsContext);
+  const { active } = useContext(SingContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [username, setUsername] = useState("");
   const navigate = useNavigate()
@@ -48,7 +49,6 @@ function HeaderDashBoard() {
     userGetData()
 
     if (editFinished) {
-      console.log("Atualizou")
       userGetData()
     }
 
@@ -60,7 +60,9 @@ function HeaderDashBoard() {
   return (
     <div className='dashboard-header'>
       <div>
-        <h1>Resumo das cobranças</h1>
+        <h1
+          className={active === "clients" && "state-client"}
+        >{ active === "home" ? "Resumo das cobranças" : active === "clients" ? "Clientes" : null}</h1>
       </div>
       <div className='dashboard-user'>
         {username ?

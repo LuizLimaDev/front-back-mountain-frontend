@@ -1,23 +1,20 @@
 import ClientsTable from '../../components/page-clients/clients-table';
 import ClientHeader from '../../components/page-clients/clients-search';
-import HeaderClient from '../../components/page-clients/clients-header';
 import MenuIcon from '../../components/menu-icon';
+import ClientModal from "../../components/ClientModal"
 import './style.css';
+import EditUserModal from '../../components/Modals/EditUserModal';
 
 function Clients() {
     return (
         <div className='clients-dashboard'>
             <div>
-                <MenuIcon active="clients" />
-            </div>
-
-            <div>
                 <div>
-                    <HeaderClient />
                     <ClientHeader />
                     <ClientsTable />
+                    <EditUserModal />
+                    <ClientModal />
                 </div>
-
             </div>
         </div>
     );

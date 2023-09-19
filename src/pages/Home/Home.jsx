@@ -16,32 +16,26 @@ import './styles.css';
 function Home() {
   return (
     <MetricsDasboardProvider>
-      <ModalsProvider>
         <div className='dashboard'>
-          <div>
-            <MenuIcon active="home" />
-          </div>
-          <div className='content'>
-            <div>
-              <HeaderDashBoard />
-            </div>
             <div className='billing-value-dashboard tables-dashboard dashboard'>
-              <BillingValueOverdue />
-              <BillingValuePaid />
-              <BillingValueProjected />
+              <div className='content'>
+                <BillingValueOverdue />
+                <BillingValuePaid />
+                <BillingValueProjected />
+              </div>
+              <div className='billing-detailed-dashboard tables-dashboard dashboard'>
+                <BillingDetailedOverdue />
+                <BillingDetailedPaid />
+                <BillingDetailedProjected />
+              </div>
+              <div className='clients-dashboard tables-dashboard dashboard'>
+                <ClientsNonpaying />
+                <ClientsPaying />
+              </div>
             </div>
-            <div className='billing-detailed-dashboard tables-dashboard dashboard'><BillingDetailedOverdue />
-              <BillingDetailedPaid />
-              <BillingDetailedProjected />
-            </div>
-            <div className='clients-dashboard tables-dashboard dashboard'><ClientsNonpaying />
-              <ClientsPaying />
-            </div>
-          </div>
         </div >
 
         <EditUserModal />
-      </ModalsProvider>
     </MetricsDasboardProvider>
   );
 }

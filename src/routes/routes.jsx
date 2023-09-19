@@ -8,6 +8,7 @@ import Success from "../pages/SingUp/Success";
 import { useContext } from "react";
 import { SingContext } from "../context/SingContext";
 import Clients from '../pages/Clients/Clients';
+import HomeLayout from "../components/HomeLayout";
 
 // eslint-disable-next-line react/prop-types
 function ProtectedRoute({ isProtected, url }) {
@@ -31,8 +32,10 @@ function MainRoutes() {
       </Route>
 
       <Route element={<ProtectedRoute isProtected={value} url={"/"} />}>
-        <Route path="/home" element={<Home />} />
-        <Route path="/clients" element={<Clients />} />
+        <Route element={ <HomeLayout /> } >
+          <Route path="/home" element={<Home />} />
+          <Route path="/clients" element={<Clients />} />
+        </Route>
       </Route>
     </Routes>
   );

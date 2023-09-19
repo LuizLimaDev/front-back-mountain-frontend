@@ -4,6 +4,5 @@ body {
 
 .clients-dashboard {
     display: flex;
-    flex-direction: row;
     gap: 6.25rem;
 }
