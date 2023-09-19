@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ClientIcon from '../../../assets/Clients-icon.png';
 import Statics from '../../../assets/Statics.png';
-import SearchIcon from '../../../assets/Search-icon.png'
+// import SearchIcon from '../../../assets/Search-icon.png'
 import './style.css';
 
 function ClientHeader() {

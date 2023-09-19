@@ -12,7 +12,7 @@ function Clients() {
                 <MenuIcon />
             </div>
 
-            {/* <ClientsTable /> */}
+            <ClientsTable />
             <div>
                 <div>
                     <HeaderClient />
