@@ -17,7 +17,8 @@ export default function ClientModal(){
     const {
         openClientModal, setOpenClientModal,
         clientForm, setClientForm,
-        clientErrors, setClientErrors
+        clientErrors, setClientErrors,
+        value
     } = useContext(SingContext);
 
     function handleChange(event){
@@ -32,8 +33,6 @@ export default function ClientModal(){
             phone: false
         })
     }
-
-    const token = localStorage.getItem("token");
 
     function cleanForm(){
         setClientForm({
@@ -68,7 +67,7 @@ export default function ClientModal(){
         try {
             await api.post("/customers", {...clientForm}, {
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${value}`
                 }
             });
         } catch (error) {
