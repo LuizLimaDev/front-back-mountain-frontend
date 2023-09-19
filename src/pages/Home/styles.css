@@ -1,10 +1,14 @@
+.content {
+	margin-bottom: 2.5rem;
+}
+
 .dashboard {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 .tables-dashboard {
-    justify-content: space-between;
-    padding: 1.5rem 0 0 5rem;
-    gap: 1.8125rem
+	justify-content: space-between;
+	padding: 1.5rem 0 0 5rem;
+	gap: 1.8125rem;
 }
