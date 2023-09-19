@@ -1,0 +1,65 @@
+.client-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 70rem;
+    padding: 1rem;
+    /* padding-left: 6.25rem; */
+}
+
+.client-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+
+    font-family: montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 1.625;
+}
+
+.client-header-right {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.client-button-add {
+
+    width: 16.625rem;
+    height: 2rem;
+    border-radius: 0.625rem;
+    border: none;
+
+    color: rgba(248, 248, 249, 1);
+    background-color: rgba(218, 1, 117, 1);
+
+    font-family: Nunito, sans-serif;
+    font-weight: 400;
+    font-size: 1.125;
+}
+
+.client-button-statics {
+
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    border: none;
+
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.client-input {
+    box-shadow: 0.1rem 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+
+    width: 19.875rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    border: none;
+
+    background-color: rgba(255, 255, 255, 1);
+}

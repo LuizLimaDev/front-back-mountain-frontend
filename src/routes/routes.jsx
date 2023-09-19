@@ -6,6 +6,7 @@ import SingUp from "../pages/SingUp/SingUp";
 import RegisterLayout from "../components/RegisterLayout";
 import Password from "../pages/SingUp/Password";
 import Success from "../pages/SingUp/Success";
+import Clients from '../pages/Clients/Clients'
 
 function MainRoutes() {
   return (
@@ -16,7 +17,7 @@ function MainRoutes() {
         <Route path="/success" element={<Success />} />
       </Route>
       <Route path="/" element={<SingIn />} />
-
+      <Route path="/clients" element={<Clients />} />
       <Route path="/home" element={<Home />} />
     </Routes>
   );
