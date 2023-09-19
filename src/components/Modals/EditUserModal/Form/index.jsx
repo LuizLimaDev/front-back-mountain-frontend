@@ -1,4 +1,4 @@
-import { Box, InputLabel, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Box, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, Stack, TextField, Typography } from "@mui/material";
 import SCButton from "../../../SCButton/indxe";
 import imgCloseModal from "../../../../assets/close.svg";
 import { useContext, useEffect, useState } from "react";
@@ -7,6 +7,8 @@ import { useTheme } from "@emotion/react";
 import api from "../../../../services/api";
 import { SingContext } from "../../../../context/SingContext";
 import useEmailValidation from "../../../../hooks/useEmailValidation";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // eslint-disable-next-line react/prop-types
 function Form({ SetEditFinished }) {
@@ -36,6 +38,8 @@ function Form({ SetEditFinished }) {
   const [passwordCombinationError, setPasswordCombinationError] = useState("")
   const [confirmPasswordErrorListener, setConfirmPasswordErrorListener] = useState(false)
 
+  const [showPassword, setShowPassword] = useState(false)
+
   const theme = useTheme()
 
   async function userGetData() {
@@ -57,6 +61,11 @@ function Form({ SetEditFinished }) {
     userGetData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -303,22 +312,33 @@ function Form({ SetEditFinished }) {
           >
             Nova Senha
           </InputLabel>
-          <TextField
+          <OutlinedInput
             id="pasasword"
-            type='password'
+            // type='password'
+            type={showPassword ? 'text' : 'password'}
             placeholder='Digite a nova senha'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={passwordErrorListener}
             helperText={passwordErrorMessage}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
             fullWidth
-            InputProps={{
-              style: {
-                height: "2.75rem",
-                borderRadius: ".5rem",
+            sx={{
+              height: "2.75rem",
+              borderRadius: ".5rem",
 
-                fontFamily: "Inter"
-              }
+              fontFamily: "Inter"
             }}
           />
           <InputLabel
@@ -329,22 +349,32 @@ function Form({ SetEditFinished }) {
           >
             Confirmar Senha
           </InputLabel>
-          <TextField
+          <OutlinedInput
             id="confirmPasasword"
-            type='password'
+            // type='password'
+            type={showPassword ? 'text' : 'password'}
             placeholder='Confirme a nova senha'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             error={confirmPasswordErrorListener}
             helperText={passwordCombinationError && `${passwordCombinationError}`}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
             fullWidth
-            InputProps={{
-              style: {
-                height: "2.75rem",
-                borderRadius: ".5rem",
+            sx={{
+              height: "2.75rem",
+              borderRadius: ".5rem",
 
-                fontFamily: "Inter"
-              }
+              fontFamily: "Inter"
             }}
           />
           <SCButton>

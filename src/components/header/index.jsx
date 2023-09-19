@@ -62,7 +62,7 @@ function HeaderDashBoard() {
       <div>
         <h1
           className={active === "clients" && "state-client"}
-        >{ active === "home" ? "Resumo das cobranças" : active === "clients" ? "Clientes" : null}</h1>
+        >{active === "home" ? "Resumo das cobranças" : active === "clients" ? "Clientes" : null}</h1>
       </div>
       <div className='dashboard-user'>
         {username ?
