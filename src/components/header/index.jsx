@@ -94,7 +94,9 @@ function HeaderDashBoard() {
                 alignItems: "center",
                 gap: ".25rem",
 
-                padding: ".625rem .937rem"
+                padding: ".625rem .937rem",
+
+                cursor: "pointer"
               }}
               onClick={() => handleOpenEditUser()}
             >
@@ -124,7 +126,9 @@ function HeaderDashBoard() {
                 alignItems: "center",
                 gap: ".25rem",
 
-                padding: ".625rem .937rem"
+                padding: ".625rem .937rem",
+
+                cursor: "pointer"
               }}
               onClick={handleLogout}
             >
