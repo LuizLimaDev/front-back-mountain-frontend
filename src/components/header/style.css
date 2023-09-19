@@ -29,3 +29,7 @@
     border-radius: 50%;
     background-color: rgba(222, 222, 233, 1);
 }
+
+.dashboard-user-chevron{
+    cursor: pointer;
+}
