@@ -27,6 +27,27 @@
     border-right: 0.125rem solid transparent;
 }
 
+.menu-clients {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 7rem;
+    height: 5.125rem;
+    border-right: 0.125rem solid transparent;
+}
+
+.menu-billings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 7rem;
+    height: 5.125rem;
+    border-right: 0.125rem solid transparent;
+}
+
+
 
 .active_menu {
     border-right: 0.125rem solid rgba(218, 1, 117, 1);
