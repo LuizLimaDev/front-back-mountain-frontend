@@ -15,7 +15,9 @@ function BillingValueProjected() {
 			<div className="billing-value-content">
 				<p className="billing-value-title">Cobranças Previstas</p>
 				<p className="billing-value-value">
-					{moneyFormat.format(metrics.totalPrices.valueProjected)}
+					{moneyFormat
+						.format(metrics.totalPrices.valueProjected)
+						.replace(/^(\D+)/, "$1 ")}
 				</p>
 			</div>
 		</div>
