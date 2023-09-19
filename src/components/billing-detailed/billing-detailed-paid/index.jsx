@@ -1,11 +1,13 @@
+import useMetricsDashboard from '../../../hooks/useMetricsDashboard';
 import './style.css';
 
 function BillingDetailedPaid() {
+  const { metrics } = useMetricsDashboard();
   return (
     <div className='table-small'>
       <div className='table-title'>
         <h1 className='table-name'>Cobranças Pagas</h1>
-        <span className='quantity-paid'>10</span>
+        <span className='quantity-paid'>{metrics.totalCounts.countPaid}</span>
       </div>
 
       <div className='table-infos-description'>
@@ -14,30 +16,15 @@ function BillingDetailedPaid() {
         <p className='table-info'>Valor</p>
       </div>
 
-      <div className='table-content'>
-        <p>Sara Silva</p>
-        <p>223456787</p>
-        <p>R$ 1000,00</p>
-      </div>
-
-      <div className='table-content'>
-        <p>Sara Silva</p>
-        <p>223456787</p>
-        <p>R$ 1000,00</p>
-      </div>
-
-      <div className='table-content'>
-        <p>Sara Silva</p>
-        <p>223456787</p>
-        <p>R$ 1000,00</p>
-      </div>
-
-      <div className='table-content'>
-        <p>Sara Silva</p>
-        <p>223456787</p>
-        <p>R$ 1000,00</p>
-      </div>
-
+      {
+        metrics.listBillings.paid.slice(0, 5).map((billing) => {
+          return (<div className='table-content' key={billing.id}>
+            <p className='data-name'>{billing.name}</p>
+            <p className='data-id'>{billing.id}</p>
+            <p className='data-value'>R$ {billing.value}</p>
+          </div>)
+        })
+      }
       <a href='' className='table-btn'>Ver todos</a>
 
     </div>

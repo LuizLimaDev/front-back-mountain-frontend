@@ -27,17 +27,16 @@ export default function useSingUp() {
         password
       })
 
-      setValue(data)
+      setValue(data.token)
       navigate("/home")
 
     } catch (error) {
       setApiErrors(error.response.data.message)
-      console.log(error.response)
     }
   }
 
   function emailErrors() {
-    if (apiErrors === 'Usuário não encontrado' || apiErrors === 'O campo email é obrigatório') {
+    if (apiErrors) {
       return true
     }
 

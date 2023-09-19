@@ -1,8 +1,10 @@
 import './style.css';
 import payedIcon from '../../../assets/Payed-icon.png'
+import useMetrics from '../../../hooks/useMetricsDashboard';
 
 
 function BillingValuePaid() {
+  const  { metrics } = useMetrics();
   return (
     <div className='billing-value-paid'>
       <div className='billing-value-icon'>
@@ -11,7 +13,7 @@ function BillingValuePaid() {
 
       <div className='billing-value-content'>
         <p className='billing-value-title'>Cobranças Pagas</p>
-        <p className='billing-value-value'>R$ 30.000</p>
+        <p className='billing-value-value'>R$ {metrics.totalPrices.valuePaid}</p>
       </div>
 
     </div>

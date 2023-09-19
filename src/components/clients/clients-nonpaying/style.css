@@ -44,7 +44,6 @@
 }
 
 .table-big-quantity-nonpaying {
-
     padding: 0.05rem 0.9375rem;
     border-radius: 0.5rem;
     background-color: rgba(255, 239, 239, 1);
@@ -61,8 +60,9 @@
 
 .table-big-infos-description {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 
     width: 100%;
     height: 3.625rem;
@@ -73,13 +73,11 @@
     font-weight: 800;
 }
 
-.table-big-info {}
-
-
 .table-big-content {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 1rem;
 
     width: 100%;
     height: 3rem;
@@ -90,7 +88,6 @@
     font-size: 0.875rem;
     font-weight: 400;
 }
-
 
 .table-big-btn {
     display: flex;

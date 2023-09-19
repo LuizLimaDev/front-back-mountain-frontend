@@ -46,40 +46,6 @@
 
 }
 
-
-.table-infos-description {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    width: 100%;
-    height: 3.625rem;
-    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
-
-    font-family: Nunito, sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.table-info {}
-
-
-.table-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    width: 100%;
-    height: 3rem;
-    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
-
-    color: rgba(110, 110, 133, 1);
-    font-family: Nunito, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-}
-
-
 .table-btn {
     display: flex;
     align-items: center;
