@@ -1,9 +1,8 @@
-import ClientsTable from '../../components/page-clients/clients-table';
-import ClientHeader from '../../components/page-clients/clients-search';
-import MenuIcon from '../../components/menu-icon';
-import ClientModal from "../../components/ClientModal"
-import './style.css';
+import ClientModal from "../../components/ClientModal";
 import EditUserModal from '../../components/Modals/EditUserModal';
+import ClientHeader from '../../components/page-clients/clients-search';
+import ClientsTable from '../../components/page-clients/clients-table';
+import './style.css';
 
 function Clients() {
     return (
