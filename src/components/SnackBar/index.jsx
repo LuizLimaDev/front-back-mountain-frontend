@@ -4,7 +4,7 @@ import { SingContext } from "../../context/SingContext";
 import OkSnack from "../../assets/okSnack.svg";
 import ExitSnack from "../../assets/exitSnack.svg";
 
-export default function SnackBar(){
+export default function SnackBar({ phrase }){
     const { openSnack, setOpenSnack } = useContext(SingContext);
     return(
         <Snackbar
@@ -38,7 +38,7 @@ export default function SnackBar(){
                             width: "100%",
                             textAlign: "center"
                         }}
-                    >Cadastro concluído com sucesso</p>
+                    >{ phrase }</p>
                     <img
                         src={ ExitSnack }
                         alt="Exit's Snack"

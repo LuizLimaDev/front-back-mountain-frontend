@@ -43,6 +43,7 @@ export const SingProvider = ({ children }) => {
   });
   const [openSnack, setOpenSnack] = useState(false);
   const [active, setActive] = useState("home");
+  const [editClientModal, setEditClientModal] = useState(false)
 
   return (
     <SingContext.Provider value={{
@@ -62,7 +63,8 @@ export const SingProvider = ({ children }) => {
       apiErrors, setApiErrors,
       active, setActive,
       openModalEdit, setOpenModalEdit,
-      openSnack, setOpenSnack
+      openSnack, setOpenSnack,
+      editClientModal, setEditClientModal
     }}
     >
       {children}
