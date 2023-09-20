@@ -1,4 +1,5 @@
 import ChevronDown from "../../../assets/chevron-down.png";
+import './style.css';
 
 // eslint-disable-next-line react/prop-types
 function Avatar({ setAnchorEl, initialsName, username }) {
