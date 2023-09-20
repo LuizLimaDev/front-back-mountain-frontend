@@ -12,7 +12,7 @@ function SCButton({ children }) {
         width: "10rem",
         height: "2.06rem",
         padding: "1.25rem",
-        marginTop: "2.5rem",
+        marginTop: "3.5rem",
         borderRadius: ".625rem",
 
         fontFamily: "Nunito",

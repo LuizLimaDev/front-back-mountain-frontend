@@ -24,7 +24,8 @@ export const theme = createTheme({
     SCLightYellow: "#FCF6DC",
     SCDarkYellow: "#C5A605",
 
-    SCNormalError: "#E70000"
+    SCNormalError: "#E70000",
+    SCErrorMui: "#D32F2F"
   },
   typography: {
     fontFamily: [
@@ -43,5 +44,13 @@ export const theme = createTheme({
     fontFamily: "Nunito",
     fontWeight: "bold",
     fontSize: ".875rem",
+  },
+  MUIerrorMessageStyle: {
+    fontFamily: 'Nunito',
+    fontSize: ".82rem",
+
+    margin: ".25rem 0 0 .7rem",
+
+    color: "SCErrorMui"
   }
 })
