@@ -9,6 +9,8 @@
     flex-direction: column;
     align-items: center;
     gap: 4.5rem;
+    position: fixed;
+    margin-right: 80rem;
 
     background-color: rgba(240, 240, 245, 1);
 

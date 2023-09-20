@@ -3,9 +3,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 3rem;
-    padding-bottom: 1.5rem;
+    position: fixed;
+    margin-left: 4rem;
+    padding: 3rem 0 1.5rem;
     border-bottom: 0.0625rem solid rgba(172, 217, 197, 1);
+    background-color: white;
 }
 
 .dashboard-user {
@@ -31,11 +33,11 @@
     background-color: rgba(222, 222, 233, 1);
 }
 
-.dashboard-user-chevron{
+.dashboard-user-chevron {
     cursor: pointer;
 }
 
-.state-client{
+.state-client {
     position: absolute;
     bottom: 0.25rem;
     left: 1.5rem;

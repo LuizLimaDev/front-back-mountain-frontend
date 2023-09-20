@@ -7,7 +7,7 @@ import './style.css';
 
 function Clients() {
     return (
-        <div className='clients-dashboard'>
+        <div className='clients-dashboard client-padding'>
             <div>
                 <div>
                     <ClientHeader />
