@@ -44,6 +44,12 @@ export default function Password() {
         try {
             const response = await api.post("/users", {name: form.name, email: form.email, password: form.password});
             setSteps(2);
+            setForm({
+                name: "",
+                email: "",
+                password: "",
+                passwordConfirm: ""
+            });
             return navigate("/success");
         } catch (error) {
             setErrorPassword(error.response.data.message);   
