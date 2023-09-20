@@ -52,6 +52,7 @@ export default function RegisterLayout() {
                                         }
                                     } else if (index === 1 && (form.name || form.email)){
                                         setSteps(index);
+                                        return navigate("/password");
                                     }
                                 }} key={stage.label} sx={{
                                     '& .MuiStepContent-root': {
