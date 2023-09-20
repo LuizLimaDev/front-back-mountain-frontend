@@ -1,5 +1,6 @@
 import { Stack, Box } from '@mui/material';
 import icon from "../../assets/Clients-icon.png";
+import iconEdit from "../../assets/icon_edit.svg";
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Paper } from '@mui/material';
@@ -55,6 +56,7 @@ export default function ClientDetailed(){
                             }
                             }}
                         >
+                            <img src={iconEdit} alt="" />
                             Editar cliente
                         </IconButton>
                     </Stack>
@@ -71,7 +73,7 @@ export default function ClientDetailed(){
                             </Stack>
                             <Stack width={"11.5rem"}>
                                 <h3>CPF</h3>
-                                <p>054.365.255-87</p>
+                                <p>{customer.cpf}</p>
                             </Stack>
                         </Stack>
                         <Stack direction={"row"} spacing={"4rem"}>
@@ -93,7 +95,7 @@ export default function ClientDetailed(){
                             </Stack>
                             <Stack width={"3.5rem"}>
                                 <h3>Cidade</h3>
-                                <p>Salvador</p>
+                                <p>{customer.city}</p>
                             </Stack>
                             <Stack width={"0.5em"}>
                                 <h3>UF</h3>
