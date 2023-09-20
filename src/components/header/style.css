@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     position: fixed;
+    width: 79.25rem;
     margin-left: 4rem;
     padding: 3rem 0 1.5rem;
     border-bottom: 0.0625rem solid rgba(172, 217, 197, 1);
@@ -15,7 +16,7 @@
     align-items: center;
     gap: 0.5rem;
     color: rgba(14, 135, 80, 1);
-
+    padding: 2.5rem 10rem 1.5rem 0;
     text-transform: capitalize;
 }
 

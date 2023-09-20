@@ -5,21 +5,20 @@ body {
 .content {
 	display: flex;
 	gap: 2rem;
-	margin-bottom: 1.5rem;
-	margin-top: 1.19rem;
+	padding-left: 3rem;
+	margin-bottom: -1rem;
 }
 
 .dashboard {
 	display: flex;
 	flex-direction: column;
-	padding: 4rem 0 0 3rem;
+	padding: 5rem 0 0 3rem;
 }
 
 .billing-detailed-dashboard {
 	display: flex;
 	flex-direction: row;
 	gap: 2rem;
-	margin-bottom: 2rem;
 }
 
 .clients-dashboard.tables-dashboard {
