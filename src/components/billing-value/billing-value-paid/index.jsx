@@ -17,7 +17,9 @@ function BillingValuePaid() {
 			<div className="billing-value-content">
 				<p className="billing-value-title">Cobranças Pagas</p>
 				<p className="billing-value-value">
-					{moneyFormat.format(metrics.totalPrices.valuePaid)}
+					{moneyFormat
+						.format(metrics.totalPrices.valuePaid)
+						.replace(/^(\D+)/, "$1 ")}
 				</p>
 			</div>
 		</div>

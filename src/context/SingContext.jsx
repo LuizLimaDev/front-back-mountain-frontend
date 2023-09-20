@@ -15,6 +15,7 @@ export const SingProvider = ({ children }) => {
   const [errorNameMessage, setErrorNameMessage] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState(false);
   const [openClientModal, setOpenClientModal] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
   const [apiErrors, setApiErrors] = useState("")
   const [form, setForm] = useState({
     name: "",
@@ -39,7 +40,8 @@ export const SingProvider = ({ children }) => {
     email: false,
     cpf: false,
     phone: false
-  })
+  });
+  const [active, setActive] = useState("home");
 
   return (
     <SingContext.Provider value={{
@@ -56,7 +58,9 @@ export const SingProvider = ({ children }) => {
       openClientModal, setOpenClientModal,
       clientForm, setClientForm,
       clientErrors, setClientErrors,
-      apiErrors, setApiErrors
+      apiErrors, setApiErrors,
+      active, setActive,
+      openModalEdit, setOpenModalEdit
     }}
     >
       {children}

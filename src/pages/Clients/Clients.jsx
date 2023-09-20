@@ -1,7 +1,7 @@
-import ClientsTable from '../../components/page-clients/clients-table';
+import ClientModal from "../../components/ClientModal";
+import EditUserModal from '../../components/Modals/EditUserModal';
 import ClientHeader from '../../components/page-clients/clients-search';
-import HeaderClient from '../../components/page-clients/clients-header';
-import MenuIcon from '../../components/menu-icon';
+import ClientsTable from '../../components/page-clients/clients-table';
 import './style.css';
 
 function Clients() {
@@ -21,9 +21,10 @@ function Clients() {
                         <ClientsTable />
                     </div>
                 </div>
-
             </div>
         </div>
+            </div >
+        </div >
     );
 }
 

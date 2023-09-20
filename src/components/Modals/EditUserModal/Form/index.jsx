@@ -1,4 +1,4 @@
-import { Box, InputLabel, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Box, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, Stack, TextField, Typography } from "@mui/material";
 import SCButton from "../../../SCButton/indxe";
 import imgCloseModal from "../../../../assets/close.svg";
 import { useContext, useEffect, useState } from "react";
@@ -7,6 +7,8 @@ import { useTheme } from "@emotion/react";
 import api from "../../../../services/api";
 import { SingContext } from "../../../../context/SingContext";
 import useEmailValidation from "../../../../hooks/useEmailValidation";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // eslint-disable-next-line react/prop-types
 function Form({ SetEditFinished }) {
@@ -15,7 +17,7 @@ function Form({ SetEditFinished }) {
     email, setEmail,
     cpf, setCpf,
     phone, setPhone,
-    handleCloseEditUser
+    handleCloseEditUser,
   } = useContext(ModalsContext)
   const { value } = useContext(SingContext)
   const {
@@ -24,17 +26,26 @@ function Form({ SetEditFinished }) {
     existingEmailError, setExistingEmailError
   } = useEmailValidation()
 
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-
   const [nameError, setNameError] = useState(false)
   const [nameErrorMessage, setNameErrorMessage] = useState("")
 
-  const [passwordErrorListener, setPasswordErrorListener] = useState(false)
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+
+  const [cpfErrorMessage, setCpfErrorMessage] = useState("")
+  const [cpfErrorListener, setCpfErrorListener] = useState(false)
+
+  const [phoneErrorMessage, setPhoneErrorMessage] = useState("")
+  const [phoneErrorListener, setPhoneErrorListener] = useState(false)
+
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
+  const [passwordErrorListener, setPasswordErrorListener] = useState(false)
 
   const [passwordCombinationError, setPasswordCombinationError] = useState("")
   const [confirmPasswordErrorListener, setConfirmPasswordErrorListener] = useState(false)
+
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const theme = useTheme()
 
@@ -58,10 +69,16 @@ function Form({ SetEditFinished }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   async function handleSubmit(e) {
     e.preventDefault()
-    setNameError(false)
+
     setNameErrorMessage("")
+    setNameError(false)
 
     setExistingEmailListener(false)
     setExistingEmailError("")
@@ -70,6 +87,12 @@ function Form({ SetEditFinished }) {
 
     setPasswordErrorListener(false)
     setPasswordErrorMessage("")
+
+    setCpfErrorListener(false)
+    setCpfErrorMessage("")
+
+    setPhoneErrorListener(false)
+    setPhoneErrorMessage("")
 
     setConfirmPasswordErrorListener(false)
 
@@ -126,7 +149,28 @@ function Form({ SetEditFinished }) {
         handleCloseEditUser()
       }, 2000);
     } catch (error) {
-      console.log(error.response.data)
+      const apiErrors = (error.response.data.message)
+      console.log(error.response.data.message)
+
+
+      const cpfError = apiErrors.split(" ").includes("CPF")
+      if (cpfError) {
+        setCpfErrorListener(true)
+        setCpfErrorMessage("Formato: XXX.XXX.XXX-XX")
+      }
+
+      const phoneError = apiErrors.split(" ").includes("DDD")
+      if (phoneError) {
+        setPhoneErrorListener(true)
+        setPhoneErrorMessage("Formato: (XX) XXXXX-XXXX")
+      }
+
+      const passwordError = apiErrors.split(" ").includes("senha")
+      if (passwordError) {
+        setPasswordErrorListener(true)
+        setConfirmPasswordErrorListener(true)
+        setPasswordCombinationError("A senha precisa conter, no mínimo, 8 caracteres!")
+      }
     }
   }
 
@@ -177,7 +221,7 @@ function Form({ SetEditFinished }) {
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            width: "23.68rem",
+            width: "24.68rem",
           }}
         >
           <InputLabel
@@ -238,14 +282,14 @@ function Form({ SetEditFinished }) {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
+              gap: "1.25rem",
 
-              width: "23.68rem",
+              width: "24.68rem",
               margin: "1.25rem 0"
             }}
           >
-            <Box sx={{ width: "11.12rem" }}>
+            <Box>
               <InputLabel
                 htmlFor="cpf"
                 sx={theme.inputModalLabelStyle}
@@ -258,7 +302,8 @@ function Form({ SetEditFinished }) {
                 placeholder='Digite seu CPF'
                 value={cpf}
                 onChange={(e) => setCpf(e.target.value)}
-                // error={}
+                error={cpfErrorListener}
+                helperText={cpfErrorMessage && `${cpfErrorMessage}`}
                 InputProps={{
                   style: {
                     height: "2.75rem",
@@ -267,7 +312,7 @@ function Form({ SetEditFinished }) {
                     fontFamily: "Inter"
                   }
                 }}
-                sx={{ width: "11.12rem" }}
+                sx={{ width: "11.62rem" }}
               />
             </Box>
             <Box sx={{ width: "11.12rem" }}>
@@ -283,9 +328,11 @@ function Form({ SetEditFinished }) {
                 placeholder='Digite seu Telefone'
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                error={phoneErrorListener}
+                helperText={phoneErrorMessage && `${phoneErrorMessage}`}
                 InputProps={{
                   style: {
-                    width: "11.12rem",
+                    width: "11.62rem",
                     height: "2.75rem",
                     borderRadius: ".5rem",
 
@@ -303,24 +350,37 @@ function Form({ SetEditFinished }) {
           >
             Nova Senha
           </InputLabel>
-          <TextField
+          <OutlinedInput
             id="pasasword"
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             placeholder='Digite a nova senha'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={passwordErrorListener}
-            helperText={passwordErrorMessage}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
             fullWidth
-            InputProps={{
-              style: {
-                height: "2.75rem",
-                borderRadius: ".5rem",
+            sx={{
+              height: "2.75rem",
+              borderRadius: ".5rem",
 
-                fontFamily: "Inter"
-              }
+              fontFamily: "Inter"
             }}
           />
+          <Typography sx={theme.MUIerrorMessageStyle}>
+            {passwordErrorMessage && `${passwordErrorMessage}`}
+          </Typography>
+
           <InputLabel
             htmlFor="confirmPasasword"
             required
@@ -329,24 +389,37 @@ function Form({ SetEditFinished }) {
           >
             Confirmar Senha
           </InputLabel>
-          <TextField
+          <OutlinedInput
             id="confirmPasasword"
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             placeholder='Confirme a nova senha'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             error={confirmPasswordErrorListener}
             helperText={passwordCombinationError && `${passwordCombinationError}`}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
             fullWidth
-            InputProps={{
-              style: {
-                height: "2.75rem",
-                borderRadius: ".5rem",
+            sx={{
+              height: "2.75rem",
+              borderRadius: ".5rem",
 
-                fontFamily: "Inter"
-              }
+              fontFamily: "Inter"
             }}
           />
+          <Typography sx={theme.MUIerrorMessageStyle}>
+            {passwordCombinationError && `${passwordCombinationError}`}
+          </Typography>
+
           <SCButton>
             Aplicar
           </SCButton>

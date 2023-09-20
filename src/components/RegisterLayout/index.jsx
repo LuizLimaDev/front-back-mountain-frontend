@@ -6,7 +6,7 @@ import {
     Typography
 } from "@mui/material";
 import { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import ActualStep from "../../assets/actualStep.svg";
 import DoneStep from "../../assets/doneStep.svg";
 import NextStep from "../../assets/nextStep.svg";
@@ -14,7 +14,8 @@ import { SingContext } from "../../context/SingContext";
 import "./styles.css";
 
 export default function RegisterLayout() {
-    const { steps } = useContext(SingContext);
+    const navigate = useNavigate();
+    const { steps, setSteps, form } = useContext(SingContext);
     const stages = [
         {
             label: "Cadastre-se",
@@ -43,7 +44,17 @@ export default function RegisterLayout() {
                     }} >
                         {stages.map((stage, index) => {
                             return(
-                                <Step key={stage.label} sx={{
+                                <Step onClick={()=>{
+                                    if(steps>index && steps<2){
+                                        setSteps(index);
+                                        if(steps === 1){
+                                            return navigate("/singup");
+                                        }
+                                    } else if (index === 1 && (form.name || form.email)){
+                                        setSteps(index);
+                                        return navigate("/password");
+                                    }
+                                }} key={stage.label} sx={{
                                     '& .MuiStepContent-root': {
                                         borderColor: "SCNormalGreen",
                                         borderWidth: "2px",
