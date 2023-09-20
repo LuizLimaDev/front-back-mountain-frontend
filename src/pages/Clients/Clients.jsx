@@ -1,9 +1,9 @@
 import ClientsTable from '../../components/page-clients/clients-table';
 import ClientHeader from '../../components/page-clients/clients-search';
-import MenuIcon from '../../components/menu-icon';
-import ClientModal from "../../components/ClientModal"
+import ClientModal from "../../components/ClientModal";
 import './style.css';
 import EditUserModal from '../../components/Modals/EditUserModal';
+import SnackBar from '../../components/SnackBar';
 
 function Clients() {
     return (
@@ -14,6 +14,7 @@ function Clients() {
                     <ClientsTable />
                     <EditUserModal />
                     <ClientModal />
+                    <SnackBar />
                 </div>
             </div>
         </div>

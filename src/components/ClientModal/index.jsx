@@ -5,7 +5,7 @@ import {
     OutlinedInput,
     InputLabel,
     Button,
-    TextField
+    TextField,
 } from "@mui/material";
 import UsersIcon from "../../assets/users.svg";
 import CloseIcon from "../../assets/closeIcon.svg";
@@ -18,8 +18,10 @@ export default function ClientModal(){
         openClientModal, setOpenClientModal,
         clientForm, setClientForm,
         clientErrors, setClientErrors,
-        value
+        value,
+        setOpenSnack
     } = useContext(SingContext);
+    
 
     function handleChange(event){
         setClientForm((prevState) => {
@@ -47,6 +49,7 @@ export default function ClientModal(){
             city: "",
             state: ""
         });
+        setOpenClientModal(false);
     }
 
     async function handleSubmit(event){
@@ -56,6 +59,18 @@ export default function ClientModal(){
             return setClientErrors((prevState) => {
                 return {...prevState, name: "Este campo deve ser preenchido."}
             });
+        }
+
+        if(!clientForm.email){
+            return setClientErrors((prevState) => {
+                return {...prevState, email: "Este campo deve ser preenchido."}
+            })
+        }
+
+        if(!clientForm.cpf){
+            return setClientErrors((prevState) => {
+                return {...prevState, cpf: "Este campo deve ser preenchido."}
+            })
         }
 
         if(!clientForm.phone){
@@ -70,7 +85,8 @@ export default function ClientModal(){
                     Authorization: `Bearer ${value}`
                 }
             });
-            setOpenClientModal(false);
+            setOpenSnack(true);
+            cleanForm();
         } catch (error) {
             setClientErrors((prevState) => {
                 return {...prevState, cpf: error.response.data.message}
