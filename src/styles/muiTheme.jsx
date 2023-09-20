@@ -24,6 +24,9 @@ export const theme = createTheme({
     SCLightYellow: "#FCF6DC",
     SCDarkYellow: "#C5A605",
 
+    SCDarkBlue: "#243F80",
+    SCLightBlue: "#C3D4FE",
+
     SCNormalError: "#E70000",
     SCErrorMui: "#D32F2F"
   },
