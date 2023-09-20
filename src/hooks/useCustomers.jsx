@@ -6,7 +6,9 @@ import { CustomersContext } from "../context/CustomersContext";
 export default function useCustomers() {
   const {         
    customers,
-   setCustomers
+   customer,
+   setCustomers,
+   setCustomer
   } = useContext(CustomersContext);
   const {  value } = useContext(SingContext);
 
@@ -22,6 +24,21 @@ export default function useCustomers() {
         console.log(error);
     }
   }
+
+  async function getCustomer(customerId){
+    try {
+      const { data } = await api.get(`/customers/${customerId}`, {
+        headers: {
+            Authorization: `Bearer ${value}`
+        }
+      });
+      console.log("hello world");
+      setCustomer(data.detailsCustomer[0]);
+    } catch (error) {
+      console.log("api error", error);
+    }
+    
+  }
   
   useEffect(()=>{
    customersUpdate();
@@ -31,5 +48,7 @@ export default function useCustomers() {
   return {
     customers,
     customersUpdate,
+    getCustomer,
+    customer,
   }
 }
