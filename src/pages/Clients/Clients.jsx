@@ -14,7 +14,7 @@ function Clients() {
                     <ClientsTable />
                     <EditUserModal />
                     <ClientModal />
-                    <SnackBar />
+                    <SnackBar phrase={"Cadastro concluído com sucesso"} />
                 </div>
             </div>
         </div>
