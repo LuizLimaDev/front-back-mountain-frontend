@@ -5,11 +5,25 @@ export const CustomersContext = createContext({});
 
 export const CustomersProvider = ({ children }) => {
   const [customers, setCustomers] = useState([]);
+  const [customer, setCustomer] = useState({
+    name: "",
+    email: "",
+    cpf: "",
+    phone: "",
+    zipcode: "",
+    street: "",
+    complement: "",
+    neighborhood: "",
+    city: "",
+    state: ""
+  });
 
   return (
     <CustomersContext.Provider value={{
         customers,
-        setCustomers
+        setCustomers,
+        customer,
+        setCustomer,
     }}
     >
       {children}

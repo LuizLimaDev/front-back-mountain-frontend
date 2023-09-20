@@ -10,6 +10,7 @@ import { SingContext } from "../context/SingContext";
 import Clients from '../pages/Clients/Clients';
 import HomeLayout from "../components/HomeLayout";
 import Billings from "../pages/Billings";
+import ClientDetailed from "../pages/ClientDetailed/ClientDetailed";
 
 // eslint-disable-next-line react/prop-types
 function ProtectedRoute({ isProtected, url }) {
@@ -37,6 +38,7 @@ function MainRoutes() {
           <Route path="/home" element={<Home />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/billings" element={<Billings />} />
+          <Route path="/clients/:customerId" element={<ClientDetailed />}/>
         </Route>
       </Route>
     </Routes>
