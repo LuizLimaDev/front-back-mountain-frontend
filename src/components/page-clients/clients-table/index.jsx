@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import './style.css';
 import ChevronUpDown from '../../../assets/chevron-Up-Down.png'
 import CreateBilling from '../../../assets/create-billing.png'
@@ -9,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+import useCustomers from "../../../hooks/useCustomers";
 
 
 function createData(name, cpf, email, phone, status) {
@@ -36,6 +37,7 @@ const rows = [
 ];
 
 export default function ClientsTable() {
+    const { customers } = useCustomers()
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -54,18 +56,20 @@ export default function ClientsTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {customers.map((row) => (
                         <TableRow
-                            key={row.name}
+                            key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
+                                <TableCell component="th" scope="row">
+                                    <Link className='link' to={`/clients/${row.id}`} >
+                                            {row.name}
+                                    </Link>
+                                </TableCell>
                             <TableCell align="left">{row.cpf}</TableCell>
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">{row.phone}</TableCell>
-                            <TableCell align="left">{row.status}</TableCell>
+                            <TableCell align="left">{row.status === "pendente" || rows.status === "vencido" ? red : green}</TableCell>
                             <TableCell align="left"><a><img src={CreateBilling}></img></a></TableCell>
                         </TableRow>
                     ))}

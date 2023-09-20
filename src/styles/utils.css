@@ -50,3 +50,8 @@
 .client-id {
   padding-left: 1.5rem;
 }
+
+.link {
+  text-decoration: none;
+  color: #000000;
+}
