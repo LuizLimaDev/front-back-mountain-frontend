@@ -6,7 +6,7 @@ import {
     Typography
 } from "@mui/material";
 import { useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import ActualStep from "../../assets/actualStep.svg";
 import DoneStep from "../../assets/doneStep.svg";
 import NextStep from "../../assets/nextStep.svg";
@@ -14,10 +14,22 @@ import { SingContext } from "../../context/SingContext";
 import "./styles.css";
 
 export default function RegisterLayout() {
-    const {
-        steps, setSteps,
-        form
-    } = useContext(SingContext);
+    const navigate = useNavigate();
+    const { steps, setSteps, form } = useContext(SingContext);
+    const stages = [
+        {
+            label: "Cadastre-se",
+            content: "Por favor, escreva seu nome e e-mail"
+        },
+        {
+            label: "Escolha uma senha",
+            content: "Escolha uma senha segura"
+        },
+        {
+            label: "Cadastro realizado com sucesso",
+            content: "E-mail e senha cadastrados com sucesso"
+        },
+    ];
 
     return (
         <div className="layout-container">
@@ -30,30 +42,28 @@ export default function RegisterLayout() {
                             borderWidth: "2px"
                         }
                     }} >
-                        <Step
-                            key={0}
-                            sx={{
-                                '& .MuiStepContent-root':{
-                                    borderColor: "SCNormalGreen",
-                                    borderWidth: "2px",
-                                    ml: 2.4,
-                                    minHeight: "0.5rem"
-                                }
-                            }}
-                        >
-                            <StepLabel
-                                icon={ <img src={ steps === 0 ? ActualStep : DoneStep }  /> }
-                            >
-                                <Link
-                                    to="/singup"
-                                    style={{textDecoration: "none"}}
-                                    onClick={() => {
-                                        if(form.email && form.name){
-                                            return setSteps(0);
+                        {stages.map((stage, index) => {
+                            return(
+                                <Step onClick={()=>{
+                                    if(steps>index && steps<2){
+                                        setSteps(index);
+                                        if(steps === 1){
+                                            return navigate("/singup");
                                         }
-                                    }}
-                                >
-                                    <Typography
+                                    } else if (index === 1 && (form.name || form.email)){
+                                        setSteps(index);
+                                        return navigate("/password");
+                                    }
+                                }} key={stage.label} sx={{
+                                    '& .MuiStepContent-root': {
+                                        borderColor: "SCNormalGreen",
+                                        borderWidth: "2px",
+                                        ml: 2.4,
+                                        minHeight: "0.5rem",
+                                    },
+                                }} >
+                                    <StepLabel icon={ <img src={ index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep } className="stepImage"  /> } >
+                                        <Typography
                                         sx={{
                                             fontFamily: "Montserrat",
                                             fontSize: "1.125rem",
