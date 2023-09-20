@@ -124,7 +124,7 @@ function LoginForm() {
               height: "2.75rem",
               borderRadius: "10px",
 
-              backgroundColor: "SCInputBackground",
+              backgroundColor: "SCBackgroundWhite",
 
               fontFamily: "Inter"
             }}
