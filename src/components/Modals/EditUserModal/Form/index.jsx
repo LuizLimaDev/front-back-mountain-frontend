@@ -1,14 +1,14 @@
-import { Box, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, Stack, TextField, Typography } from "@mui/material";
-import SCButton from "../../../SCButton/indxe";
-import imgCloseModal from "../../../../assets/close.svg";
-import { useContext, useEffect, useState } from "react";
-import { ModalsContext } from "../../../../context/ModalsContext";
 import { useTheme } from "@emotion/react";
-import api from "../../../../services/api";
-import { SingContext } from "../../../../context/SingContext";
-import useEmailValidation from "../../../../hooks/useEmailValidation";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Box, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, Stack, TextField, Typography } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import imgCloseModal from "../../../../assets/close.svg";
+import { ModalsContext } from "../../../../context/ModalsContext";
+import { SingContext } from "../../../../context/SingContext";
+import useEmailValidation from "../../../../hooks/useEmailValidation";
+import api from "../../../../services/api";
+import SCButton from "../../../SCButton/indxe";
 
 // eslint-disable-next-line react/prop-types
 function Form({ SetEditFinished }) {
@@ -26,11 +26,15 @@ function Form({ SetEditFinished }) {
     existingEmailError, setExistingEmailError
   } = useEmailValidation()
 
-  const [nameError, setNameError] = useState(false)
-  const [nameErrorMessage, setNameErrorMessage] = useState("")
-
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+
+  const [nameErrorMessage, setNameErrorMessage] = useState("")
+  const [nameErrorListener, setNameErrorListener] = useState(false)
+
+  const [emailErrorMessage, setEmailErrorMessage] = useState("")
+  // eslint-disable-next-line no-unused-vars
+  const [emailErrorListener, setEmailErrorListener] = useState(false)
 
   const [cpfErrorMessage, setCpfErrorMessage] = useState("")
   const [cpfErrorListener, setCpfErrorListener] = useState(false)
@@ -43,7 +47,6 @@ function Form({ SetEditFinished }) {
 
   const [passwordCombinationError, setPasswordCombinationError] = useState("")
   const [confirmPasswordErrorListener, setConfirmPasswordErrorListener] = useState(false)
-
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -78,7 +81,7 @@ function Form({ SetEditFinished }) {
     e.preventDefault()
 
     setNameErrorMessage("")
-    setNameError(false)
+    setNameErrorListener(false)
 
     setExistingEmailListener(false)
     setExistingEmailError("")
@@ -95,37 +98,6 @@ function Form({ SetEditFinished }) {
     setPhoneErrorMessage("")
 
     setConfirmPasswordErrorListener(false)
-
-    if (password && confirmPassword && password !== confirmPassword) {
-      setPasswordCombinationError("As senhas não coincidem!")
-      setPasswordErrorListener(true)
-      setConfirmPasswordErrorListener(true)
-      return
-    }
-
-    if (!name) {
-      setNameError(true)
-      setNameErrorMessage("Este campo deve ser preenchido!")
-      return
-    }
-
-    if (!email) {
-      setExistingEmailListener(true)
-      setExistingEmailError("Este campo deve ser preenchido!")
-      return
-    }
-
-    if (password && !confirmPassword) {
-      setConfirmPasswordErrorListener(true)
-      setPasswordCombinationError("Este campo deve ser preenchido!")
-      return
-    }
-
-    if (confirmPassword && !password) {
-      setPasswordErrorListener(true)
-      setPasswordErrorMessage("Este campo deve ser preenchido!")
-      return
-    }
 
     const userEdit = {
       name,
@@ -147,30 +119,67 @@ function Form({ SetEditFinished }) {
       setTimeout(() => {
         SetEditFinished(false)
         handleCloseEditUser()
+
+        setName("")
+        setEmail("")
+        setCpf("")
+        setPhone("")
       }, 2000);
     } catch (error) {
-      const apiErrors = (error.response.data.message)
-      console.log(error.response.data.message)
+      const apiErrors = (error.response.data.errors)
 
+      apiErrors.find(erro => {
+        if (erro.type === "name") {
+          setNameErrorListener(true)
+          setNameErrorMessage("O campo de Nome deve ser preenchido!")
 
-      const cpfError = apiErrors.split(" ").includes("CPF")
-      if (cpfError) {
-        setCpfErrorListener(true)
-        setCpfErrorMessage("Formato: XXX.XXX.XXX-XX")
-      }
+        }
 
-      const phoneError = apiErrors.split(" ").includes("DDD")
-      if (phoneError) {
-        setPhoneErrorListener(true)
-        setPhoneErrorMessage("Formato: (XX) XXXXX-XXXX")
-      }
+        if (erro.type === "email") {
+          setEmailErrorListener(true)
+          setEmailErrorMessage("O campo de E-mail deve ser preenchido!")
+          return
+        }
 
-      const passwordError = apiErrors.split(" ").includes("senha")
-      if (passwordError) {
-        setPasswordErrorListener(true)
+        if (erro.type === "cpf") {
+          setCpfErrorListener(true)
+          setCpfErrorMessage("Formato: XXX.XXX.XXX-XX")
+          return
+        }
+
+        if (erro.type === "phone") {
+          setPhoneErrorListener(true)
+          setPhoneErrorMessage("Formato: (XX) XXXXX-XXXX")
+          return
+        }
+
+        if (erro.type === "newPassword") {
+          setPasswordErrorListener(true)
+          setConfirmPasswordErrorListener(true)
+          setPasswordCombinationError("A senha precisa conter, no mínimo, 8 caracteres!")
+          return
+        }
+
+        if (password && confirmPassword && password !== confirmPassword) {
+          setPasswordCombinationError("As senhas não coincidem!")
+          setPasswordErrorListener(true)
+          setConfirmPasswordErrorListener(true)
+          return
+        }
+      })
+
+      if (password && !confirmPassword) {
         setConfirmPasswordErrorListener(true)
-        setPasswordCombinationError("A senha precisa conter, no mínimo, 8 caracteres!")
+        setPasswordCombinationError(`O campo "Confirmar Senha" deve ser preenchido!`)
+        return
       }
+
+      if (confirmPassword && !password) {
+        setPasswordErrorListener(true)
+        setPasswordErrorMessage(`O campo "Nova Senha" deve ser preenchido!`)
+        return
+      }
+
     }
   }
 
@@ -238,7 +247,7 @@ function Form({ SetEditFinished }) {
             fullWidth
             value={name}
             onChange={(e) => setName(e.target.value)}
-            error={nameError}
+            error={nameErrorListener}
             helperText={nameErrorMessage && `${nameErrorMessage}`}
             InputProps={{
               style: {
@@ -266,7 +275,7 @@ function Form({ SetEditFinished }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={handleBlur}
-            error={existingEmailListener}
+            error={existingEmailListener || emailErrorMessage}
             helperText={existingEmailError && `${existingEmailError}`}
             InputProps={{
               style: {
@@ -278,6 +287,9 @@ function Form({ SetEditFinished }) {
               }
             }}
           />
+          <Typography sx={theme.MUIerrorMessageStyle}>
+            {emailErrorMessage && `${emailErrorMessage}`}
+          </Typography>
 
           <Box
             sx={{
