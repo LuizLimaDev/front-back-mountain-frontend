@@ -7,3 +7,15 @@ body {
     flex-direction: row;
     gap: 6.25rem;
 }
+
+.clients-fixed {
+    position: fixed;
+}
+
+.clients-page {
+    padding-left: 10.5rem;
+}
+
+.client-content {
+    padding-top: 8rem;
+}
