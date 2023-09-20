@@ -61,11 +61,11 @@ export default function ClientsTable() {
                             key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <Link to={`/clients/${row.id}`}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    <Link to={`/clients/${row.id}`}>
+                                            {row.name}
+                                    </Link>
                                 </TableCell>
-                            </Link>
                             <TableCell align="left">{row.cpf}</TableCell>
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">{row.phone}</TableCell>
