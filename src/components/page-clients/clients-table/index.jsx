@@ -62,7 +62,7 @@ export default function ClientsTable() {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                                 <TableCell component="th" scope="row">
-                                    <Link to={`/clients/${row.id}`}>
+                                    <Link className='link' to={`/clients/${row.id}`} >
                                             {row.name}
                                     </Link>
                                 </TableCell>
