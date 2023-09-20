@@ -3,11 +3,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 6rem;
+    position: fixed;
     /* padding: 3rem 0 1.25rem 5.125rem; */
     /* margin: 0 2rem; */
     border-bottom: 0.0625rem solid rgba(172, 217, 197, 1);
     /* margin-bottom: 1.5rem; */
+
 
     height: 8rem;
     width: 70rem;

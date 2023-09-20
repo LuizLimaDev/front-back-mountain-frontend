@@ -5,9 +5,11 @@ function Avatar({ setAnchorEl, initialsName, username }) {
 	function handleClick(e) {
 		setAnchorEl(e.currentTarget);
 	}
-
+	const menuStyle = {
+		position: 'fixed'
+	};
 	return (
-		<div className="dashboard-user">
+		<div className="dashboard-user" style={menuStyle}>
 			<span className="dashboard-user-icon">{`${initialsName[0]}${initialsName[2]}`}</span>
 			<span className="dashboard-user-name">{username}</span>
 			<a>

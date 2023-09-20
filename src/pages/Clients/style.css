@@ -4,7 +4,13 @@ body {
 
 .clients-dashboard {
     display: flex;
+    flex-direction: row;
     gap: 6.25rem;
+
+}
+
+.client-padding {
+    padding: 5rem 0 0 3rem;
 }
 
 .clients-fixed {

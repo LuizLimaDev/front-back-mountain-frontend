@@ -11,6 +11,7 @@ import Clients from '../pages/Clients/Clients';
 import HomeLayout from "../components/HomeLayout";
 import Billings from "../pages/Billings";
 
+
 // eslint-disable-next-line react/prop-types
 function ProtectedRoute({ isProtected, url }) {
   return isProtected ? <Outlet /> : <Navigate to={url} />;
@@ -18,6 +19,7 @@ function ProtectedRoute({ isProtected, url }) {
 
 function MainRoutes() {
   const { value } = useContext(SingContext);
+
 
   return (
     <Routes>
@@ -33,13 +35,14 @@ function MainRoutes() {
       </Route>
 
       <Route element={<ProtectedRoute isProtected={value} url={"/"} />}>
+
         <Route element={<HomeLayout />} >
           <Route path="/home" element={<Home />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/billings" element={<Billings />} />
         </Route>
       </Route>
-    </Routes>
+    </Routes >
   );
 }
 
