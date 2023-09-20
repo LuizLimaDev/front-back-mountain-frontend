@@ -6,7 +6,6 @@ body {
     display: flex;
     flex-direction: row;
     gap: 6.25rem;
-
 }
 
 .client-padding {
