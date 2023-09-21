@@ -10,7 +10,6 @@ import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
 import Avatar from "./Avatar";
 import EditUserModal from "../../components/Modals/EditUserModal";
-import "./style.css";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);
@@ -65,8 +64,8 @@ function HeaderDashBoard() {
 					{active === "home"
 						? "Resumo das cobranças"
 						: active === "clients"
-						? "Clientes"
-						: null}
+							? "Clientes"
+							: null}
 				</h1>
 			</div>
 			<div className="dashboard-user">
