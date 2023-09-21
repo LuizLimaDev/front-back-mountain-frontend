@@ -55,6 +55,7 @@ export default function EditClientModal( { id } ){
             });
             setEditClientModal(false);
             getCustomer(id);
+            setOpenSnack(true);
         } catch (error) {
             const errors = error.response.data.errors;
             errors.map((item) => {
