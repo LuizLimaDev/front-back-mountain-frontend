@@ -17,6 +17,18 @@ export const CustomersProvider = ({ children }) => {
     city: "",
     state: ""
   });
+  const [formCustomer, setFormCustomer] = useState({
+    name: "",
+    email: "",
+    cpf: "",
+    phone: "",
+    zipcode: "",
+    street: "",
+    complement: "",
+    neighborhood: "",
+    city: "",
+    state: ""
+})
 
   return (
     <CustomersContext.Provider value={{
@@ -24,6 +36,8 @@ export const CustomersProvider = ({ children }) => {
         setCustomers,
         customer,
         setCustomer,
+        formCustomer,
+        setFormCustomer
     }}
     >
       {children}

@@ -8,7 +8,9 @@ export default function useCustomers() {
    customers,
    customer,
    setCustomers,
-   setCustomer
+   setCustomer,
+   formCustomer,
+   setFormCustomer
   } = useContext(CustomersContext);
   const {  value } = useContext(SingContext);
 
@@ -32,8 +34,8 @@ export default function useCustomers() {
             Authorization: `Bearer ${value}`
         }
       });
-      console.log("hello world");
       setCustomer(data.detailsCustomer[0]);
+      setFormCustomer(data.detailsCustomer[0]);
     } catch (error) {
       console.log("api error", error);
     }
@@ -50,5 +52,8 @@ export default function useCustomers() {
     customersUpdate,
     getCustomer,
     customer,
+    setCustomer,
+    formCustomer,
+    setFormCustomer
   }
 }

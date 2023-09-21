@@ -47,7 +47,7 @@ export default function SnackBar({ phrase }){
         }
             sx={{
                 backgroundColor: "SCLightBlue",
-                width: "20.625rem",
+                minWidth: "20.625rem",
                 height: "3.375rem",
                 borderRadius: "0.625rem",
             }}

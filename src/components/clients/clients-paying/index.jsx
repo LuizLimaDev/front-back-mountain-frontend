@@ -1,6 +1,7 @@
 import './style.css';
 import clientsPayed from '../../../assets/Clients-payed.png'
 import useMetricsDashboard from '../../../hooks/useMetricsDashboard';
+import { Link } from 'react-router-dom';
 
 function ClientsPaying() {
   const { metrics } = useMetricsDashboard();
@@ -29,7 +30,9 @@ function ClientsPaying() {
         })
       }
 
-      <a href='' className='table-big-btn'>Ver todos</a>
+      <Link to="/clients" className="table-btn">
+        Ver todos
+      </Link>
 
     </div>
   )
