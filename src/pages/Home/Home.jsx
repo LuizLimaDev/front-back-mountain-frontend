@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import BillingDetailedOverdue from '../../components/billing-detailed/billing-detailed-overdue';
@@ -20,24 +21,62 @@ function Home() {
 
   return (
     <MetricsDasboardProvider>
-      <div className='dashboard'>
-        <div className='billing-value-dashboard tables-dashboard dashboard'>
-          <div className='content'>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+
+          width: "100vw",
+          paddingLeft: "7.5vw"
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+
+            width: "100%",
+            paddingTop: "18vh"
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              gap: "2.12rem",
+
+              paddingBottom: "1.25rem"
+            }}
+          >
             <BillingValueOverdue />
             <BillingValuePaid />
             <BillingValueProjected />
-          </div>
-          <div className='billing-detailed-dashboard tables-dashboard dashboard'>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "2.12rem",
+
+              padding: "1.5rem 0 1.25rem"
+            }}
+          >
             <BillingDetailedOverdue />
             <BillingDetailedPaid />
             <BillingDetailedProjected />
-          </div>
-          <div className='clients-dashboard tables-dashboard dashboard'>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "2.12rem",
+
+              padding: "2rem 0 3rem"
+            }}
+          >
             <ClientsNonpaying />
             <ClientsPaying />
-          </div>
-        </div>
-      </div >
+          </Box>
+        </Box>
+      </Box >
 
     </MetricsDasboardProvider>
   );

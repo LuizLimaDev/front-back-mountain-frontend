@@ -9,7 +9,7 @@ import { ModalsContext } from '../../context/ModalsContext';
 import { SingContext } from '../../context/SingContext';
 import api from '../../services/api';
 import Avatar from './Avatar';
-import EditUserModal from '../../components/Modals/EditUserModal';
+import EditUserModal from '../Modals/EditUserModal';
 import './style.css';
 
 function HeaderDashBoard() {

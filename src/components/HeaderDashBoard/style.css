@@ -3,11 +3,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     position: fixed;
-    width: 79.25rem;
-    margin-left: 4rem;
+    width: 87%;
+    height: 15vh;
+    margin-left: 7.5vw;
     padding: 3rem 0 1.5rem;
     border-bottom: 0.0625rem solid rgba(172, 217, 197, 1);
+
     background-color: rgba(248, 248, 249, 1);
 }
 
