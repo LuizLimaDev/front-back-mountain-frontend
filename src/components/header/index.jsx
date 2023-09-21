@@ -9,6 +9,7 @@ import { ModalsContext } from "../../context/ModalsContext";
 import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
 import Avatar from "./Avatar";
+import EditUserModal from "../../components/Modals/EditUserModal";
 import "./style.css";
 
 function HeaderDashBoard() {
@@ -153,6 +154,7 @@ function HeaderDashBoard() {
 						</Box>
 					</Box>
 				</Popover>
+				<EditUserModal />
 			</div>
 		</div>
 	);
