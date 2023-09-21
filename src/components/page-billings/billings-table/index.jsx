@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,15 +8,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 // import { Link } from "react-router-dom";
 import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
-import useCharges from "../../../hooks/useCharges";
 import "./style.css";
+import EditIcon from "../../../assets/edit.svg";
+import DeleteIcon from "../../../assets/delete-icon-billing.svg";
+import { Stack, Typography, useTheme } from "@mui/material";
+import { moneyFormat } from "../../../utils/moneyFormat";
 
-export default function BillingsTable() {
-	const { charges } = useCharges();
-	console.log(charges);
-
+// eslint-disable-next-line react/prop-types
+export default function BillingsTable({ charges }) {
+	const theme = useTheme();
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} sx={{ maxWidth: "70rem" }}>
 			<Table>
 				<TableHead>
 					<TableRow>
@@ -33,21 +36,122 @@ export default function BillingsTable() {
 						<TableCell align="left">Data de venc.</TableCell>
 						<TableCell align="left">Status</TableCell>
 						<TableCell align="left">Descrição</TableCell>
+						<TableCell align="left"></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{charges.map((charge) => (
-						<TableRow key={charge.id}>
-							<TableCell>{charge.name}</TableCell>
-							<TableCell>{charge.id}</TableCell>
-							<TableCell align="left">{charge.value}</TableCell>
-							<TableCell align="left">{charge.dueDate}</TableCell>
-							<TableCell align="left">{charge.status}</TableCell>
-							<TableCell align="left">
-								{charge.description}
-							</TableCell>
-						</TableRow>
-					))}
+					{charges.map((charge) => {
+						const colorStatusStyled =
+							charge.status === "pendente"
+								? theme.billingsYellow
+								: charge.status === "vencido"
+								? theme.billingsRed
+								: theme.billingsCyan;
+						return (
+							<TableRow key={charge.id}>
+								<TableCell>
+									<Typography sx={theme.infoBillingsTable}>
+										{charge.name}
+									</Typography>
+								</TableCell>
+								<TableCell>
+									<Typography sx={theme.infoBillingsTable}>
+										{charge.id}
+									</Typography>
+								</TableCell>
+								<TableCell align="left">
+									<Typography sx={theme.infoBillingsTable}>
+										{moneyFormat
+											.format(charge.value)
+											.replace(/^(\D+)/, "$1 ")}
+									</Typography>
+								</TableCell>
+								<TableCell align="left">
+									<Typography sx={theme.infoBillingsTable}>
+										{charge.duedate}
+									</Typography>
+								</TableCell>
+								<TableCell align="left">
+									<Stack
+										component="div"
+										sx={{
+											...theme.statusBillings,
+											...colorStatusStyled,
+										}}
+									>
+										{charge.status}
+									</Stack>
+								</TableCell>
+								<TableCell align="left">
+									<Typography
+										sx={{
+											overflow: "hidden",
+											whiteSpace: "nowrap",
+											textOverflow: "ellipsis",
+											width: "13.5rem",
+											...theme.infoBillingsTable,
+										}}
+									>
+										{charge.description}
+									</Typography>
+								</TableCell>
+								<TableCell align="left">
+									<Stack direction={"row"} spacing={"1.5rem"}>
+										<Stack
+											direction={"column"}
+											spacing={"0.25rem"}
+											sx={{
+												cursor: "pointer",
+											}}
+										>
+											<img
+												src={EditIcon}
+												alt="Ícone de editar"
+												className="icon-small"
+											/>
+											<Typography
+												sx={{
+													color: "SCGray3",
+													fontFamily: "Nunito",
+													fontSize: "0.5rem",
+													fontStyle: "normal",
+													fontWeight: "600",
+													lineHeight: "normal",
+												}}
+											>
+												Editar
+											</Typography>
+										</Stack>
+										<Stack
+											direction={"column"}
+											spacing={"0.25rem"}
+											sx={{
+												cursor: "pointer",
+											}}
+										>
+											<img
+												src={DeleteIcon}
+												alt="Ícone de excluir"
+												className="icon-small"
+											/>
+											<Typography
+												sx={{
+													color: "SCDarkRed",
+													fontFamily: "Nunito",
+													fontSize: "0.5rem",
+													fontStyle: "normal",
+													fontWeight: "600",
+													lineHeight: "normal",
+												}}
+											>
+												Excluir
+											</Typography>
+										</Stack>
+									</Stack>
+								</TableCell>
+							</TableRow>
+						);
+					})}
 				</TableBody>
 			</Table>
 		</TableContainer>
