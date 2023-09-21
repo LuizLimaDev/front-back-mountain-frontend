@@ -66,4 +66,13 @@ export const theme = createTheme({
     fontFamily: "Nunito",
     fontSize: "1rem",
   },
+  layoutOutletHome: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+
+    width: "100vw",
+    height: "100vh",
+    padding: "18vh 0 0 14vw"
+  },
 })

@@ -12,34 +12,21 @@ import ClientsPaying from '../../components/clients/clients-paying';
 import { MetricsDasboardProvider } from '../../context/MetricsDashboard';
 import { SingContext } from '../../context/SingContext';
 import './styles.css';
+import { useTheme } from '@emotion/react';
 
 function Home() {
   const { value } = useContext(SingContext)
   const navigate = useNavigate()
+  const theme = useTheme()
 
   if (!value) navigate("/")
 
   return (
     <MetricsDasboardProvider>
       <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-
-          width: "100vw",
-          paddingLeft: "7.5vw"
-        }}
+        sx={theme.layoutOutletHome}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-
-            width: "100%",
-            paddingTop: "18vh"
-          }}
-        >
+        <Box>
           <Box
             sx={{
               display: "flex",

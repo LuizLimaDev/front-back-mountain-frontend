@@ -26,12 +26,12 @@ export default function ClientDetailed() {
     return (
         <Box
             sx={{
-                paddingTop: "10rem",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
 
-                width: "92.5vw",
+                width: "100vw",
+                height: "100vh",
+                padding: "18vh 0 0 14vw"
             }}
         >
             <Stack
@@ -98,7 +98,7 @@ export default function ClientDetailed() {
                                     opacity: ".7"
                                 }
                             }}
-                            onClick={() => {setEditClientModal(true)}}
+                            onClick={() => { setEditClientModal(true) }}
                         >
                             <img src={iconEdit} alt="" />
                             Editar cliente
@@ -195,7 +195,7 @@ export default function ClientDetailed() {
                     </Button>
                 </Stack>
             </Stack>
-            <EditClientModal id={ customerId } />
+            <EditClientModal id={customerId} />
             <SnackBar phrase={"Edições do cadastro concluídas com sucesso"} />
         </Box>
     )

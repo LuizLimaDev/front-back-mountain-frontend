@@ -1,16 +1,15 @@
-import './style.css';
-import ChevronUpDown from '../../../assets/chevron-Up-Down.png'
-import CreateBilling from '../../../assets/create-billing.png'
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
+import ChevronUpDown from '../../../assets/chevron-Up-Down.png';
+import CreateBilling from '../../../assets/create-billing.png';
 import useCustomers from "../../../hooks/useCustomers";
-
+import './style.css';
 
 function createData(name, cpf, email, phone, status) {
     if (status === "inadimplente") {
@@ -39,7 +38,7 @@ const rows = [
 export default function ClientsTable() {
     const { customers } = useCustomers()
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ marginBottom: "3rem" }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -61,11 +60,11 @@ export default function ClientsTable() {
                             key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                                <TableCell component="th" scope="row">
-                                    <Link className='link' to={`/clients/${row.id}`} >
-                                            {row.name}
-                                    </Link>
-                                </TableCell>
+                            <TableCell component="th" scope="row">
+                                <Link className='link' to={`/clients/${row.id}`} >
+                                    {row.name}
+                                </Link>
+                            </TableCell>
                             <TableCell align="left">{row.cpf}</TableCell>
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">{row.phone}</TableCell>

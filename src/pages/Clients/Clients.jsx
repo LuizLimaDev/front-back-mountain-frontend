@@ -3,11 +3,16 @@ import ClientHeader from '../../components/page-clients/clients-search';
 import ClientModal from "../../components/ClientModal";
 import SnackBar from '../../components/SnackBar';
 import './style.css';
+import { Box } from '@mui/material';
+import { useTheme } from '@emotion/react';
 
 function Clients() {
+    const theme = useTheme()
 
     return (
-        <div className='clients-dashboard client-padding' >
+        <Box
+            sx={theme.layoutOutletHome}
+        >
             <div>
                 <div>
                     <ClientHeader />
@@ -16,7 +21,7 @@ function Clients() {
                     <SnackBar phrase={"Cadastro concluído com sucesso"} />
                 </div>
             </div>
-        </div>
+        </Box>
     );
 }
 
