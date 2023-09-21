@@ -1,16 +1,22 @@
 import { Box, Paper, Stack, Typography, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import icon from "../../assets/Clients-icon.png";
 import iconEdit from "../../assets/icon_edit.svg";
 import useCustomers from '../../hooks/useCustomers';
+import EditClientModal from '../../components/EditClient';
+import { SingContext } from '../../context/SingContext';
+import SnackBar from '../../components/SnackBar';
 
 export default function ClientDetailed() {
     const { getCustomer, customer } = useCustomers();
     const { customerId } = useParams();
     const theme = useTheme()
+    const {
+        setEditClientModal,
+    } = useContext(SingContext);
 
     useEffect(() => {
         getCustomer(customerId);
@@ -92,6 +98,7 @@ export default function ClientDetailed() {
                                     opacity: ".7"
                                 }
                             }}
+                            onClick={() => {setEditClientModal(true)}}
                         >
                             <img src={iconEdit} alt="" />
                             Editar cliente
@@ -188,6 +195,8 @@ export default function ClientDetailed() {
                     </Button>
                 </Stack>
             </Stack>
+            <EditClientModal id={ customerId } />
+            <SnackBar phrase={"Edições do cadastro concluídas com sucesso"} />
         </Box>
     )
 }

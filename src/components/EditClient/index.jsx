@@ -9,25 +9,32 @@ import {
 } from "@mui/material";
 import UsersIcon from "../../assets/users.svg";
 import CloseIcon from "../../assets/closeIcon.svg";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
+import useCustomers from "../../hooks/useCustomers";
 
-export default function EditClientModal(){
+export default function EditClientModal( { id } ){
     const {
         editClientModal, setEditClientModal,
-        clientForm, setClientForm,
-        clientErrors, setClientErrors,
         value,
-        setOpenSnack
+        setOpenSnack,
+        clientErrors, setClientErrors
     } = useContext(SingContext);
+
+    const {
+        customer,
+        setCustomer,
+        formCustomer,
+        setFormCustomer,
+        getCustomer
+    } = useCustomers();
     
 
     function handleChange(event){
-        setClientForm((prevState) => {
+        setFormCustomer((prevState) => {
             return {...prevState, [event.target.name]: event.target.value}
         });
-
         setClientErrors({
             name: false,
             email: false,
@@ -36,70 +43,22 @@ export default function EditClientModal(){
         });
     }
 
-    function cleanForm(){
-        setClientForm({
-            name: "",
-            email: "",
-            cpf: "",
-            phone: "",
-            zipcode: "",
-            street: "",
-            complement: "",
-            neighborhood: "",
-            city: "",
-            state: ""
-        });
-        setEditClientModal(false);
-    }
-
     async function handleSubmit(event){
         event.preventDefault();
-
-        if(!clientForm.name){
-            return setClientErrors((prevState) => {
-                return {...prevState, name: "Este campo deve ser preenchido."}
-            });
-        }
-
-        if(!clientForm.email){
-            return setClientErrors((prevState) => {
-                return {...prevState, email: "Este campo deve ser preenchido."}
-            })
-        }
-
-        if(!clientForm.cpf){
-            return setClientErrors((prevState) => {
-                return {...prevState, cpf: "Este campo deve ser preenchido."}
-            })
-        }
-
-        if(!clientForm.phone){
-            return setClientErrors((prevState) => {
-                return {...prevState, phone: "Este campo deve ser preenchido."}
-            });
-        }
+        const { id, ...localCustomer } = formCustomer;
 
         try {
-            await api.post("/customers", {...clientForm}, {
+            await api.put(`/customers/${id}`, { ...localCustomer }, {
                 headers:{
                     Authorization: `Bearer ${value}`
                 }
             });
-            setOpenSnack(true);
-            cleanForm();
+            setEditClientModal(false);
+            getCustomer(id);
         } catch (error) {
-            setClientErrors((prevState) => {
-                return {...prevState, cpf: error.response.data.message}
-            })
-        }
-    }
-
-    async function emailCheck(event){
-        try {
-            await api.get(`/email/${event.target.value}`);
-        } catch (error) {
-            setClientErrors((prevState) => {
-                return {...prevState, email: error.response.data.message}
+            const errors = error.response.data.errors;
+            errors.map((item) => {
+                setClientErrors({...clientErrors, [item.type]: item.message})
             })
         }
     }
@@ -107,7 +66,10 @@ export default function EditClientModal(){
     return(
         <Modal
             open={editClientModal}
-            onClose={() => setEditClientModal(!editClientModal)}
+            onClose={() => {
+                setEditClientModal(!editClientModal);
+                setFormCustomer(customer);
+            }}
         >
             <Box
                 sx={{
@@ -130,7 +92,10 @@ export default function EditClientModal(){
                     margin: "1.5rem 1.5rem 0 0",
                     cursor: "pointer",
                 }}
-                onClick={() => setEditClientModal(!openClientModal)}
+                onClick={() => {
+                    setEditClientModal(!editClientModal);
+                    setFormCustomer(customer);
+                }}
                 />
                 <form
                     onSubmit={(event) => handleSubmit(event)}
@@ -184,10 +149,10 @@ export default function EditClientModal(){
                                 }
                             }}
                             name="name"
-                            value={clientForm.name}
+                            value={ formCustomer.name }
                             onChange={(event) => handleChange(event)}
-                            error={clientErrors.name}
-                            helperText={clientErrors.name}
+                            error={ clientErrors.name }
+                            helperText={ clientErrors.name }
                         />
                     </Box>
                     <Box
@@ -220,11 +185,10 @@ export default function EditClientModal(){
                                 }
                             }}
                             name="email"
-                            value={clientForm.email}
+                            value={ formCustomer.email }
                             onChange={(event) => handleChange(event)}
-                            error={clientErrors.email}
-                            helperText={clientErrors.email}
-                            onBlur={(event) => emailCheck(event)}
+                            error={ clientErrors.email }
+                            helperText={ clientErrors.email }
                         />
                     </Box>
                     <Box
@@ -261,10 +225,10 @@ export default function EditClientModal(){
                                     }
                                 }}
                                 name="cpf"
-                                value={clientForm.cpf}
+                                value={ formCustomer.cpf }
                                 onChange={(event) => handleChange(event)}
-                                error={clientErrors.cpf}
-                                helperText={clientErrors.cpf}
+                                error={ clientErrors.cpf }
+                                helperText={ clientErrors.cpf }
                             />
                         </Box>
                         <Box>
@@ -293,10 +257,10 @@ export default function EditClientModal(){
                                     }
                                 }}
                                 name="phone"
-                                value={clientForm.phone}
+                                value={ formCustomer.phone }
                                 onChange={(event) => handleChange(event)}
-                                error={clientErrors.phone}
-                                helperText={clientErrors.phone}
+                                error={ clientErrors.phone }
+                                helperText={ clientErrors.phone }
                             />
                         </Box>
                     </Box>
@@ -328,7 +292,7 @@ export default function EditClientModal(){
                                 lineHeight: "1.5rem",
                             }}
                             name="street"
-                            value={clientForm.street}
+                            value={ formCustomer.street }
                             onChange={(event) => handleChange(event)}
                         />
                     </Box>
@@ -360,7 +324,7 @@ export default function EditClientModal(){
                                 lineHeight: "1.5rem",
                             }}
                             name="complement"
-                            value={clientForm.complement}
+                            value={ formCustomer.complement }
                             onChange={(event) => handleChange(event)}
                         />
                     </Box>
@@ -396,7 +360,7 @@ export default function EditClientModal(){
                                     lineHeight: "1.5rem",
                                 }}
                                 name="zipcode"
-                                value={clientForm.zipcode}
+                                value={ formCustomer.zipcode }
                                 onChange={(event) => handleChange(event)}
                             />
                         </Box>
@@ -424,7 +388,7 @@ export default function EditClientModal(){
                                     lineHeight: "1.5rem",
                                 }}
                                 name="neighborhood"
-                                value={clientForm.neighborhood}
+                                value={ formCustomer.neighborhood }
                                 onChange={(event) => handleChange(event)}
                             />
                         </Box>
@@ -461,7 +425,7 @@ export default function EditClientModal(){
                                     lineHeight: "1.5rem",
                                 }}
                                 name="city"
-                                value={clientForm.city}
+                                value={ formCustomer.city }
                                 onChange={(event) => handleChange(event)}
                             />
                         </Box>
@@ -489,7 +453,7 @@ export default function EditClientModal(){
                                     lineHeight: "1.5rem",
                                 }}
                                 name="state"
-                                value={clientForm.state}
+                                value={ formCustomer.state }
                                 onChange={(event) => handleChange(event)}
                             />
                         </Box>
@@ -519,7 +483,10 @@ export default function EditClientModal(){
                                     backgroundColor: "SCGray8"
                                 }
                             }}
-                            onClick={() => cleanForm()}
+                            onClick={() => {
+                                setEditClientModal(false)
+                                setFormCustomer(customer);
+                            }}
                         >Cancelar</Button>
                         <Button
                             variant="contained"
