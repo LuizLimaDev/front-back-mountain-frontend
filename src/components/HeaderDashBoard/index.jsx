@@ -10,6 +10,7 @@ import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
 import Avatar from "./Avatar";
 import EditUserModal from "../../components/Modals/EditUserModal";
+import "./style.css";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);
@@ -57,22 +58,16 @@ function HeaderDashBoard() {
 
 	const initialsName = [...username];
 
-	const title =
-		active === "home"
-			? "Resumo das cobranças"
-			: active === "clients"
-			? "Clientes"
-			: active === "billings"
-			? "Cobranças"
-			: "";
-
-	const styleTitle =
-		active === "clients" || active === "billings" ? "state-client" : "";
-
 	return (
 		<div className="dashboard-header">
 			<div>
-				<h1 className={styleTitle}>{title}</h1>
+				<h1 className={active === "clients" && "state-client"}>
+					{active === "home"
+						? "Resumo das cobranças"
+						: active === "clients"
+						? "Clientes"
+						: null}
+				</h1>
 			</div>
 			<div className="dashboard-user">
 				{username ? (
