@@ -2,15 +2,16 @@
     display: flex;
     flex-direction: row;
     gap: 6.25rem;
-    background-color: rgba(248, 248, 249, 1)
+    background-color: rgba(248, 248, 249, 1);
 }
 
+
 .client-padding {
-    padding-top: 10rem;
+    padding-top: 9rem;
 }
 
 .clients-fixed {
-    position: fixed;
+    /* position: fixed; */
 }
 
 .clients-page {
