@@ -14,7 +14,7 @@ function EditUserModal() {
     handleCloseEditUser,
     editFinished, SetEditFinished
   } = useContext(ModalsContext)
-  const { value } = useContext(SingContext)
+  const { value, setReceivedEmail } = useContext(SingContext)
 
   async function userGetDataInfo() {
     try {
@@ -26,6 +26,7 @@ function EditUserModal() {
 
       setName(data.name)
       setEmail(data.email)
+      setReceivedEmail(data.email)
     } catch (error) {
       console.log(error.response.data)
     }
