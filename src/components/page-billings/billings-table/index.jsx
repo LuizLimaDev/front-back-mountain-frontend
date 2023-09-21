@@ -1,14 +1,19 @@
-import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+// import { Link } from "react-router-dom";
+import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
+import useCharges from "../../../hooks/useCharges";
 import "./style.css";
 
 export default function BillingsTable() {
+	const { charges } = useCharges();
+	console.log(charges);
+
 	return (
 		<TableContainer component={Paper}>
 			<Table>
@@ -30,7 +35,20 @@ export default function BillingsTable() {
 						<TableCell align="left">Descrição</TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody></TableBody>
+				<TableBody>
+					{charges.map((charge) => (
+						<TableRow key={charge.id}>
+							<TableCell>{charge.name}</TableCell>
+							<TableCell>{charge.id}</TableCell>
+							<TableCell align="left">{charge.value}</TableCell>
+							<TableCell align="left">{charge.dueDate}</TableCell>
+							<TableCell align="left">{charge.status}</TableCell>
+							<TableCell align="left">
+								{charge.description}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
 			</Table>
 		</TableContainer>
 	);
