@@ -1,59 +1,96 @@
-import { Stack, Box } from '@mui/material';
-import icon from "../../assets/Clients-icon.png";
-import iconEdit from "../../assets/icon_edit.svg";
+import { Box, Paper, Stack, Typography, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { Paper } from '@mui/material';
 import { useEffect } from 'react';
-import useCustomers from '../../hooks/useCustomers';
 import { useParams } from "react-router-dom";
+import icon from "../../assets/Clients-icon.png";
+import iconEdit from "../../assets/icon_edit.svg";
+import useCustomers from '../../hooks/useCustomers';
 
-export default function ClientDetailed(){
+export default function ClientDetailed() {
     const { getCustomer, customer } = useCustomers();
-    const { customerId }= useParams();
+    const { customerId } = useParams();
+    const theme = useTheme()
 
-    useEffect(()=>{
+    useEffect(() => {
         getCustomer(customerId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <Box>            
-            <Stack direction={"row"} spacing={1}>
-                <img src={icon} alt="" className="icon"/>
-                <h1>{customer.name}</h1>
-            </Stack>
+        <Box
+            sx={{
+                paddingTop: "10rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
 
-            <Stack spacing={"3.75rem"}
-                component={Paper}
-                p={"1.25rem"}
+                width: "92.5vw",
+            }}
+        >
+            <Stack
+                direction={"row"}
+                spacing={1}
                 sx={{
-                    borderRadius: "1.8175rem" 
+                    alignItems: "center",
+                    width: "80vw",
+                    padding: ".5rem 0 1.5rem"
                 }}
             >
-                <Stack spacing={"0.5rem"}>
+                <img src={icon} alt="" className="icon" style={{ width: "2rem", height: "2rem" }} />
+                <Typography
+                    sx={{
+                        fontFamily: "Montserrat",
+                        fontSize: "1.62rem",
+                        fontWeight: "600",
+                    }}
+                >
+                    {customer.name}
+                </Typography>
+            </Stack>
 
+            <Stack
+                spacing={"3.75rem"}
+                component={Paper}
+                p={"1.5rem 1.25rem"}
+                sx={{
+                    width: "80vw",
+                    borderRadius: "1.8175rem"
+                }}
+
+            >
+                <Stack spacing={"0.5rem"}>
                     <Stack
                         direction="row"
                         justifyContent="space-between"
                     >
-                        <h2>Dados do cliente</h2>
-                        <IconButton                          
+                        <Typography
+                            sx={{
+                                marginBottom: "1.5rem",
+
+                                fontFamily: "Montserrat",
+                                fontSize: "1.25rem",
+                                fontWeight: "600"
+                            }}
+                        >
+                            Dados do cliente
+                        </Typography>
+                        <IconButton
                             sx={{
                                 width: "15rem",
-                            height: "2rem",
-                            borderRadius: ".625rem",
-                            border: "1px solid #DEDEE9",
-                            background: "#F8F8F9",
-                            color: "SCNormalGreen",
-                    
-                            fontFamily: "Nunito",
-                            fontSize: "1.25rem",
-                            textTransform: "capitalize",
-                    
-                            '&:hover': {
-                                opacity: ".7"
-                            }
+                                height: "2rem",
+                                borderRadius: ".625rem",
+                                border: "1px solid #DEDEE9",
+                                background: "#F8F8F9",
+                                color: "SCNormalGreen",
+
+                                fontFamily: "Nunito",
+                                fontSize: "1.25rem",
+                                textTransform: "capitalize",
+
+                                '&:hover': {
+                                    opacity: ".7"
+                                }
                             }}
                         >
                             <img src={iconEdit} alt="" />
@@ -64,80 +101,93 @@ export default function ClientDetailed(){
                     <Stack spacing={"3.5rem"}>
                         <Stack direction={"row"} spacing={"4rem"}>
                             <Stack width={"11.5rem"}>
-                                <h3>E-mail</h3>
-                                <p>{customer.email}</p>
+                                <Typography sx={theme.clientLabelStyle}>E-mail</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.email}</Typography>
                             </Stack>
                             <Stack width={"11.5rem"}>
-                                <h3>Telefone</h3>
-                                <p>{customer.phone}</p>
+                                <Typography sx={theme.clientLabelStyle}>Telefone</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.phone}</Typography>
                             </Stack>
                             <Stack width={"11.5rem"}>
-                                <h3>CPF</h3>
-                                <p>{customer.cpf}</p>
+                                <Typography sx={theme.clientLabelStyle}>CPF</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.cpf}</Typography>
                             </Stack>
                         </Stack>
                         <Stack direction={"row"} spacing={"4rem"}>
                             <Stack width={"11.5rem"}>
-                                <h3>Endereço</h3>
-                                <p>{customer.street}</p>
+                                <Typography sx={theme.clientLabelStyle}>Endereço</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.street}</Typography>
                             </Stack>
                             <Stack width={"11.5rem"}>
-                                <h3>Bairro</h3>
-                                <p>{customer.neighborhood}</p>
+                                <Typography sx={theme.clientLabelStyle}>Bairro</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.neighborhood}</Typography>
                             </Stack>
                             <Stack width={"11.5rem"}>
-                                <h3>Complemento</h3>
-                                <p>{customer.complement}</p>
+                                <Typography sx={theme.clientLabelStyle}>Complemento</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.complement}</Typography>
                             </Stack>
                             <Stack width={"8rem"}>
-                                <h3>CEP</h3>
-                                <p>{customer.zipcode}</p>
+                                <Typography sx={theme.clientLabelStyle}>CEP</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.zipcode}</Typography>
                             </Stack>
                             <Stack width={"3.5rem"}>
-                                <h3>Cidade</h3>
-                                <p>{customer.city}</p>
+                                <Typography sx={theme.clientLabelStyle}>Cidade</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.city}</Typography>
                             </Stack>
                             <Stack width={"0.5em"}>
-                                <h3>UF</h3>
-                                <p>{customer.state}</p>
+                                <Typography sx={theme.clientLabelStyle}>UF</Typography>
+                                <Typography sx={theme.clientValueStyle}>{customer.state}</Typography>
                             </Stack>
                         </Stack>
                     </Stack>
-                
-                </Stack>     
+
+                </Stack>
             </Stack>
-            
-            <Stack mt={"3rem"} pl={"3.2rem"} justifyContent="space-between"
+
+            <Stack
+                mt={"3rem"}
+                pl={"3.2rem"} j
+                ustifyContent="space-between"
                 component={Paper}
                 p={"1.25rem"}
                 sx={{
-                    borderRadius: "1.8175rem" 
+                    width: "80vw",
+                    borderRadius: "1.8175rem"
                 }}
             >
-                    <Stack direction={"row"} justifyContent={"space-between"}>
-                        <h1>Cobranças do Cliente</h1>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                width: "15rem",
+                <Stack
+                    direction={"row"}
+                    justifyContent={"space-between"}
+                    sx={{
+                        padding: "1.5rem 1rem"
+                    }}
+                >
+                    <Typography sx={{ fontFamily: "Montserrat", fontSize: "1.25rem", fontWeight: "600" }}>
+                        Cobranças do Cliente
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            width: "15rem",
                             height: "2rem",
                             borderRadius: ".625rem",
-                    
+
                             fontFamily: "Nunito",
                             fontSize: "1.25rem",
                             textTransform: "capitalize",
-                    
+
                             backgroundColor: "SCPink",
-                            
+
                             '&:hover': {
                                 backgroundColor: "SCPink",
                                 opacity: ".7"
                             }
-                            }}
-                        >
-                            + Nova cobrança
-                        </Button>
-                    </Stack>
+                        }}
+                    >
+                        + Nova cobrança
+                    </Button>
+                </Stack>
             </Stack>
-    </Box>)
+        </Box>
+    )
 }

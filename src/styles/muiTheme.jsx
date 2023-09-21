@@ -55,5 +55,15 @@ export const theme = createTheme({
     margin: ".25rem 0 0 .7rem",
 
     color: "SCErrorMui"
-  }
+  },
+  clientLabelStyle: {
+    marginBottom: ".5rem",
+    fontFamily: "Montserrat",
+    fontSize: "1rem",
+    fontWeight: "700"
+  },
+  clientValueStyle: {
+    fontFamily: "Nunito",
+    fontSize: "1rem",
+  },
 })
