@@ -1,13 +1,26 @@
-import underConstructionImg from "../../assets/under-construction.gif"
+import BillingsTable from "../../components/page-billings/billings-table";
+import BillingsSearch from "../../components/page-billings/billings-search";
+import useCharges from "../../hooks/useCharges";
 
 function Billings() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "80vw", height: "100vh", paddingBottom: "15rem" }}>
-      <h1 style={{ paddingRight: "5rem" }}>Em construção</h1>
-
-      <img src={underConstructionImg} alt="Em construção" />
-    </div>
-  );
+	const { charges } = useCharges();
+	return (
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center",
+				width: "92.5vw",
+				paddingBottom: "15rem",
+				paddingTop: "10rem",
+				margin: "0 auto",
+			}}
+		>
+			<BillingsSearch />
+			<BillingsTable charges={charges} />
+		</div>
+	);
 }
 
 export default Billings;
