@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import backgroundLogin from '../../assets/background-login.png';
 import LoginForm from '../../components/Form/LoginForm/index';
+import ChargeModal from '../../components/Modals/ChargeModal';
 
 function SingIn() {
   return (
@@ -49,6 +50,7 @@ function SingIn() {
       >
         <LoginForm />
       </Grid>
+      <ChargeModal />
     </Grid >
   );
 }
