@@ -1,18 +1,32 @@
 import { Outlet } from "react-router-dom";
 import MenuIcon from "../menu-icon";
-import HeaderDashBoard from "../header";
+
+import { Box } from "@mui/material";
+import HeaderDashBoard from "../HeaderDashBoard";
 
 export default function HomeLayout() {
 
     return (
-        <div className="clients-dashboard">
-            <div>
+        <Box
+            sx={{
+                width: "100vw",
+
+                backgroundColor: "SCGray8"
+            }}
+        >
+            <Box>
                 <MenuIcon />
-            </div>
-            <div>
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center"
+                }}
+            >
                 <HeaderDashBoard />
                 <Outlet />
-            </div>
-        </div >
+            </Box>
+        </Box>
     )
 }

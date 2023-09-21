@@ -49,7 +49,6 @@ export const theme = createTheme({
 	MUIerrorMessageStyle: {
 		fontFamily: "Nunito",
 		fontSize: ".82rem",
-
 		margin: ".25rem 0 0 .7rem",
 
 		color: "SCErrorMui",
@@ -58,11 +57,20 @@ export const theme = createTheme({
 		marginBottom: ".5rem",
 		fontFamily: "Montserrat",
 		fontSize: "1rem",
-		fontWeight: "700",
+		fontWeight: "700"
 	},
 	clientValueStyle: {
 		fontFamily: "Nunito",
 		fontSize: "1rem",
+	},
+	layoutOutletHome: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+
+		width: "100vw",
+		height: "100vh",
+		padding: "18vh 0 0 14vw"
 	},
 	infoBillingsTable: {
 		color: "SCGray5",
@@ -95,3 +103,4 @@ export const theme = createTheme({
 		color: "SCLightGreen",
 	},
 });
+
