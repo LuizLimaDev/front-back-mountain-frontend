@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useMetricsDashboard from "../../../hooks/useMetricsDashboard";
 import { moneyFormat } from "../../../utils/moneyFormat";
 import "./style.css";
@@ -33,9 +34,9 @@ function BillingDetailedProjected() {
 				);
 			})}
 
-			<a href="" className="table-btn">
+			<Link to="/billings" className="table-btn">
 				Ver todos
-			</a>
+			</Link>
 		</div>
 	);
 }
