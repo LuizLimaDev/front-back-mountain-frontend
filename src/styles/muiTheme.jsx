@@ -17,7 +17,6 @@ export const theme = createTheme({
 		SCGray7: "#F0F0F5",
 		SCGray8: "#F8F8F9",
 		SCGray2: "#3F3F55",
-		SCGray5: "#6E6E85",
 
 		SCLightRed: "#FFEFEF",
 		SCDarkRed: "#971D1D",
@@ -30,8 +29,6 @@ export const theme = createTheme({
 
 		SCNormalError: "#E70000",
 		SCErrorMui: "#D32F2F",
-
-		SCLightCyan: "#EEF6F6",
 	},
 	typography: {
 		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter"].join(","),
@@ -57,7 +54,7 @@ export const theme = createTheme({
 		marginBottom: ".5rem",
 		fontFamily: "Montserrat",
 		fontSize: "1rem",
-		fontWeight: "700"
+		fontWeight: "700",
 	},
 	clientValueStyle: {
 		fontFamily: "Nunito",
@@ -70,7 +67,7 @@ export const theme = createTheme({
 
 		width: "100vw",
 		height: "100vh",
-		padding: "18vh 0 0 14vw"
+		padding: "18vh 0 0 14vw",
 	},
 	infoBillingsTable: {
 		color: "SCGray5",
@@ -103,4 +100,3 @@ export const theme = createTheme({
 		color: "SCLightGreen",
 	},
 });
-

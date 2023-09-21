@@ -10,6 +10,7 @@ import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
 import Avatar from "./Avatar";
 import EditUserModal from "../../components/Modals/EditUserModal";
+import "./style.css";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);

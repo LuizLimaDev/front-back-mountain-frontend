@@ -1,15 +1,15 @@
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { Link } from 'react-router-dom';
-import ChevronUpDown from '../../../assets/chevron-Up-Down.png';
-import CreateBilling from '../../../assets/create-billing.png';
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Link } from "react-router-dom";
+import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
+import CreateBilling from "../../../assets/create-billing.png";
 import useCustomers from "../../../hooks/useCustomers";
-import './style.css';
+import "./style.css";
 
 function createData(name, cpf, email, phone, status) {
 	if (status === "inadimplente") {
@@ -138,7 +138,7 @@ export default function ClientsTable() {
 							<TableCell align="left">{row.phone}</TableCell>
 							<TableCell align="left">
 								{row.status === "pendente" ||
-									rows.status === "vencido"
+								rows.status === "vencido"
 									? red
 									: green}
 							</TableCell>
