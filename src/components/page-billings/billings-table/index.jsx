@@ -13,6 +13,7 @@ import EditIcon from "../../../assets/edit.svg";
 import DeleteIcon from "../../../assets/delete-icon-billing.svg";
 import { Stack, Typography, useTheme } from "@mui/material";
 import { moneyFormat } from "../../../utils/moneyFormat";
+import format from "date-fns/format";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges }) {
@@ -68,7 +69,10 @@ export default function BillingsTable({ charges }) {
 								</TableCell>
 								<TableCell align="left">
 									<Typography sx={theme.infoBillingsTable}>
-										{charge.duedate}
+										{format(
+											new Date(charge.duedate),
+											"dd/MM/yyyy"
+										)}
 									</Typography>
 								</TableCell>
 								<TableCell align="left">
