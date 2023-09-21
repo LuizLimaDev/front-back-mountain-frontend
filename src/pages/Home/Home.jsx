@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import EditUserModal from '../../components/Modals/EditUserModal';
 import BillingDetailedOverdue from '../../components/billing-detailed/billing-detailed-overdue';
 import BillingDetailedPaid from '../../components/billing-detailed/billing-detailed-paid';
 import BillingDetailedProjected from '../../components/billing-detailed/billing-detailed-projected';
@@ -40,7 +39,6 @@ function Home() {
         </div>
       </div >
 
-      <EditUserModal />
     </MetricsDasboardProvider>
   );
 }
