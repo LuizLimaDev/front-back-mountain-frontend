@@ -50,11 +50,12 @@ export default function BillingsTable({ charges }) {
 							</div>
 						</TableCell>
 						<TableCell>
-							<div
-								style={{ cursor: "pointer" }}
-								className="client-icon"
-							>
-								<img src={ChevronUpDown} /> ID Cob.
+							<div className="client-icon">
+								<img
+									style={{ cursor: "pointer" }}
+									src={ChevronUpDown}
+								/>{" "}
+								ID Cob.
 							</div>
 						</TableCell>
 						<TableCell align="left">Valor</TableCell>
