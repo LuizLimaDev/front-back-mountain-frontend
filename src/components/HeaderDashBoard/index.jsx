@@ -65,13 +65,11 @@ function HeaderDashBoard() {
 					className={active === "clients" && "state-client"}
 					style={{ marginLeft: "2.75rem" }}
 				>
-					{
-						active === "home"
-							? "Resumo das cobranças"
-							: active === "clients"
-								? "Clientes"
-								: null
-					}
+					{active === "home"
+						? "Resumo das cobranças"
+						: active === "clients"
+						? "Clientes"
+						: null}
 				</h1>
 			</div>
 			<div className="dashboard-user">
