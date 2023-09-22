@@ -9,9 +9,10 @@ import useCustomers from '../../hooks/useCustomers';
 import EditClientModal from '../../components/EditClient';
 import { SingContext } from '../../context/SingContext';
 import SnackBar from '../../components/SnackBar';
+import BillingsTable from '../../components/page-billings/billings-table';
 
 export default function ClientDetailed() {
-    const { getCustomer, customer } = useCustomers();
+    const { getCustomer, customer, chargesByCustomer } = useCustomers();
     const { customerId } = useParams();
     const theme = useTheme()
     const {
@@ -22,7 +23,6 @@ export default function ClientDetailed() {
         getCustomer(customerId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     return (
         <Box sx={theme.layoutOutletHome}>
             <Stack
@@ -185,6 +185,7 @@ export default function ClientDetailed() {
                         + Nova cobrança
                     </Button>
                 </Stack>
+                <BillingsTable charges={chargesByCustomer} />
             </Stack>
             <EditClientModal id={customerId} />
             <SnackBar phrase={"Edições do cadastro concluídas com sucesso"} />
