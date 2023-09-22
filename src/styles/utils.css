@@ -66,6 +66,13 @@
 	height: 1rem;
 }
 
-.table-scroll::-webkit-scrollbar-thumb {
+/* .table-scroll::-webkit-scrollbar-thumb {
 	background-color: "SCPink";
+} */
+
+/* ::-webkit-scrollbar-thumb {
+	background-color: #a02525;
 }
+::-webkit-scrollbar {
+	height: 200px;
+} */

@@ -26,7 +26,6 @@ export default function BillingsTable({ charges }) {
 				...theme.layoutOutletContents,
 				overflowY: "auto",
 				maxHeight: "42rem",
-				scrollbarColor: "SCPink",
 			}}
 		>
 			<Table>
