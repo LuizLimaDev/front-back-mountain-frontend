@@ -68,11 +68,10 @@ export const theme = createTheme({
 		width: "100vw",
 		padding: "18vh 0 0 7.5vw",
 
-		backgroundColor: "SCGray8"
+		backgroundColor: "SCGray8",
 	},
 	layoutOutletContents: {
-		marginBottom: "3rem",
-		width: "1140px"
+		width: "1140px",
 	},
 	infoBillingsTable: {
 		color: "SCGray5",

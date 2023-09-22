@@ -1,59 +1,56 @@
 .table-small {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-    width: 22.5rem;
-    height: 24.8rem;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    border-radius: 0.5rem;
-    background-color: rgba(255, 255, 255, 1);
-    font-family: Montserrat, sans-serif;
-    color: rgba(63, 63, 85, 1);
+	width: 22.5rem;
+	height: 24.8rem;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 0.5rem;
+	background-color: rgba(255, 255, 255, 1);
+	font-family: Montserrat, sans-serif;
+	color: rgba(63, 63, 85, 1);
 }
 
 .table-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 
-    width: 100%;
-    height: 3.625rem;
-    border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+	width: 100%;
+	height: 3.625rem;
+	border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
 }
 
 .table-name {
-    font-weight: 600;
-    font-size: 1.125rem;
-
+	font-weight: 600;
+	font-size: 1.125rem;
 }
 
 .quantity-overdue {
+	padding: 0.05rem 0.9375rem;
+	border-radius: 0.5rem;
+	background-color: rgba(255, 239, 239, 1);
+	color: rgba(151, 29, 29, 1);
 
-    padding: 0.05rem 0.9375rem;
-    border-radius: 0.5rem;
-    background-color: rgba(255, 239, 239, 1);
-    color: rgba(151, 29, 29, 1);
-
-    font-family: Montserrat, sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-
+	font-family: Montserrat, sans-serif;
+	font-size: 1rem;
+	font-weight: 700;
 }
 
 .table-btn {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    margin: 0.5rem;
+	margin: 0.5rem;
 
-    color: rgba(218, 1, 117, 1);
-    font-family: Nunito, sans-serif;
-    font-size: 1.125rem;
-    font-weight: 400;
+	color: rgba(218, 1, 117, 1);
+	font-family: Nunito, sans-serif;
+	font-size: 1.125rem;
+	font-weight: 400;
 }

@@ -20,9 +20,22 @@ export default function BillingsTable({ charges }) {
 	const theme = useTheme();
 
 	return (
-		<TableContainer component={Paper} sx={theme.layoutOutletContents}>
+		<TableContainer
+			component={Paper}
+			sx={{
+				...theme.layoutOutletContents,
+				overflowY: "auto",
+				maxHeight: "42rem",
+			}}
+		>
 			<Table>
-				<TableHead>
+				<TableHead
+					sx={{
+						position: "sticky",
+						top: 0,
+						backgroundColor: "white",
+					}}
+				>
 					<TableRow>
 						<TableCell>
 							<div className="client-icon">
@@ -47,8 +60,8 @@ export default function BillingsTable({ charges }) {
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-									? theme.billingsRed
-									: theme.billingsCyan;
+								? theme.billingsRed
+								: theme.billingsCyan;
 						return (
 							<TableRow key={charge.id}>
 								<TableCell>
