@@ -10,101 +10,19 @@ import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../assets/create-billing.png";
 import useCustomers from "../../../hooks/useCustomers";
 import "./style.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ModalsContext } from "../../../context/ModalsContext";
 import ChargeModal from "../../Modals/ChargeModal";
-import { Snackbar } from "@mui/material";
 import { useTheme } from "@mui/material";
-
-function createData(name, cpf, email, phone, status) {
-	if (status === "inadimplente") {
-		status = red;
-	} else {
-		status = green;
-	}
-	return { name, cpf, email, phone, status };
-}
 
 let red = <div className="red">Inadimplente</div>;
 let green = <div className="green">Em dia</div>;
 
-const rows = [
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 24",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Ana Nguyen",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Ana Nguyen",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-];
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
-	const [openSnack, setOpenSnack] = useState(false);
+
 	const theme = useTheme()
 
 	return (
@@ -147,28 +65,25 @@ export default function ClientsTable() {
 							<TableCell align="left">{row.phone}</TableCell>
 							<TableCell align="left">
 								{row.status === "pendente" ||
-									rows.status === "vencido"
+									row.status === "vencido"
 									? red
 									: green}
 							</TableCell>
 							<TableCell align="left">
-								<a
-									onClick={() => {
-										setCustomerCharges((prevState) => {
-											return {...prevState, customerId: row.id, name: row.name}
-										});
-										setOpenChargeModal(true);
+									<img src={CreateBilling}
+										onClick={() => {
+											setCustomerCharges((prevState) => {
+												return {...prevState, customerId: row.id, name: row.name}
+											});
+											setOpenChargeModal(true);
 									}}
-								>
-								<a >
-									<img src={CreateBilling}></img>
-								</a>
+									></img>
 							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
-			<ChargeModal setOpenSnack={setOpenSnack} />
+			<ChargeModal />
 		</TableContainer>
 	);
 }

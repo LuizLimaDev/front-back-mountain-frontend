@@ -10,7 +10,9 @@ export default function useCustomers() {
    setCustomers,
    setCustomer,
    formCustomer,
-   setFormCustomer
+   setFormCustomer,
+   chargesByCustomer, 
+   setChargesByCustomer
   } = useContext(CustomersContext);
   const {  value } = useContext(SingContext);
 
@@ -34,8 +36,15 @@ export default function useCustomers() {
             Authorization: `Bearer ${value}`
         }
       });
+
+      const { data: charges } = await api.get(`/customers/${customerId}/charges`, {
+        headers: {
+            Authorization: `Bearer ${value}`
+        }
+      });
       setCustomer(data.detailsCustomer[0]);
       setFormCustomer(data.detailsCustomer[0]);
+      setChargesByCustomer(charges.detailsCustomerCharges);
     } catch (error) {
       console.log("api error", error);
     }
@@ -54,6 +63,7 @@ export default function useCustomers() {
     customer,
     setCustomer,
     formCustomer,
-    setFormCustomer
+    setFormCustomer,
+    chargesByCustomer, 
   }
 }
