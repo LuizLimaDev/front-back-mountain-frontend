@@ -15,8 +15,16 @@ import useCustomers from "../../../hooks/useCustomers";
 import ChargeModal from "../../Modals/ChargeModal";
 import "./style.css";
 
-let red = <div className="red">Inadimplente</div>;
-let green = <div className="green">Em dia</div>;
+let red = (
+	<div style={{ fontWeight: "600" }} className="red">
+		Inadimplente
+	</div>
+);
+let green = (
+	<div style={{ fontWeight: "600" }} className="green">
+		Em dia
+	</div>
+);
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
