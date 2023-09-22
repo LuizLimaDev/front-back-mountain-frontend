@@ -40,8 +40,8 @@ function MainRoutes() {
         <Route element={<HomeLayout />} >
           <Route path="/home" element={<Home />} />
           <Route path="/clients" element={<Clients />} />
+          <Route path="/clients/:customerId" element={<ClientDetailed />} />
           <Route path="/billings" element={<Billings />} />
-          <Route path="/clients/:customerId" element={<ClientDetailed />}/>
         </Route>
       </Route>
     </Routes >

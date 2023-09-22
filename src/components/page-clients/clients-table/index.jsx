@@ -10,6 +10,7 @@ import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../assets/create-billing.png";
 import useCustomers from "../../../hooks/useCustomers";
 import "./style.css";
+import { useTheme } from "@mui/material";
 
 function createData(name, cpf, email, phone, status) {
 	if (status === "inadimplente") {
@@ -98,8 +99,10 @@ const rows = [
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
+	const theme = useTheme()
+
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} sx={theme.layoutOutletContents}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
 				<TableHead>
 					<TableRow>
@@ -138,12 +141,12 @@ export default function ClientsTable() {
 							<TableCell align="left">{row.phone}</TableCell>
 							<TableCell align="left">
 								{row.status === "pendente" ||
-								rows.status === "vencido"
+									rows.status === "vencido"
 									? red
 									: green}
 							</TableCell>
 							<TableCell align="left">
-								<a>
+								<a >
 									<img src={CreateBilling}></img>
 								</a>
 							</TableCell>
