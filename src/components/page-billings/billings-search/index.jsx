@@ -1,7 +1,14 @@
 import { useState } from "react";
 import BillingsIcon from "../../../assets/billings-icon.svg";
 import Statics from "../../../assets/Statics.png";
-import { Box, useTheme } from "@mui/material";
+import {
+	Box,
+	useTheme,
+	OutlinedInput,
+	InputAdornment,
+	IconButton,
+} from "@mui/material";
+import SearchIcon from "../../../assets/search-icon.svg";
 
 export default function BillingsSearch() {
 	const [search, setSearch] = useState("");
@@ -27,12 +34,27 @@ export default function BillingsSearch() {
 						<img src={Statics} alt="Ícone Estatísticas" />
 					</button>
 					<form onSubmit={handleSubmit}>
-						<input
+						<OutlinedInput
+							sx={{ padding: "0" }}
+							id="search-input"
 							className="client-input"
-							type="text"
+							type="search"
 							placeholder="Pesquisa"
 							value={search}
 							onChange={handleInputChange}
+							endAdornment={
+								<InputAdornment position="end">
+									<IconButton
+										sx={{ marginRight: "0.5rem" }}
+										edge="end"
+									>
+										<img
+											src={SearchIcon}
+											alt="Ícone de lupa"
+										/>
+									</IconButton>
+								</InputAdornment>
+							}
 						/>
 					</form>
 				</div>
