@@ -61,12 +61,17 @@ function HeaderDashBoard() {
 	return (
 		<div className="dashboard-header">
 			<div>
-				<h1 className={active === "clients" && "state-client"}>
-					{active === "home"
-						? "Resumo das cobranças"
-						: active === "clients"
-						? "Clientes"
-						: null}
+				<h1
+					className={active === "clients" && "state-client"}
+					style={{ marginLeft: "2.75rem" }}
+				>
+					{
+						active === "home"
+							? "Resumo das cobranças"
+							: active === "clients"
+								? "Clientes"
+								: null
+					}
 				</h1>
 			</div>
 			<div className="dashboard-user">

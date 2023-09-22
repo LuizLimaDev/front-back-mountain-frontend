@@ -1,25 +1,17 @@
 import BillingsTable from "../../components/page-billings/billings-table";
 import BillingsSearch from "../../components/page-billings/billings-search";
 import useCharges from "../../hooks/useCharges";
+import { Box, useTheme } from "@mui/material";
 
 function Billings() {
-	const { charges } = useCharges();
+	const { charges } = useCharges()
+	const theme = useTheme()
+
 	return (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-				width: "92.5vw",
-				paddingBottom: "15rem",
-				paddingTop: "10rem",
-				margin: "0 auto",
-			}}
-		>
+		<Box sx={theme.layoutOutletHome}>
 			<BillingsSearch />
 			<BillingsTable charges={charges} />
-		</div>
+		</Box>
 	);
 }
 

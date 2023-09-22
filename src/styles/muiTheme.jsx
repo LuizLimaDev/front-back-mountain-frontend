@@ -66,8 +66,13 @@ export const theme = createTheme({
 		alignItems: "center",
 
 		width: "100vw",
-		height: "100vh",
-		padding: "18vh 0 0 14vw",
+		padding: "18vh 0 0 7.5vw",
+
+		backgroundColor: "SCGray8"
+	},
+	layoutOutletContents: {
+		marginBottom: "3rem",
+		width: "1140px"
 	},
 	infoBillingsTable: {
 		color: "SCGray5",

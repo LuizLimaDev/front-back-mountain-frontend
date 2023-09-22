@@ -179,7 +179,6 @@ function Form({ SetEditFinished }) {
         setPasswordErrorMessage(`O campo "Nova Senha" deve ser preenchido!`)
         return
       }
-
     }
   }
 

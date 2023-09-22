@@ -14,6 +14,7 @@ import { useContext, useState } from "react";
 import { ModalsContext } from "../../../context/ModalsContext";
 import ChargeModal from "../../Modals/ChargeModal";
 import { Snackbar } from "@mui/material";
+import { useTheme } from "@mui/material";
 
 function createData(name, cpf, email, phone, status) {
 	if (status === "inadimplente") {
@@ -104,9 +105,10 @@ export default function ClientsTable() {
 	const { customers } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
 	const [openSnack, setOpenSnack] = useState(false);
+	const theme = useTheme()
 
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} sx={theme.layoutOutletContents}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
 				<TableHead>
 					<TableRow>
@@ -145,7 +147,7 @@ export default function ClientsTable() {
 							<TableCell align="left">{row.phone}</TableCell>
 							<TableCell align="left">
 								{row.status === "pendente" ||
-								rows.status === "vencido"
+									rows.status === "vencido"
 									? red
 									: green}
 							</TableCell>
@@ -158,6 +160,7 @@ export default function ClientsTable() {
 										setOpenChargeModal(true);
 									}}
 								>
+								<a >
 									<img src={CreateBilling}></img>
 								</a>
 							</TableCell>
