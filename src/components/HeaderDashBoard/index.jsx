@@ -11,7 +11,7 @@ import api from "../../services/api";
 import Avatar from "./Avatar";
 import EditUserModal from "../../components/Modals/EditUserModal";
 import "./style.css";
-import ClientBreadcrumbs from "./clientBreadcrumbs/ClientBreadcrumbs";
+import ClientBreadcrumbs from "./ClientBreadcrumbs/ClientBreadcrumbs";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);
