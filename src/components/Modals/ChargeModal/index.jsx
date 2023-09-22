@@ -13,24 +13,15 @@ import CloseIcon from "../../../assets/closeIcon.svg";
 import ChargeIcon from "../../../assets/chargeIcon.svg";
 import EmptyCheckbox from "../../../assets/emptyCheckbox.svg";
 import CheckedIcon from "../../../assets/CheckedIcon.svg";
-import { useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import api from "../../../services/api";
-import useCustomers from "../../../hooks/useCustomers";
 import { SingContext } from "../../../context/SingContext";
+import { ModalsContext } from "../../../context/ModalsContext";
 
-export default function ChargeModal(){
-    const [openChargeModal, setOpenChargeModal] = useState(true);
+export default function ChargeModal({ setOpenSnack }){
+    const { openChargeModal, setOpenChargeModal, customerCharges, setCustomerCharges, setOpenSnackChargeAdd } = useContext(ModalsContext);
     const { value } = useContext(SingContext);
-    const { customer } = useCustomers();
-    const [customerCharges, setCustomerCharges] = useState({
-        customerId: customer.id,
-        name: customer.name,
-        description: "",
-        dueDate: "",
-        value: "",
-        status: "pago"
-    });
+    
     const [customerErrors, setCustomerErrors] = useState({
         description: false,
         dueDate: false,
@@ -44,11 +35,23 @@ export default function ChargeModal(){
                 headers:{
                     Authorization: `Bearer ${value}`
                 }
+            });
+            setOpenSnackChargeAdd(true);
+            setOpenChargeModal(false);
+            setCustomerCharges({
+                customerId: "",
+                name: "",
+                description: "",
+                dueDate: "",
+                value: 0,
+                status: "pago"
             })
         } catch (error) {
             const errors = error.response.data.errors;
             errors.map((item) => {
-                setCustomerErrors({...customerErrors, [item.type]: item.message})
+                setCustomerErrors((prevState) => {
+                    return {...prevState, [item.type]: item.message}
+                })
             });
         }
     }
@@ -62,7 +65,14 @@ export default function ChargeModal(){
     return(
         <Modal
             open={ openChargeModal }
-            onClose={() => {setOpenChargeModal(false)}}
+            onClose={() => {
+                setCustomerErrors({
+                    description: false,
+                    dueDate: false,
+                    value: false
+                });
+                setOpenChargeModal(false)
+            }}
         >
             <Box
                 sx={{
@@ -87,6 +97,11 @@ export default function ChargeModal(){
                 }}
                 onClick={() => {
                     setOpenChargeModal(false);
+                    setCustomerErrors({
+                        description: false,
+                        dueDate: false,
+                        value: false
+                    });
                 }}
                 />
 
@@ -142,7 +157,7 @@ export default function ChargeModal(){
                                 }
                             }}
                             name="name"
-                            value={customer.name}
+                            value={customerCharges.name}
                             disabled
                         />
                     </Box>
@@ -179,6 +194,7 @@ export default function ChargeModal(){
                                 }
                             }}
                             name="description"
+                            value={ customerCharges.description }
                             onChange={(event) => handleChange(event)}
                             error={ customerErrors.description }
                             helperText={ customerErrors.description }
@@ -220,6 +236,7 @@ export default function ChargeModal(){
                                     }
                                 }}
                                 name="dueDate"
+                                value={ customerCharges.dueDate }
                                 onChange={(event) => handleChange(event)}
                                 error={ customerErrors.dueDate }
                                 helperText={ customerErrors.dueDate }
@@ -251,6 +268,7 @@ export default function ChargeModal(){
                                     }
                                 }}
                                 name="value"
+                                value={ customerCharges.value }
                                 onChange={(event) => handleChange(event)}
                                 error={ customerErrors.value }
                                 helperText={ customerErrors.value }

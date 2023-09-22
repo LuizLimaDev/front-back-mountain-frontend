@@ -10,6 +10,10 @@ import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../assets/create-billing.png";
 import useCustomers from "../../../hooks/useCustomers";
 import "./style.css";
+import { useContext, useState } from "react";
+import { ModalsContext } from "../../../context/ModalsContext";
+import ChargeModal from "../../Modals/ChargeModal";
+import { Snackbar } from "@mui/material";
 
 function createData(name, cpf, email, phone, status) {
 	if (status === "inadimplente") {
@@ -98,6 +102,9 @@ const rows = [
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
+	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
+	const [openSnack, setOpenSnack] = useState(false);
+
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -143,7 +150,14 @@ export default function ClientsTable() {
 									: green}
 							</TableCell>
 							<TableCell align="left">
-								<a>
+								<a
+									onClick={() => {
+										setCustomerCharges((prevState) => {
+											return {...prevState, customerId: row.id, name: row.name}
+										});
+										setOpenChargeModal(true);
+									}}
+								>
 									<img src={CreateBilling}></img>
 								</a>
 							</TableCell>
@@ -151,6 +165,7 @@ export default function ClientsTable() {
 					))}
 				</TableBody>
 			</Table>
+			<ChargeModal setOpenSnack={setOpenSnack} />
 		</TableContainer>
 	);
 }
