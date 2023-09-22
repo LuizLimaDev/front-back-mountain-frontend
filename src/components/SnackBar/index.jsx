@@ -1,18 +1,14 @@
 import { Snackbar } from "@mui/material";
-import { useContext } from "react";
-import { SingContext } from "../../context/SingContext";
 import OkSnack from "../../assets/okSnack.svg";
 import ExitSnack from "../../assets/exitSnack.svg";
 
-export default function SnackBar({ phrase }){
-    const { openSnack, setOpenSnack } = useContext(SingContext);
+export default function SnackBar({ phrase, openSnack, setOpenSnack }){
     return(
         <Snackbar
             open={ openSnack }
             onClose={ () => {return setOpenSnack(!openSnack)} }
             onClick={ () => {return setOpenSnack(!openSnack)} }
-            message="Cadastro concluído com sucesso"
-            autoHideDuration={6000}
+            autoHideDuration={2000}
             children={
                 <div
                     style={{

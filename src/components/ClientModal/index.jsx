@@ -12,6 +12,7 @@ import CloseIcon from "../../assets/closeIcon.svg";
 import { useContext } from "react";
 import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
+import { ModalsContext } from "../../context/ModalsContext";
 
 export default function ClientModal(){
     const {
@@ -21,6 +22,8 @@ export default function ClientModal(){
         value,
         setOpenSnack
     } = useContext(SingContext);
+
+    const { openSnackClientAdd, setOpenSnackClientAdd } = useContext(ModalsContext);
     
 
     function handleChange(event){
@@ -85,7 +88,7 @@ export default function ClientModal(){
                     Authorization: `Bearer ${value}`
                 }
             });
-            setOpenSnack(true);
+            setOpenSnackClientAdd(true);
             cleanForm();
         } catch (error) {
             setClientErrors((prevState) => {

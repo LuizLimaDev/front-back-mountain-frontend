@@ -5,9 +5,15 @@ import SnackBar from '../../components/SnackBar';
 import './style.css';
 import { Box } from '@mui/material';
 import { useTheme } from '@emotion/react';
+import { useContext } from 'react';
+import { ModalsContext } from '../../context/ModalsContext';
 
 function Clients() {
     const theme = useTheme()
+    const {
+        openSnackChargeAdd, setOpenSnackChargeAdd,
+        openSnackClientAdd, setOpenSnackClientAdd
+    } = useContext(ModalsContext)
 
     return (
         <Box
@@ -18,7 +24,16 @@ function Clients() {
                     <ClientHeader />
                     <ClientsTable />
                     <ClientModal />
-                    <SnackBar phrase={"Cadastro concluído com sucesso"} />
+                    <SnackBar
+                        phrase={"Cadastro concluído com sucesso"}
+                        openSnack={openSnackClientAdd}
+                        setOpenSnack={setOpenSnackClientAdd}
+                    />
+                    <SnackBar
+                        phrase={"Cobrança cadastrada com sucesso"}
+                        openSnack={openSnackChargeAdd}
+                        setOpenSnack={setOpenSnackChargeAdd}
+                    />
                 </div>
             </div>
         </Box>
