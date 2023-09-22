@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
-import "./style.css";
 import EditIcon from "../../../assets/edit.svg";
 import DeleteIcon from "../../../assets/delete-icon-billing.svg";
 import { Stack, Typography, useTheme } from "@mui/material";
@@ -27,7 +26,12 @@ export default function BillingsTable({ charges }) {
 				maxHeight: "42rem",
 			}}
 		>
-			<Table>
+			<Table
+				sx={{
+					minWidth: 650,
+				}}
+				aria-label="simple table"
+			>
 				<TableHead
 					sx={{
 						position: "sticky",
@@ -63,32 +67,33 @@ export default function BillingsTable({ charges }) {
 								: theme.billingsCyan;
 						return (
 							<TableRow key={charge.id}>
-								<TableCell>
-									<Typography sx={theme.infoBillingsTable}>
-										{charge.name}
-									</Typography>
+								<TableCell sx={theme.infoBillingsTable}>
+									{charge.name}
 								</TableCell>
-								<TableCell>
-									<Typography sx={theme.infoBillingsTable}>
-										{charge.id}
-									</Typography>
+								<TableCell sx={theme.infoBillingsTable}>
+									{charge.id}
 								</TableCell>
-								<TableCell align="left">
-									<Typography sx={theme.infoBillingsTable}>
-										{moneyFormat
-											.format(charge.value)
-											.replace(/^(\D+)/, "$1 ")}
-									</Typography>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									align="left"
+								>
+									{moneyFormat
+										.format(charge.value)
+										.replace(/^(\D+)/, "$1 ")}
 								</TableCell>
-								<TableCell align="left">
-									<Typography sx={theme.infoBillingsTable}>
-										{format(
-											new Date(charge.duedate),
-											"dd/MM/yyyy"
-										)}
-									</Typography>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									align="left"
+								>
+									{format(
+										new Date(charge.duedate),
+										"dd/MM/yyyy"
+									)}
 								</TableCell>
-								<TableCell align="left">
+								<TableCell
+									sx={theme.infoBillingsTable}
+									align="left"
+								>
 									<Stack
 										component="div"
 										sx={{
@@ -99,20 +104,28 @@ export default function BillingsTable({ charges }) {
 										{charge.status}
 									</Stack>
 								</TableCell>
-								<TableCell align="left">
-									<Typography
+								<TableCell
+									sx={{
+										...theme.infoBillingsTable,
+									}}
+									align="left"
+								>
+									<Stack
+										component="div"
 										sx={{
-											overflow: "hidden",
 											whiteSpace: "nowrap",
+											overflow: "hidden",
+											width: "15rem",
 											textOverflow: "ellipsis",
-											width: "13.5rem",
-											...theme.infoBillingsTable,
 										}}
 									>
 										{charge.description}
-									</Typography>
+									</Stack>
 								</TableCell>
-								<TableCell align="left">
+								<TableCell
+									sx={theme.infoBillingsTable}
+									align="left"
+								>
 									<Stack direction={"row"} spacing={"1.5rem"}>
 										<Stack
 											direction={"column"}

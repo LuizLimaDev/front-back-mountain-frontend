@@ -26,9 +26,23 @@ export default function ClientsTable() {
 	const theme = useTheme();
 
 	return (
-		<TableContainer component={Paper} sx={theme.layoutOutletContents}>
+		<TableContainer
+			component={Paper}
+			sx={{
+				...theme.layoutOutletContents,
+				...theme.infoBillingsTable,
+				overflowY: "auto",
+				maxHeight: "42rem",
+			}}
+		>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
-				<TableHead>
+				<TableHead
+					sx={{
+						position: "sticky",
+						top: 0,
+						backgroundColor: "white",
+					}}
+				>
 					<TableRow>
 						<TableCell>
 							<div className="client-icon">
@@ -50,9 +64,14 @@ export default function ClientsTable() {
 								"&:last-child td, &:last-child th": {
 									border: 0,
 								},
+								...theme.clientValueStyle,
 							}}
 						>
-							<TableCell component="th" scope="row">
+							<TableCell
+								sx={theme.clientValueStyle}
+								component="th"
+								scope="row"
+							>
 								<Link
 									className="link"
 									to={`/clients/${row.id}`}
@@ -60,17 +79,24 @@ export default function ClientsTable() {
 									{row.name}
 								</Link>
 							</TableCell>
-							<TableCell align="left">{row.cpf}</TableCell>
-							<TableCell align="left">{row.email}</TableCell>
-							<TableCell align="left">{row.phone}</TableCell>
-							<TableCell align="left">
+							<TableCell sx={theme.clientValueStyle} align="left">
+								{row.cpf}
+							</TableCell>
+							<TableCell sx={theme.clientValueStyle} align="left">
+								{row.email}
+							</TableCell>
+							<TableCell sx={theme.clientValueStyle} align="left">
+								{row.phone}
+							</TableCell>
+							<TableCell sx={theme.clientValueStyle} align="left">
 								{row.status === "pendente" ||
 								row.status === "vencido"
 									? red
 									: green}
 							</TableCell>
-							<TableCell align="left">
+							<TableCell sx={theme.clientValueStyle} align="left">
 								<img
+									style={{ cursor: "pointer" }}
 									src={CreateBilling}
 									onClick={() => {
 										setCustomerCharges((prevState) => {
