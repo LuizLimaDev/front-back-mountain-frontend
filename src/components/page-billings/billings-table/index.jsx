@@ -24,10 +24,19 @@ export default function BillingsTable({ charges }) {
 			component={Paper}
 			sx={{
 				...theme.layoutOutletContents,
+				overflowY: "auto",
+				maxHeight: "42rem",
+				scrollbarColor: "SCPink",
 			}}
 		>
 			<Table>
-				<TableHead>
+				<TableHead
+					sx={{
+						position: "sticky",
+						top: 0,
+						backgroundColor: "white",
+					}}
+				>
 					<TableRow>
 						<TableCell>
 							<div className="client-icon">

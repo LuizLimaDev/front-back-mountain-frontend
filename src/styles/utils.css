@@ -65,3 +65,7 @@
 	width: 1rem;
 	height: 1rem;
 }
+
+.table-scroll::-webkit-scrollbar-thumb {
+	background-color: "SCPink";
+}
