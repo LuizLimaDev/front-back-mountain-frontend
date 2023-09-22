@@ -43,7 +43,7 @@ export const ModalsProvider = ({ children }) => {
 
       setReceivedEmail(data.email)
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error)
     }
   }
 
