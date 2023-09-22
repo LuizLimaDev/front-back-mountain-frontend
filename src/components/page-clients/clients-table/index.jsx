@@ -15,90 +15,9 @@ import { ModalsContext } from "../../../context/ModalsContext";
 import ChargeModal from "../../Modals/ChargeModal";
 import { useTheme } from "@mui/material";
 
-function createData(name, cpf, email, phone, status) {
-	if (status === "inadimplente") {
-		status = red;
-	} else {
-		status = green;
-	}
-	return { name, cpf, email, phone, status };
-}
-
 let red = <div className="red">Inadimplente</div>;
 let green = <div className="green">Em dia</div>;
 
-const rows = [
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 24",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Ana Nguyen",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"inadimplente"
-	),
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Ana Nguyen",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Antonio Moreira",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-	createData(
-		"Sara da Silva",
-		"039 746 383 28",
-		"sarasilva@gmail.com",
-		"34 9 9876 5432",
-		"em dia"
-	),
-];
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
@@ -146,7 +65,7 @@ export default function ClientsTable() {
 							<TableCell align="left">{row.phone}</TableCell>
 							<TableCell align="left">
 								{row.status === "pendente" ||
-									rows.status === "vencido"
+									row.status === "vencido"
 									? red
 									: green}
 							</TableCell>
@@ -157,7 +76,7 @@ export default function ClientsTable() {
 												return {...prevState, customerId: row.id, name: row.name}
 											});
 											setOpenChargeModal(true);
-									 	}}
+									}}
 									></img>
 							</TableCell>
 						</TableRow>
