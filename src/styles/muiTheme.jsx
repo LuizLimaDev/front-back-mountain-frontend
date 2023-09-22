@@ -103,4 +103,11 @@ export const theme = createTheme({
 		backgroundColor: "SCLightCyan",
 		color: "SCLightGreen",
 	},
+	breadCrumbsTypograph: {
+		fontFamily: "Inter",
+		fontSize: "1rem",
+		fontWeight: "400",
+		lineHeight: "1.5rem",
+		cursor: "pointer"
+	}
 });

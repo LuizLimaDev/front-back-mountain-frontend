@@ -11,6 +11,7 @@ import api from "../../services/api";
 import Avatar from "./Avatar";
 import EditUserModal from "../../components/Modals/EditUserModal";
 import "./style.css";
+import ClientBreadcrumbs from "./clientBreadcrumbs/ClientBreadcrumbs";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);
@@ -57,20 +58,21 @@ function HeaderDashBoard() {
 	}, [editFinished]);
 
 	const initialsName = [...username];
-
 	return (
 		<div className="dashboard-header">
 			<div>
-				<h1
-					className={active === "clients" && "state-client"}
+				{active === "clientDetail" ? <ClientBreadcrumbs /> : <h1
+					className={(active === "clients" || active === "billings") && "state-client"}
 					style={{ marginLeft: "2.75rem" }}
 				>
-					{active === "home"
+					{
+					active === "home"
 						? "Resumo das cobranças"
 						: active === "clients"
 						? "Clientes"
-						: null}
-				</h1>
+						: "cobranças"
+					}
+				</h1>}
 			</div>
 			<div className="dashboard-user">
 				{username ? (
