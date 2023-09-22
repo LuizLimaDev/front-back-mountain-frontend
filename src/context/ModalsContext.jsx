@@ -23,8 +23,6 @@ export const ModalsProvider = ({ children }) => {
   const [openSnackChargeAdd, setOpenSnackChargeAdd] = useState(false);
   const [openSnackClientAdd, setOpenSnackClientAdd] = useState(false);
 
-
-
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [cpf, setCpf] = useState("")

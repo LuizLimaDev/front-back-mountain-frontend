@@ -1,3 +1,4 @@
+import { useTheme } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -5,19 +6,18 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../assets/create-billing.png";
-import useCustomers from "../../../hooks/useCustomers";
-import "./style.css";
-import { useContext } from "react";
 import { ModalsContext } from "../../../context/ModalsContext";
+import useCustomers from "../../../hooks/useCustomers";
 import ChargeModal from "../../Modals/ChargeModal";
+import "./style.css";
 import { useTheme } from "@mui/material";
 
 let red = <div className="red">Inadimplente</div>;
 let green = <div className="green">Em dia</div>;
-
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
