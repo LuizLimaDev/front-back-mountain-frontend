@@ -1,10 +1,11 @@
 import LogoutIcon from "@mui/icons-material/Logout";
+import EditIcon from "@mui/icons-material/Edit";
 import { Box } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import editImg from "../../assets/edit.svg";
+// import editImg from "../../assets/edit.svg";
 import { ModalsContext } from "../../context/ModalsContext";
 import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
@@ -118,14 +119,7 @@ function HeaderDashBoard() {
 							}}
 							onClick={() => handleOpenEditUser()}
 						>
-							<img
-								src={editImg}
-								alt="editar"
-								style={{
-									width: "1.25rem",
-									paddingBottom: ".3rem",
-								}}
-							/>
+							<EditIcon sx={{ color: "SCGray3" }} />
 							<Typography
 								sx={{
 									fontFamily: "Nunito",
@@ -150,7 +144,7 @@ function HeaderDashBoard() {
 							}}
 							onClick={handleLogout}
 						>
-							<LogoutIcon />
+							<LogoutIcon sx={{ color: "SCGray3" }} />
 							<Typography
 								sx={{
 									fontFamily: "Nunito",
