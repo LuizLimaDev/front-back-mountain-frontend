@@ -118,17 +118,16 @@ export default function BillingsTable({ charges }) {
 									}}
 									align="left"
 								>
-									<Stack
-										component="div"
-										sx={{
+									<p
+										style={{
 											whiteSpace: "nowrap",
 											overflow: "hidden",
-											width: "15rem",
+											width: "17rem",
 											textOverflow: "ellipsis",
 										}}
 									>
 										{charge.description}
-									</Stack>
+									</p>
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
