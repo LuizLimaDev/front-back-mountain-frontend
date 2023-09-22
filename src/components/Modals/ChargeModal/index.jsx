@@ -30,7 +30,12 @@ export default function ChargeModal(){
         dueDate: "",
         value: "",
         status: "pago"
-    })
+    });
+    const [customerErrors, setCustomerErrors] = useState({
+        description: false,
+        dueDate: false,
+        value: false
+    });
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -41,7 +46,10 @@ export default function ChargeModal(){
                 }
             })
         } catch (error) {
-            console.log(error);
+            const errors = error.response.data.errors;
+            errors.map((item) => {
+                setCustomerErrors({...customerErrors, [item.type]: item.message})
+            });
         }
     }
 
@@ -172,6 +180,8 @@ export default function ChargeModal(){
                             }}
                             name="description"
                             onChange={(event) => handleChange(event)}
+                            error={ customerErrors.description }
+                            helperText={ customerErrors.description }
                         />
                     </Box>
 
@@ -211,6 +221,8 @@ export default function ChargeModal(){
                                 }}
                                 name="dueDate"
                                 onChange={(event) => handleChange(event)}
+                                error={ customerErrors.dueDate }
+                                helperText={ customerErrors.dueDate }
                             />
                         </Box>
                         <Box>
@@ -240,6 +252,8 @@ export default function ChargeModal(){
                                 }}
                                 name="value"
                                 onChange={(event) => handleChange(event)}
+                                error={ customerErrors.value }
+                                helperText={ customerErrors.value }
                             />
                         </Box>
                     </Box>
