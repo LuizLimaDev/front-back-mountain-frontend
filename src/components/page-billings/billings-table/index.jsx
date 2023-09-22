@@ -42,12 +42,20 @@ export default function BillingsTable({ charges }) {
 					<TableRow>
 						<TableCell>
 							<div className="client-icon">
-								<img src={ChevronUpDown} /> Cobranças
+								<img
+									style={{ cursor: "pointer" }}
+									src={ChevronUpDown}
+								/>{" "}
+								Cobranças
 							</div>
 						</TableCell>
 						<TableCell>
 							<div className="client-icon">
-								<img src={ChevronUpDown} /> ID Cob.
+								<img
+									style={{ cursor: "pointer" }}
+									src={ChevronUpDown}
+								/>{" "}
+								ID Cob.
 							</div>
 						</TableCell>
 						<TableCell align="left">Valor</TableCell>
@@ -110,17 +118,16 @@ export default function BillingsTable({ charges }) {
 									}}
 									align="left"
 								>
-									<Stack
-										component="div"
-										sx={{
+									<p
+										style={{
 											whiteSpace: "nowrap",
 											overflow: "hidden",
-											width: "15rem",
+											width: "17rem",
 											textOverflow: "ellipsis",
 										}}
 									>
 										{charge.description}
-									</Stack>
+									</p>
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}

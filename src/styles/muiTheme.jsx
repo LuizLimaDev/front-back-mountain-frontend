@@ -5,6 +5,7 @@ export const theme = createTheme({
 		SCBackground: "#F0F0F5",
 		SCInputBackground: "#F0F0F5",
 		SCBackgroundWhite: "#FFFFFF",
+		SCBackgroundGrey: "#EEF6F6",
 
 		SCLightGreen: "#1FA7AF",
 		SCNormalGreen: "#0E8750",
@@ -101,7 +102,7 @@ export const theme = createTheme({
 		color: "SCDarkRed",
 	},
 	billingsCyan: {
-		backgroundColor: "SCLightCyan",
+		backgroundColor: "SCBackgroundGrey",
 		color: "SCLightGreen",
 	},
 	breadCrumbsTypograph: {
