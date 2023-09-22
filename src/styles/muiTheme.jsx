@@ -53,12 +53,13 @@ export const theme = createTheme({
 	clientLabelStyle: {
 		marginBottom: ".5rem",
 		fontFamily: "Montserrat",
-		fontSize: "1rem",
+		fontSize: "0.9rem",
 		fontWeight: "700",
 	},
 	clientValueStyle: {
 		fontFamily: "Nunito",
-		fontSize: "1rem",
+		fontSize: "0.9rem",
+		color: "SCGray3",
 	},
 	layoutOutletHome: {
 		display: "flex",
@@ -74,9 +75,9 @@ export const theme = createTheme({
 		width: "1140px",
 	},
 	infoBillingsTable: {
-		color: "SCGray5",
+		color: "SCGray3",
 		fontFamily: "Nunito",
-		fontSize: "0.8rem",
+		fontSize: "0.9rem",
 		fontStyle: "normal",
 		fontWeight: "400",
 		lineHeight: "2.5rem",
@@ -86,7 +87,7 @@ export const theme = createTheme({
 		textAlign: "center",
 		borderRadius: "0.5rem",
 		fontFamily: "Nunito",
-		fontSize: "0.8rem",
+		fontSize: "0.9rem",
 		fontStyle: "normal",
 		fontWeight: "600",
 		lineHeight: "normal",
@@ -108,6 +109,6 @@ export const theme = createTheme({
 		fontSize: "1rem",
 		fontWeight: "400",
 		lineHeight: "1.5rem",
-		cursor: "pointer"
-	}
+		cursor: "pointer",
+	},
 });
