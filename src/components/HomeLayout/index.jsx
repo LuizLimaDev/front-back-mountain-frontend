@@ -10,8 +10,6 @@ export default function HomeLayout() {
         <Box
             sx={{
                 width: "100vw",
-
-                backgroundColor: "SCGray8"
             }}
         >
             <Box>
@@ -21,7 +19,9 @@ export default function HomeLayout() {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center"
+                    alignItems: "center",
+
+                    marginRight: ".5rem"
                 }}
             >
                 <HeaderDashBoard />

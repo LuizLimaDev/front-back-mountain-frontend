@@ -18,8 +18,9 @@ import format from "date-fns/format";
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges }) {
 	const theme = useTheme();
+
 	return (
-		<TableContainer component={Paper} sx={{ maxWidth: "70rem" }}>
+		<TableContainer component={Paper} sx={theme.layoutOutletContents}>
 			<Table>
 				<TableHead>
 					<TableRow>
@@ -46,8 +47,8 @@ export default function BillingsTable({ charges }) {
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-								? theme.billingsRed
-								: theme.billingsCyan;
+									? theme.billingsRed
+									: theme.billingsCyan;
 						return (
 							<TableRow key={charge.id}>
 								<TableCell>

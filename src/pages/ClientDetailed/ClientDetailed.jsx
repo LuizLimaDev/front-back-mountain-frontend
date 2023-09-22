@@ -24,16 +24,7 @@ export default function ClientDetailed() {
     }, []);
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-
-                width: "100vw",
-                height: "100vh",
-                padding: "18vh 0 0 14vw"
-            }}
-        >
+        <Box sx={theme.layoutOutletHome}>
             <Stack
                 direction={"row"}
                 spacing={1}

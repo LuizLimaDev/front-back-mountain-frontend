@@ -1,9 +1,11 @@
 import { useState } from "react";
 import BillingsIcon from "../../../assets/billings-icon.svg";
 import Statics from "../../../assets/Statics.png";
+import { Box, useTheme } from "@mui/material";
 
 export default function BillingsSearch() {
 	const [search, setSearch] = useState("");
+	const theme = useTheme()
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
@@ -14,7 +16,7 @@ export default function BillingsSearch() {
 	};
 
 	return (
-		<div>
+		<Box sx={theme.layoutOutletContents}>
 			<div className="client-header">
 				<div className="client-icon">
 					<img src={BillingsIcon} alt="Ícone Cobranças" />
@@ -35,6 +37,6 @@ export default function BillingsSearch() {
 					</form>
 				</div>
 			</div>
-		</div>
+		</Box>
 	);
 }

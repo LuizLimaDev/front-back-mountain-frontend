@@ -4,9 +4,7 @@
 	align-items: center;
 	justify-content: space-between;
 
-	width: 70rem;
-	padding: 1rem;
-	/* padding-left: 6.25rem; */
+	padding: 1rem 0 1.5rem 0;
 }
 
 .client-icon {
