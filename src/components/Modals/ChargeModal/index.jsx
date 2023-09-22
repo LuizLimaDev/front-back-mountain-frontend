@@ -4,7 +4,6 @@ import {
     InputLabel,
     Typography,
     TextField,
-    Checkbox,
     Button,
     Radio,
     RadioGroup
@@ -18,7 +17,7 @@ import api from "../../../services/api";
 import { SingContext } from "../../../context/SingContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 
-export default function ChargeModal({ setOpenSnack }){
+export default function ChargeModal(){
     const { openChargeModal, setOpenChargeModal, customerCharges, setCustomerCharges, setOpenSnackChargeAdd } = useContext(ModalsContext);
     const { value } = useContext(SingContext);
     

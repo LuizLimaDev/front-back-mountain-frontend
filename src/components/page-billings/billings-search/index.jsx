@@ -5,7 +5,7 @@ import { Box, useTheme } from "@mui/material";
 
 export default function BillingsSearch() {
 	const [search, setSearch] = useState("");
-	const theme = useTheme()
+	const theme = useTheme();
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
