@@ -61,6 +61,7 @@ function HeaderDashBoard() {
 	return (
 		<div className="dashboard-header">
 			<div>
+				{/* erro no console por conter bolean na classe que só aceita string */}
 				<h1
 					className={active === "clients" && "state-client"}
 					style={{ marginLeft: "2.75rem" }}

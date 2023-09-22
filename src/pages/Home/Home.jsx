@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import BillingDetailedOverdue from '../../components/billing-detailed/billing-detailed-overdue';
 import BillingDetailedPaid from '../../components/billing-detailed/billing-detailed-paid';
@@ -19,7 +19,9 @@ function Home() {
   const navigate = useNavigate()
   const theme = useTheme()
 
-  if (!value) navigate("/")
+  useEffect(() => {
+    if (!value) navigate("/")
+  }, [navigate, value])
 
   return (
     <MetricsDasboardProvider>

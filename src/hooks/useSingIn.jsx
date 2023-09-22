@@ -31,7 +31,7 @@ export default function useSingUp() {
       navigate("/home")
 
     } catch (error) {
-      setApiErrors(error.response.data.message)
+      setApiErrors(error.response.data.errors)
     }
   }
 

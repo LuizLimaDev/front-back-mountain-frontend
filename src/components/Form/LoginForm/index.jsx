@@ -130,13 +130,14 @@ function LoginForm() {
             }}
           />
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
           {
             apiErrors &&
-            <Typography
-              sx={theme.errorMessageStyle}>
-              {apiErrors}
-            </Typography>
+            apiErrors.map((error, index) => (
+              <Typography key={index} sx={{ ...theme.errorMessageStyle, marginLeft: ".7rem" }}>
+                {error.message}
+              </Typography>
+            ))
           }
         </Box>
 
