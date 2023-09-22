@@ -10,10 +10,9 @@ import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../assets/create-billing.png";
 import useCustomers from "../../../hooks/useCustomers";
 import "./style.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ModalsContext } from "../../../context/ModalsContext";
 import ChargeModal from "../../Modals/ChargeModal";
-import { Snackbar } from "@mui/material";
 import { useTheme } from "@mui/material";
 
 function createData(name, cpf, email, phone, status) {
@@ -104,7 +103,7 @@ const rows = [
 export default function ClientsTable() {
 	const { customers } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
-	const [openSnack, setOpenSnack] = useState(false);
+
 	const theme = useTheme()
 
 	return (
@@ -152,23 +151,20 @@ export default function ClientsTable() {
 									: green}
 							</TableCell>
 							<TableCell align="left">
-								<a
-									onClick={() => {
-										setCustomerCharges((prevState) => {
-											return {...prevState, customerId: row.id, name: row.name}
-										});
-										setOpenChargeModal(true);
-									}}
-								>
-								<a >
-									<img src={CreateBilling}></img>
-								</a>
+									<img src={CreateBilling}
+										onClick={() => {
+											setCustomerCharges((prevState) => {
+												return {...prevState, customerId: row.id, name: row.name}
+											});
+											setOpenChargeModal(true);
+									 	}}
+									></img>
 							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
-			<ChargeModal setOpenSnack={setOpenSnack} />
+			<ChargeModal />
 		</TableContainer>
 	);
 }
