@@ -8,7 +8,7 @@ import {
 	InputAdornment,
 	IconButton,
 } from "@mui/material";
-import SearchIcon from "../../../assets/search-icon.svg";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function BillingsSearch() {
 	const [search, setSearch] = useState("");
@@ -48,10 +48,7 @@ export default function BillingsSearch() {
 										sx={{ marginRight: "0.5rem" }}
 										edge="end"
 									>
-										<img
-											src={SearchIcon}
-											alt="Ícone de lupa"
-										/>
+										<SearchIcon />
 									</IconButton>
 								</InputAdornment>
 							}
