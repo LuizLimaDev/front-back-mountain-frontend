@@ -407,7 +407,6 @@ function Form({ SetEditFinished }) {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             error={confirmPasswordErrorListener}
-            helperText={passwordCombinationError && `${passwordCombinationError}`}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton

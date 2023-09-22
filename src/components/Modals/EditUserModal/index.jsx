@@ -1,5 +1,5 @@
 import { Modal, Stack } from '@mui/material';
-import { useContext, useEffect } from 'react';
+import { forwardRef, useContext, useEffect } from 'react';
 import { ModalsContext } from '../../../context/ModalsContext';
 import { SingContext } from '../../../context/SingContext';
 import api from '../../../services/api';
@@ -37,6 +37,13 @@ function EditUserModal() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const SuccessComponent = forwardRef((props, ref) => {
+    return <Sucess {...props} ref={ref} />
+  })
+  const FormComponent = forwardRef((props, ref) => {
+    return <Form {...props} ref={ref} />
+  })
+
   return (
     <Stack>
       <Modal
@@ -52,7 +59,11 @@ function EditUserModal() {
           height: "100%",
         }}
       >
-        {editFinished ? <Sucess /> : <Form SetEditFinished={SetEditFinished} />}
+        {
+          editFinished ?
+          <SuccessComponent />
+          : <FormComponent SetEditFinished={SetEditFinished} />
+        }
       </Modal>
     </Stack >
   );

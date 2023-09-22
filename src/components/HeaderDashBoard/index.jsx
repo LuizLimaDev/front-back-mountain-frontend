@@ -62,7 +62,7 @@ function HeaderDashBoard() {
 		<div className="dashboard-header">
 			<div>
 				{active === "clientDetail" ? <ClientBreadcrumbs /> : <h1
-					className={(active === "clients" || active === "billings") && "state-client"}
+					className={(active === "clients" || active === "billings") ? "state-client" : null }
 					style={{ marginLeft: "2.75rem" }}
 				>
 					{
