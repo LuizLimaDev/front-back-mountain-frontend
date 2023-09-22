@@ -4,8 +4,8 @@ import Statics from "../../../assets/Statics.png";
 // import SearchIcon from '../../../assets/Search-icon.png'
 import "./style.css";
 import { SingContext } from "../../../context/SingContext";
-import SearchIcon from "../../../assets/search-icon.svg";
 import { OutlinedInput, InputAdornment, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 function ClientHeader() {
 	const [search, setSearch] = useState("");
@@ -53,10 +53,7 @@ function ClientHeader() {
 										sx={{ marginRight: "0.5rem" }}
 										edge="end"
 									>
-										<img
-											src={SearchIcon}
-											alt="Ícone de lupa"
-										/>
+										<SearchIcon />
 									</IconButton>
 								</InputAdornment>
 							}
