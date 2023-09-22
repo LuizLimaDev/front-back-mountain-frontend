@@ -42,11 +42,18 @@ export default function BillingsTable({ charges }) {
 					<TableRow>
 						<TableCell>
 							<div className="client-icon">
-								<img src={ChevronUpDown} /> Cobranças
+								<img
+									style={{ cursor: "pointer" }}
+									src={ChevronUpDown}
+								/>{" "}
+								Cobranças
 							</div>
 						</TableCell>
 						<TableCell>
-							<div className="client-icon">
+							<div
+								style={{ cursor: "pointer" }}
+								className="client-icon"
+							>
 								<img src={ChevronUpDown} /> ID Cob.
 							</div>
 						</TableCell>

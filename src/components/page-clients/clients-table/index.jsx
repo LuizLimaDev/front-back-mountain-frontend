@@ -46,7 +46,11 @@ export default function ClientsTable() {
 					<TableRow>
 						<TableCell>
 							<div className="client-icon">
-								<img src={ChevronUpDown} /> Cliente
+								<img
+									style={{ cursor: "pointer" }}
+									src={ChevronUpDown}
+								/>{" "}
+								Cliente
 							</div>
 						</TableCell>
 						<TableCell align="left">CPF</TableCell>
