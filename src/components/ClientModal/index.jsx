@@ -59,41 +59,8 @@ export default function ClientModal() {
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		if (!clientForm.name) {
-			return setClientErrors((prevState) => {
-				return {
-					...prevState,
-					name: "Este campo deve ser preenchido.",
-				};
-			});
-		}
-
-		if (!clientForm.email) {
-			return setClientErrors((prevState) => {
-				return {
-					...prevState,
-					email: "Este campo deve ser preenchido.",
-				};
-			});
-		}
-
-		if (!clientForm.cpf) {
-			return setClientErrors((prevState) => {
-				return { ...prevState, cpf: "Este campo deve ser preenchido." };
-			});
-		}
-
-		if (!clientForm.phone) {
-			return setClientErrors((prevState) => {
-				return {
-					...prevState,
-					phone: "Este campo deve ser preenchido.",
-				};
-			});
-		}
-
 		try {
-			await api.post(
+			const response = await api.post(
 				"/customers",
 				{ ...clientForm },
 				{
@@ -102,12 +69,17 @@ export default function ClientModal() {
 					},
 				}
 			);
+			console.log(response);
 			setOpenSnackClientAdd(true);
 			cleanForm();
 		} catch (error) {
-			setClientErrors((prevState) => {
-				return { ...prevState, cpf: error.response.data.message };
-			});
+			console.log(error);
+			const errors = error.response.data.errors
+			errors.map(error => {
+				setClientErrors((prevState) => {
+					return { ...prevState, [error.type]: error.message };
+				});
+			})
 		}
 	}
 
