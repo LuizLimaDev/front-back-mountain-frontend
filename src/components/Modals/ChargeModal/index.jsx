@@ -59,6 +59,11 @@ export default function ChargeModal(){
         setCustomerCharges((prevState) => {
             return { ...prevState, [event.target.name]: event.target.value }
         });
+        setCustomerErrors({
+            description: false,
+            dueDate: false,
+            value: false
+        });
     }
 
     return(
@@ -70,6 +75,14 @@ export default function ChargeModal(){
                     dueDate: false,
                     value: false
                 });
+                setCustomerCharges({
+                    customerId: "",
+                    name: "",
+                    description: "",
+                    dueDate: "",
+                    value: 0,
+                    status: "pago"
+                })
                 setOpenChargeModal(false)
             }}
         >
@@ -101,6 +114,19 @@ export default function ChargeModal(){
                         dueDate: false,
                         value: false
                     });
+                    setCustomerErrors({
+                        description: false,
+                        dueDate: false,
+                        value: false
+                    });
+                    setCustomerCharges({
+                        customerId: "",
+                        name: "",
+                        description: "",
+                        dueDate: "",
+                        value: 0,
+                        status: "pago"
+                    })
                 }}
                 />
 
@@ -418,7 +444,22 @@ export default function ChargeModal(){
                                 border: "1px solid #DEDEE9"
                             }}
                             type="button"
-                            onClick={() => {setOpenChargeModal(false)}}
+                            onClick={() => {
+                                setOpenChargeModal(false)
+                                setCustomerErrors({
+                                    description: false,
+                                    dueDate: false,
+                                    value: false
+                                });
+                                setCustomerCharges({
+                                    customerId: "",
+                                    name: "",
+                                    description: "",
+                                    dueDate: "",
+                                    value: 0,
+                                    status: "pago"
+                                })
+                            }}
                         >Cancelar</Button>
                         <Button
                             sx={{
