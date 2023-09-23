@@ -53,6 +53,12 @@ export default function ClientModal() {
 			city: "",
 			state: "",
 		});
+		setClientErrors({
+			name: false,
+			email: false,
+			cpf: false,
+			phone: false,
+		});
 		setOpenClientModal(false);
 	}
 
@@ -60,7 +66,7 @@ export default function ClientModal() {
 		event.preventDefault();
 
 		try {
-			const response = await api.post(
+			await api.post(
 				"/customers",
 				{ ...clientForm },
 				{
@@ -69,7 +75,6 @@ export default function ClientModal() {
 					},
 				}
 			);
-			console.log(response);
 			setOpenSnackClientAdd(true);
 			cleanForm();
 		} catch (error) {
@@ -96,7 +101,7 @@ export default function ClientModal() {
 	return (
 		<Modal
 			open={openClientModal}
-			onClose={() => setOpenClientModal(!openClientModal)}
+			onClose={() => cleanForm()}
 		>
 			<Box
 				sx={{
@@ -122,7 +127,7 @@ export default function ClientModal() {
 						margin: "1.5rem 1.5rem 0 0",
 						cursor: "pointer",
 					}}
-					onClick={() => setOpenClientModal(!openClientModal)}
+					onClick={() =>  cleanForm()}
 				/>
 				<form onSubmit={(event) => handleSubmit(event)}>
 					<Box
