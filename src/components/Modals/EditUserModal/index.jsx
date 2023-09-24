@@ -3,6 +3,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
   Box,
+  FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -27,7 +29,6 @@ function EditUserModal() {
     handleCloseEditUser,
   } = useContext(ModalsContext)
   const { value, setReceivedEmail } = useContext(SingContext)
-  const { handleBlur } = useEmailValidation()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [cpf, setCpf] = useState("")
@@ -38,6 +39,7 @@ function EditUserModal() {
 
   const [apiErrors, setApiErrors] = useState([])
   const [passowrdCombination, setPassowrdCombination] = useState("")
+  const { handleBlur, existingEmailError } = useEmailValidation(setApiErrors)
 
   const theme = useTheme()
 
@@ -88,7 +90,6 @@ function EditUserModal() {
       newPassword: password
     }
 
-    // TODO - validacoes da api
     try {
       await api.put("/users", userEditData, {
         headers: {
@@ -203,26 +204,30 @@ function EditUserModal() {
             >
               E-mail
             </InputLabel>
-            <TextField
-              id="email"
-              type='email'
-              placeholder='Digite seu e-mail'
-              fullWidth
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              error={apiErrors.email && true}
-              helperText={apiErrors.email}
-              onBlur={handleBlur}
-              InputProps={{
-                style: {
+            <FormControl variant="outlined">
+              <OutlinedInput
+                id="email"
+                type='email'
+                placeholder='Digite seu e-mail'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={apiErrors.email || existingEmailError ? true : false}
+                onBlur={handleBlur}
+                sx={{
                   height: "2.75rem",
                   borderRadius: ".5rem",
 
-
                   fontFamily: "Inter"
-                }
-              }}
-            />
+                }}
+                aria-describedby="email-text"
+              />
+              <FormHelperText id="email-text">
+                {apiErrors.email}
+              </FormHelperText>
+              <FormHelperText id="email-text">
+                {existingEmailError}
+              </FormHelperText>
+            </FormControl>
 
             <Box
               sx={{
@@ -337,7 +342,7 @@ function EditUserModal() {
               placeholder='Confirme a nova senha'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              error={apiErrors.newPassword && true}
+              error={apiErrors.newPassword || existingEmailError ? true : false}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

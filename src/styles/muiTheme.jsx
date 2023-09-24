@@ -28,8 +28,17 @@ export const theme = createTheme({
 		SCDarkBlue: "#243F80",
 		SCLightBlue: "#C3D4FE",
 
-		SCNormalError: "#EF5350",
-		SCErrorMui: "#EF5350",
+		SCNormalError: "#C33E32",
+		SCErrorMui: "#C33E32",
+	},
+	components: {
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {
+					color: "#C33E32"
+				}
+			}
+		}
 	},
 	typography: {
 		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
@@ -40,9 +49,10 @@ export const theme = createTheme({
 		fontSize: ".875rem",
 	},
 	MUIerrorMessageStyle: {
-		fontFamily: "Roboto",
+		fontFamily: "Inter",
 		fontSize: ".82rem",
-		margin: ".25rem 0 0 .7rem",
+		margin: ".25rem 0 0 .85rem",
+		lineHeight: ".5rem",
 
 		color: "SCErrorMui",
 	},

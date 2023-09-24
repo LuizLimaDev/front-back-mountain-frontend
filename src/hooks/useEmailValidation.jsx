@@ -24,7 +24,6 @@ export default function useEmailValidation() {
     } catch (error) {
 
       if (receivedEmail !== emailInput) {
-        console.log('email api: ', receivedEmail, 'email input: ', emailInput)
         setExistingEmailError(error.response.data.message)
         setExistingEmailListener(true)
         return
