@@ -28,16 +28,11 @@ export const theme = createTheme({
 		SCDarkBlue: "#243F80",
 		SCLightBlue: "#C3D4FE",
 
-		SCNormalError: "#E70000",
-		SCErrorMui: "#D32F2F",
+		SCNormalError: "#EF5350",
+		SCErrorMui: "#EF5350",
 	},
 	typography: {
-		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter"].join(","),
-	},
-	errorMessageStyle: {
-		fontFamily: "Inter",
-		fontSize: ".875rem",
-		color: "SCNormalError",
+		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
 	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
@@ -45,7 +40,7 @@ export const theme = createTheme({
 		fontSize: ".875rem",
 	},
 	MUIerrorMessageStyle: {
-		fontFamily: "Nunito",
+		fontFamily: "Roboto",
 		fontSize: ".82rem",
 		margin: ".25rem 0 0 .7rem",
 

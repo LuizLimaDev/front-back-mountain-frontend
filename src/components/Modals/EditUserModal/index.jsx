@@ -28,13 +28,16 @@ function EditUserModal() {
   } = useContext(ModalsContext)
   const { value, setReceivedEmail } = useContext(SingContext)
   const { handleBlur } = useEmailValidation()
-  const [name, setName] = useState(" ")
-  const [email, setEmail] = useState(" ")
-  const [cpf, setCpf] = useState(" ")
-  const [phone, setPhone] = useState(" ")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [cpf, setCpf] = useState("")
+  const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+
+  const [apiErrors, setApiErrors] = useState([])
+  const [passowrdCombination, setPassowrdCombination] = useState("")
 
   const theme = useTheme()
 
@@ -62,10 +65,20 @@ function EditUserModal() {
     userGetDataInfo()
   }, [setReceivedEmail, value])
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    setPassowrdCombination("")
+    setApiErrors([])
 
-    // TODO - validacoes da api
+    if (!password && confirmPassword) {
+      setApiErrors({ ...apiErrors, newPassword: `Digite a "Nova Senha" e o "Confirmar Senha"` })
+      return
+    }
+
+    if (password !== confirmPassword) {
+      setApiErrors({ ...apiErrors, newPassword: "As senhas não conferem" })
+      return
+    }
 
     const userEditData = {
       name,
@@ -75,8 +88,22 @@ function EditUserModal() {
       newPassword: password
     }
 
-    console.log(userEditData);
-    // TODO - Apagar componente form
+    // TODO - validacoes da api
+    try {
+      await api.put("/users", userEditData, {
+        headers: {
+          Authorization: `Bearer ${value}`
+        }
+      })
+    } catch (error) {
+      const errors = error.response.data.errors;
+
+      errors.map((item) => {
+        setApiErrors((prevState) => {
+          return { ...prevState, [item.type]: item.message }
+        })
+      });
+    }
   }
 
   return (
@@ -97,7 +124,7 @@ function EditUserModal() {
         <Paper
           sx={{
             position: "relative",
-            width: "30.68rem",
+            width: "31.68rem",
             padding: "2.5rem 3.5rem",
             borderRadius: "1.87rem"
           }}
@@ -139,7 +166,7 @@ function EditUserModal() {
             component="form"
             onSubmit={handleSubmit}
             sx={{
-              width: "24.68rem",
+              width: "25.68rem",
             }}
           >
             <InputLabel
@@ -156,6 +183,8 @@ function EditUserModal() {
               fullWidth
               value={name}
               onChange={(e) => setName(e.target.value)}
+              error={apiErrors.name && true}
+              helperText={apiErrors.name}
               InputProps={{
                 style: {
                   height: "2.75rem",
@@ -181,6 +210,8 @@ function EditUserModal() {
               fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              error={apiErrors.email && true}
+              helperText={apiErrors.email}
               onBlur={handleBlur}
               InputProps={{
                 style: {
@@ -200,7 +231,7 @@ function EditUserModal() {
                 gap: "1.25rem",
 
                 width: "24.68rem",
-                margin: "1.25rem 0"
+                margin: "1.25rem 0 "
               }}
             >
               <Box>
@@ -216,6 +247,8 @@ function EditUserModal() {
                   placeholder='Digite seu CPF'
                   value={cpf}
                   onChange={(e) => setCpf(e.target.value)}
+                  error={apiErrors.cpf && true}
+                  helperText={apiErrors.cpf && "Formato: XXX.XXX.XXX-XX"}
                   InputProps={{
                     style: {
                       height: "2.75rem",
@@ -224,7 +257,7 @@ function EditUserModal() {
                       fontFamily: "Inter"
                     }
                   }}
-                  sx={{ width: "11.62rem" }}
+                  sx={{ width: "12.12rem" }}
                 />
               </Box>
               <Box sx={{ width: "11.12rem" }}>
@@ -240,9 +273,11 @@ function EditUserModal() {
                   placeholder='Digite seu Telefone'
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  error={apiErrors.phone && true}
+                  helperText={apiErrors.phone && "Formado: (XX) XXXXX-XXXX"}
                   InputProps={{
                     style: {
-                      width: "11.62rem",
+                      width: "12.12rem",
                       height: "2.75rem",
                       borderRadius: ".5rem",
 
@@ -266,6 +301,7 @@ function EditUserModal() {
               placeholder='Digite a nova senha'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              error={apiErrors.newPassword && true}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -301,6 +337,7 @@ function EditUserModal() {
               placeholder='Confirme a nova senha'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              error={apiErrors.newPassword && true}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -320,6 +357,9 @@ function EditUserModal() {
                 fontFamily: "Inter"
               }}
             />
+            <Typography sx={theme.MUIerrorMessageStyle}>
+              {apiErrors.newPassword && apiErrors.newPassword || passowrdCombination}
+            </Typography>
 
             <SCButton>
               Aplicar

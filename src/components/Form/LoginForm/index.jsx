@@ -134,7 +134,7 @@ function LoginForm() {
           {
             apiErrors &&
             apiErrors.map((error, index) => (
-              <Typography key={index} sx={{ ...theme.errorMessageStyle, marginLeft: ".7rem" }}>
+              <Typography key={index} sx={{ ...theme.MUIerrorMessageStyle, marginLeft: ".7rem" }}>
                 {error.message}
               </Typography>
             ))
