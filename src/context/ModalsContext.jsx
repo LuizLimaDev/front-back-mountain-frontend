@@ -32,25 +32,6 @@ export const ModalsProvider = ({ children }) => {
   const [apiErrors, setApiErrors] = useState("")
   const [editFinished, SetEditFinished] = useState(false)
 
-  const { setReceivedEmail } = useEmailValidation()
-  async function getData() {
-    try {
-      const { data } = await api.get("/users/profile", {
-        headers: {
-          Authorization: `Bearer ${value}`
-        }
-      })
-
-      setReceivedEmail(data.email)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
-
   return (
     <ModalsContext.Provider value={{
       openModalEditUser, setOpenModalEditUser,
