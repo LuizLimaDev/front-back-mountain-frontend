@@ -1,13 +1,9 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useState } from "react";
-import useEmailValidation from "../hooks/useEmailValidation";
-import api from "../services/api";
-import { SingContext } from "./SingContext";
+import { createContext, useState } from "react";
 
 export const ModalsContext = createContext({})
 
 export const ModalsProvider = ({ children }) => {
-  const { value } = useContext(SingContext)
   const [openModalEditUser, setOpenModalEditUser] = useState(false)
   const handleOpenEditUser = () => setOpenModalEditUser(true);
   const handleCloseEditUser = () => setOpenModalEditUser(false);
