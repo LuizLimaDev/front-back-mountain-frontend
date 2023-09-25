@@ -277,7 +277,7 @@ function EditUserModal() {
                   value={cpf}
                   onChange={(e) => setCpf(e.target.value)}
                   error={apiErrors.cpf && true}
-                  helperText={apiErrors.cpf && "Formato: XXX.XXX.XXX-XX"}
+                  helperText={apiErrors.cpf}
                   InputProps={{
                     style: {
                       height: "2.75rem",
