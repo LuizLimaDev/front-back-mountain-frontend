@@ -1,5 +1,4 @@
 import { useTheme } from "@mui/material";
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -35,12 +34,12 @@ export default function ClientsTable() {
 
 	return (
 		<TableContainer
-			component={Paper}
 			sx={{
 				...theme.layoutOutletContents,
 				...theme.infoBillingsTable,
 				overflowY: "auto",
 				maxHeight: "42rem",
+				borderRadius: "1.875rem",
 			}}
 		>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -77,6 +76,7 @@ export default function ClientsTable() {
 									border: 0,
 								},
 								...theme.clientValueStyle,
+								backgroundColor: "SCBackgroundWhite",
 							}}
 						>
 							<TableCell

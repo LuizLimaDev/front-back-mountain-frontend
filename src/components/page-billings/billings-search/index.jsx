@@ -38,7 +38,8 @@ export default function BillingsSearch() {
 							sx={{
 								padding: "0",
 								borderRadius: ".625rem",
-								filter: "drop-shadow(7px 7px 4px rgba(218, 1, 117, 0.05))"
+								filter: "drop-shadow(7px 7px 4px rgba(218, 1, 117, 0.07))",
+								"& fieldset": { border: "none" },
 							}}
 							id="search-input"
 							className="client-input"
