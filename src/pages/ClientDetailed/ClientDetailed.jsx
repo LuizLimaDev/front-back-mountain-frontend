@@ -144,8 +144,8 @@ export default function ClientDetailed() {
 
             <Stack
                 mt={"3rem"}
-                pl={"3.2rem"} j
-                ustifyContent="space-between"
+                pl={"3.2rem"}
+                justifyContent={"space-between"}
                 component={Paper}
                 p={"1.25rem"}
                 sx={{
