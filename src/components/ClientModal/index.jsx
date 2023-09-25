@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
 import { ModalsContext } from "../../context/ModalsContext";
+import useCustomers from './../../hooks/useCustomers';
 
 export default function ClientModal() {
 	const {
@@ -26,6 +27,7 @@ export default function ClientModal() {
 	} = useContext(SingContext);
 
 	const { setOpenSnackClientAdd } = useContext(ModalsContext);
+	const { customersUpdate } = useCustomers();
 
 	function handleChange(event) {
 		setClientForm((prevState) => {
@@ -75,6 +77,7 @@ export default function ClientModal() {
 					},
 				}
 			);
+			customersUpdate();
 			setOpenSnackClientAdd(true);
 			cleanForm();
 		} catch (error) {
