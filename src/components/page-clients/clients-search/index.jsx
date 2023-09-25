@@ -40,7 +40,11 @@ function ClientHeader() {
 					</button>
 					<form onSubmit={handleSubmit}>
 						<OutlinedInput
-							sx={{ padding: "0" }}
+							sx={{
+								padding: "0",
+								borderRadius: ".625rem",
+								filter: "drop-shadow(7px 7px 4px rgba(218, 1, 117, 0.05))",
+							}}
 							id="search-input"
 							className="client-input"
 							type="search"
