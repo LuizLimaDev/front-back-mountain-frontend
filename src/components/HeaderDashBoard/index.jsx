@@ -13,6 +13,7 @@ import Avatar from "./Avatar";
 import EditUserModal from "../../components/Modals/EditUserModal";
 import "./style.css";
 import ClientBreadcrumbs from "./ClientBreadcrumbs/ClientBreadcrumbs";
+import ModalEditSucess from "../Modals/EditUserModal/ModalEditSucess";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);
@@ -160,6 +161,7 @@ function HeaderDashBoard() {
 					</Box>
 				</Popover>
 				<EditUserModal />
+				<ModalEditSucess />
 			</div>
 		</div>
 	);

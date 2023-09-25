@@ -27,6 +27,7 @@ function EditUserModal() {
   const {
     openModalEditUser,
     handleCloseEditUser,
+    handleOpenEditSucess
   } = useContext(ModalsContext)
   const { value, setReceivedEmail } = useContext(SingContext)
   const [name, setName] = useState("")
@@ -115,6 +116,8 @@ function EditUserModal() {
       console.log("enviando");
       clearForm()
       // TODO - Adicionar pagina de sucess
+      handleCloseEditUser()
+      handleOpenEditSucess()
 
     } catch (error) {
       const errors = error.response.data.errors;

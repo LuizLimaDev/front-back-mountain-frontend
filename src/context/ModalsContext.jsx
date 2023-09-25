@@ -5,6 +5,7 @@ export const ModalsContext = createContext({})
 
 export const ModalsProvider = ({ children }) => {
   const [openModalEditUser, setOpenModalEditUser] = useState(false)
+  const [openModalEditSucess, setOpenModalEditSucess] = useState(false)
   const [openChargeModal, setOpenChargeModal] = useState(false);
   const [customerCharges, setCustomerCharges] = useState({
     customerId: "",
@@ -28,10 +29,13 @@ export const ModalsProvider = ({ children }) => {
 
   const handleOpenEditUser = () => setOpenModalEditUser(true);
   const handleCloseEditUser = () => setOpenModalEditUser(false);
+  const handleOpenEditSucess = () => setOpenModalEditSucess(true);
+  const handleCloseEditSucess = () => setOpenModalEditSucess(false);
 
   return (
     <ModalsContext.Provider value={{
       openModalEditUser, setOpenModalEditUser,
+      openModalEditSucess,
       name, setName,
       email, setEmail,
       cpf, setCpf,
@@ -40,6 +44,7 @@ export const ModalsProvider = ({ children }) => {
       confirmPassword, setConfirmPassword,
       apiErrors, setApiErrors,
       handleOpenEditUser, handleCloseEditUser,
+      handleOpenEditSucess, handleCloseEditSucess,
       editFinished, SetEditFinished,
       openChargeModal, setOpenChargeModal,
       customerCharges, setCustomerCharges,
