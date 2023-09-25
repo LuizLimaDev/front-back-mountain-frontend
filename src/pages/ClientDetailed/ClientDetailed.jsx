@@ -11,14 +11,14 @@ import { SingContext } from "../../context/SingContext";
 import SnackBar from "../../components/SnackBar";
 import BillingsTable from "../../components/page-billings/billings-table";
 import { ModalsContext } from "../../context/ModalsContext";
+import ChargeModal from "../../components/Modals/ChargeModal";
 
 export default function ClientDetailed() {
 	const { getCustomer, customer, chargesByCustomer } = useCustomers();
 	const { customerId } = useParams();
 	const theme = useTheme();
 	const { setEditClientModal } = useContext(SingContext);
-	const { openSnackClientEdit, setOpenSnackClientEdit } =
-		useContext(ModalsContext);
+	const { openSnackClientEdit, setOpenSnackClientEdit, setOpenChargeModal, setCustomerCharges, openSnackChargeAdd, setOpenSnackChargeAdd } = useContext(ModalsContext);
 
 	useEffect(() => {
 		getCustomer(customerId);
@@ -226,6 +226,16 @@ export default function ClientDetailed() {
 								opacity: ".7",
 							},
 						}}
+						onClick={() => {
+							setCustomerCharges((prevState) => {
+								return {
+									...prevState,
+									customerId: customer.id,
+									name: customer.name,
+								};
+							});
+							setOpenChargeModal(true)
+						}}
 					>
 						+ Nova cobrança
 					</Button>
@@ -238,6 +248,12 @@ export default function ClientDetailed() {
 				setOpenSnack={setOpenSnackClientEdit}
 				phrase={"Edições do cadastro concluídas com sucesso"}
 			/>
+			<ChargeModal />
+			<SnackBar
+				phrase={"Cobrança cadastrada com sucesso"}
+				openSnack={openSnackChargeAdd}
+				setOpenSnack={setOpenSnackChargeAdd}
+            />
 		</Box>
 	);
 }
