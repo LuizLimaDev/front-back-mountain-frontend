@@ -1,16 +1,11 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useState } from "react";
-import useEmailValidation from "../hooks/useEmailValidation";
-import api from "../services/api";
-import { SingContext } from "./SingContext";
+import { createContext, useState } from "react";
 
 export const ModalsContext = createContext({})
 
 export const ModalsProvider = ({ children }) => {
-  const { value } = useContext(SingContext)
   const [openModalEditUser, setOpenModalEditUser] = useState(false)
-  const handleOpenEditUser = () => setOpenModalEditUser(true);
-  const handleCloseEditUser = () => setOpenModalEditUser(false);
+  const [openModalEditSucess, setOpenModalEditSucess] = useState(false)
   const [openChargeModal, setOpenChargeModal] = useState(false);
   const [customerCharges, setCustomerCharges] = useState({
     customerId: "",
@@ -32,28 +27,15 @@ export const ModalsProvider = ({ children }) => {
   const [apiErrors, setApiErrors] = useState("")
   const [editFinished, SetEditFinished] = useState(false)
 
-  const { setReceivedEmail } = useEmailValidation()
-  async function getData() {
-    try {
-      const { data } = await api.get("/users/profile", {
-        headers: {
-          Authorization: `Bearer ${value}`
-        }
-      })
-
-      setReceivedEmail(data.email)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
+  const handleOpenEditUser = () => setOpenModalEditUser(true);
+  const handleCloseEditUser = () => setOpenModalEditUser(false);
+  const handleOpenEditSucess = () => setOpenModalEditSucess(true);
+  const handleCloseEditSucess = () => setOpenModalEditSucess(false);
 
   return (
     <ModalsContext.Provider value={{
       openModalEditUser, setOpenModalEditUser,
+      openModalEditSucess,
       name, setName,
       email, setEmail,
       cpf, setCpf,
@@ -62,6 +44,7 @@ export const ModalsProvider = ({ children }) => {
       confirmPassword, setConfirmPassword,
       apiErrors, setApiErrors,
       handleOpenEditUser, handleCloseEditUser,
+      handleOpenEditSucess, handleCloseEditSucess,
       editFinished, SetEditFinished,
       openChargeModal, setOpenChargeModal,
       customerCharges, setCustomerCharges,

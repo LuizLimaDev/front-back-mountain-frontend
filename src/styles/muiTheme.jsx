@@ -28,16 +28,20 @@ export const theme = createTheme({
 		SCDarkBlue: "#243F80",
 		SCLightBlue: "#C3D4FE",
 
-		SCNormalError: "#E70000",
-		SCErrorMui: "#D32F2F",
+		SCNormalError: "#C33E32",
+		SCErrorMui: "#C33E32",
+	},
+	components: {
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {
+					color: "#C33E32"
+				}
+			}
+		}
 	},
 	typography: {
-		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter"].join(","),
-	},
-	errorMessageStyle: {
-		fontFamily: "Inter",
-		fontSize: ".875rem",
-		color: "SCNormalError",
+		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
 	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
@@ -45,9 +49,10 @@ export const theme = createTheme({
 		fontSize: ".875rem",
 	},
 	MUIerrorMessageStyle: {
-		fontFamily: "Nunito",
+		fontFamily: "Inter",
 		fontSize: ".82rem",
-		margin: ".25rem 0 0 .7rem",
+		margin: ".25rem 0 0 .85rem",
+		lineHeight: ".5rem",
 
 		color: "SCErrorMui",
 	},
