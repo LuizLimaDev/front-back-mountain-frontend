@@ -16,10 +16,12 @@ import { useContext, useState } from "react";
 import api from "../../../services/api";
 import { SingContext } from "../../../context/SingContext";
 import { ModalsContext } from "../../../context/ModalsContext";
+import useCustomers from "../../../hooks/useCustomers";
 
 export default function ChargeModal(){
     const { openChargeModal, setOpenChargeModal, customerCharges, setCustomerCharges, setOpenSnackChargeAdd } = useContext(ModalsContext);
     const { value } = useContext(SingContext);
+    const { getCustomer } = useCustomers();
     
     const [customerErrors, setCustomerErrors] = useState({
         description: false,
@@ -37,6 +39,7 @@ export default function ChargeModal(){
             });
             setOpenSnackChargeAdd(true);
             setOpenChargeModal(false);
+            getCustomer(customerCharges.customerId);
             setCustomerCharges({
                 customerId: "",
                 name: "",
@@ -44,7 +47,7 @@ export default function ChargeModal(){
                 dueDate: "",
                 value: 0,
                 status: "pago"
-            })
+            });
         } catch (error) {
             const errors = error.response.data.errors;
             errors.map((item) => {
