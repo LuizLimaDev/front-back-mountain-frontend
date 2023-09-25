@@ -1,30 +1,29 @@
 /* eslint-disable react/prop-types */
-import Paper from "@mui/material/Paper";
+import { Stack, Typography, useTheme } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
-import EditIcon from "../../../assets/edit.svg";
-import DeleteIcon from "../../../assets/delete-icon-billing.svg";
-import { Stack, Typography, useTheme } from "@mui/material";
-import { moneyFormat } from "../../../utils/moneyFormat";
 import format from "date-fns/format";
+import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
+import DeleteIcon from "../../../assets/delete-icon-billing.svg";
+import EditIcon from "../../../assets/edit.svg";
+import { moneyFormat } from "../../../utils/moneyFormat";
 
 // eslint-disable-next-line react/prop-types
-export default function BillingsTable({ charges }) {
+export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 
 	return (
 		<TableContainer
-			component={Paper}
 			sx={{
 				...theme.layoutOutletContents,
 				overflowY: "auto",
 				maxHeight: "42rem",
-				width: "69.75rem",
+				width: "71.25rem",
+				borderRadius: "1.875rem"
 			}}
 		>
 			<Table
@@ -35,18 +34,21 @@ export default function BillingsTable({ charges }) {
 						position: "sticky",
 						top: 0,
 						backgroundColor: "white",
+
 					}}
 				>
 					<TableRow>
-						<TableCell>
-							<div className="client-icon">
-								<img
-									style={{ cursor: "pointer" }}
-									src={ChevronUpDown}
-								/>{" "}
-								Cobranças
-							</div>
-						</TableCell>
+						{isClientDetailed ? null : (
+							<TableCell>
+								<div className="client-icon">
+									<img
+										style={{ cursor: "pointer" }}
+										src={ChevronUpDown}
+									/>{" "}
+									Cliente
+								</div>
+							</TableCell>
+						)}
 						<TableCell>
 							<div className="client-icon">
 								<img
@@ -56,26 +58,28 @@ export default function BillingsTable({ charges }) {
 								ID Cob.
 							</div>
 						</TableCell>
-						<TableCell align="left">Valor</TableCell>
-						<TableCell align="left">Data de venc.</TableCell>
-						<TableCell align="left">Status</TableCell>
-						<TableCell align="left">Descrição</TableCell>
-						<TableCell align="left"></TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>Data de venc.</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody>
+				<TableBody sx={{ backgroundColor: "white" }} >
 					{charges.map((charge) => {
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-								? theme.billingsRed
-								: theme.billingsCyan;
+									? theme.billingsRed
+									: theme.billingsCyan;
 						return (
-							<TableRow key={charge.id}>
-								<TableCell sx={theme.infoBillingsTable}>
-									{charge.name}
-								</TableCell>
+							<TableRow key={charge.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								{isClientDetailed ? null : (
+									<TableCell sx={theme.infoBillingsTable}>
+										{charge.name}
+									</TableCell>
+								)}
 								<TableCell sx={theme.infoBillingsTable}>
 									{charge.id}
 								</TableCell>
@@ -134,6 +138,7 @@ export default function BillingsTable({ charges }) {
 									<Stack direction={"row"} spacing={"1.5rem"}>
 										<Stack
 											direction={"column"}
+											alignItems={"center"}
 											spacing={"0.25rem"}
 											sx={{
 												cursor: "pointer",
@@ -159,6 +164,7 @@ export default function BillingsTable({ charges }) {
 										</Stack>
 										<Stack
 											direction={"column"}
+											alignItems={"center"}
 											spacing={"0.25rem"}
 											sx={{
 												cursor: "pointer",
