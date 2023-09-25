@@ -327,7 +327,7 @@ export default function ClientModal() {
 								mb: "0.38rem",
 							}}
 						>
-							Endereço*
+							Endereço
 						</InputLabel>
 						<OutlinedInput
 							placeholder="Digite o endereço"
@@ -362,7 +362,7 @@ export default function ClientModal() {
 								mb: "0.38rem",
 							}}
 						>
-							Complemento*
+							Complemento
 						</InputLabel>
 						<OutlinedInput
 							placeholder="Digite o complemento"
@@ -401,7 +401,7 @@ export default function ClientModal() {
 									mb: "0.38rem",
 								}}
 							>
-								CEP*
+								CEP
 							</InputLabel>
 							<OutlinedInput
 								placeholder="Digite o CEP"
@@ -432,7 +432,7 @@ export default function ClientModal() {
 									mb: "0.38rem",
 								}}
 							>
-								Bairro*
+								Bairro
 							</InputLabel>
 							<OutlinedInput
 								placeholder="Digite o bairro"
@@ -472,7 +472,7 @@ export default function ClientModal() {
 									mb: "0.38rem",
 								}}
 							>
-								Cidade*
+								Cidade
 							</InputLabel>
 							<OutlinedInput
 								placeholder="Digite a cidade"
@@ -503,7 +503,7 @@ export default function ClientModal() {
 									mb: "0.38rem",
 								}}
 							>
-								UF*
+								UF
 							</InputLabel>
 							<OutlinedInput
 								placeholder="Digite a UF"
