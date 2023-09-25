@@ -78,7 +78,7 @@ export const theme = createTheme({
 		backgroundColor: "SCGray8",
 	},
 	layoutOutletContents: {
-		width: "1140px",
+		width: "71.25rem",
 	},
 	infoBillingsTable: {
 		color: "SCGray3",
