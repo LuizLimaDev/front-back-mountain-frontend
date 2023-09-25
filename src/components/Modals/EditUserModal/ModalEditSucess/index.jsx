@@ -6,6 +6,10 @@ import { ModalsContext } from "../../../../context/ModalsContext";
 function ModalEditSucess() {
   const { openModalEditSucess, handleCloseEditSucess } = useContext(ModalsContext)
 
+  setTimeout(() => {
+    handleCloseEditSucess()
+  }, 2500)
+
   return (
     <Modal
       open={openModalEditSucess}

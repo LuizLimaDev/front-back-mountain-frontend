@@ -27,7 +27,8 @@ function EditUserModal() {
   const {
     openModalEditUser,
     handleCloseEditUser,
-    handleOpenEditSucess
+    handleOpenEditSucess,
+    SetEditFinished
   } = useContext(ModalsContext)
   const { value, setReceivedEmail } = useContext(SingContext)
   const [name, setName] = useState("")
@@ -40,7 +41,7 @@ function EditUserModal() {
 
   const [apiErrors, setApiErrors] = useState([])
   const [passowrdCombination, setPassowrdCombination] = useState("")
-  const { handleBlur, existingEmailError } = useEmailValidation(setApiErrors)
+  const { handleBlur, existingEmailError, setExistingEmailError } = useEmailValidation()
 
   const theme = useTheme()
 
@@ -58,6 +59,7 @@ function EditUserModal() {
     setConfirmPassword("")
     setShowPassword(false)
     setApiErrors([])
+    setExistingEmailError("")
   }
 
   useEffect(() => {
@@ -113,9 +115,8 @@ function EditUserModal() {
         }
       })
 
-      console.log("enviando");
+      SetEditFinished(true)
       clearForm()
-      // TODO - Adicionar pagina de sucess
       handleCloseEditUser()
       handleOpenEditSucess()
 
@@ -366,7 +367,7 @@ function EditUserModal() {
                 placeholder='Confirme a nova senha'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                error={apiErrors.newPassword || existingEmailError ? true : false}
+                error={apiErrors.newPassword && true}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
