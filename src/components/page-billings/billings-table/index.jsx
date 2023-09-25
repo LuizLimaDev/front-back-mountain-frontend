@@ -24,12 +24,10 @@ export default function BillingsTable({ charges }) {
 				...theme.layoutOutletContents,
 				overflowY: "auto",
 				maxHeight: "42rem",
+				width: "69.75rem",
 			}}
 		>
 			<Table
-				sx={{
-					minWidth: 650,
-				}}
 				aria-label="simple table"
 			>
 				<TableHead
