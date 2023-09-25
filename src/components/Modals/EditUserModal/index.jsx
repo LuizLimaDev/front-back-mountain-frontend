@@ -183,7 +183,7 @@ function EditUserModal() {
 
                 cursor: "pointer"
               }}
-              onClick={() => handleCloseEditUser()}
+              onClick={() => { handleCloseEditUser(), clearForm() }}
             />
           </Box>
 
