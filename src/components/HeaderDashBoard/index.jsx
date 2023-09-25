@@ -76,8 +76,8 @@ function HeaderDashBoard() {
 						{active === "home"
 							? "Resumo das cobranças"
 							: active === "clients"
-							? "Clientes"
-							: "Cobranças"}
+								? "Clientes"
+								: "Cobranças"}
 					</h1>
 				)}
 			</div>

@@ -48,6 +48,17 @@ function EditUserModal() {
     event.preventDefault();
   };
 
+  function clearForm() {
+    setName("")
+    setEmail("")
+    setCpf("")
+    setPhone("")
+    setPassword("")
+    setConfirmPassword("")
+    setShowPassword(false)
+    setApiErrors([])
+  }
+
   useEffect(() => {
     async function userGetDataInfo() {
       try {
@@ -64,8 +75,12 @@ function EditUserModal() {
         console.log(error.response.data)
       }
     }
-    userGetDataInfo()
-  }, [setReceivedEmail, value])
+
+    if (openModalEditUser) {
+      userGetDataInfo()
+    }
+
+  }, [openModalEditUser, setReceivedEmail, value])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -96,6 +111,11 @@ function EditUserModal() {
           Authorization: `Bearer ${value}`
         }
       })
+
+      console.log("enviando");
+      clearForm()
+      // TODO - Adicionar pagina de sucess
+
     } catch (error) {
       const errors = error.response.data.errors;
 
@@ -111,7 +131,7 @@ function EditUserModal() {
     <Stack>
       <Modal
         open={openModalEditUser}
-        onClose={handleCloseEditUser}
+        onClose={() => { handleCloseEditUser(), clearForm() }}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -336,35 +356,37 @@ function EditUserModal() {
             >
               Confirmar Senha
             </InputLabel>
-            <OutlinedInput
-              id="confirmPasasword"
-              type={showPassword ? 'text' : 'password'}
-              placeholder='Confirme a nova senha'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              error={apiErrors.newPassword || existingEmailError ? true : false}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              fullWidth
-              sx={{
-                height: "2.75rem",
-                borderRadius: ".5rem",
+            <FormControl variant='outlined'>
+              <OutlinedInput
+                id="confirmPasasword"
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Confirme a nova senha'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                error={apiErrors.newPassword || existingEmailError ? true : false}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                fullWidth
+                sx={{
+                  height: "2.75rem",
+                  borderRadius: ".5rem",
 
-                fontFamily: "Inter"
-              }}
-            />
-            <Typography sx={theme.MUIerrorMessageStyle}>
-              {apiErrors.newPassword && apiErrors.newPassword || passowrdCombination}
-            </Typography>
+                  fontFamily: "Inter"
+                }}
+              />
+              <FormHelperText id="email-text">
+                {apiErrors.newPassword && apiErrors.newPassword || passowrdCombination}
+              </FormHelperText>
+            </FormControl>
 
             <SCButton>
               Aplicar
