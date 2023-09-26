@@ -1,0 +1,7 @@
+.dashboard-user-name {
+  width: 5.5rem;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}

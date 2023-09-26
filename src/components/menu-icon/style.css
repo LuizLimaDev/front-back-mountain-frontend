@@ -9,11 +9,15 @@
     flex-direction: column;
     align-items: center;
     gap: 4.5rem;
+    position: fixed;
+    margin-right: 80rem;
 
     background-color: rgba(240, 240, 245, 1);
 
     padding: 2.25rem 0;
-    width: 6.75rem;
+    /* width: 6.75rem; */
+    width: 7.5vw;
+
     height: 100%;
 }
 

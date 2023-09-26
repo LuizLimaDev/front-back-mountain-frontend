@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useMetricsDashboard from "../../../hooks/useMetricsDashboard";
 import { moneyFormat } from "../../../utils/moneyFormat";
 import "./style.css";
@@ -24,15 +25,17 @@ function BillingDetailedOverdue() {
 						<p className="data-name">{billing.name}</p>
 						<p className="data-id">{billing.id}</p>
 						<p className="data-value">
-							{moneyFormat.format(billing.value)}
+							{moneyFormat
+								.format(billing.value)
+								.replace(/^(\D+)/, "$1 ")}
 						</p>
 					</div>
 				);
 			})}
 
-			<a href="" className="table-btn">
+			<Link to="/billings" className="table-btn">
 				Ver todos
-			</a>
+			</Link>
 		</div>
 	);
 }

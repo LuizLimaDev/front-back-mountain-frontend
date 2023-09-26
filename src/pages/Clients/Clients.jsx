@@ -1,23 +1,43 @@
-import ClientsTable from '../../components/page-clients/clients-table';
-import ClientHeader from '../../components/page-clients/clients-search';
-import MenuIcon from '../../components/menu-icon';
-import ClientModal from "../../components/ClientModal"
-import './style.css';
-import EditUserModal from '../../components/Modals/EditUserModal';
+import ClientsTable from "../../components/page-clients/clients-table";
+import ClientHeader from "../../components/page-clients/clients-search";
+import ClientModal from "../../components/ClientModal";
+import SnackBar from "../../components/SnackBar";
+import "./style.css";
+import { Box } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import { useContext } from "react";
+import { ModalsContext } from "../../context/ModalsContext";
 
 function Clients() {
-    return (
-        <div className='clients-dashboard'>
-            <div>
-                <div>
-                    <ClientHeader />
-                    <ClientsTable />
-                    <EditUserModal />
-                    <ClientModal />
-                </div>
-            </div>
-        </div>
-    );
+	const theme = useTheme();
+	const {
+		openSnackChargeAdd,
+		setOpenSnackChargeAdd,
+		openSnackClientAdd,
+		setOpenSnackClientAdd,
+	} = useContext(ModalsContext);
+
+	return (
+		<Box sx={{ ...theme.layoutOutletHome, marginBottom: "3rem" }}>
+			<div>
+				<div>
+					<ClientHeader />
+					<ClientsTable />
+					<ClientModal />
+					<SnackBar
+						phrase={"Cadastro concluído com sucesso"}
+						openSnack={openSnackClientAdd}
+						setOpenSnack={setOpenSnackClientAdd}
+					/>
+					<SnackBar
+						phrase={"Cobrança cadastrada com sucesso"}
+						openSnack={openSnackChargeAdd}
+						setOpenSnack={setOpenSnackChargeAdd}
+					/>
+				</div>
+			</div>
+		</Box>
+	);
 }
 
 export default Clients;

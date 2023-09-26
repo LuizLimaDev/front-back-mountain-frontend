@@ -1,52 +1,78 @@
 .table-infos-description {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 1rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 1rem;
 
-  width: 100%;
-  height: 3.625rem;
-  border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+	width: 100%;
+	height: 3.625rem;
+	border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
 
-  font-family: Nunito, sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
+	font-family: Nunito, sans-serif;
+	font-size: 1rem;
+	font-weight: 700;
 }
 
 .table-content {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 1rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 1rem;
 
-  width: 100%;
-  height: 3rem;
-  padding-left: 2rem;
+	width: 100%;
+	height: 3rem;
+	padding-left: 2rem;
 
-  border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
+	border-bottom: 0.0625rem solid rgba(239, 240, 246, 1);
 
-  color: rgba(110, 110, 133, 1);
-  font-family: Nunito, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
+	color: rgba(110, 110, 133, 1);
+	font-family: Nunito, sans-serif;
+	font-size: 0.875rem;
+	font-weight: 400;
 }
 
 .data-name {
-  width: 6.7rem;
+	width: 6.7rem;
 }
 
 .data-id {
-  width: 5rem;
+	width: 5rem;
 }
 
 .data-value {
-  width: 4.75rem;
+	width: 6rem;
 }
 
 .data-cpf {
-  width: 8rem;
+	width: 8rem;
 }
 
 .client-id {
-  padding-left: 1.5rem;
+	padding-left: 1.5rem;
 }
+
+.link {
+	text-decoration: none;
+	color: #000000;
+}
+
+.icon {
+	width: 3rem;
+	height: 3rem;
+}
+
+.icon-small {
+	width: 1rem;
+	height: 1rem;
+}
+
+/* .table-scroll::-webkit-scrollbar-thumb {
+	background-color: "SCPink";
+} */
+
+/* ::-webkit-scrollbar-thumb {
+	background-color: #a02525;
+}
+::-webkit-scrollbar {
+	height: 200px;
+} */

@@ -1,9 +1,11 @@
 import { useTheme } from "@emotion/react";
-import { Box, Button, FormControl, Stack, TextField, Typography } from "@mui/material";
-import { useContext } from "react";
+import { Box, Button, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
 import useSingIn from "../../../hooks/useSingIn";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function LoginForm() {
   const {
@@ -14,6 +16,12 @@ function LoginForm() {
   const { handleSubmit, emailErrors, passwordErrors } = useSingIn()
   const navigate = useNavigate()
   const theme = useTheme()
+
+  const [showPassword, setShowPassword] = useState(false)
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
@@ -92,33 +100,44 @@ function LoginForm() {
             </Typography>
           </Box>
 
-          <TextField
+          <OutlinedInput
             id="password"
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             placeholder="Digite sua senha"
             fullWidth
             error={passwordErrors()}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            InputProps={{
-              style: {
-                height: "2.75rem",
-                borderRadius: "10px",
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            sx={{
+              height: "2.75rem",
+              borderRadius: "10px",
 
-                backgroundColor: "SCInputBackground",
+              backgroundColor: "SCBackgroundWhite",
 
-                fontFamily: "Inter"
-              }
+              fontFamily: "Inter"
             }}
           />
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
           {
             apiErrors &&
-            <Typography
-              sx={theme.errorMessageStyle}>
-              {apiErrors}
-            </Typography>
+            apiErrors.map((error, index) => (
+              <Typography key={index} sx={{ ...theme.MUIerrorMessageStyle, marginLeft: ".7rem" }}>
+                {error.message}
+              </Typography>
+            ))
           }
         </Box>
 

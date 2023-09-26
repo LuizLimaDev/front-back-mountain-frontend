@@ -1,8 +1,23 @@
-body {
+.clients-dashboard {
+    display: flex;
+    flex-direction: row;
+    gap: 6.25rem;
     background-color: rgba(248, 248, 249, 1);
 }
 
-.clients-dashboard {
-    display: flex;
-    gap: 6.25rem;
+
+.client-padding {
+    padding-top: 9rem;
+}
+
+.clients-fixed {
+    /* position: fixed; */
+}
+
+.clients-page {
+    /* padding-left: 10.5rem; */
+}
+
+.client-content {
+    padding-top: 8rem;
 }

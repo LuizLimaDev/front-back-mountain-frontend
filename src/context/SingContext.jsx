@@ -41,7 +41,10 @@ export const SingProvider = ({ children }) => {
     cpf: false,
     phone: false
   });
+  const [openSnack, setOpenSnack] = useState(false);
   const [active, setActive] = useState("home");
+  const [editClientModal, setEditClientModal] = useState(false)
+  const [receivedEmail, setReceivedEmail] = useState("")
 
   return (
     <SingContext.Provider value={{
@@ -60,7 +63,10 @@ export const SingProvider = ({ children }) => {
       clientErrors, setClientErrors,
       apiErrors, setApiErrors,
       active, setActive,
-      openModalEdit, setOpenModalEdit
+      openModalEdit, setOpenModalEdit,
+      openSnack, setOpenSnack,
+      editClientModal, setEditClientModal,
+      receivedEmail, setReceivedEmail
     }}
     >
       {children}

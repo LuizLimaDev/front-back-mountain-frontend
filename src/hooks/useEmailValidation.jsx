@@ -3,8 +3,7 @@ import { SingContext } from "../context/SingContext"
 import api from "../services/api"
 
 export default function useEmailValidation() {
-  const { setErrorEmailMessage } = useContext(SingContext)
-  const [receivedEmail, setReceivedEmail] = useState("")
+  const { setErrorEmailMessage, receivedEmail } = useContext(SingContext)
   const [existingEmailError, setExistingEmailError] = useState("")
   const [existingEmailListener, setExistingEmailListener] = useState(false)
 
@@ -21,13 +20,10 @@ export default function useEmailValidation() {
     }
 
     try {
-      await api.get(`/email/${emailInput}`, { emailInput })
-      setErrorEmailMessage('E-mail inválido!')
-
+      await api.get(`/email/${emailInput}`);
     } catch (error) {
 
       if (receivedEmail !== emailInput) {
-        console.log('email api: ', receivedEmail, 'email input: ', emailInput)
         setExistingEmailError(error.response.data.message)
         setExistingEmailListener(true)
         return
@@ -37,7 +33,6 @@ export default function useEmailValidation() {
 
   return {
     handleBlur,
-    setReceivedEmail,
     existingEmailListener, setExistingEmailListener,
     existingEmailError, setExistingEmailError,
   }
