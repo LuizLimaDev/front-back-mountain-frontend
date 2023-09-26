@@ -18,7 +18,7 @@ function Clients() {
 	} = useContext(ModalsContext);
 
 	return (
-		<Box sx={{ ...theme.layoutOutletHome, paddingBottom: "3rem" }}>
+		<Box sx={{ ...theme.layoutOutletHome, marginBottom: "3rem" }}>
 			<div>
 				<div>
 					<ClientHeader />
