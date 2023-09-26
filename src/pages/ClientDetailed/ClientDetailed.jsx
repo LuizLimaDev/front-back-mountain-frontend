@@ -32,7 +32,7 @@ export default function ClientDetailed() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
-		<Box sx={theme.layoutOutletHome}>
+		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"} >
 			<Stack
 				direction={"row"}
 				spacing={1}
