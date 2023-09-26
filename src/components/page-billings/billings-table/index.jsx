@@ -58,8 +58,16 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								ID Cob.
 							</div>
 						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+						<div className="client-icon">
+								<img
+									style={{ cursor: "pointer" }}
+									src={ChevronUpDown}
+								/>{" "}
+								Data de venc.
+							</div>
+						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Data de venc.</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>

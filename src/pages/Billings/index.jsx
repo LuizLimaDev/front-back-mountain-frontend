@@ -8,7 +8,7 @@ function Billings() {
 	const theme = useTheme()
 
 	return (
-		<Box sx={theme.layoutOutletHome}>
+		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"} >
 			<BillingsSearch />
 			<BillingsTable charges={charges} />
 		</Box>
