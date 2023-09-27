@@ -1,19 +1,20 @@
 import {
 	Box,
-	Modal,
-	Typography,
-	OutlinedInput,
-	InputLabel,
 	Button,
+	InputLabel,
+	Modal,
+	OutlinedInput,
 	TextField,
+	Typography,
 } from "@mui/material";
-import UsersIcon from "../../../../assets/users.svg";
-import CloseIcon from "../../../../assets/closeIcon.svg";
 import { useContext } from "react";
-import { SingContext } from "../../../../context/SingContext";
-import api from "../../../../services/api";
+import CloseIcon from "../../../../assets/closeIcon.svg";
+import UsersIcon from "../../../../assets/users.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
+import { SingContext } from "../../../../context/SingContext";
 import useCustomers from '../../../../hooks/useCustomers';
+import useZipcode from '../../../../hooks/useZipcode';
+import api from "../../../../services/api";
 
 export default function ClientModal() {
 	const {
@@ -28,6 +29,7 @@ export default function ClientModal() {
 
 	const { setOpenSnackClientAdd } = useContext(ModalsContext);
 	const { customersUpdate } = useCustomers();
+	const { handleZipcodeBlur } = useZipcode()
 
 	function handleChange(event) {
 		setClientForm((prevState) => {
@@ -418,6 +420,7 @@ export default function ClientModal() {
 								name="zipcode"
 								value={clientForm.zipcode}
 								onChange={(event) => handleChange(event)}
+								onBlur={e => handleZipcodeBlur(e.target.value)}
 							/>
 						</Box>
 						<Box>
