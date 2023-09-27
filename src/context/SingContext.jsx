@@ -39,7 +39,8 @@ export const SingProvider = ({ children }) => {
     name: false,
     email: false,
     cpf: false,
-    phone: false
+    phone: false,
+    zipcode: false
   });
   const [openSnack, setOpenSnack] = useState(false);
   const [active, setActive] = useState("home");

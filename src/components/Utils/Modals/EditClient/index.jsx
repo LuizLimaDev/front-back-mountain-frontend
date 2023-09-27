@@ -38,12 +38,26 @@ export default function EditClientModal() {
 			email: false,
 			cpf: false,
 			phone: false,
+			zipcode: false
+		});
+	}
+
+	function closeModal(){
+		setEditClientModal(!editClientModal);
+		setFormCustomer(customer);
+		setClientErrors({
+			name: false,
+			email: false,
+			cpf: false,
+			phone: false,
+			zipcode: false
 		});
 	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		const { id, ...localCustomer } = formCustomer;
+		localCustomer.zipcode = localCustomer.zipcode.replace("-", "");
 
 		try {
 			await api.put(
@@ -69,10 +83,7 @@ export default function EditClientModal() {
 	return (
 		<Modal
 			open={editClientModal}
-			onClose={() => {
-				setEditClientModal(!editClientModal);
-				setFormCustomer(customer);
-			}}
+			onClose={() => closeModal()}
 		>
 			<Box
 				sx={{
@@ -98,10 +109,7 @@ export default function EditClientModal() {
 						margin: "1.5rem 1.5rem 0 0",
 						cursor: "pointer",
 					}}
-					onClick={() => {
-						setEditClientModal(!editClientModal);
-						setFormCustomer(customer);
-					}}
+					onClick={() => closeModal()}
 				/>
 				<form onSubmit={(event) => handleSubmit(event)}>
 					<Box
@@ -373,20 +381,26 @@ export default function EditClientModal() {
 							>
 								CEP
 							</InputLabel>
-							<OutlinedInput
+							<TextField
 								placeholder="Digite o CEP"
 								id="icep"
-								sx={{
-									width: "14.4rem",
-									height: "2.75rem",
-									borderRadius: "0.5rem",
-									fontFamily: "Nunito",
-									fontSize: "1rem",
-									fontWeight: "400",
-									lineHeight: "1.5rem",
+								InputProps={{
+									style:{
+									
+										width: "14.4rem",
+										height: "2.75rem",
+										borderRadius: "0.5rem",
+										fontFamily: "Nunito",
+										fontSize: "1rem",
+										fontWeight: "400",
+										lineHeight: "1.5rem",
+									
+									}
 								}}
 								name="zipcode"
 								value={formCustomer.zipcode}
+								error={clientErrors.zipcode}
+								helperText={clientErrors.zipcode}
 								onChange={(event) => handleChange(event)}
 							/>
 						</Box>
@@ -518,10 +532,7 @@ export default function EditClientModal() {
 									backgroundColor: "SCGray8",
 								},
 							}}
-							onClick={() => {
-								setEditClientModal(false);
-								setFormCustomer(customer);
-							}}
+							onClick={() => closeModal()}
 						>
 							Cancelar
 						</Button>
