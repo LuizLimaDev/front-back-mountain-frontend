@@ -11,10 +11,25 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
+import DeleteChargeModal from "../../../Utils/Modals/DeleteChargeModal";
+import { useContext, useState } from "react";
+import { ModalsContext } from "../../../../context/ModalsContext";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
+
+	const [chargeToDelete, setChargeToDelete] = useState(null);
+	const { openDeleteChargeModal, setOpenDeleteChargeModal } =
+		useContext(ModalsContext);
+
+	const handleDeleteClick = (charge) => {
+		setOpenDeleteChargeModal(true);
+		setChargeToDelete(charge);
+	};
+
+	console.log("openDeleteChargeModal:", openDeleteChargeModal);
+	console.log("chargeToDelete:", chargeToDelete);
 
 	return (
 		<TableContainer
@@ -23,18 +38,15 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				overflowY: "auto",
 				maxHeight: "42rem",
 				width: "71.25rem",
-				borderRadius: "1.875rem"
+				borderRadius: "1.875rem",
 			}}
 		>
-			<Table
-				aria-label="simple table"
-			>
+			<Table aria-label="simple table">
 				<TableHead
 					sx={{
 						position: "sticky",
 						top: 0,
 						backgroundColor: "white",
-
 					}}
 				>
 					<TableRow>
@@ -67,22 +79,38 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								Data de venc.
 							</div>
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Valor
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Status
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Descrição
+						</TableCell>
+						<TableCell
+							align="left"
+							sx={theme.inputModalLabelStyle}
+						></TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody sx={{ backgroundColor: "white" }} >
+				<TableBody sx={{ backgroundColor: "white" }}>
 					{charges.map((charge) => {
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-									? theme.billingsRed
-									: theme.billingsCyan;
+								? theme.billingsRed
+								: theme.billingsCyan;
 						return (
-							<TableRow key={charge.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableRow
+								key={charge.id}
+								sx={{
+									"&:last-child td, &:last-child th": {
+										border: 0,
+									},
+								}}
+							>
 								{isClientDetailed ? null : (
 									<TableCell sx={theme.infoBillingsTable}>
 										{charge.name}
@@ -177,6 +205,9 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											sx={{
 												cursor: "pointer",
 											}}
+											onClick={() =>
+												handleDeleteClick(charge)
+											}
 										>
 											<img
 												src={DeleteIcon}
@@ -202,6 +233,12 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 						);
 					})}
 				</TableBody>
+				<DeleteChargeModal
+					openDeleteChargeModal={openDeleteChargeModal}
+					setOpenDeleteChargeModal={setOpenDeleteChargeModal}
+					chargeToDelete={chargeToDelete}
+					setChargeToDelete={setChargeToDelete}
+				/>
 			</Table>
 		</TableContainer>
 	);
