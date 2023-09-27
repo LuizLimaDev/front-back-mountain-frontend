@@ -12,10 +12,6 @@ function useZipcode() {
             const { data } = await axios.get(`/${e}/json`)
 
             setClientForm({
-                name: "",
-                email: "",
-                cpf: "",
-                phone: "",
                 zipcode: e,
                 street: data.logradouro,
                 complement: data.complemento,
@@ -25,10 +21,6 @@ function useZipcode() {
             })
 
             setFormCustomer({
-                name: "",
-                email: "",
-                cpf: "",
-                phone: "",
                 zipcode: e,
                 street: data.logradouro,
                 complement: data.complemento,

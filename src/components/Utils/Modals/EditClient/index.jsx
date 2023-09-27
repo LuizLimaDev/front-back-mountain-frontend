@@ -285,76 +285,6 @@ export default function EditClientModal() {
 					<Box
 						sx={{
 							mb: "0.5rem",
-						}}
-					>
-						<InputLabel
-							htmlFor="iaddress"
-							sx={{
-								fontFamily: "Nunito",
-								fontSize: "0.875rem",
-								fontWeight: "600",
-								lineHeight: "1.25rem",
-								color: "SCGray2",
-								mb: "0.38rem",
-							}}
-						>
-							Endereço
-						</InputLabel>
-						<OutlinedInput
-							placeholder="Digite o endereço"
-							id="iaddress"
-							sx={{
-								width: "30.4375rem",
-								height: "2.75rem",
-								borderRadius: "0.5rem",
-								fontFamily: "Nunito",
-								fontSize: "1rem",
-								fontWeight: "400",
-								lineHeight: "1.5rem",
-							}}
-							name="street"
-							value={formCustomer.street}
-							onChange={(event) => handleChange(event)}
-						/>
-					</Box>
-					<Box
-						sx={{
-							mb: "0.5rem",
-						}}
-					>
-						<InputLabel
-							htmlFor="icomplement"
-							sx={{
-								fontFamily: "Nunito",
-								fontSize: "0.875rem",
-								fontWeight: "600",
-								lineHeight: "1.25rem",
-								color: "SCGray2",
-								mb: "0.38rem",
-							}}
-						>
-							Complemento
-						</InputLabel>
-						<OutlinedInput
-							placeholder="Digite o complemento"
-							id="icomplement"
-							sx={{
-								width: "30.4375rem",
-								height: "2.75rem",
-								borderRadius: "0.5rem",
-								fontFamily: "Nunito",
-								fontSize: "1rem",
-								fontWeight: "400",
-								lineHeight: "1.5rem",
-							}}
-							name="complement"
-							value={formCustomer.complement}
-							onChange={(event) => handleChange(event)}
-						/>
-					</Box>
-					<Box
-						sx={{
-							mb: "0.5rem",
 							display: "flex",
 							justifyContent: "center",
 							gap: "1.5rem",
@@ -424,6 +354,77 @@ export default function EditClientModal() {
 							/>
 						</Box>
 					</Box>
+					<Box
+						sx={{
+							mb: "0.5rem",
+						}}
+					>
+						<InputLabel
+							htmlFor="iaddress"
+							sx={{
+								fontFamily: "Nunito",
+								fontSize: "0.875rem",
+								fontWeight: "600",
+								lineHeight: "1.25rem",
+								color: "SCGray2",
+								mb: "0.38rem",
+							}}
+						>
+							Endereço
+						</InputLabel>
+						<OutlinedInput
+							placeholder="Digite o endereço"
+							id="iaddress"
+							sx={{
+								width: "30.4375rem",
+								height: "2.75rem",
+								borderRadius: "0.5rem",
+								fontFamily: "Nunito",
+								fontSize: "1rem",
+								fontWeight: "400",
+								lineHeight: "1.5rem",
+							}}
+							name="street"
+							value={formCustomer.street}
+							onChange={(event) => handleChange(event)}
+						/>
+					</Box>
+					<Box
+						sx={{
+							mb: "0.5rem",
+						}}
+					>
+						<InputLabel
+							htmlFor="icomplement"
+							sx={{
+								fontFamily: "Nunito",
+								fontSize: "0.875rem",
+								fontWeight: "600",
+								lineHeight: "1.25rem",
+								color: "SCGray2",
+								mb: "0.38rem",
+							}}
+						>
+							Complemento
+						</InputLabel>
+						<OutlinedInput
+							placeholder="Digite o complemento"
+							id="icomplement"
+							sx={{
+								width: "30.4375rem",
+								height: "2.75rem",
+								borderRadius: "0.5rem",
+								fontFamily: "Nunito",
+								fontSize: "1rem",
+								fontWeight: "400",
+								lineHeight: "1.5rem",
+							}}
+							name="complement"
+							value={formCustomer.complement}
+							onChange={(event) => handleChange(event)}
+						/>
+					</Box>
+
 					<Box
 						sx={{
 							mb: "3.56rem",
