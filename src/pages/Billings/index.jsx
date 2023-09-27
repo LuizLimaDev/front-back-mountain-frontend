@@ -1,5 +1,5 @@
-import BillingsTable from "../../components/page-billings/billings-table";
-import BillingsSearch from "../../components/page-billings/billings-search";
+import BillingsTable from "../../components/DataDisplay/Tables/Billings-table";
+import BillingsSearch from "../../components/Inputs/billings-search/index";
 import useCharges from "../../hooks/useCharges";
 import { Box, useTheme } from "@mui/material";
 
