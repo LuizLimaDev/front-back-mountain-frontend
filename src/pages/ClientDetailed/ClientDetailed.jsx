@@ -6,12 +6,12 @@ import { useParams } from "react-router-dom";
 import icon from "../../assets/Clients-icon.png";
 import iconEdit from "../../assets/icon_edit.svg";
 import useCustomers from "../../hooks/useCustomers";
-import EditClientModal from "../../components/EditClient";
+import EditClientModal from "../../components/Utils/Modals/EditClient";
 import { SingContext } from "../../context/SingContext";
-import SnackBar from "../../components/SnackBar";
+import SnackBar from "../../components/Feedback/SnackBar";
 import BillingsTable from "../../components/page-billings/billings-table";
 import { ModalsContext } from "../../context/ModalsContext";
-import ChargeModal from "../../components/Modals/ChargeModal";
+import ChargeModal from "../../components/Utils/Modals/ChargeModal";
 
 export default function ClientDetailed() {
 	const { getCustomer, customer, chargesByCustomer } = useCustomers();

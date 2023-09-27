@@ -67,6 +67,7 @@ function LoginForm() {
                 fontFamily: "Inter"
               }
             }}
+            sx={{ backgroundColor: "SCBackgroundWhite" }}
           />
         </Box>
 

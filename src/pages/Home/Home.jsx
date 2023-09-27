@@ -1,18 +1,18 @@
+import { useTheme } from '@emotion/react';
 import { Box } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import BillingDetailedOverdue from '../../components/billing-detailed/billing-detailed-overdue';
-import BillingDetailedPaid from '../../components/billing-detailed/billing-detailed-paid';
-import BillingDetailedProjected from '../../components/billing-detailed/billing-detailed-projected';
-import BillingValueOverdue from '../../components/billing-value/billing-value-overdue';
-import BillingValuePaid from '../../components/billing-value/billing-value-paid';
-import BillingValueProjected from '../../components/billing-value/billing-value-projected';
-import ClientsNonpaying from '../../components/clients/clients-nonpaying';
-import ClientsPaying from '../../components/clients/clients-paying';
+import BillingDetailedOverdue from '../../components/DataDisplay/Tables/billing-detailed/billing-detailed-overdue';
+import BillingDetailedPaid from '../../components/DataDisplay/Tables/billing-detailed/billing-detailed-paid';
+import BillingDetailedProjected from '../../components/DataDisplay/Tables/billing-detailed/billing-detailed-projected';
+import BillingValueOverdue from '../../components/DataDisplay/Tables/billing-value/billing-value-overdue';
+import BillingValuePaid from '../../components/DataDisplay/Tables/billing-value/billing-value-paid';
+import BillingValueProjected from '../../components/DataDisplay/Tables/billing-value/billing-value-projected';
+import ClientsNonpaying from '../../components/DataDisplay/Tables/clients/clients-nonpaying';
+import ClientsPaying from '../../components/DataDisplay/Tables/clients/clients-paying';
 import { MetricsDasboardProvider } from '../../context/MetricsDashboard';
 import { SingContext } from '../../context/SingContext';
 import './styles.css';
-import { useTheme } from '@emotion/react';
 
 function Home() {
   const { value } = useContext(SingContext)

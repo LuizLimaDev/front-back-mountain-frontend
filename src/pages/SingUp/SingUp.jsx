@@ -83,7 +83,9 @@ function SingUp() {
                     id="input-name"
                     variant="outlined"
                     placeholder="Digite seu nome"
-                    sx={{ mb: "1.25rem" }}
+                    sx={{
+                        mb: "1.25rem", backgroundColor: "SCBackgroundWhite",
+                    }}
                     error={errorNameMessage && true}
                     helperText={errorNameMessage}
                     name="name"
@@ -92,7 +94,6 @@ function SingUp() {
                         style: {
                             height: "2.75rem",
                             borderRadius: "0.5rem",
-                            borderColor: "#D0D5DD",
 
                             fontFamily: "Inter",
                         }
@@ -114,7 +115,9 @@ function SingUp() {
                     variant="outlined"
                     placeholder="Digite seu e-mail"
                     className="form__input-email"
-                    sx={{ mb: "2.5rem" }}
+                    sx={{
+                        mb: "2.5rem", backgroundColor: "SCBackgroundWhite",
+                    }}
                     InputProps={{
                         style: {
                             height: "2.75rem",

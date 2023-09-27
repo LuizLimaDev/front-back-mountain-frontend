@@ -11,7 +11,7 @@ import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../assets/create-billing.png";
 import { ModalsContext } from "../../../context/ModalsContext";
 import useCustomers from "../../../hooks/useCustomers";
-import ChargeModal from "../../Modals/ChargeModal";
+import ChargeModal from "../../Utils/Modals/ChargeModal";
 import "./style.css";
 
 let red = (
@@ -102,7 +102,7 @@ export default function ClientsTable() {
 							</TableCell>
 							<TableCell sx={theme.clientValueStyle} align="left">
 								{row.status === "pendente" ||
-								row.status === "vencido"
+									row.status === "vencido"
 									? red
 									: green}
 							</TableCell>

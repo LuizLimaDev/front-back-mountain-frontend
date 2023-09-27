@@ -42,7 +42,7 @@ export default function Password() {
         }
 
         try {
-            const response = await api.post("/users", {name: form.name, email: form.email, password: form.password});
+            await api.post("/users", { name: form.name, email: form.email, password: form.password });
             setSteps(2);
             setForm({
                 name: "",
@@ -52,7 +52,7 @@ export default function Password() {
             });
             return navigate("/success");
         } catch (error) {
-            setErrorPassword(error.response.data.message);   
+            setErrorPassword(error.response.data.message);
         }
     }
 
@@ -97,7 +97,10 @@ export default function Password() {
                         height: "2.75rem",
                         borderRadius: "0.5rem",
                         border: "1px solid #D0D5DD",
-                        fontFamily: "Inter"
+
+                        fontFamily: "Inter",
+
+                        backgroundColor: "SCBackgroundWhite",
                     }}
                     error={errorPassword && true}
                     name="password"
@@ -134,7 +137,10 @@ export default function Password() {
                         height: "2.75rem",
                         borderRadius: "0.5rem",
                         border: "1px solid #D0D5DD",
-                        fontFamily: "Inter"
+
+                        fontFamily: "Inter",
+
+                        backgroundColor: "SCBackgroundWhite",
                     }}
                     error={errorPassword && true}
                     name="passwordConfirm"

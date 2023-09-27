@@ -10,10 +10,10 @@ import { ModalsContext } from "../../context/ModalsContext";
 import { SingContext } from "../../context/SingContext";
 import api from "../../services/api";
 import Avatar from "./Avatar";
-import EditUserModal from "../../components/Modals/EditUserModal";
+import EditUserModal from "../../components/Utils/Modals/EditUserModal";
 import "./style.css";
 import ClientBreadcrumbs from "./ClientBreadcrumbs/ClientBreadcrumbs";
-import ModalEditSucess from "../Modals/EditUserModal/ModalEditSucess";
+import ModalEditSucess from "../Utils/Modals/EditUserModal/ModalEditSucess";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);

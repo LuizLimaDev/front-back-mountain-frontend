@@ -1,7 +1,7 @@
 import ClientsTable from "../../components/page-clients/clients-table";
 import ClientHeader from "../../components/page-clients/clients-search";
-import ClientModal from "../../components/ClientModal";
-import SnackBar from "../../components/SnackBar";
+import ClientModal from "../../components/Utils/Modals/ClientModal";
+import SnackBar from "../../components/Feedback/SnackBar";
 import "./style.css";
 import { Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
