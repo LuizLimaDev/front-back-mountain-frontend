@@ -1,5 +1,5 @@
-import ClientsTable from "../../components/page-clients/clients-table";
-import ClientHeader from "../../components/page-clients/clients-search";
+import ClientsTable from "../../components/DataDisplay/Tables/Clients-table";
+import ClientHeader from "../../components/Inputs/clients-search";
 import ClientModal from "../../components/Utils/Modals/ClientModal";
 import SnackBar from "../../components/Feedback/SnackBar";
 import "./style.css";

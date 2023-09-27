@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import backgroundLogin from '../../assets/background-login.png';
-import LoginForm from '../../components/Form/LoginForm/index';
+import LoginForm from '../../components/Inputs/LoginForm';
 
-function SingIn() {
+function SignIn() {
   return (
     <Grid container sx={{ width: "100vw", height: "100vh" }}>
       <Grid
@@ -53,4 +53,4 @@ function SingIn() {
   );
 }
 
-export default SingIn;
+export default SignIn;

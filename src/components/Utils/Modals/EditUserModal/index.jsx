@@ -21,7 +21,7 @@ import { ModalsContext } from '../../../../context/ModalsContext';
 import { SingContext } from '../../../../context/SingContext';
 import useEmailValidation from '../../../../hooks/useEmailValidation';
 import api from '../../../../services/api';
-import SCButton from '../../../SCButton/indxe';
+import SCButton from '../../../Inputs/SCButton/indxe';
 
 function EditUserModal() {
   const {

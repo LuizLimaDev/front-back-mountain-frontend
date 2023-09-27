@@ -6,14 +6,14 @@ import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import editImg from "../../assets/edit.svg";
-import { ModalsContext } from "../../context/ModalsContext";
-import { SingContext } from "../../context/SingContext";
-import api from "../../services/api";
-import Avatar from "./Avatar";
-import EditUserModal from "../../components/Utils/Modals/EditUserModal";
+import { ModalsContext } from "../../../context/ModalsContext";
+import { SingContext } from "../../../context/SingContext";
+import api from "../../../services/api";
+import Avatar from "../../DataDisplay/Avatar/index";
+import EditUserModal from "../../Utils/Modals/EditUserModal";
 import "./style.css";
-import ClientBreadcrumbs from "./ClientBreadcrumbs/ClientBreadcrumbs";
-import ModalEditSucess from "../Utils/Modals/EditUserModal/ModalEditSucess";
+import ClientBreadcrumbs from "../../Navigation/ClientBreadcrumbs/ClientBreadcrumbs"
+import ModalEditSucess from "../../Utils/Modals/EditUserModal/ModalEditSucess";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);

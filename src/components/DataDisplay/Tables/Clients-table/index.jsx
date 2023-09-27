@@ -7,11 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
-import CreateBilling from "../../../assets/create-billing.png";
-import { ModalsContext } from "../../../context/ModalsContext";
-import useCustomers from "../../../hooks/useCustomers";
-import ChargeModal from "../../Utils/Modals/ChargeModal";
+import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
+import CreateBilling from "../../../../assets/create-billing.png";
+import { ModalsContext } from "../../../../context/ModalsContext";
+import useCustomers from "../../../../hooks/useCustomers";
+import ChargeModal from "../../../Utils/Modals/ChargeModal";
 import "./style.css";
 
 let red = (

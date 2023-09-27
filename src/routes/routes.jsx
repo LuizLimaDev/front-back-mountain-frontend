@@ -1,16 +1,16 @@
 import { Route, Routes, Outlet, Navigate } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import SingIn from "../pages/SingIn/SingIn";
-import SingUp from "../pages/SingUp/SingUp";
-import RegisterLayout from "../components/RegisterLayout";
-import Password from "../pages/SingUp/Password";
-import Success from "../pages/SingUp/Success";
+import Home from "../pages/Home";
+import SignIn from "../pages/SignIn/index";
+import SignUp from "../pages/SignUp/index";
+import RegisterLayout from "../components/Layouts/RegisterLayout/index";
+import Password from "../pages/SignUp/Password";
+import Success from "../pages/SignUp/Success";
 import { useContext } from "react";
 import { SingContext } from "../context/SingContext";
-import Clients from '../pages/Clients/Clients';
-import HomeLayout from "../components/HomeLayout";
+import Clients from '../pages/Clients';
+import HomeLayout from "../components/Layouts/HomeLayout/index";
 import Billings from "../pages/Billings";
-import ClientDetailed from "../pages/ClientDetailed/ClientDetailed";
+import ClientDetailed from "../pages/ClientDetailed";
 import api from "../services/api";
 import { useEffect } from "react";
 
@@ -21,7 +21,7 @@ function ProtectedRouteByLogout({ isProtected, url }) {
 
 // eslint-disable-next-line react/prop-types
 function ProtectedRouteByLogged({ isProtected, url, remove }) {
-  useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
       try {
         await api.get("/users/profile", {
@@ -38,7 +38,7 @@ function ProtectedRouteByLogged({ isProtected, url, remove }) {
     if (isProtected) {
       fetchData();
     }
-  },[isProtected, remove]);
+  }, [isProtected, remove]);
 
   return isProtected ? <Outlet /> : <Navigate to={url} />;
 }
@@ -55,11 +55,11 @@ function MainRoutes() {
       >
 
         <Route element={<RegisterLayout />}>
-          <Route path="/singup" element={<SingUp />} />
+          <Route path="/singup" element={<SignUp />} />
           <Route path="/password" element={<Password />} />
           <Route path="/success" element={<Success />} />
         </Route>
-        <Route path="/" element={<SingIn />} />
+        <Route path="/" element={<SignIn />} />
 
       </Route>
 
@@ -71,7 +71,7 @@ function MainRoutes() {
           <Route path="/clients/:customerId" element={<ClientDetailed />} />
           <Route path="/billings" element={<Billings />} />
         </Route>
-        
+
       </Route>
 
     </Routes >

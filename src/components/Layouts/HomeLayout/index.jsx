@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import MenuIcon from "../menu-icon";
 
 import { Box } from "@mui/material";
-import HeaderDashBoard from "../HeaderDashBoard";
+import HeaderDashBoard from "../../Layouts/HeaderDashBoard/index";
+import MenuIcon from "./menu-icon/index";
 
 export default function HomeLayout() {
 

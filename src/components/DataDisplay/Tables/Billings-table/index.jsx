@@ -7,10 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import format from "date-fns/format";
-import ChevronUpDown from "../../../assets/chevron-Up-Down.png";
-import DeleteIcon from "../../../assets/delete-icon-billing.svg";
-import EditIcon from "../../../assets/edit.svg";
-import { moneyFormat } from "../../../utils/moneyFormat";
+import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
+import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
+import EditIcon from "../../../../assets/edit.svg";
+import { moneyFormat } from "../../../../utils/moneyFormat";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
@@ -59,7 +59,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 							</div>
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
-						<div className="client-icon">
+							<div className="client-icon">
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}

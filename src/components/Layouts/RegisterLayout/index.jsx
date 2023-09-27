@@ -7,10 +7,10 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import ActualStep from "../../assets/actualStep.svg";
-import DoneStep from "../../assets/doneStep.svg";
-import NextStep from "../../assets/nextStep.svg";
-import { SingContext } from "../../context/SingContext";
+import ActualStep from "../../../assets/actualStep.svg";
+import DoneStep from "../../../assets/doneStep.svg";
+import NextStep from "../../../assets/nextStep.svg";
+import { SingContext } from "../../../context/SingContext";
 import "./styles.css";
 
 export default function RegisterLayout() {
@@ -34,36 +34,36 @@ export default function RegisterLayout() {
     return (
         <div className="layout-container">
             <aside className="aside-step" >
-                    <Stepper activeStep={steps} orientation="vertical" sx={{
-                        '& .MuiStepConnector-lineVertical': {
-                            minHeight: "2rem",
-                            ml: 0.9,
-                            borderColor: "SCNormalGreen",
-                            borderWidth: "2px"
-                        }
-                    }} >
-                        {stages.map((stage, index) => {
-                            return(
-                                <Step onClick={()=>{
-                                    if(steps>index && steps<2){
-                                        setSteps(index);
-                                        if(steps === 1){
-                                            return navigate("/singup");
-                                        }
-                                    } else if (index === 1 && (form.name || form.email)){
-                                        setSteps(index);
-                                        return navigate("/password");
+                <Stepper activeStep={steps} orientation="vertical" sx={{
+                    '& .MuiStepConnector-lineVertical': {
+                        minHeight: "2rem",
+                        ml: 0.9,
+                        borderColor: "SCNormalGreen",
+                        borderWidth: "2px"
+                    }
+                }} >
+                    {stages.map((stage, index) => {
+                        return (
+                            <Step onClick={() => {
+                                if (steps > index && steps < 2) {
+                                    setSteps(index);
+                                    if (steps === 1) {
+                                        return navigate("/singup");
                                     }
-                                }} key={stage.label} sx={{
-                                    '& .MuiStepContent-root': {
-                                        borderColor: "SCNormalGreen",
-                                        borderWidth: "2px",
-                                        ml: 2.4,
-                                        minHeight: "0.5rem",
-                                    },
-                                }} >
-                                    <StepLabel icon={ <img src={ index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep } className="stepImage"  /> } >
-                                        <Typography
+                                } else if (index === 1 && (form.name || form.email)) {
+                                    setSteps(index);
+                                    return navigate("/password");
+                                }
+                            }} key={stage.label} sx={{
+                                '& .MuiStepContent-root': {
+                                    borderColor: "SCNormalGreen",
+                                    borderWidth: "2px",
+                                    ml: 2.4,
+                                    minHeight: "0.5rem",
+                                },
+                            }} >
+                                <StepLabel icon={<img src={index === steps && steps !== 2 ? ActualStep : steps > index || steps === 2 ? DoneStep : NextStep} className="stepImage" />} >
+                                    <Typography
                                         sx={{
                                             fontFamily: "Montserrat",
                                             fontWeight: "700",

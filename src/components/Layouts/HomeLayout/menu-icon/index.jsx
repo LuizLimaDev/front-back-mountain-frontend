@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import billingIcon from '../../assets/Menu/Billing-button.png';
-import clientsIcon from '../../assets/Menu/Clients-button.png';
-import homeIconActive from '../../assets/Menu/Home-button.png';
-import homeIconDefault from '../../assets/Menu/Home-button_default.png';
-import clientsIconActive from '../../assets/Menu/clients_active.icon.png';
-import billingIconActive from '../../assets/Menu/billings_active.svg';
-import { SingContext } from '../../context/SingContext';
+import billingIcon from '../../../../assets/Menu/Billing-button.png';
+import clientsIcon from '../../../../assets/Menu/Clients-button.png';
+import homeIconActive from '../../../../assets/Menu/Home-button.png';
+import homeIconDefault from '../../../../assets/Menu/Home-button_default.png';
+import clientsIconActive from '../../../../assets/Menu/clients_active.icon.png';
+import billingIconActive from '../../../../assets/Menu/billings_active.svg';
+import { SingContext } from '../../../../context/SingContext';
 import './style.css';
 
 
@@ -21,12 +21,12 @@ function MenuIcon() {
       setActive('clients');
     } else if (location.pathname.match(/^\/clients\//)) {
       setActive('clientDetail');
-    } else if(location.pathname === '/home'){
+    } else if (location.pathname === '/home') {
       setActive('home');
-    } else if(location.pathname === '/billings'){
+    } else if (location.pathname === '/billings') {
       setActive('billings');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   return (
@@ -50,7 +50,7 @@ function MenuIcon() {
             setActive("billings")
             : null;
         }}>
-          <img src={active === "billings" ? billingIconActive : billingIcon } alt='Botão Cobranças' className='menu-icon menu-billings-icon'></img>
+          <img src={active === "billings" ? billingIconActive : billingIcon} alt='Botão Cobranças' className='menu-icon menu-billings-icon'></img>
         </NavLink>
       </div>
     </div>

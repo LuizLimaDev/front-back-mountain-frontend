@@ -9,7 +9,7 @@ import useCustomers from "../../hooks/useCustomers";
 import EditClientModal from "../../components/Utils/Modals/EditClient";
 import { SingContext } from "../../context/SingContext";
 import SnackBar from "../../components/Feedback/SnackBar";
-import BillingsTable from "../../components/page-billings/billings-table";
+import BillingsTable from "../../components/DataDisplay/Tables/Billings-table/index";
 import { ModalsContext } from "../../context/ModalsContext";
 import ChargeModal from "../../components/Utils/Modals/ChargeModal";
 
