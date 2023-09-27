@@ -23,18 +23,15 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				overflowY: "auto",
 				maxHeight: "42rem",
 				width: "71.25rem",
-				borderRadius: "1.875rem"
+				borderRadius: "1.875rem",
 			}}
 		>
-			<Table
-				aria-label="simple table"
-			>
+			<Table aria-label="simple table">
 				<TableHead
 					sx={{
 						position: "sticky",
 						top: 0,
 						backgroundColor: "white",
-
 					}}
 				>
 					<TableRow>
@@ -67,22 +64,38 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								Data de venc.
 							</div>
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Valor
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Status
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Descrição
+						</TableCell>
+						<TableCell
+							align="left"
+							sx={theme.inputModalLabelStyle}
+						></TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody sx={{ backgroundColor: "white" }} >
+				<TableBody sx={{ backgroundColor: "white" }}>
 					{charges.map((charge) => {
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-									? theme.billingsRed
-									: theme.billingsCyan;
+								? theme.billingsRed
+								: theme.billingsCyan;
 						return (
-							<TableRow key={charge.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableRow
+								key={charge.id}
+								sx={{
+									"&:last-child td, &:last-child th": {
+										border: 0,
+									},
+								}}
+							>
 								{isClientDetailed ? null : (
 									<TableCell sx={theme.infoBillingsTable}>
 										{charge.name}
@@ -95,19 +108,20 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									sx={theme.infoBillingsTable}
 									align="left"
 								>
-									{moneyFormat
-										.format(charge.value)
-										.replace(/^(\D+)/, "$1 ")}
-								</TableCell>
-								<TableCell
-									sx={theme.infoBillingsTable}
-									align="left"
-								>
 									{format(
 										new Date(charge.duedate),
 										"dd/MM/yyyy"
 									)}
 								</TableCell>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									align="left"
+								>
+									{moneyFormat
+										.format(charge.value)
+										.replace(/^(\D+)/, "$1 ")}
+								</TableCell>
+
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
