@@ -14,7 +14,10 @@ export default function useCharges() {
 		chargeEdit,
 		setChargeEdit,
 		chargeDelete,
-		setChargeDelete, setChargeDetailSelected
+		setChargeDelete,
+		setChargeDetailSelected,
+		chargesParams,
+		setChargesParams,
 	} = useContext(ChargesContext);
 
 	const { value } = useContext(SingContext);
