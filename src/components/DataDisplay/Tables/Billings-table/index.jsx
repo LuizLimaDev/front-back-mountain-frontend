@@ -11,10 +11,15 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
+import useCharges from "../../../../hooks/useCharges";
+import { ModalsContext } from "../../../../context/ModalsContext";
+import { useContext } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
+	const { setChargeEdit } = useCharges();
+	const { setOpenChargeEditModal } = useContext(ModalsContext)
 
 	return (
 		<TableContainer
@@ -151,6 +156,17 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											sx={{
 												cursor: "pointer",
 											}}
+											onClick={(() => {
+												setChargeEdit({
+													name: charge.name,
+													id: charge.id,
+													status:charge.status === "vencido" ? "pendente": charge.status,
+													value: charge.value,
+													dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
+													description: charge.description,
+												})
+												setOpenChargeEditModal(true);
+											})}
 										>
 											<img
 												src={EditIcon}
