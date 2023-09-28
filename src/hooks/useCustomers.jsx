@@ -64,6 +64,6 @@ export default function useCustomers() {
     setCustomer,
     formCustomer,
     setFormCustomer,
-    chargesByCustomer, 
+    chargesByCustomer,
   }
 }

@@ -12,6 +12,7 @@ import CreateBilling from "../../../../assets/create-billing.png";
 import { ModalsContext } from "../../../../context/ModalsContext";
 import useCustomers from "../../../../hooks/useCustomers";
 import ChargeModal from "../../../Utils/Modals/ChargeModal";
+import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import "./style.css";
 
 let red = (
@@ -27,7 +28,7 @@ let green = (
 
 export default function ClientsTable() {
 	const { customers } = useCustomers();
-	const { setOpenChargeModal, setCustomerCharges } =
+	const { setOpenChargeModal, setCustomerCharges, showErrorSearch } =
 		useContext(ModalsContext);
 
 	const theme = useTheme();
@@ -126,6 +127,7 @@ export default function ClientsTable() {
 					))}
 				</TableBody>
 			</Table>
+					{ showErrorSearch && <ErrorSearchPage /> }
 			<ChargeModal />
 		</TableContainer>
 	);

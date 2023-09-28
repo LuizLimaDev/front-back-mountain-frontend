@@ -6,17 +6,49 @@ import "./style.css";
 import { SingContext } from "../../../context/SingContext";
 import { OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import api from "../../../services/api";
+import useCustomers from "../../../hooks/useCustomers";
+import { CustomersContext } from "../../../context/CustomersContext";
+import { ModalsContext } from "../../../context/ModalsContext";
 
 function ClientHeader() {
 	const [search, setSearch] = useState("");
-	const { setOpenClientModal } = useContext(SingContext);
+	const { setOpenClientModal, value } = useContext(SingContext);
+	const { setCustomers } = useContext(CustomersContext);
+	const { setShowErrorSearch } = useContext(ModalsContext);
+	const { customersUpdate } = useCustomers();
+	
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		try {
+			const response = await api.get(`/customers?search=${ search }`, {
+				headers: {
+					Authorization: `Bearer ${ value }`
+				}
+			});
+
+			if(response.data.customers.length === 0 && search.length === 0){
+				setShowErrorSearch(false);
+				return customersUpdate();
+			}
+
+			if(response.data.customers.length === 0 && search.length > 0){
+				setCustomers((prevState) => prevState = []);
+				return setShowErrorSearch(true);
+			}
+
+			setCustomers((prevState) => {
+				return prevState = [...response.data.customers];
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
