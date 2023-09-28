@@ -31,6 +31,7 @@ function EditUserModal() {
     SetEditFinished
   } = useContext(ModalsContext)
   const { value, setReceivedEmail } = useContext(SingContext)
+
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [cpf, setCpf] = useState("")
@@ -71,6 +72,8 @@ function EditUserModal() {
           }
         })
 
+        setCpf(data.cpf)
+        setPhone(data.phone)
         setName(data.name)
         setEmail(data.email)
         setReceivedEmail(data.email)
