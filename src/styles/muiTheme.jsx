@@ -43,6 +43,11 @@ export const theme = createTheme({
 	typography: {
 		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
 	},
+	SCmodalTile: {
+		fontFamily: "Montserrat",
+		fontWeight: "600",
+		fontSize: "1.5rem"
+	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
 		fontWeight: "bold",
@@ -90,14 +95,24 @@ export const theme = createTheme({
 	},
 	statusBillings: {
 		display: "flex",
-		textAlign: "center",
+		justifyContent: "center",
+		width: "4.75rem",
 		borderRadius: "0.5rem",
+
 		fontFamily: "Nunito",
 		fontSize: "0.9rem",
 		fontStyle: "normal",
 		fontWeight: "600",
+		textAlign: "center",
 		lineHeight: "normal",
 	},
+	// statusBillingsShape: {
+	// 	width: "4.75rem",
+	// 	borderRadius: ".5rem",
+	// 	fontFamily: "Nunito",
+	// 	fontWeight: "600",
+	// 	textAlign: "center"
+	// },
 	billingsYellow: {
 		backgroundColor: "SCLightYellow",
 		color: "SCDarkYellow",

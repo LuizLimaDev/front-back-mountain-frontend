@@ -8,6 +8,7 @@ export const ModalsProvider = ({ children }) => {
 	const [openModalEditSucess, setOpenModalEditSucess] = useState(false);
 	const [openChargeModal, setOpenChargeModal] = useState(false);
 	const [openChargeEditModal, setOpenChargeEditModal] = useState(false);
+	const [openChargeDetailsModal, setOpenChargeDetailsModal] = useState(false);
 	const [customerCharges, setCustomerCharges] = useState({
 		customerId: "",
 		name: "",
@@ -73,8 +74,10 @@ export const ModalsProvider = ({ children }) => {
 				setOpenSnackClientAdd,
 				openSnackClientEdit,
 				setOpenSnackClientEdit,
-				openChargeEditModal, 
+				openChargeEditModal,
 				setOpenChargeEditModal,
+				openChargeDetailsModal,
+				setOpenChargeDetailsModal,
 				openSnackChargeEdit, 
 				setOpenSnackChargeEdit,
 				showErrorSearch,

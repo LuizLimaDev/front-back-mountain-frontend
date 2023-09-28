@@ -22,6 +22,16 @@ export const ChargesProvider = ({ children }) => {
 		description: "",
 		customerId: "",
 	});
+
+	const [chargeDetailSelected, setChargeDetailSelected] = useState({
+		name: "",
+		id: "",
+		status: "",
+		value: "",
+		dueDate: "",
+		description: "",
+		customerId: "",
+	});
 	
 	const [chargesParams, setChargesParams] = useState({});
 
@@ -32,10 +42,12 @@ export const ChargesProvider = ({ children }) => {
 				setCharges,
 				charge,
 				setCharge,
+				chargeDetailSelected,
+				setChargeDetailSelected,
 				chargeEdit, 
 				setChargeEdit,
 				chargesParams,
-				setChargesParams
+				setChargesParams,
 			}}
 		>
 			{children}
