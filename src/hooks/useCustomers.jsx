@@ -12,7 +12,9 @@ export default function useCustomers() {
    formCustomer,
    setFormCustomer,
    chargesByCustomer, 
-   setChargesByCustomer
+   setChargesByCustomer,
+   customersParams,
+   setCustomersParams
   } = useContext(CustomersContext);
   const {  value } = useContext(SingContext);
 
@@ -21,6 +23,9 @@ export default function useCustomers() {
         const { data } = await api.get("/customers", {
             headers: {
                 Authorization: `Bearer ${value}`
+            },
+            params: {
+              ...customersParams
             }
         });
         setCustomers(data.customers);
@@ -54,7 +59,7 @@ export default function useCustomers() {
   useEffect(()=>{
    customersUpdate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [customersParams])
 
   return {
     customers,
@@ -64,6 +69,8 @@ export default function useCustomers() {
     setCustomer,
     formCustomer,
     setFormCustomer,
-    chargesByCustomer, 
+    chargesByCustomer,
+    customersParams,
+    setCustomersParams
   }
 }

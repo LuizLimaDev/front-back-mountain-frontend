@@ -11,10 +11,43 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
+import { ModalsContext } from "../../../../context/ModalsContext";
+import { useContext, useState } from "react";
+import ErrorSearchPage from "../../../Layouts/ErrorSearch";
+import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
+	const { setChargeEdit } = useCharges();
+	const { setOpenChargeEditModal } = useContext(ModalsContext);
+	const { chargesParams, setChargesParams } = useCharges();
+	const [orderName, setOrderName] = useState(false);
+	const [orderID, setOrderID] = useState(false);
+
+	function handleOrderName() {
+		const localChargesParams = chargesParams;
+		setOrderName(!orderName);
+		localChargesParams.orderName = orderName ? "desc" : "asc";
+		delete localChargesParams.orderIdCharge;
+
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
+	}
+
+	function handleOrderID() {
+		const localChargesParams = chargesParams;
+		setOrderID(!orderID);
+		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
+		delete localChargesParams.orderName;
+
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
+	}
 
 	return (
 		<TableContainer
@@ -41,6 +74,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									<img
 										style={{ cursor: "pointer" }}
 										src={ChevronUpDown}
+										onClick={() => handleOrderName()}
 									/>{" "}
 									Cliente
 								</div>
@@ -51,21 +85,16 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}
+									onClick={() => handleOrderID()}
 								/>{" "}
 								ID Cob.
 							</div>
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
-							<div className="client-icon">
-								<img
-									style={{ cursor: "pointer" }}
-									src={ChevronUpDown}
-								/>{" "}
-								Data de venc.
-							</div>
+							Valor
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
-							Valor
+							Data de venc.
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
 							Status
@@ -108,20 +137,19 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									sx={theme.infoBillingsTable}
 									align="left"
 								>
-									{format(
-										new Date(charge.duedate),
-										"dd/MM/yyyy"
-									)}
+									{moneyFormat
+										.format(charge.value)
+										.replace(/^(\D+)/, "$1 ")}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
 								>
-									{moneyFormat
-										.format(charge.value)
-										.replace(/^(\D+)/, "$1 ")}
+									{format(
+										new Date(charge.duedate),
+										"dd/MM/yyyy"
+									)}
 								</TableCell>
-
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
@@ -164,6 +192,29 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											spacing={"0.25rem"}
 											sx={{
 												cursor: "pointer",
+											}}
+											onClick={() => {
+												setChargeEdit({
+													name: charge.name,
+													id: charge.id,
+													status:
+														charge.status ===
+														"vencido"
+															? "pendente"
+															: charge.status,
+													value: charge.value,
+													dueDate: format(
+														new Date(
+															charge.duedate
+														),
+														"yyyy'-'MM'-'dd"
+													),
+													description:
+														charge.description,
+													customerId:
+														charge.customerid,
+												});
+												setOpenChargeEditModal(true);
 											}}
 										>
 											<img
@@ -217,6 +268,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
+			{charges.length == 0 ? <ErrorSearchPage /> : null}
 		</TableContainer>
 	);
 }
