@@ -51,7 +51,7 @@ export default function useCharges() {
 				headers: {
 					Authorization: `Bearer ${value}`
 				}
-			);
+			});
 		} catch (error) {
 			return error.response.data;
 		}
