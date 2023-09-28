@@ -20,7 +20,7 @@ import useCustomers from './../../../../hooks/useCustomers';
 export default function EditChargeModal() {
     const { chargeEdit, setChargeEdit, handleEditCharge, getCharges } = useCharges();
     const { getCustomer } = useCustomers();
-    const { openChargeEditModal, setOpenChargeEditModal } = useContext(ModalsContext);
+    const { openChargeEditModal, setOpenChargeEditModal, setOpenSnackChargeEdit } = useContext(ModalsContext);
     const [chargeEditErrors, setChargeEditErrors] = useState({
         description: false,
         dueDate: false,
@@ -49,6 +49,7 @@ export default function EditChargeModal() {
         }
         getCustomer(chargeEdit.customerId);
         getCharges();
+        setOpenSnackChargeEdit(true);
         closeModal();
     }
     function closeModal(){

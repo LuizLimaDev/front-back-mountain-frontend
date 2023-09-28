@@ -19,6 +19,7 @@ export const ModalsProvider = ({ children }) => {
 	const [openSnackChargeAdd, setOpenSnackChargeAdd] = useState(false);
 	const [openSnackClientAdd, setOpenSnackClientAdd] = useState(false);
 	const [openSnackClientEdit, setOpenSnackClientEdit] = useState(false);
+	const [openSnackChargeEdit, setOpenSnackChargeEdit] = useState(false);
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -72,6 +73,8 @@ export const ModalsProvider = ({ children }) => {
 				setOpenSnackClientEdit,
 				openChargeEditModal, 
 				setOpenChargeEditModal,
+				openSnackChargeEdit, 
+				setOpenSnackChargeEdit
 			}}
 		>
 			{children}

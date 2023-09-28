@@ -25,6 +25,8 @@ export default function ClientDetailed() {
 		setCustomerCharges,
 		openSnackChargeAdd,
 		setOpenSnackChargeAdd,
+		openSnackChargeEdit, 
+		setOpenSnackChargeEdit
 	} = useContext(ModalsContext);
 
 	useEffect(() => {
@@ -266,6 +268,7 @@ export default function ClientDetailed() {
 				openSnack={openSnackChargeAdd}
 				setOpenSnack={setOpenSnackChargeAdd}
 			/>
+			<SnackBar phrase={"Cobrança editada com sucesso!"} openSnack={openSnackChargeEdit} setOpenSnack={setOpenSnackChargeEdit} />
 		</Box>
 	);
 }

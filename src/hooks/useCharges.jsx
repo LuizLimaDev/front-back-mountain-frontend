@@ -50,6 +50,7 @@ export default function useCharges() {
 		setCharge,
 		chargeEdit, 
 		setChargeEdit,
-		handleEditCharge
+		handleEditCharge,
+		getCharges
 	};
 }
