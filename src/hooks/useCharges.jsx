@@ -4,7 +4,7 @@ import { SingContext } from "../context/SingContext";
 import { ChargesContext } from "../context/ChargesContext";
 
 export default function useCharges() {
-	const { charges, charge, setCharges, setCharge } =
+	const { charges, charge, setCharges, setCharge, chargesParams, setChargesParams } =
 		useContext(ChargesContext);
 	const { value } = useContext(SingContext);
 
@@ -14,6 +14,9 @@ export default function useCharges() {
 				headers: {
 					Authorization: `Bearer ${value}`,
 				},
+				params: {
+					...chargesParams
+				}
 			});
 
 			setCharges(data.charges);
@@ -25,12 +28,14 @@ export default function useCharges() {
 	useEffect(() => {
 		getCharges();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [chargesParams]);
 
 	return {
 		charges,
 		charge,
 		setCharges,
 		setCharge,
+		chargesParams,
+		setChargesParams
 	};
 }

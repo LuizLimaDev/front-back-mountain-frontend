@@ -21,37 +21,22 @@ export default function BillingsSearch() {
 	const { value } = useContext(SingContext);
 	const { setCharges } = useContext(ChargesContext);
 	const { setShowErrorBilling } = useContext(ModalsContext);
-	const { getCharges } = useCharges();
+	const { getCharges, setChargesParams, chargesParams } = useCharges();
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
+		const localChargesParams = chargesParams;
 
-		try {
-			const response = await api.get(`/charges?search=${ search }`, {
-				headers: {
-					Authorization: `Bearer ${ value }`
-				}
-			});
-
-			if(search.length === 0 && response.data.charges.length === 0){
-				setShowErrorBilling(false);
-				return getCharges();
-			}
-
-			if(search.length > 0 && response.data.charges.length === 0){
-				setCharges((prevState) => prevState = []);
-				return setShowErrorBilling(true);
-			}
-
-			setShowErrorBilling(false);
-			setCharges((prevState) => prevState = [...response.data.charges]);
-		} catch (error) {
-			console.log(error);
+		if(search){
+			localChargesParams.search = search;
+		}else{
+			delete localChargesParams.search;
 		}
+		setChargesParams((prevState) => prevState = {...localChargesParams})
 	};
 
 	return (

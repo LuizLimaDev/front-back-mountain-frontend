@@ -111,7 +111,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					</TableRow>
 				</TableHead>
 				<TableBody sx={{ backgroundColor: "white" }} >
-					{charges.map((charge) => {
+					{ charges.map((charge) => {
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
@@ -240,7 +240,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
-			{showErrorBilling && <ErrorSearchPage />}
+			{charges.length == 0 ? <ErrorSearchPage /> : null}
 		</TableContainer>
 	);
 }
