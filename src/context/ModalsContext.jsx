@@ -77,7 +77,7 @@ export const ModalsProvider = ({ children }) => {
 				openChargeEditModal,
 				setOpenChargeEditModal,
 				openChargeDetailsModal,
-				setOpenChargeDetailsModal
+				setOpenChargeDetailsModal,
 				openSnackChargeEdit, 
 				setOpenSnackChargeEdit,
 				showErrorSearch,
