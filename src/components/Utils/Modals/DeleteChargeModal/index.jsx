@@ -16,14 +16,6 @@ export default function DeleteChargeModal() {
 		setOpenSnackChargeDelete,
 	} = useContext(ModalsContext);
 
-	async function handleSubmit() {
-		await handleDeleteCharge();
-		getCustomer(chargeDelete.customerId);
-		getCharges();
-		setOpenSnackChargeDelete(true);
-		closeModal();
-	}
-
 	function closeModal() {
 		setChargeDelete({
 			customerId: "",
@@ -34,6 +26,14 @@ export default function DeleteChargeModal() {
 			status: "pago",
 		});
 		setOpenChargeDeleteModal(false);
+	}
+
+	async function handleDelete() {
+		await handleDeleteCharge();
+		getCustomer(chargeDelete.customerId);
+		getCharges();
+		setOpenSnackChargeDelete(true);
+		closeModal();
 	}
 
 	return (
@@ -71,79 +71,73 @@ export default function DeleteChargeModal() {
 						closeModal();
 					}}
 				/>
-				<form
-					onSubmit={(e) => {
-						e.preventDefault();
-						handleSubmit();
+
+				<img
+					src={Frame}
+					alt="Ícone de atenção"
+					style={{
+						alignSelf: "center",
+						width: "10rem",
+						height: "10rem",
+					}}
+				/>
+
+				<Typography
+					sx={{
+						color: " #CC7800",
+						textAlign: "center",
+						fontFamily: "Montserrat",
+						fontSize: "1.125rem",
+						fontStyle: "normal",
+						fontWeight: "600",
 					}}
 				>
-					<img
-						src={Frame}
-						alt="Ícone de atenção"
-						style={{
-							alignSelf: "center",
-							width: "10rem",
-							height: "10rem",
-						}}
-					/>
+					Tem certeza que deseja excluir esta cobrança?
+				</Typography>
 
-					<Typography
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						gap: "1.5rem",
+						mt: "2rem",
+					}}
+				>
+					<Button
 						sx={{
-							color: " #CC7800",
-							textAlign: "center",
-							fontFamily: "Montserrat",
+							width: "6.25rem",
+							height: "1.5rem",
+							color: "#AE1100",
+							fontFamily: "Nunito",
 							fontSize: "1.125rem",
-							fontStyle: "normal",
-							fontWeight: "600",
+							fontWeight: "400",
+							backgroundColor: "#F2D6D0",
+							borderRadius: "0.25rem",
+						}}
+						type="button"
+						onClick={() => {
+							closeModal();
 						}}
 					>
-						Tem certeza que deseja excluir esta cobrança?
-					</Typography>
+						Não
+					</Button>
 
-					<Box
+					<Button
 						sx={{
-							display: "flex",
-							alignItems: "center",
-							gap: "1.5rem",
-							mt: "2rem",
+							width: "6.25rem",
+							height: "1.5rem",
+							color: "#034A2A",
+							fontFamily: "Nunito",
+							fontSize: "1.125rem",
+							fontWeight: "400",
+							backgroundColor: "#ACD9C5",
+							borderRadius: "0.25rem",
 						}}
+						onClick={() => handleDelete()}
 					>
-						<Button
-							sx={{
-								width: "6.25rem",
-								height: "1.5rem",
-								color: "#AE1100",
-								fontFamily: "Nunito",
-								fontSize: "1.125rem",
-								fontWeight: "400",
-								backgroundColor: "#F2D6D0",
-								borderRadius: "0.25rem",
-							}}
-							type="button"
-							onClick={() => {
-								closeModal();
-							}}
-						>
-							Não
-						</Button>
-
-						<Button
-							sx={{
-								width: "6.25rem",
-								height: "1.5rem",
-								color: "#034A2A",
-								fontFamily: "Nunito",
-								fontSize: "1.125rem",
-								fontWeight: "400",
-								backgroundColor: "#ACD9C5",
-								borderRadius: "0.25rem",
-							}}
-							type="submit"
-						>
-							Sim
-						</Button>
-					</Box>
-				</form>
+						Sim
+					</Button>
+				</Box>
 			</Box>
 		</Modal>
 	);

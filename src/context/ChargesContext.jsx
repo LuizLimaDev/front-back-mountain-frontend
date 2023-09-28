@@ -22,15 +22,8 @@ export const ChargesProvider = ({ children }) => {
 		description: "",
 		customerId: "",
 	});
-	const [chargeDelete, setChargeDelete] = useState({
-		name: "",
-		id: "",
-		status: "",
-		value: "",
-		dueDate: "",
-		description: "",
-		customerId: "",
-	});
+
+	const [chargeDelete, setChargeDelete] = useState(null);
 
 	return (
 		<ChargesContext.Provider

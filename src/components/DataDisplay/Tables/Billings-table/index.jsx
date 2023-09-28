@@ -19,8 +19,8 @@ import { useContext } from "react";
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 	const { setChargeEdit } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext);
 	const { setChargeDelete } = useCharges();
+	const { setOpenChargeEditModal } = useContext(ModalsContext);
 	const { setOpenChargeDeleteModal } = useContext(ModalsContext);
 
 	return (
@@ -221,8 +221,9 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												cursor: "pointer",
 											}}
 											onClick={() => {
-												setChargeDelete(null);
+												console.log(charge.id);
 												setOpenChargeDeleteModal(true);
+												setChargeDelete(charge);
 											}}
 										>
 											<img

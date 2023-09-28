@@ -53,12 +53,18 @@ export default function useCharges() {
 
 	async function handleDeleteCharge() {
 		try {
-			await api.delete(`/charges/${chargeDelete.id}`, {
+			const response = await api.delete(`/charges/${chargeDelete.id}`, {
 				headers: {
-					Authorization: `Beare ${value}`,
+					Authorization: `Bearer ${value}`,
 				},
 			});
+			console.log(response);
+			setChargeDelete(null);
+			setCharges((prevCharges) =>
+				prevCharges.filter((charge) => charge.id !== chargeDelete.id)
+			);
 		} catch (error) {
+			console.log("hello", error);
 			return error.response.data;
 		}
 	}
