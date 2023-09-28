@@ -164,6 +164,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 													value: charge.value,
 													dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
 													description: charge.description,
+													customerId: charge.customerid,
 												})
 												setOpenChargeEditModal(true);
 											})}

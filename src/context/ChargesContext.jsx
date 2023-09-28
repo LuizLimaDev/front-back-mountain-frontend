@@ -20,6 +20,7 @@ export const ChargesProvider = ({ children }) => {
 		value: "",
 		dueDate: "",
 		description: "",
+		customerId: "",
 	});
 	
 

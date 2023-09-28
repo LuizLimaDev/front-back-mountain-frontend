@@ -15,9 +15,11 @@ import CloseIcon from "../../../../assets/closeIcon.svg";
 import EmptyCheckbox from "../../../../assets/emptyCheckbox.svg";
 import useCharges from "../../../../hooks/useCharges";
 import { ModalsContext } from "../../../../context/ModalsContext";
+import useCustomers from './../../../../hooks/useCustomers';
 
 export default function EditChargeModal() {
-    const { chargeEdit, setChargeEdit, handleEditCharge } = useCharges();
+    const { chargeEdit, setChargeEdit, handleEditCharge, getCharges } = useCharges();
+    const { getCustomer } = useCustomers();
     const { openChargeEditModal, setOpenChargeEditModal } = useContext(ModalsContext);
     const [chargeEditErrors, setChargeEditErrors] = useState({
         description: false,
@@ -34,7 +36,6 @@ export default function EditChargeModal() {
             dueDate: false,
             value: false
         });
-        console.log(chargeEdit)
     }
 
     async function handleSubmit(){
@@ -46,6 +47,8 @@ export default function EditChargeModal() {
                 })
             });
         }
+        getCustomer(chargeEdit.customerId);
+        getCharges();
         closeModal();
     }
     function closeModal(){
