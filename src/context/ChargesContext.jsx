@@ -47,7 +47,7 @@ export const ChargesProvider = ({ children }) => {
 				chargeEdit, 
 				setChargeEdit,
 				chargesParams,
-				setChargesParams
+				setChargesParams,
 			}}
 		>
 			{children}
