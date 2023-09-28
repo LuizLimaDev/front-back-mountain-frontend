@@ -29,6 +29,8 @@ export const ModalsProvider = ({ children }) => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [apiErrors, setApiErrors] = useState("");
 	const [editFinished, SetEditFinished] = useState(false);
+	const [showErrorSearch, setShowErrorSearch] = useState(false);
+	const [showErrorBilling, setShowErrorBilling] = useState(false);
 
 	const handleOpenEditUser = () => setOpenModalEditUser(true);
 	const handleCloseEditUser = () => setOpenModalEditUser(false);
@@ -74,7 +76,11 @@ export const ModalsProvider = ({ children }) => {
 				openChargeEditModal, 
 				setOpenChargeEditModal,
 				openSnackChargeEdit, 
-				setOpenSnackChargeEdit
+				setOpenSnackChargeEdit,
+				showErrorSearch,
+				setShowErrorSearch,
+				showErrorBilling,
+				setShowErrorBilling
 			}}
 		>
 			{children}

@@ -4,7 +4,7 @@ import { SingContext } from "../context/SingContext";
 import { ChargesContext } from "../context/ChargesContext";
 
 export default function useCharges() {
-	const { charges, charge, setCharges, setCharge, chargeEdit, setChargeEdit } = useContext(ChargesContext);
+	const { charges, charge, setCharges, setCharge, chargeEdit, setChargeEdit, chargesParams, setChargesParams } = useContext(ChargesContext);
 	const { value } = useContext(SingContext);
 
 	async function getCharges() {
@@ -13,6 +13,9 @@ export default function useCharges() {
 				headers: {
 					Authorization: `Bearer ${value}`,
 				},
+				params: {
+					...chargesParams
+				}
 			});
 
 			setCharges(data.charges);
@@ -30,7 +33,7 @@ export default function useCharges() {
 				dueDate: chargeEdit.dueDate
 			},{
 				headers: {
-					Authorization: `Beare ${value}`
+					Authorization: `Bearer ${value}`
 				}
 			})
 		} catch (error) {
@@ -41,7 +44,7 @@ export default function useCharges() {
 	useEffect(() => {
 		getCharges();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [chargesParams]);
 
 	return {
 		charges,
@@ -51,6 +54,8 @@ export default function useCharges() {
 		chargeEdit, 
 		setChargeEdit,
 		handleEditCharge,
-		getCharges
+		getCharges,
+		chargesParams,
+		setChargesParams
 	};
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BillingsIcon from "../../../assets/billings-icon.svg";
 import Statics from "../../../assets/Statics.png";
 import {
@@ -9,10 +9,19 @@ import {
 	IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import api from "../../../services/api";
+import { SingContext } from "../../../context/SingContext";
+import { ChargesContext } from "../../../context/ChargesContext";
+import { ModalsContext } from "../../../context/ModalsContext";
+import useCharges from "../../../hooks/useCharges";
 
 export default function BillingsSearch() {
 	const [search, setSearch] = useState("");
 	const theme = useTheme();
+	const { value } = useContext(SingContext);
+	const { setCharges } = useContext(ChargesContext);
+	const { setShowErrorBilling } = useContext(ModalsContext);
+	const { getCharges, setChargesParams, chargesParams } = useCharges();
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
@@ -20,6 +29,14 @@ export default function BillingsSearch() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		const localChargesParams = chargesParams;
+
+		if(search){
+			localChargesParams.search = search;
+		}else{
+			delete localChargesParams.search;
+		}
+		setChargesParams((prevState) => prevState = {...localChargesParams})
 	};
 
 	return (

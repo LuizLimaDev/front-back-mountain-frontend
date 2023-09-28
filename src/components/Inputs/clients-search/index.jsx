@@ -6,17 +6,29 @@ import "./style.css";
 import { SingContext } from "../../../context/SingContext";
 import { OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import useCustomers from "../../../hooks/useCustomers";
 
 function ClientHeader() {
 	const [search, setSearch] = useState("");
+	
 	const { setOpenClientModal } = useContext(SingContext);
+	const { customersParams, setCustomersParams } = useCustomers();
+	
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
+		const localCustomersParams = customersParams;
+
+		if(search){
+			localCustomersParams.search = search;
+		}else{
+			delete localCustomersParams.search;
+		}
+		setCustomersParams((prevState) => prevState = {...localCustomersParams})
 	};
 
 	return (

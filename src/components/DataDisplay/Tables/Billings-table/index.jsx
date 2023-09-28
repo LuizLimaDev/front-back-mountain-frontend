@@ -11,15 +11,39 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
-import useCharges from "../../../../hooks/useCharges";
 import { ModalsContext } from "../../../../context/ModalsContext";
 import { useContext } from "react";
+import { useState } from "react";
+import ErrorSearchPage from "../../../Layouts/ErrorSearch";
+import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 	const { setChargeEdit } = useCharges();
 	const { setOpenChargeEditModal } = useContext(ModalsContext)
+	const { chargesParams, setChargesParams } = useCharges();
+	const [orderName, setOrderName] = useState(false);
+	const [orderID, setOrderID] = useState(false);
+
+	function handleOrderName(){
+		const localChargesParams = chargesParams;
+		setOrderName(!orderName);
+		localChargesParams.orderName = orderName ? "desc" : "asc";
+		delete localChargesParams.orderIdCharge;
+
+
+		setChargesParams((prevState) => prevState = {...localChargesParams})
+	}
+
+	function handleOrderID(){
+		const localChargesParams = chargesParams;
+		setOrderID(!orderID);
+		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
+		delete localChargesParams.orderName;
+
+		setChargesParams((prevState) => prevState = {...localChargesParams})
+	}
 
 	return (
 		<TableContainer
@@ -49,6 +73,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									<img
 										style={{ cursor: "pointer" }}
 										src={ChevronUpDown}
+										onClick={() => handleOrderName()}
 									/>{" "}
 									Cliente
 								</div>
@@ -59,27 +84,22 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}
+									onClick={() => handleOrderID()}
 								/>{" "}
 								ID Cob.
 							</div>
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>
-							<div className="client-icon">
-								<img
-									style={{ cursor: "pointer" }}
-									src={ChevronUpDown}
-								/>{" "}
-								Data de venc.
-							</div>
-						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Data de venc.
+						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody sx={{ backgroundColor: "white" }} >
-					{charges.map((charge) => {
+					{ charges.map((charge) => {
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
@@ -220,6 +240,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
+			{charges.length == 0 ? <ErrorSearchPage /> : null}
 		</TableContainer>
 	);
 }
