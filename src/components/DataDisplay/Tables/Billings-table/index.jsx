@@ -11,30 +11,10 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
-import DeleteChargeModal from "../../../Utils/Modals/DeleteChargeModal";
-import { useContext, useState } from "react";
-import { ModalsContext } from "../../../../context/ModalsContext";
-import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-
-	const [chargeToDelete, setChargeToDelete] = useState(null);
-	const { openDeleteChargeModal, setOpenDeleteChargeModal } =
-		useContext(ModalsContext);
-
-	const handleDeleteClick = (charge) => {
-		setChargeToDelete(charge);
-		console.log(charge);
-		setOpenDeleteChargeModal(true);
-	};
-
-	useEffect(() => {
-		if (chargeToDelete !== null) {
-			setOpenDeleteChargeModal(true);
-		}
-	}, [chargeToDelete, setOpenDeleteChargeModal]);
 
 	return (
 		<TableContainer
@@ -210,9 +190,6 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											sx={{
 												cursor: "pointer",
 											}}
-											onClick={() =>
-												handleDeleteClick(charge)
-											}
 										>
 											<img
 												src={DeleteIcon}
@@ -238,12 +215,6 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 						);
 					})}
 				</TableBody>
-				<DeleteChargeModal
-					openDeleteChargeModal={openDeleteChargeModal}
-					setOpenDeleteChargeModal={setOpenDeleteChargeModal}
-					chargeToDelete={chargeToDelete}
-					setChargeToDelete={setChargeToDelete}
-				/>
 			</Table>
 		</TableContainer>
 	);
