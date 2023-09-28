@@ -206,7 +206,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												cursor: "pointer",
 											}}
 
-											onClick={(() => {
+											onClick={() => {
 
 												setChargeEdit({
 													name: charge.name,
