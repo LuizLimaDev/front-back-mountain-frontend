@@ -17,44 +17,32 @@ import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import { ChargesContext } from "../../../../context/ChargesContext";
 import { SingContext } from "../../../../context/SingContext";
 import api from "../../../../services/api";
+import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const { showErrorBilling } = useContext(ModalsContext);
-	const { value } = useContext(SingContext);
-	const { setCharges } = useContext(ChargesContext);
+	const { chargesParams, setChargesParams } = useCharges();
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
-	async function handleOrderName(){
+	function handleOrderName(){
+		const localChargesParams = chargesParams;
 		setOrderName(!orderName);
+		localChargesParams.orderName = orderName ? "desc" : "asc";
+		delete localChargesParams.orderIdCharge;
 
-		try {
-			const response = await api.get(`/charges?orderName=${orderName ? "desc" : "asc"}`, {
-				headers: {
-					Authorization: `Bearer ${ value }`
-				}
-			});
-			return setCharges((prevState) => prevState = [...response.data.charges]);
-		} catch (error) {
-			console.log(error);
-		}
+
+		setChargesParams((prevState) => prevState = {...localChargesParams})
 	}
 
-	async function handleOrderID(){
+	function handleOrderID(){
+		const localChargesParams = chargesParams;
 		setOrderID(!orderID);
+		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
+		delete localChargesParams.orderName;
 
-		try {
-			const response = await api.get(`/charges?orderIdCharge=${orderID ? "desc" : "asc"}`, {
-				headers: {
-					Authorization: `Bearer ${ value }`
-				}
-			});
-			return setCharges((prevState) => prevState = [...response.data.charges]);
-		} catch (error) {
-			console.log(error);
-		}
+		setChargesParams((prevState) => prevState = {...localChargesParams})
 	}
 
 	return (
