@@ -81,7 +81,7 @@ export default function useCharges() {
 		setChargeEdit,
 		handleEditCharge,
 		getCharges,
-		openChargeDetails
+		openChargeDetails,
 		chargesParams,
 		setChargesParams
 	};
