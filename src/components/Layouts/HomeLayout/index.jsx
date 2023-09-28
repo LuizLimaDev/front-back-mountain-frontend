@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 import HeaderDashBoard from "../../Layouts/HeaderDashBoard/index";
 import MenuIcon from "./menu-icon/index";
+import EditChargeModal from "../../Utils/Modals/EditChargeModal/EditChargeModal";
 
 export default function HomeLayout() {
 
@@ -26,6 +27,7 @@ export default function HomeLayout() {
             >
                 <HeaderDashBoard />
                 <Outlet />
+                <EditChargeModal />
             </Box>
         </Box>
     )

@@ -4,8 +4,7 @@ import { SingContext } from "../context/SingContext";
 import { ChargesContext } from "../context/ChargesContext";
 
 export default function useCharges() {
-	const { charges, charge, setCharges, setCharge } =
-		useContext(ChargesContext);
+	const { charges, charge, setCharges, setCharge, chargeEdit, setChargeEdit } = useContext(ChargesContext);
 	const { value } = useContext(SingContext);
 
 	async function getCharges() {
@@ -22,6 +21,23 @@ export default function useCharges() {
 		}
 	}
 
+	async function handleEditCharge(){
+		try {
+			await api.put(`/charges/${chargeEdit.id}`, {
+				description: chargeEdit.description,
+				status: chargeEdit.status,
+				value: chargeEdit.value,
+				dueDate: chargeEdit.dueDate
+			},{
+				headers: {
+					Authorization: `Beare ${value}`
+				}
+			})
+		} catch (error) {
+			return error.response.data;
+		}
+	}
+
 	useEffect(() => {
 		getCharges();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,5 +48,9 @@ export default function useCharges() {
 		charge,
 		setCharges,
 		setCharge,
+		chargeEdit, 
+		setChargeEdit,
+		handleEditCharge,
+		getCharges
 	};
 }
