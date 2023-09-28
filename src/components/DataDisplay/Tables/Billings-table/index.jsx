@@ -12,8 +12,7 @@ import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import useCharges from "../../../../hooks/useCharges";
 
@@ -21,28 +20,33 @@ import useCharges from "../../../../hooks/useCharges";
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 	const { setChargeEdit } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext)
+	const { setOpenChargeEditModal } = useContext(ModalsContext);
 	const { chargesParams, setChargesParams } = useCharges();
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
-	function handleOrderName(){
+	function handleOrderName() {
 		const localChargesParams = chargesParams;
 		setOrderName(!orderName);
 		localChargesParams.orderName = orderName ? "desc" : "asc";
 		delete localChargesParams.orderIdCharge;
 
-
-		setChargesParams((prevState) => prevState = {...localChargesParams})
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
 	}
 
-	function handleOrderID(){
+	function handleOrderID() {
 		const localChargesParams = chargesParams;
 		setOrderID(!orderID);
 		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
 		delete localChargesParams.orderName;
 
-		setChargesParams((prevState) => prevState = {...localChargesParams})
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
 	}
 
 	return (
@@ -52,18 +56,15 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				overflowY: "auto",
 				maxHeight: "42rem",
 				width: "71.25rem",
-				borderRadius: "1.875rem"
+				borderRadius: "1.875rem",
 			}}
 		>
-			<Table
-				aria-label="simple table"
-			>
+			<Table aria-label="simple table">
 				<TableHead
 					sx={{
 						position: "sticky",
 						top: 0,
 						backgroundColor: "white",
-
 					}}
 				>
 					<TableRow>
@@ -89,25 +90,41 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								ID Cob.
 							</div>
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Valor
+						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
 							Data de venc.
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Status
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Descrição
+						</TableCell>
+						<TableCell
+							align="left"
+							sx={theme.inputModalLabelStyle}
+						></TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody sx={{ backgroundColor: "white" }} >
-					{ charges.map((charge) => {
+				<TableBody sx={{ backgroundColor: "white" }}>
+					{charges.map((charge) => {
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-									? theme.billingsRed
-									: theme.billingsCyan;
+								? theme.billingsRed
+								: theme.billingsCyan;
 						return (
-							<TableRow key={charge.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableRow
+								key={charge.id}
+								sx={{
+									"&:last-child td, &:last-child th": {
+										border: 0,
+									},
+								}}
+							>
 								{isClientDetailed ? null : (
 									<TableCell sx={theme.infoBillingsTable}>
 										{charge.name}
@@ -176,18 +193,29 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											sx={{
 												cursor: "pointer",
 											}}
-											onClick={(() => {
+											onClick={() => {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status:charge.status === "vencido" ? "pendente": charge.status,
+													status:
+														charge.status ===
+														"vencido"
+															? "pendente"
+															: charge.status,
 													value: charge.value,
-													dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
-													description: charge.description,
-													customerId: charge.customerid,
-												})
+													dueDate: format(
+														new Date(
+															charge.duedate
+														),
+														"yyyy'-'MM'-'dd"
+													),
+													description:
+														charge.description,
+													customerId:
+														charge.customerid,
+												});
 												setOpenChargeEditModal(true);
-											})}
+											}}
 										>
 											<img
 												src={EditIcon}
