@@ -12,6 +12,7 @@ import SnackBar from "../../components/Feedback/SnackBar";
 import BillingsTable from "../../components/DataDisplay/Tables/Billings-table/index";
 import { ModalsContext } from "../../context/ModalsContext";
 import ChargeModal from "../../components/Utils/Modals/ChargeModal";
+import ChargeDetailModal from "../../components/Utils/Modals/ChargeDetailModal";
 
 export default function ClientDetailed() {
 	const { getCustomer, customer, chargesByCustomer } = useCustomers();
@@ -25,7 +26,7 @@ export default function ClientDetailed() {
 		setCustomerCharges,
 		openSnackChargeAdd,
 		setOpenSnackChargeAdd,
-		openSnackChargeEdit, 
+		openSnackChargeEdit,
 		setOpenSnackChargeEdit
 	} = useContext(ModalsContext);
 
@@ -257,12 +258,13 @@ export default function ClientDetailed() {
 				/>
 			</Stack>
 			<EditClientModal id={customerId} />
+			<ChargeModal />
+			<ChargeDetailModal />
 			<SnackBar
 				openSnack={openSnackClientEdit}
 				setOpenSnack={setOpenSnackClientEdit}
 				phrase={"Edições do cadastro concluídas com sucesso"}
 			/>
-			<ChargeModal />
 			<SnackBar
 				phrase={"Cobrança cadastrada com sucesso"}
 				openSnack={openSnackChargeAdd}

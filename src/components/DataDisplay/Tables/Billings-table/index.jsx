@@ -7,24 +7,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import format from "date-fns/format";
+import { useContext } from "react";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
-import { moneyFormat } from "../../../../utils/moneyFormat";
-import useCharges from "../../../../hooks/useCharges";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import { useContext } from "react";
-import { ChargesContext } from "../../../../context/ChargesContext";
+import useCharges from "../../../../hooks/useCharges";
+import { moneyFormat } from "../../../../utils/moneyFormat";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const { setChargeEdit } = useCharges();
-	const { setChargeDetailSelected } = useContext(ChargesContext)
-	const {
-		setOpenChargeEditModal,
-		setOpenChargeDetailsModal
-	} = useContext(ModalsContext)
+	const { setChargeEdit, openChargeDetails } = useCharges();
+	const { setOpenChargeEditModal } = useContext(ModalsContext)
 
 	return (
 		<TableContainer
@@ -95,30 +90,25 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 							<TableRow
 								key={charge.id}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-								onClick={(() => {
-									setChargeDetailSelected({
-										name: charge.name,
-										id: charge.id,
-										status: charge.status,
-										value: charge.value,
-										dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
-										description: charge.description,
-										customerId: charge.customerid,
-									})
-									setOpenChargeDetailsModal(true);
-								})}
 							>
 								{isClientDetailed ? null : (
-									<TableCell sx={theme.infoBillingsTable}>
+									<TableCell
+										sx={theme.infoBillingsTable}
+										onClick={() => openChargeDetails(charge)}
+									>
 										{charge.name}
 									</TableCell>
 								)}
-								<TableCell sx={theme.infoBillingsTable}>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									onClick={() => openChargeDetails(charge)}
+								>
 									{charge.id}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									{moneyFormat
 										.format(charge.value)
@@ -127,6 +117,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									{format(
 										new Date(charge.duedate),
@@ -136,6 +127,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<Stack
 										component="div"
@@ -152,6 +144,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 										...theme.infoBillingsTable,
 									}}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<p
 										style={{
@@ -177,6 +170,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												cursor: "pointer",
 											}}
 											onClick={(() => {
+
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
