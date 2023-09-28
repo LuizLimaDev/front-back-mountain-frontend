@@ -43,6 +43,11 @@ export const theme = createTheme({
 	typography: {
 		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
 	},
+	SCmodalTile: {
+		fontFamily: "Montserrat",
+		fontWeight: "600",
+		fontSize: "1.5rem"
+	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
 		fontWeight: "bold",

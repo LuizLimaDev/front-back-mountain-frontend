@@ -5,6 +5,7 @@ import useCharges from "../../hooks/useCharges";
 import { Box, useTheme } from "@mui/material";
 import { ModalsContext } from "../../context/ModalsContext";
 import SnackBar from "../../components/Feedback/SnackBar";
+import ChargeDetailModal from "../../components/Utils/Modals/ChargeDetailModal";
 
 function Billings() {
 	const { charges } = useCharges()
@@ -15,6 +16,7 @@ function Billings() {
 		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"} >
 			<BillingsSearch />
 			<BillingsTable charges={charges} />
+			<ChargeDetailModal />
 			<SnackBar phrase={"Cobrança editada com sucesso!"} openSnack={openSnackChargeEdit} setOpenSnack={setOpenSnackChargeEdit} />
 		</Box>
 	);
