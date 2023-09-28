@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BillingsIcon from "../../../assets/billings-icon.svg";
 import Statics from "../../../assets/Statics.png";
 import {
@@ -9,17 +9,48 @@ import {
 	IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import api from "../../../services/api";
+import { SingContext } from "../../../context/SingContext";
+import { ChargesContext } from "../../../context/ChargesContext";
+import { ModalsContext } from "../../../context/ModalsContext";
+import useCharges from "../../../hooks/useCharges";
 
 export default function BillingsSearch() {
 	const [search, setSearch] = useState("");
 	const theme = useTheme();
+	const { value } = useContext(SingContext);
+	const { setCharges } = useContext(ChargesContext);
+	const { setShowErrorBilling } = useContext(ModalsContext);
+	const { getCharges } = useCharges();
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		try {
+			const response = await api.get(`/charges?search=${ search }`, {
+				headers: {
+					Authorization: `Bearer ${ value }`
+				}
+			});
+
+			if(search.length === 0 && response.data.charges.length === 0){
+				setShowErrorBilling(false);
+				return getCharges();
+			}
+
+			if(search.length > 0 && response.data.charges.length === 0){
+				setCharges((prevState) => prevState = []);
+				return setShowErrorBilling(true);
+			}
+
+			setCharges((prevState) => prevState = [...response.data.charges]);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (

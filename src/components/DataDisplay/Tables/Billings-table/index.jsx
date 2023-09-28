@@ -11,10 +11,14 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
+import { useContext } from "react";
+import { ModalsContext } from "../../../../context/ModalsContext";
+import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
+	const { showErrorBilling } = useContext(ModalsContext);
 
 	return (
 		<TableContainer
@@ -203,6 +207,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
+			{showErrorBilling && <ErrorSearchPage />}
 		</TableContainer>
 	);
 }
