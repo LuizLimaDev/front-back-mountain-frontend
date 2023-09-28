@@ -22,7 +22,7 @@ export const ChargesProvider = ({ children }) => {
 		description: "",
 		customerId: "",
 	});
-	
+
 	const [chargesParams, setChargesParams] = useState({});
 
 	return (
@@ -32,7 +32,7 @@ export const ChargesProvider = ({ children }) => {
 				setCharges,
 				charge,
 				setCharge,
-				chargeEdit, 
+				chargeEdit,
 				setChargeEdit,
 				chargesParams,
 				setChargesParams
