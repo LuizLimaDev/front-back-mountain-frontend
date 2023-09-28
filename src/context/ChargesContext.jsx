@@ -43,7 +43,7 @@ export const ChargesProvider = ({ children }) => {
 				charge,
 				setCharge,
 				chargeDetailSelected,
-				setChargeDetailSelected
+				setChargeDetailSelected,
 				chargeEdit, 
 				setChargeEdit,
 				chargesParams,
