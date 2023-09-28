@@ -165,12 +165,7 @@ function EditUserModal() {
               marginBottom: "2rem"
             }}
           >
-            <Typography
-              sx={{
-                fontFamily: "Montserrat",
-                fontWeight: "600",
-                fontSize: "1.5rem"
-              }}
+            <Typography sx={theme.SCmodalTile}
             >
               Edite seu cadastro
             </Typography>
