@@ -14,6 +14,7 @@ import { ModalsContext } from "../../../../context/ModalsContext";
 import { SingContext } from "../../../../context/SingContext";
 import useCustomers from "../../../../hooks/useCustomers";
 import api from "../../../../services/api";
+import useZipcode from "../../../../hooks/useZipcode";
 
 export default function EditClientModal() {
 	const {
@@ -24,8 +25,8 @@ export default function EditClientModal() {
 		setClientErrors,
 	} = useContext(SingContext);
 
-	const { customer, formCustomer, setFormCustomer, getCustomer } =
-		useCustomers();
+	const { customer, formCustomer, setFormCustomer, getCustomer } = useCustomers();
+	const { handleZipcodeBlur } = useZipcode()
 
 	const { setOpenSnackClientEdit } = useContext(ModalsContext);
 
@@ -38,26 +39,12 @@ export default function EditClientModal() {
 			email: false,
 			cpf: false,
 			phone: false,
-			zipcode: false
-		});
-	}
-
-	function closeModal(){
-		setEditClientModal(!editClientModal);
-		setFormCustomer(customer);
-		setClientErrors({
-			name: false,
-			email: false,
-			cpf: false,
-			phone: false,
-			zipcode: false
 		});
 	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		const { id, ...localCustomer } = formCustomer;
-		localCustomer.zipcode = localCustomer.zipcode.replace("-", "");
 
 		try {
 			await api.put(
@@ -83,7 +70,10 @@ export default function EditClientModal() {
 	return (
 		<Modal
 			open={editClientModal}
-			onClose={() => closeModal()}
+			onClose={() => {
+				setEditClientModal(!editClientModal);
+				setFormCustomer(customer);
+			}}
 		>
 			<Box
 				sx={{
@@ -109,7 +99,10 @@ export default function EditClientModal() {
 						margin: "1.5rem 1.5rem 0 0",
 						cursor: "pointer",
 					}}
-					onClick={() => closeModal()}
+					onClick={() => {
+						setEditClientModal(!editClientModal);
+						setFormCustomer(customer);
+					}}
 				/>
 				<form onSubmit={(event) => handleSubmit(event)}>
 					<Box
@@ -292,6 +285,78 @@ export default function EditClientModal() {
 					<Box
 						sx={{
 							mb: "0.5rem",
+							display: "flex",
+							justifyContent: "center",
+							gap: "1.5rem",
+						}}
+					>
+						<Box>
+							<InputLabel
+								htmlFor="icep"
+								sx={{
+									fontFamily: "Nunito",
+									fontSize: "0.875rem",
+									fontWeight: "600",
+									lineHeight: "1.25rem",
+									color: "SCGray2",
+									mb: "0.38rem",
+								}}
+							>
+								CEP
+							</InputLabel>
+							<OutlinedInput
+								placeholder="Digite o CEP"
+								id="icep"
+								sx={{
+									width: "14.4rem",
+									height: "2.75rem",
+									borderRadius: "0.5rem",
+									fontFamily: "Nunito",
+									fontSize: "1rem",
+									fontWeight: "400",
+									lineHeight: "1.5rem",
+								}}
+								name="zipcode"
+								value={formCustomer.zipcode}
+								onChange={(event) => handleChange(event)}
+								onBlur={e => handleZipcodeBlur(e.target.value)}
+							/>
+						</Box>
+						<Box>
+							<InputLabel
+								htmlFor="ihood"
+								sx={{
+									fontFamily: "Nunito",
+									fontSize: "0.875rem",
+									fontWeight: "600",
+									lineHeight: "1.25rem",
+									color: "SCGray2",
+									mb: "0.38rem",
+								}}
+							>
+								Bairro
+							</InputLabel>
+							<OutlinedInput
+								placeholder="Digite o bairro"
+								id="ihood"
+								sx={{
+									width: "14.6rem",
+									height: "2.75rem",
+									borderRadius: "0.5rem",
+									fontFamily: "Nunito",
+									fontSize: "1rem",
+									fontWeight: "400",
+									lineHeight: "1.5rem",
+								}}
+								name="neighborhood"
+								value={formCustomer.neighborhood}
+								onChange={(event) => handleChange(event)}
+							/>
+						</Box>
+					</Box>
+					<Box
+						sx={{
+							mb: "0.5rem",
 						}}
 					>
 						<InputLabel
@@ -359,83 +424,7 @@ export default function EditClientModal() {
 							onChange={(event) => handleChange(event)}
 						/>
 					</Box>
-					<Box
-						sx={{
-							mb: "0.5rem",
-							display: "flex",
-							justifyContent: "center",
-							gap: "1.5rem",
-						}}
-					>
-						<Box>
-							<InputLabel
-								htmlFor="icep"
-								sx={{
-									fontFamily: "Nunito",
-									fontSize: "0.875rem",
-									fontWeight: "600",
-									lineHeight: "1.25rem",
-									color: "SCGray2",
-									mb: "0.38rem",
-								}}
-							>
-								CEP
-							</InputLabel>
-							<TextField
-								placeholder="Digite o CEP"
-								id="icep"
-								InputProps={{
-									style:{
-									
-										width: "14.4rem",
-										height: "2.75rem",
-										borderRadius: "0.5rem",
-										fontFamily: "Nunito",
-										fontSize: "1rem",
-										fontWeight: "400",
-										lineHeight: "1.5rem",
-									
-									}
-								}}
-								name="zipcode"
-								value={formCustomer.zipcode}
-								error={clientErrors.zipcode}
-								helperText={clientErrors.zipcode}
-								onChange={(event) => handleChange(event)}
-							/>
-						</Box>
-						<Box>
-							<InputLabel
-								htmlFor="ihood"
-								sx={{
-									fontFamily: "Nunito",
-									fontSize: "0.875rem",
-									fontWeight: "600",
-									lineHeight: "1.25rem",
-									color: "SCGray2",
-									mb: "0.38rem",
-								}}
-							>
-								Bairro
-							</InputLabel>
-							<OutlinedInput
-								placeholder="Digite o bairro"
-								id="ihood"
-								sx={{
-									width: "14.6rem",
-									height: "2.75rem",
-									borderRadius: "0.5rem",
-									fontFamily: "Nunito",
-									fontSize: "1rem",
-									fontWeight: "400",
-									lineHeight: "1.5rem",
-								}}
-								name="neighborhood"
-								value={formCustomer.neighborhood}
-								onChange={(event) => handleChange(event)}
-							/>
-						</Box>
-					</Box>
+
 					<Box
 						sx={{
 							mb: "3.56rem",
@@ -532,7 +521,10 @@ export default function EditClientModal() {
 									backgroundColor: "SCGray8",
 								},
 							}}
-							onClick={() => closeModal()}
+							onClick={() => {
+								setEditClientModal(false);
+								setFormCustomer(customer);
+							}}
 						>
 							Cancelar
 						</Button>

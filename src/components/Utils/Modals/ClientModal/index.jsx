@@ -1,19 +1,20 @@
 import {
 	Box,
-	Modal,
-	Typography,
-	OutlinedInput,
-	InputLabel,
 	Button,
+	InputLabel,
+	Modal,
+	OutlinedInput,
 	TextField,
+	Typography,
 } from "@mui/material";
-import UsersIcon from "../../../../assets/users.svg";
-import CloseIcon from "../../../../assets/closeIcon.svg";
 import { useContext } from "react";
-import { SingContext } from "../../../../context/SingContext";
-import api from "../../../../services/api";
+import CloseIcon from "../../../../assets/closeIcon.svg";
+import UsersIcon from "../../../../assets/users.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
+import { SingContext } from "../../../../context/SingContext";
 import useCustomers from '../../../../hooks/useCustomers';
+import useZipcode from '../../../../hooks/useZipcode';
+import api from "../../../../services/api";
 
 export default function ClientModal() {
 	const {
@@ -28,6 +29,7 @@ export default function ClientModal() {
 
 	const { setOpenSnackClientAdd } = useContext(ModalsContext);
 	const { customersUpdate } = useCustomers();
+	const { handleZipcodeBlur } = useZipcode()
 
 	function handleChange(event) {
 		setClientForm((prevState) => {
@@ -314,6 +316,78 @@ export default function ClientModal() {
 					<Box
 						sx={{
 							mb: "0.5rem",
+							display: "flex",
+							justifyContent: "center",
+							gap: "1.5rem",
+						}}
+					>
+						<Box>
+							<InputLabel
+								htmlFor="icep"
+								sx={{
+									fontFamily: "Nunito",
+									fontSize: "0.875rem",
+									fontWeight: "600",
+									lineHeight: "1.25rem",
+									color: "SCGray2",
+									mb: "0.38rem",
+								}}
+							>
+								CEP
+							</InputLabel>
+							<OutlinedInput
+								placeholder="Digite o CEP"
+								id="icep"
+								sx={{
+									width: "14.4rem",
+									height: "2.75rem",
+									borderRadius: "0.5rem",
+									fontFamily: "Nunito",
+									fontSize: "1rem",
+									fontWeight: "400",
+									lineHeight: "1.5rem",
+								}}
+								name="zipcode"
+								value={clientForm.zipcode}
+								onChange={(event) => handleChange(event)}
+								onBlur={e => handleZipcodeBlur(e.target.value)}
+							/>
+						</Box>
+						<Box>
+							<InputLabel
+								htmlFor="ihood"
+								sx={{
+									fontFamily: "Nunito",
+									fontSize: "0.875rem",
+									fontWeight: "600",
+									lineHeight: "1.25rem",
+									color: "SCGray2",
+									mb: "0.38rem",
+								}}
+							>
+								Bairro
+							</InputLabel>
+							<OutlinedInput
+								placeholder="Digite o bairro"
+								id="ihood"
+								sx={{
+									width: "14.6rem",
+									height: "2.75rem",
+									borderRadius: "0.5rem",
+									fontFamily: "Nunito",
+									fontSize: "1rem",
+									fontWeight: "400",
+									lineHeight: "1.5rem",
+								}}
+								name="neighborhood"
+								value={clientForm.neighborhood}
+								onChange={(event) => handleChange(event)}
+							/>
+						</Box>
+					</Box>
+					<Box
+						sx={{
+							mb: "0.5rem",
 						}}
 					>
 						<InputLabel
@@ -381,77 +455,7 @@ export default function ClientModal() {
 							onChange={(event) => handleChange(event)}
 						/>
 					</Box>
-					<Box
-						sx={{
-							mb: "0.5rem",
-							display: "flex",
-							justifyContent: "center",
-							gap: "1.5rem",
-						}}
-					>
-						<Box>
-							<InputLabel
-								htmlFor="icep"
-								sx={{
-									fontFamily: "Nunito",
-									fontSize: "0.875rem",
-									fontWeight: "600",
-									lineHeight: "1.25rem",
-									color: "SCGray2",
-									mb: "0.38rem",
-								}}
-							>
-								CEP
-							</InputLabel>
-							<OutlinedInput
-								placeholder="Digite o CEP"
-								id="icep"
-								sx={{
-									width: "14.4rem",
-									height: "2.75rem",
-									borderRadius: "0.5rem",
-									fontFamily: "Nunito",
-									fontSize: "1rem",
-									fontWeight: "400",
-									lineHeight: "1.5rem",
-								}}
-								name="zipcode"
-								value={clientForm.zipcode}
-								onChange={(event) => handleChange(event)}
-							/>
-						</Box>
-						<Box>
-							<InputLabel
-								htmlFor="ihood"
-								sx={{
-									fontFamily: "Nunito",
-									fontSize: "0.875rem",
-									fontWeight: "600",
-									lineHeight: "1.25rem",
-									color: "SCGray2",
-									mb: "0.38rem",
-								}}
-							>
-								Bairro
-							</InputLabel>
-							<OutlinedInput
-								placeholder="Digite o bairro"
-								id="ihood"
-								sx={{
-									width: "14.6rem",
-									height: "2.75rem",
-									borderRadius: "0.5rem",
-									fontFamily: "Nunito",
-									fontSize: "1rem",
-									fontWeight: "400",
-									lineHeight: "1.5rem",
-								}}
-								name="neighborhood"
-								value={clientForm.neighborhood}
-								onChange={(event) => handleChange(event)}
-							/>
-						</Box>
-					</Box>
+
 					<Box
 						sx={{
 							mb: "3.56rem",
