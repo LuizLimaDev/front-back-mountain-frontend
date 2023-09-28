@@ -5,13 +5,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../../assets/create-billing.png";
 import { ModalsContext } from "../../../../context/ModalsContext";
 import useCustomers from "../../../../hooks/useCustomers";
 import ChargeModal from "../../../Utils/Modals/ChargeModal";
+import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import "./style.css";
 
 let red = (
@@ -26,11 +27,19 @@ let green = (
 );
 
 export default function ClientsTable() {
-	const { customers } = useCustomers();
-	const { setOpenChargeModal, setCustomerCharges } =
-		useContext(ModalsContext);
-
+	const { customers, customersParams, setCustomersParams } = useCustomers();
+	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
+	const [order, setOrder] = useState(false);
 	const theme = useTheme();
+
+	function handleOrder(){
+		setOrder(!order);
+		
+		const localCustomersParams = customersParams;
+		localCustomersParams.orderName = order ? "desc" : "asc";
+
+		setCustomersParams((prevState) => prevState = {...localCustomersParams})
+	}
 
 	return (
 		<TableContainer
@@ -56,6 +65,7 @@ export default function ClientsTable() {
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}
+									onClick={() => handleOrder()}
 								/>{" "}
 								Cliente
 							</div>
@@ -126,6 +136,7 @@ export default function ClientsTable() {
 					))}
 				</TableBody>
 			</Table>
+					{ customers.length === 0 ? <ErrorSearchPage /> : null }
 			<ChargeModal />
 		</TableContainer>
 	);

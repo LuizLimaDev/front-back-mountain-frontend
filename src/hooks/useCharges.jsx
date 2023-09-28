@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { ModalsContext } from "../context/ModalsContext";
 
 export default function useCharges() {
+
 	const {
 		charges,
 		charge,
@@ -15,6 +16,7 @@ export default function useCharges() {
 		setChargeEdit,
 		setChargeDetailSelected
 	} = useContext(ChargesContext);
+
 	const { value } = useContext(SingContext);
 	const { setOpenChargeDetailsModal } = useContext(ModalsContext)
 
@@ -24,6 +26,9 @@ export default function useCharges() {
 				headers: {
 					Authorization: `Bearer ${value}`,
 				},
+				params: {
+					...chargesParams
+				}
 			});
 
 			setCharges(data.charges);
@@ -41,7 +46,7 @@ export default function useCharges() {
 				dueDate: chargeEdit.dueDate
 			}, {
 				headers: {
-					Authorization: `Beare ${value}`
+					Authorization: `Bearer ${value}`
 				}
 			})
 		} catch (error) {
@@ -65,7 +70,7 @@ export default function useCharges() {
 	useEffect(() => {
 		getCharges();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [chargesParams]);
 
 	return {
 		charges,
@@ -77,5 +82,7 @@ export default function useCharges() {
 		handleEditCharge,
 		getCharges,
 		openChargeDetails
+		chargesParams,
+		setChargesParams
 	};
 }
