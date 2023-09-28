@@ -6,7 +6,6 @@ import { format } from "date-fns";
 import { ModalsContext } from "../context/ModalsContext";
 
 export default function useCharges() {
-
 	const {
 		charges,
 		charge,
@@ -14,7 +13,11 @@ export default function useCharges() {
 		setCharge,
 		chargeEdit,
 		setChargeEdit,
-		setChargeDetailSelected
+		chargeDelete,
+		setChargeDelete,
+		setChargeDetailSelected,
+		chargesParams,
+		setChargesParams,
 	} = useContext(ChargesContext);
 
 	const { value } = useContext(SingContext);
@@ -48,8 +51,26 @@ export default function useCharges() {
 				headers: {
 					Authorization: `Bearer ${value}`
 				}
-			})
+			});
 		} catch (error) {
+			return error.response.data;
+		}
+	}
+
+	async function handleDeleteCharge() {
+		try {
+			const response = await api.delete(`/charges/${chargeDelete.id}`, {
+				headers: {
+					Authorization: `Bearer ${value}`,
+				},
+			});
+			console.log(response);
+			setChargeDelete(null);
+			setCharges((prevCharges) =>
+				prevCharges.filter((charge) => charge.id !== chargeDelete.id)
+			);
+		} catch (error) {
+			console.log("hello", error);
 			return error.response.data;
 		}
 	}
@@ -81,6 +102,9 @@ export default function useCharges() {
 		setChargeEdit,
 		handleEditCharge,
 		getCharges,
+		chargeDelete,
+		setChargeDelete,
+		handleDeleteCharge,
 		openChargeDetails,
 		chargesParams,
 		setChargesParams

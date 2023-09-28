@@ -8,16 +8,29 @@ import SnackBar from "../../components/Feedback/SnackBar";
 import ChargeDetailModal from "../../components/Utils/Modals/ChargeDetailModal";
 
 function Billings() {
-	const { charges } = useCharges()
-	const { openSnackChargeEdit, setOpenSnackChargeEdit } = useContext(ModalsContext);
-	const theme = useTheme()
+	const { charges } = useCharges();
+	const {
+		openSnackChargeEdit,
+		setOpenSnackChargeEdit,
+		openSnackChargeDelete,
+		setOpenSnackChargeDelete,
+	} = useContext(ModalsContext);
+	const theme = useTheme();
 
 	return (
-		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"} >
+		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"}>
 			<BillingsSearch />
 			<BillingsTable charges={charges} />
-			<ChargeDetailModal />
-			<SnackBar phrase={"Cobrança editada com sucesso!"} openSnack={openSnackChargeEdit} setOpenSnack={setOpenSnackChargeEdit} />
+			<SnackBar
+				phrase={"Cobrança editada com sucesso!"}
+				openSnack={openSnackChargeEdit}
+				setOpenSnack={setOpenSnackChargeEdit}
+			/>
+			<SnackBar
+				phrase={"Cobrança excluída com sucesso!"}
+				openSnack={openSnackChargeDelete}
+				setOpenSnack={setOpenSnackChargeDelete}
+			/>
 		</Box>
 	);
 }
