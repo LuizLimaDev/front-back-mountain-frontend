@@ -19,7 +19,9 @@ import { useContext } from "react";
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 	const { setChargeEdit } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext)
+	const { setOpenChargeEditModal } = useContext(ModalsContext);
+	const { setChargeDelete } = useCharges();
+	const { setOpenChargeDeleteModal } = useContext(ModalsContext);
 
 	return (
 		<TableContainer
@@ -169,18 +171,29 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											sx={{
 												cursor: "pointer",
 											}}
-											onClick={(() => {
+											onClick={() => {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status:charge.status === "vencido" ? "pendente": charge.status,
+													status:
+														charge.status ===
+														"vencido"
+															? "pendente"
+															: charge.status,
 													value: charge.value,
-													dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
-													description: charge.description,
-													customerId: charge.customerid,
-												})
+													dueDate: format(
+														new Date(
+															charge.duedate
+														),
+														"yyyy'-'MM'-'dd"
+													),
+													description:
+														charge.description,
+													customerId:
+														charge.customerid,
+												});
 												setOpenChargeEditModal(true);
-											})}
+											}}
 										>
 											<img
 												src={EditIcon}
@@ -206,6 +219,10 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											spacing={"0.25rem"}
 											sx={{
 												cursor: "pointer",
+											}}
+											onClick={() => {
+												setChargeDelete(null);
+												setOpenChargeDeleteModal(true);
 											}}
 										>
 											<img

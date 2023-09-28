@@ -2,41 +2,45 @@ import { useContext } from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CloseIcon from "../../../../assets/closeIcon.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import api from "../../../../services/api";
-import { SingContext } from "../../../../context/SingContext";
 import Frame from "../../../../assets/frame.svg";
+import useCharges from "../../../../hooks/useCharges";
+import useCustomers from "./../../../../hooks/useCustomers";
 
 export default function DeleteChargeModal() {
+	const { chargeDelete, setChargeDelete, handleDeleteCharge, getCharges } =
+		useCharges();
+	const { getCustomer } = useCustomers();
 	const {
-		openDeleteChargeModal,
-		setOpenDeleteChargeModal,
-		chargeToDelete,
-		setChargeToDelete,
+		openChargeDeleteModal,
+		setOpenChargeDeleteModal,
+		setOpenSnackChargeDelete,
 	} = useContext(ModalsContext);
-	const { value } = useContext(SingContext);
 
-	async function handleDeleteCharge(event) {
-		event.preventDefault();
-		try {
-			await api.delete(`/charges/${chargeToDelete.id}`, {
-				headers: {
-					Authorization: `Bearer ${value}`,
-				},
-			});
+	async function handleSubmit() {
+		await handleDeleteCharge();
+		getCustomer(chargeDelete.customerId);
+		getCharges();
+		setOpenSnackChargeDelete(true);
+		closeModal();
+	}
 
-			setOpenDeleteChargeModal(false);
-			setChargeToDelete(null);
-		} catch (error) {
-			console.log(error);
-		}
+	function closeModal() {
+		setChargeDelete({
+			customerId: "",
+			name: "",
+			description: "",
+			dueDate: "",
+			value: 0,
+			status: "pago",
+		});
+		setOpenChargeDeleteModal(false);
 	}
 
 	return (
 		<Modal
-			open={openDeleteChargeModal}
+			open={openChargeDeleteModal}
 			onClose={() => {
-				setOpenDeleteChargeModal(false);
-				setChargeToDelete(null);
+				closeModal();
 			}}
 		>
 			<Box
@@ -64,76 +68,82 @@ export default function DeleteChargeModal() {
 						cursor: "pointer",
 					}}
 					onClick={() => {
-						setOpenDeleteChargeModal(false);
-						setChargeToDelete(null);
+						closeModal();
 					}}
 				/>
-				<img
-					src={Frame}
-					alt="Ícone de atenção"
-					style={{
-						alignSelf: "center",
-						width: "10rem",
-						height: "10rem",
-					}}
-				/>
-
-				<Typography
-					sx={{
-						color: " #CC7800",
-						textAlign: "center",
-						fontFamily: "Montserrat",
-						fontSize: "1.125rem",
-						fontStyle: "normal",
-						fontWeight: "600",
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						handleSubmit();
 					}}
 				>
-					Tem certeza que deseja excluir esta cobrança?
-				</Typography>
-
-				<Box
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: "1.5rem",
-						mt: "2rem",
-					}}
-				>
-					<Button
-						sx={{
-							width: "6.25rem",
-							height: "1.5rem",
-							color: "#AE1100",
-							fontFamily: "Nunito",
-							fontSize: "1.125rem",
-							fontWeight: "400",
-							backgroundColor: "#F2D6D0",
-							borderRadius: "0.25rem",
+					<img
+						src={Frame}
+						alt="Ícone de atenção"
+						style={{
+							alignSelf: "center",
+							width: "10rem",
+							height: "10rem",
 						}}
-						onClick={() => {
-							setOpenDeleteChargeModal(false);
-							setChargeToDelete(null);
+					/>
+
+					<Typography
+						sx={{
+							color: " #CC7800",
+							textAlign: "center",
+							fontFamily: "Montserrat",
+							fontSize: "1.125rem",
+							fontStyle: "normal",
+							fontWeight: "600",
 						}}
 					>
-						Não
-					</Button>
+						Tem certeza que deseja excluir esta cobrança?
+					</Typography>
 
-					<Button
+					<Box
 						sx={{
-							width: "6.25rem",
-							height: "1.5rem",
-							color: "#034A2A",
-							fontFamily: "Nunito",
-							fontSize: "1.125rem",
-							fontWeight: "400",
-							backgroundColor: "#ACD9C5",
-							borderRadius: "0.25rem",
+							display: "flex",
+							alignItems: "center",
+							gap: "1.5rem",
+							mt: "2rem",
 						}}
-						onClick={handleDeleteCharge}
 					>
-						Sim
-					</Button>
-				</Box>
+						<Button
+							sx={{
+								width: "6.25rem",
+								height: "1.5rem",
+								color: "#AE1100",
+								fontFamily: "Nunito",
+								fontSize: "1.125rem",
+								fontWeight: "400",
+								backgroundColor: "#F2D6D0",
+								borderRadius: "0.25rem",
+							}}
+							type="button"
+							onClick={() => {
+								closeModal();
+							}}
+						>
+							Não
+						</Button>
+
+						<Button
+							sx={{
+								width: "6.25rem",
+								height: "1.5rem",
+								color: "#034A2A",
+								fontFamily: "Nunito",
+								fontSize: "1.125rem",
+								fontWeight: "400",
+								backgroundColor: "#ACD9C5",
+								borderRadius: "0.25rem",
+							}}
+							type="submit"
+						>
+							Sim
+						</Button>
+					</Box>
+				</form>
 			</Box>
 		</Modal>
 	);

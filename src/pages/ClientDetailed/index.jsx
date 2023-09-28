@@ -25,8 +25,10 @@ export default function ClientDetailed() {
 		setCustomerCharges,
 		openSnackChargeAdd,
 		setOpenSnackChargeAdd,
-		openSnackChargeEdit, 
-		setOpenSnackChargeEdit
+		openSnackChargeEdit,
+		setOpenSnackChargeEdit,
+		openSnackChargeDelete,
+		setOpenSnackChargeDelete,
 	} = useContext(ModalsContext);
 
 	useEffect(() => {
@@ -34,7 +36,7 @@ export default function ClientDetailed() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
-		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"} >
+		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"}>
 			<Stack
 				direction={"row"}
 				spacing={1}
@@ -268,7 +270,16 @@ export default function ClientDetailed() {
 				openSnack={openSnackChargeAdd}
 				setOpenSnack={setOpenSnackChargeAdd}
 			/>
-			<SnackBar phrase={"Cobrança editada com sucesso!"} openSnack={openSnackChargeEdit} setOpenSnack={setOpenSnackChargeEdit} />
+			<SnackBar
+				phrase={"Cobrança editada com sucesso!"}
+				openSnack={openSnackChargeEdit}
+				setOpenSnack={setOpenSnackChargeEdit}
+			/>
+			<SnackBar
+				phrase={"Cobrança excluída com sucesso!"}
+				openSnack={openSnackChargeDelete}
+				setOpenSnack={setOpenSnackChargeDelete}
+			/>
 		</Box>
 	);
 }
