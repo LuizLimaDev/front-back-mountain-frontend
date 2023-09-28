@@ -43,6 +43,7 @@ function ClientHeader() {
 				return setShowErrorSearch(true);
 			}
 
+			setShowErrorSearch(false);
 			setCustomers((prevState) => {
 				return prevState = [...response.data.customers];
 			});

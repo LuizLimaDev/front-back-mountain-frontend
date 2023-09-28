@@ -47,6 +47,7 @@ export default function BillingsSearch() {
 				return setShowErrorBilling(true);
 			}
 
+			setShowErrorBilling(false);
 			setCharges((prevState) => prevState = [...response.data.charges]);
 		} catch (error) {
 			console.log(error);
