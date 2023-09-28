@@ -4,7 +4,6 @@ import CloseIcon from "../../../../assets/closeIcon.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
 import api from "../../../../services/api";
 import { SingContext } from "../../../../context/SingContext";
-import useCustomers from "../../../../hooks/useCustomers";
 import Frame from "../../../../assets/frame.svg";
 
 export default function DeleteChargeModal() {
@@ -15,7 +14,6 @@ export default function DeleteChargeModal() {
 		setChargeToDelete,
 	} = useContext(ModalsContext);
 	const { value } = useContext(SingContext);
-	const { getCustomer } = useCustomers();
 
 	async function handleDeleteCharge(event) {
 		event.preventDefault();
@@ -27,10 +25,9 @@ export default function DeleteChargeModal() {
 			});
 
 			setOpenDeleteChargeModal(false);
-			getCustomer(chargeToDelete.customerId);
 			setChargeToDelete(null);
 		} catch (error) {
-			console.log(error.response.data.message);
+			console.log(error);
 		}
 	}
 

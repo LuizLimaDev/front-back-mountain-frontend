@@ -14,6 +14,7 @@ import { moneyFormat } from "../../../../utils/moneyFormat";
 import DeleteChargeModal from "../../../Utils/Modals/DeleteChargeModal";
 import { useContext, useState } from "react";
 import { ModalsContext } from "../../../../context/ModalsContext";
+import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
@@ -24,12 +25,16 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 		useContext(ModalsContext);
 
 	const handleDeleteClick = (charge) => {
-		setOpenDeleteChargeModal(true);
 		setChargeToDelete(charge);
+		console.log(charge);
+		setOpenDeleteChargeModal(true);
 	};
 
-	console.log("openDeleteChargeModal:", openDeleteChargeModal);
-	console.log("chargeToDelete:", chargeToDelete);
+	useEffect(() => {
+		if (chargeToDelete !== null) {
+			setOpenDeleteChargeModal(true);
+		}
+	}, [chargeToDelete, setOpenDeleteChargeModal]);
 
 	return (
 		<TableContainer

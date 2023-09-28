@@ -29,7 +29,14 @@ export const ModalsProvider = ({ children }) => {
 	const [editFinished, SetEditFinished] = useState(false);
 
 	const [openDeleteChargeModal, setOpenDeleteChargeModal] = useState(false);
-	const [chargeToDelete, setChargeToDelete] = useState();
+	const [chargeToDelete, setChargeToDelete] = useState({
+		customerId: "",
+		name: "",
+		description: "",
+		dueDate: "",
+		value: 0,
+		status: "",
+	});
 
 	const handleOpenEditUser = () => setOpenModalEditUser(true);
 	const handleCloseEditUser = () => setOpenModalEditUser(false);
