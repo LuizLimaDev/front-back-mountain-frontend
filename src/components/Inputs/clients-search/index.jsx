@@ -13,6 +13,7 @@ import { ModalsContext } from "../../../context/ModalsContext";
 
 function ClientHeader() {
 	const [search, setSearch] = useState("");
+	
 	const { setOpenClientModal, value } = useContext(SingContext);
 	const { setCustomers } = useContext(CustomersContext);
 	const { setShowErrorSearch } = useContext(ModalsContext);
