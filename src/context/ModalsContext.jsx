@@ -7,6 +7,7 @@ export const ModalsProvider = ({ children }) => {
 	const [openModalEditUser, setOpenModalEditUser] = useState(false);
 	const [openModalEditSucess, setOpenModalEditSucess] = useState(false);
 	const [openChargeModal, setOpenChargeModal] = useState(false);
+	const [openChargeEditModal, setOpenChargeEditModal] = useState(false);
 	const [customerCharges, setCustomerCharges] = useState({
 		customerId: "",
 		name: "",
@@ -18,6 +19,7 @@ export const ModalsProvider = ({ children }) => {
 	const [openSnackChargeAdd, setOpenSnackChargeAdd] = useState(false);
 	const [openSnackClientAdd, setOpenSnackClientAdd] = useState(false);
 	const [openSnackClientEdit, setOpenSnackClientEdit] = useState(false);
+	const [openSnackChargeEdit, setOpenSnackChargeEdit] = useState(false);
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -71,6 +73,10 @@ export const ModalsProvider = ({ children }) => {
 				setOpenSnackClientAdd,
 				openSnackClientEdit,
 				setOpenSnackClientEdit,
+				openChargeEditModal, 
+				setOpenChargeEditModal,
+				openSnackChargeEdit, 
+				setOpenSnackChargeEdit,
 				showErrorSearch,
 				setShowErrorSearch,
 				showErrorBilling,
