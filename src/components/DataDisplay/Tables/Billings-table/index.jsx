@@ -14,12 +14,17 @@ import { moneyFormat } from "../../../../utils/moneyFormat";
 import useCharges from "../../../../hooks/useCharges";
 import { ModalsContext } from "../../../../context/ModalsContext";
 import { useContext } from "react";
+import { ChargesContext } from "../../../../context/ChargesContext";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 	const { setChargeEdit } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext)
+	const { setChargeDetailSelected } = useContext(ChargesContext)
+	const {
+		setOpenChargeEditModal,
+		setOpenChargeDetailsModal
+	} = useContext(ModalsContext)
 
 	return (
 		<TableContainer
@@ -87,7 +92,22 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									? theme.billingsRed
 									: theme.billingsCyan;
 						return (
-							<TableRow key={charge.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableRow
+								key={charge.id}
+								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+								onClick={(() => {
+									setChargeDetailSelected({
+										name: charge.name,
+										id: charge.id,
+										status: charge.status,
+										value: charge.value,
+										dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
+										description: charge.description,
+										customerId: charge.customerid,
+									})
+									setOpenChargeDetailsModal(true);
+								})}
+							>
 								{isClientDetailed ? null : (
 									<TableCell sx={theme.infoBillingsTable}>
 										{charge.name}
@@ -160,7 +180,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status:charge.status === "vencido" ? "pendente": charge.status,
+													status: charge.status === "vencido" ? "pendente" : charge.status,
 													value: charge.value,
 													dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
 													description: charge.description,

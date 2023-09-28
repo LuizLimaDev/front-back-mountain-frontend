@@ -22,7 +22,15 @@ export const ChargesProvider = ({ children }) => {
 		description: "",
 		customerId: "",
 	});
-	
+	const [chargeDetailSelected, setChargeDetailSelected] = useState({
+		name: "",
+		id: "",
+		status: "",
+		value: "",
+		dueDate: "",
+		description: "",
+		customerId: "",
+	});
 
 	return (
 		<ChargesContext.Provider
@@ -31,8 +39,10 @@ export const ChargesProvider = ({ children }) => {
 				setCharges,
 				charge,
 				setCharge,
-				chargeEdit, 
-				setChargeEdit
+				chargeEdit,
+				setChargeEdit,
+				chargeDetailSelected,
+				setChargeDetailSelected
 			}}
 		>
 			{children}

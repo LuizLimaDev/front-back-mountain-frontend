@@ -1,22 +1,36 @@
-import { Box, Modal, Paper, Stack, Typography } from "@mui/material"
-import { useState } from "react"
-import paperIcon from "../../../../assets/paper-chargedetails.svg"
-import closeModal from "../../../../assets/close.svg"
 import { useTheme } from "@emotion/react"
+import { Box, Modal, Paper, Stack, Typography } from "@mui/material"
+import { useContext } from "react"
+import closeModal from "../../../../assets/close.svg"
+import paperIcon from "../../../../assets/paper-chargedetails.svg"
+import { ChargesContext } from "../../../../context/ChargesContext"
+import { ModalsContext } from "../../../../context/ModalsContext"
+import { moneyFormat } from "../../../../utils/moneyFormat"
 
 function ChargeDetailModal() {
-    // TODO - mover os estados para um contexto para usar nas paginas
-    // TODO - detalhes do Cliente e Cobranças
-    const [chargeDetailModal, setChargeDetailModal] = useState(true)
-    const handleOpenChargeDetailModal = () => setChargeDetailModal(true);
-    const handleCloseChargeDetailModal = () => setChargeDetailModal(false);
+    const { openChargeDetailsModal, setOpenChargeDetailsModal } = useContext(ModalsContext)
+    const { chargeDetailSelected } = useContext(ChargesContext)
     const theme = useTheme()
+
+    function statusColor() {
+        if (chargeDetailSelected.status === "pago") {
+            return { ...theme.billingsCyan, ...theme.statusBillings }
+        }
+
+        if (chargeDetailSelected.status === "vencido") {
+            return { ...theme.billingsRed, ...theme.statusBillings }
+        }
+
+        if (chargeDetailSelected.status === "pendente") {
+            return { ...theme.billingsYellow, ...theme.statusBillings }
+        }
+    }
 
     return (
         <Stack>
             <Modal
-                open={chargeDetailModal}
-                onClose={handleCloseChargeDetailModal}
+                open={openChargeDetailsModal}
+                onClose={() => setOpenChargeDetailsModal(false)}
                 sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -47,7 +61,7 @@ function ChargeDetailModal() {
 
                             cursor: "pointer"
                         }}
-                        onClick={() => handleCloseChargeDetailModal()}
+                        onClick={() => setOpenChargeDetailsModal(false)}
                     />
 
                     <Box
@@ -72,7 +86,7 @@ function ChargeDetailModal() {
                             <Typography
                                 sx={{ fontFamily: "Nunito", fontSize: "1rem", fontWeight: "400" }}
                             >
-                                Sara Lage Silva
+                                {chargeDetailSelected.name}
                             </Typography>
                         </Box>
 
@@ -83,7 +97,7 @@ function ChargeDetailModal() {
                             <Typography
                                 sx={{ fontFamily: "Nunito", fontSize: "1rem", fontWeight: "400" }}
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem iusto, nesciunt quaerat voluptatibus eaque cupiditate.
+                                {chargeDetailSelected.description}
                             </Typography>
                         </Box>
 
@@ -95,7 +109,7 @@ function ChargeDetailModal() {
                                 <Typography
                                     sx={{ fontFamily: "Nunito", fontSize: "1.25rem", fontWeight: "400" }}
                                 >
-                                    01/01/2022
+                                    {chargeDetailSelected.dueDate}
                                 </Typography>
                             </Box>
 
@@ -107,7 +121,9 @@ function ChargeDetailModal() {
                                     sx={{ fontFamily: "Nunito", fontSize: "1.25rem", fontWeight: "400" }}
 
                                 >
-                                    R$ 300,00
+                                    {moneyFormat
+                                        .format(chargeDetailSelected.value)
+                                        .replace(/^(\D+)/, "$1 ")}
                                 </Typography>
                             </Box>
                         </Box>
@@ -121,7 +137,7 @@ function ChargeDetailModal() {
                                 <Typography
                                     sx={{ fontFamily: "Nunito", fontSize: "1rem", fontWeight: "400" }}
                                 >
-                                    248563147
+                                    {chargeDetailSelected.id}
                                 </Typography>
                             </Box>
 
@@ -129,9 +145,10 @@ function ChargeDetailModal() {
                                 <Typography sx={theme.inputModalLabelStyle}>
                                     Status
                                 </Typography>
-                                {/* TODO - const de conditional renderin class para cores */}
-                                <Typography>
-                                    Vencida
+                                <Typography
+                                    sx={statusColor}
+                                >
+                                    {chargeDetailSelected.status}
                                 </Typography>
                             </Box>
                         </Box>
