@@ -13,9 +13,6 @@ import { ModalsContext } from "../../../../context/ModalsContext";
 import useCustomers from "../../../../hooks/useCustomers";
 import ChargeModal from "../../../Utils/Modals/ChargeModal";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
-import { CustomersContext } from "../../../../context/CustomersContext";
-import { SingContext } from "../../../../context/SingContext";
-import api from "../../../../services/api";
 import "./style.css";
 
 let red = (
@@ -30,26 +27,18 @@ let green = (
 );
 
 export default function ClientsTable() {
-	const { customers } = useCustomers();
-	const { setOpenChargeModal, setCustomerCharges, showErrorSearch } = useContext(ModalsContext);
+	const { customers, customersParams, setCustomersParams } = useCustomers();
+	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
 	const [order, setOrder] = useState(false);
-	const { setCustomers } = useContext(CustomersContext);
-	const { value } = useContext(SingContext);
 	const theme = useTheme();
 
-	async function handleOrder(){
+	function handleOrder(){
 		setOrder(!order);
 		
-		try {
-			const response = await api.get(`/customers?orderName=${order ? "desc" : "asc"}`, {
-				headers: {
-					Authorization: `Bearer ${ value }`
-				}
-			});
-			return setCustomers((prevState) => prevState = [...response.data.customers]);
-		} catch (error) {
-			console.log(error);
-		}
+		const localCustomersParams = customersParams;
+		localCustomersParams.orderName = order ? "desc" : "asc";
+
+		setCustomersParams((prevState) => prevState = {...localCustomersParams})
 	}
 
 	return (
@@ -147,7 +136,7 @@ export default function ClientsTable() {
 					))}
 				</TableBody>
 			</Table>
-					{ showErrorSearch && <ErrorSearchPage /> }
+					{ customers.length === 0 ? <ErrorSearchPage /> : null }
 			<ChargeModal />
 		</TableContainer>
 	);

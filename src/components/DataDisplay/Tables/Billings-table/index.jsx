@@ -11,12 +11,8 @@ import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
-import { useContext, useState } from "react";
-import { ModalsContext } from "../../../../context/ModalsContext";
+import { useState } from "react";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
-import { ChargesContext } from "../../../../context/ChargesContext";
-import { SingContext } from "../../../../context/SingContext";
-import api from "../../../../services/api";
 import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
