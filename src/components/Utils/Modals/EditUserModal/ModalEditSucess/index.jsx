@@ -2,13 +2,13 @@ import { Box, Modal, Paper, Typography } from "@mui/material";
 import sucessImg from "../../../../../assets/success.svg"
 import { useContext } from "react";
 import { ModalsContext } from "../../../../../context/ModalsContext";
+import useGetUserDataInfo from "../../../../../hooks/useGetUserDataInfo";
 
 function ModalEditSucess() {
   const { openModalEditSucess, handleCloseEditSucess } = useContext(ModalsContext)
+  const { timeoutSucess } = useGetUserDataInfo()
 
-  setTimeout(() => {
-    handleCloseEditSucess()
-  }, 2500)
+  timeoutSucess()
 
   return (
     <Modal

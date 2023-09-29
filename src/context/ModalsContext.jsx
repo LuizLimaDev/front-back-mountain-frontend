@@ -36,6 +36,8 @@ export const ModalsProvider = ({ children }) => {
 	const [editFinished, SetEditFinished] = useState(false);
 	const [showErrorSearch, setShowErrorSearch] = useState(false);
 	const [showErrorBilling, setShowErrorBilling] = useState(false);
+	const [showPassword, setShowPassword] = useState(false)
+	const [passowrdCombination, setPassowrdCombination] = useState("")
 
 	const handleOpenEditUser = () => setOpenModalEditUser(true);
 	const handleCloseEditUser = () => setOpenModalEditUser(false);
@@ -94,6 +96,10 @@ export const ModalsProvider = ({ children }) => {
 				setShowErrorBilling,
 				openSnackChargeCannotDelete,
 				setOpenSnackChargeCannotDelete,
+				showPassword,
+				setShowPassword,
+				passowrdCombination,
+				setPassowrdCombination,
 			}}
 		>
 			{children}

@@ -15,124 +15,35 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import imgCloseModal from "../../../../assets/close.svg";
 import { ModalsContext } from '../../../../context/ModalsContext';
-import { SingContext } from '../../../../context/SingContext';
 import useEmailValidation from '../../../../hooks/useEmailValidation';
-import api from '../../../../services/api';
+import useGetUserDataInfo from '../../../../hooks/useGetUserDataInfo';
 import SCButton from '../../../Inputs/SCButton/indxe';
 
 function EditUserModal() {
   const {
     openModalEditUser,
     handleCloseEditUser,
-    handleOpenEditSucess,
-    SetEditFinished
+    name, setName,
+    email, setEmail,
+    cpf, setCpf,
+    phone, setPhone,
+    password, setPassword,
+    confirmPassword, setConfirmPassword,
+    showPassword,
+    passowrdCombination
   } = useContext(ModalsContext)
-  const { value, setReceivedEmail } = useContext(SingContext)
-
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [cpf, setCpf] = useState("")
-  const [phone, setPhone] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-
-  const [apiErrors, setApiErrors] = useState([])
-  const [passowrdCombination, setPassowrdCombination] = useState("")
-  const { handleBlur, existingEmailError, setExistingEmailError } = useEmailValidation()
-
+  const { handleBlur, existingEmailError } = useEmailValidation()
+  const {
+    handleClickShowPassword,
+    handleMouseDownPassword,
+    apiErrors,
+    clearForm,
+    handleSubmit,
+  } = useGetUserDataInfo()
   const theme = useTheme()
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  function clearForm() {
-    setName("")
-    setEmail("")
-    setCpf("")
-    setPhone("")
-    setPassword("")
-    setConfirmPassword("")
-    setShowPassword(false)
-    setApiErrors([])
-    setExistingEmailError("")
-  }
-
-  useEffect(() => {
-    async function userGetDataInfo() {
-      try {
-        const { data } = await api.get("/users/profile", {
-          headers: {
-            Authorization: `Bearer ${value}`
-          }
-        })
-
-        setCpf(data.cpf)
-        setPhone(data.phone)
-        setName(data.name)
-        setEmail(data.email)
-        setReceivedEmail(data.email)
-      } catch (error) {
-        console.log(error.response.data)
-      }
-    }
-
-    if (openModalEditUser) {
-      userGetDataInfo()
-    }
-
-  }, [openModalEditUser, setReceivedEmail, value])
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-    setPassowrdCombination("")
-    setApiErrors([])
-
-    if (!password && confirmPassword) {
-      setApiErrors({ ...apiErrors, newPassword: `Digite a "Nova Senha" e o "Confirmar Senha"` })
-      return
-    }
-
-    if (password !== confirmPassword) {
-      setApiErrors({ ...apiErrors, newPassword: "As senhas não conferem" })
-      return
-    }
-
-    const userEditData = {
-      name,
-      email,
-      cpf,
-      phone,
-      newPassword: password
-    }
-
-    try {
-      await api.put("/users", userEditData, {
-        headers: {
-          Authorization: `Bearer ${value}`
-        }
-      })
-
-      SetEditFinished(true)
-      clearForm()
-      handleCloseEditUser()
-      handleOpenEditSucess()
-
-    } catch (error) {
-      const errors = error.response.data.errors;
-
-      errors.map((item) => {
-        setApiErrors((prevState) => {
-          return { ...prevState, [item.type]: item.message }
-        })
-      });
-    }
-  }
 
   return (
     <Stack>
