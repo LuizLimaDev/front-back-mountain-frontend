@@ -110,20 +110,10 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				</TableHead>
 				<TableBody sx={{ backgroundColor: "white" }}>
 					{charges.map((charge) => {
-						// const chargeDate = parseISO(charge.duedate);
-						// const formattedDate = format(chargeDate, "dd-MM-yyyy");
-
-						// const option = {
-						// 	year: "numeric",
-						// 	month: "numeric",
-						// 	day: "numeric",
-						// };
-
 						const chargeDate = format(
 							addHours(new Date(charge.duedate), 3),
 							"dd-MM-yyyy"
 						);
-
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
