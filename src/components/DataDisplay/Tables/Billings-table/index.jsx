@@ -290,7 +290,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
-			{charges.length == 0 ? <ErrorSearchPage /> : null}
+			{charges.length == 0 && !isClientDetailed ? <ErrorSearchPage /> : null}
 		</TableContainer>
 	);
 }
