@@ -21,7 +21,7 @@ export default function useCharges() {
 	} = useContext(ChargesContext);
 
 	const { value } = useContext(SingContext);
-	const { setOpenChargeDetailsModal } = useContext(ModalsContext)
+	const { setOpenChargeDetailsModal } = useContext(ModalsContext);
 
 	async function getCharges() {
 		try {
@@ -30,8 +30,8 @@ export default function useCharges() {
 					Authorization: `Bearer ${value}`,
 				},
 				params: {
-					...chargesParams
-				}
+					...chargesParams,
+				},
 			});
 
 			setCharges(data.charges);
@@ -42,16 +42,20 @@ export default function useCharges() {
 
 	async function handleEditCharge() {
 		try {
-			await api.put(`/charges/${chargeEdit.id}`, {
-				description: chargeEdit.description,
-				status: chargeEdit.status,
-				value: chargeEdit.value,
-				dueDate: chargeEdit.dueDate
-			}, {
-				headers: {
-					Authorization: `Bearer ${value}`
+			await api.put(
+				`/charges/${chargeEdit.id}`,
+				{
+					description: chargeEdit.description,
+					status: chargeEdit.status,
+					value: chargeEdit.value,
+					dueDate: chargeEdit.dueDate,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${value}`,
+					},
 				}
-			});
+			);
 		} catch (error) {
 			return error.response.data;
 		}
@@ -70,7 +74,6 @@ export default function useCharges() {
 				prevCharges.filter((charge) => charge.id !== chargeDelete.id)
 			);
 		} catch (error) {
-			console.log("hello", error);
 			return error.response.data;
 		}
 	}
@@ -84,7 +87,7 @@ export default function useCharges() {
 			dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
 			description: charge.description,
 			customerId: charge.customerid,
-		})
+		});
 		setOpenChargeDetailsModal(true);
 	}
 
@@ -107,6 +110,6 @@ export default function useCharges() {
 		handleDeleteCharge,
 		openChargeDetails,
 		chargesParams,
-		setChargesParams
+		setChargesParams,
 	};
 }

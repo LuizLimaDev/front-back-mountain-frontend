@@ -5,7 +5,6 @@ import { ModalsContext } from "../../../../context/ModalsContext";
 import Frame from "../../../../assets/Frame.svg";
 import useCharges from "../../../../hooks/useCharges";
 import useCustomers from "./../../../../hooks/useCustomers";
-import { format } from "date-fns";
 
 export default function DeleteChargeModal() {
 	const { chargeDelete, setChargeDelete, handleDeleteCharge, getCharges } =
@@ -33,21 +32,14 @@ export default function DeleteChargeModal() {
 	async function handleDelete() {
 		try {
 			await handleDeleteCharge();
-			getCustomer(chargeDelete.customerId);
+			getCustomer(chargeDelete.customerid);
 			getCharges();
 
-			const currentDate = format(new Date(), "dd-MM-yyyy");
-			const chargeDate = chargeDelete.duedate;
-			const chargeDateFormatted = format(
-				new Date(chargeDate),
-				"dd-MM-yyyy"
-			);
+			const currentDate = new Date();
+			const chargeDate = new Date(chargeDelete.duedate);
+			const chargeStatus = chargeDelete.status;
 
-			if (chargeDelete.status === "pago") {
-				setOpenSnackChargeCannotDelete(true);
-			}
-
-			if (chargeDateFormatted < currentDate) {
+			if (chargeStatus === "pago" || chargeDate < currentDate) {
 				setOpenSnackChargeCannotDelete(true);
 			}
 
