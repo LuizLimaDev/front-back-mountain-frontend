@@ -39,11 +39,12 @@ function BillingDetailedPaid() {
 				);
 			})}
 			<Link
+				to="/billings"
 				className="table-btn"
 				onClick={(e) => {
 					e.preventDefault();
 					navigate('/billings');
-					setChargesParams({ filter: 'pago' });
+					setChargesParams({ filter: '["pago"]' });
 				}}
 			>
 				Ver todos
