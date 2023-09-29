@@ -1,10 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useCharges from "../../../../../hooks/useCharges";
 import useMetricsDashboard from "../../../../../hooks/useMetricsDashboard";
 import { moneyFormat } from "../../../../../utils/moneyFormat";
 import "./style.css";
 
 function BillingDetailedPaid() {
+
 	const { metrics } = useMetricsDashboard();
+	const { setChargesParams } = useCharges();
+	const navigate = useNavigate();
+
 	return (
 		<div className="table-small">
 			<div className="table-title">
@@ -33,10 +38,18 @@ function BillingDetailedPaid() {
 					</div>
 				);
 			})}
-			<Link to="/billings" className="table-btn">
+			<Link
+				to="/billings"
+				className="table-btn"
+				onClick={(e) => {
+					e.preventDefault();
+					navigate('/billings');
+					setChargesParams({ filter: '["pago"]' });
+				}}
+			>
 				Ver todos
 			</Link>
-		</div>
+		</div >
 	);
 }
 

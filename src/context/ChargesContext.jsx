@@ -32,7 +32,7 @@ export const ChargesProvider = ({ children }) => {
 		description: "",
 		customerId: "",
 	});
-	
+  
 	const [chargesParams, setChargesParams] = useState({});
 	return (
 		<ChargesContext.Provider
