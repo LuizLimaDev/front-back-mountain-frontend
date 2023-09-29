@@ -13,6 +13,10 @@ import BillingsTable from "../../components/DataDisplay/Tables/Billings-table/in
 import { ModalsContext } from "../../context/ModalsContext";
 import ChargeModal from "../../components/Utils/Modals/ChargeModal";
 import ChargeDetailModal from "../../components/Utils/Modals/ChargeDetailModal";
+import NotOkaySnack from "../../assets/notOkSnack.svg";
+import NotOkayExitSnack from "../../assets/notOkayExitSnack.svg";
+import OkSnack from "../../assets/okSnack.svg";
+import ExitSnack from "../../assets/exitSnack.svg";
 
 export default function ClientDetailed() {
 	const { getCustomer, customer, chargesByCustomer } = useCustomers();
@@ -30,7 +34,8 @@ export default function ClientDetailed() {
 		setOpenSnackChargeEdit,
 		openSnackChargeDelete,
 		setOpenSnackChargeDelete,
-
+		openSnackChargeCannotDelete,
+		setOpenSnackChargeCannotDelete,
 	} = useContext(ModalsContext);
 
 	useEffect(() => {
@@ -267,21 +272,46 @@ export default function ClientDetailed() {
 				openSnack={openSnackClientEdit}
 				setOpenSnack={setOpenSnackClientEdit}
 				phrase={"Edições do cadastro concluídas com sucesso"}
+				backgroundColor={"SCLightBlue"}
+				color={"SCDarkBlue"}
+				SnackImage={OkSnack}
+				ExitSnackImage={ExitSnack}
 			/>
 			<SnackBar
 				phrase={"Cobrança cadastrada com sucesso"}
 				openSnack={openSnackChargeAdd}
 				setOpenSnack={setOpenSnackChargeAdd}
+				backgroundColor={"SCLightBlue"}
+				color={"SCDarkBlue"}
+				SnackImage={OkSnack}
+				ExitSnackImage={ExitSnack}
 			/>
 			<SnackBar
 				phrase={"Cobrança editada com sucesso!"}
 				openSnack={openSnackChargeEdit}
 				setOpenSnack={setOpenSnackChargeEdit}
+				backgroundColor={"SCLightBlue"}
+				color={"SCDarkBlue"}
+				SnackImage={OkSnack}
+				ExitSnackImage={ExitSnack}
 			/>
 			<SnackBar
 				phrase={"Cobrança excluída com sucesso!"}
 				openSnack={openSnackChargeDelete}
 				setOpenSnack={setOpenSnackChargeDelete}
+				backgroundColor={"SCLightBlue"}
+				color={"SCDarkBlue"}
+				SnackImage={OkSnack}
+				ExitSnackImage={ExitSnack}
+			/>
+			<SnackBar
+				phrase={"Esta cobrança não pode ser excluída!"}
+				openSnack={openSnackChargeCannotDelete}
+				setOpenSnack={setOpenSnackChargeCannotDelete}
+				backgroundColor={"SCSnackLightRed"}
+				color={"SCSnackDarkRed"}
+				SnackImage={NotOkaySnack}
+				ExitSnackImage={NotOkayExitSnack}
 			/>
 		</Box>
 	);

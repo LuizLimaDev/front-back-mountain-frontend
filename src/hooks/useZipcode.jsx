@@ -4,30 +4,32 @@ import axios from "../services/zipcode";
 import { CustomersContext } from "../context/CustomersContext";
 
 function useZipcode() {
-    const { setClientForm } = useContext(SingContext)
-    const { setFormCustomer } = useContext(CustomersContext)
+    const { setClientForm, clientForm } = useContext(SingContext)
+    const { setFormCustomer, formCustomer } = useContext(CustomersContext)
 
     async function handleZipcodeBlur(e) {
         try {
             const { data } = await axios.get(`/${e}/json`)
 
-            setClientForm({
+            setClientForm((prevState) => prevState = {
+                ...prevState,
                 zipcode: e,
                 street: data.logradouro,
                 complement: data.complemento,
                 neighborhood: data.bairro,
                 city: data.localidade,
                 state: data.uf
-            })
+            });
 
-            setFormCustomer({
+            setFormCustomer((prevState) => prevState = {
+                ...prevState,
                 zipcode: e,
                 street: data.logradouro,
                 complement: data.complemento,
                 neighborhood: data.bairro,
                 city: data.localidade,
                 state: data.uf
-            })
+            });
         } catch (error) {
             console.log(error);
         }

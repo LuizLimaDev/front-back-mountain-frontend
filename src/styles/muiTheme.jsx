@@ -20,6 +20,8 @@ export const theme = createTheme({
 		SCGray2: "#3F3F55",
 
 		SCLightRed: "#FFEFEF",
+		SCSnackLightRed: "#F2D6D0",
+		SCSnackDarkRed: "#AE1100",
 		SCDarkRed: "#971D1D",
 
 		SCLightYellow: "#FCF6DC",
@@ -35,18 +37,24 @@ export const theme = createTheme({
 		MuiFormHelperText: {
 			styleOverrides: {
 				root: {
-					color: "#C33E32"
-				}
-			}
-		}
+					color: "#C33E32",
+				},
+			},
+		},
 	},
 	typography: {
-		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
+		fontFamily: [
+			"Montserrat",
+			"sans-serif",
+			"Nunito",
+			"Inter",
+			"Roboto",
+		].join(","),
 	},
 	SCmodalTile: {
 		fontFamily: "Montserrat",
 		fontWeight: "600",
-		fontSize: "1.5rem"
+		fontSize: "1.5rem",
 	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
