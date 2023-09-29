@@ -1,10 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useMetricsDashboard from '../../../../../hooks/useMetricsDashboard';
 import clientsBilling from '../../../../../assets/Clients-billing.png';
 import './style.css';
+import useCustomers from '../../../../../hooks/useCustomers';
 
 function ClientsNonpaying() {
+
   const { metrics } = useMetricsDashboard();
+  const { setCustomersParams } = useCustomers();
+  const navigate = useNavigate();
+
   return (
     <div className='table-big'>
       <div className='table-big-title'>
@@ -30,7 +35,14 @@ function ClientsNonpaying() {
         })
       }
 
-      <Link to="/clients" className="table-btn">
+      <Link to="/clients"
+        className="table-btn"
+        onClick={(e) => {
+          e.preventDefault();
+          setCustomersParams({ filter: 'inadimplente' });
+          navigate('/clients');
+        }}
+      >
         Ver todos
       </Link>
 

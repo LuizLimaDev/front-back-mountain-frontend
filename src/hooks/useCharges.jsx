@@ -4,7 +4,14 @@ import { SingContext } from "../context/SingContext";
 import { ChargesContext } from "../context/ChargesContext";
 
 export default function useCharges() {
-	const { charges, charge, setCharges, setCharge, chargeEdit, setChargeEdit, chargesParams, setChargesParams } = useContext(ChargesContext);
+	const { charges,
+		charge,
+		setCharges,
+		setCharge,
+		chargeEdit,
+		setChargeEdit,
+		chargesParams,
+		setChargesParams } = useContext(ChargesContext);
 	const { value } = useContext(SingContext);
 
 	async function getCharges() {
@@ -24,14 +31,14 @@ export default function useCharges() {
 		}
 	}
 
-	async function handleEditCharge(){
+	async function handleEditCharge() {
 		try {
 			await api.put(`/charges/${chargeEdit.id}`, {
 				description: chargeEdit.description,
 				status: chargeEdit.status,
 				value: chargeEdit.value,
 				dueDate: chargeEdit.dueDate
-			},{
+			}, {
 				headers: {
 					Authorization: `Bearer ${value}`
 				}
@@ -51,7 +58,7 @@ export default function useCharges() {
 		charge,
 		setCharges,
 		setCharge,
-		chargeEdit, 
+		chargeEdit,
 		setChargeEdit,
 		handleEditCharge,
 		getCharges,
