@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import format from "date-fns/format";
+import { format, addHours } from "date-fns";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
@@ -108,6 +108,10 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				</TableHead>
 				<TableBody sx={{ backgroundColor: "white" }}>
 					{charges.map((charge) => {
+						const chargeDate = format(
+							addHours(new Date(charge.duedate), 3),
+							"dd-MM-yyyy"
+						);
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
@@ -151,10 +155,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									align="left"
 									onClick={() => openChargeDetails(charge)}
 								>
-									{format(
-										new Date(charge.duedate),
-										"dd/MM/yyyy"
-									)}
+									{chargeDate}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
