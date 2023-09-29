@@ -19,8 +19,15 @@ import useCharges from "../../../../hooks/useCharges";
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const { setChargeEdit, openChargeDetails, setChargeDelete, chargesParams, setChargesParams } = useCharges();
-	const { setOpenChargeEditModal, setOpenChargeDeleteModal } = useContext(ModalsContext);
+	const {
+		setChargeEdit,
+		openChargeDetails,
+		setChargeDelete,
+		chargesParams,
+		setChargesParams,
+	} = useCharges();
+	const { setOpenChargeEditModal, setOpenChargeDeleteModal } =
+		useContext(ModalsContext);
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
@@ -116,8 +123,8 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-									? theme.billingsRed
-									: theme.billingsCyan;
+								? theme.billingsRed
+								: theme.billingsCyan;
 						return (
 							<TableRow
 								key={charge.id}
@@ -130,7 +137,9 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								{isClientDetailed ? null : (
 									<TableCell
 										sx={theme.infoBillingsTable}
-										onClick={() => openChargeDetails(charge)}
+										onClick={() =>
+											openChargeDetails(charge)
+										}
 									>
 										{charge.name}
 									</TableCell>
@@ -206,7 +215,11 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status: charge.status === "vencido" ? "pendente" : charge.status,
+													status:
+														charge.status ===
+														"vencido"
+															? "pendente"
+															: charge.status,
 													value: charge.value,
 													dueDate: format(
 														new Date(
@@ -248,7 +261,6 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												cursor: "pointer",
 											}}
 											onClick={() => {
-												console.log(charge.id);
 												setOpenChargeDeleteModal(true);
 												setChargeDelete(charge);
 											}}
