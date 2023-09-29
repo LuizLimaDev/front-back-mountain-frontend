@@ -1,10 +1,15 @@
 import './style.css';
 import clientsPayed from '../../../../../assets/Clients-payed.png'
 import useMetricsDashboard from '../../../../../hooks/useMetricsDashboard';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useCustomers from '../../../../../hooks/useCustomers';
+
 
 function ClientsPaying() {
   const { metrics } = useMetricsDashboard();
+  const { setCustomersParams } = useCustomers();
+  const navigate = useNavigate();
+
   return (
     <div className='table-big'>
       <div className='table-big-title'>
@@ -30,7 +35,13 @@ function ClientsPaying() {
         })
       }
 
-      <Link to="/clients" className="table-btn">
+      <Link to="/clients"
+        className="table-btn"
+        onClick={(e) => {
+          e.preventDefault();
+          setCustomersParams({ filter: 'emDia' });
+          navigate('/clients');
+        }}>
         Ver todos
       </Link>
 
