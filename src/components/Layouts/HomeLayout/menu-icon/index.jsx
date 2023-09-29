@@ -58,7 +58,6 @@ function MenuIcon() {
             alt='Botão Cobranças'
             className='menu-icon menu-billings-icon'
             onClick={() => {
-
               setChargesParams();
             }}
           ></img>
