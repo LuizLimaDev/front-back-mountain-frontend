@@ -12,6 +12,7 @@ import SnackBar from "../../components/Feedback/SnackBar";
 import BillingsTable from "../../components/DataDisplay/Tables/Billings-table/index";
 import { ModalsContext } from "../../context/ModalsContext";
 import ChargeModal from "../../components/Utils/Modals/ChargeModal";
+import ChargeDetailModal from "../../components/Utils/Modals/ChargeDetailModal";
 
 export default function ClientDetailed() {
 	const { getCustomer, customer, chargesByCustomer } = useCustomers();
@@ -25,8 +26,11 @@ export default function ClientDetailed() {
 		setCustomerCharges,
 		openSnackChargeAdd,
 		setOpenSnackChargeAdd,
-		openSnackChargeEdit, 
-		setOpenSnackChargeEdit
+		openSnackChargeEdit,
+		setOpenSnackChargeEdit,
+		openSnackChargeDelete,
+		setOpenSnackChargeDelete,
+
 	} = useContext(ModalsContext);
 
 	useEffect(() => {
@@ -34,7 +38,7 @@ export default function ClientDetailed() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
-		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"} >
+		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"}>
 			<Stack
 				direction={"row"}
 				spacing={1}
@@ -257,18 +261,28 @@ export default function ClientDetailed() {
 				/>
 			</Stack>
 			<EditClientModal id={customerId} />
+			<ChargeModal />
+			<ChargeDetailModal />
 			<SnackBar
 				openSnack={openSnackClientEdit}
 				setOpenSnack={setOpenSnackClientEdit}
 				phrase={"Edições do cadastro concluídas com sucesso"}
 			/>
-			<ChargeModal />
 			<SnackBar
 				phrase={"Cobrança cadastrada com sucesso"}
 				openSnack={openSnackChargeAdd}
 				setOpenSnack={setOpenSnackChargeAdd}
 			/>
-			<SnackBar phrase={"Cobrança editada com sucesso!"} openSnack={openSnackChargeEdit} setOpenSnack={setOpenSnackChargeEdit} />
+			<SnackBar
+				phrase={"Cobrança editada com sucesso!"}
+				openSnack={openSnackChargeEdit}
+				setOpenSnack={setOpenSnackChargeEdit}
+			/>
+			<SnackBar
+				phrase={"Cobrança excluída com sucesso!"}
+				openSnack={openSnackChargeDelete}
+				setOpenSnack={setOpenSnackChargeDelete}
+			/>
 		</Box>
 	);
 }

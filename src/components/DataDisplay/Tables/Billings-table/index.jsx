@@ -19,9 +19,8 @@ import useCharges from "../../../../hooks/useCharges";
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const { setChargeEdit } = useCharges();
+	const { setChargeEdit, openChargeDetails, setChargeDelete, chargesParams, setChargesParams } = useCharges();
 	const { setOpenChargeEditModal } = useContext(ModalsContext);
-	const { chargesParams, setChargesParams } = useCharges();
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
@@ -48,7 +47,6 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 			(prevState) => (prevState = { ...localChargesParams })
 		);
 	}
-
 	return (
 		<TableContainer
 			sx={{
@@ -130,16 +128,23 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								}}
 							>
 								{isClientDetailed ? null : (
-									<TableCell sx={theme.infoBillingsTable}>
+									<TableCell
+										sx={theme.infoBillingsTable}
+										onClick={() => openChargeDetails(charge)}
+									>
 										{charge.name}
 									</TableCell>
 								)}
-								<TableCell sx={theme.infoBillingsTable}>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									onClick={() => openChargeDetails(charge)}
+								>
 									{charge.id}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									{moneyFormat
 										.format(charge.value)
@@ -148,12 +153,14 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									{chargeDate}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<Stack
 										component="div"
@@ -170,6 +177,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 										...theme.infoBillingsTable,
 									}}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<p
 										style={{
@@ -198,11 +206,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status:
-														charge.status ===
-														"vencido"
-															? "pendente"
-															: charge.status,
+													status: charge.status === "vencido" ? "pendente" : charge.status,
 													value: charge.value,
 													dueDate: format(
 														new Date(
@@ -242,6 +246,11 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											spacing={"0.25rem"}
 											sx={{
 												cursor: "pointer",
+											}}
+											onClick={() => {
+												console.log(charge.id);
+												setOpenChargeDeleteModal(true);
+												setChargeDelete(charge);
 											}}
 										>
 											<img
