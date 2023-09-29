@@ -57,9 +57,8 @@ function MenuIcon() {
             src={active === "billings" ? billingIconActive : billingIcon}
             alt='Botão Cobranças'
             className='menu-icon menu-billings-icon'
-            onClick={(e) => {
-              e.preventDefault();
-              setChargesParams({ filter: '' });
+            onClick={() => {
+              setChargesParams();
             }}
           ></img>
         </NavLink>
