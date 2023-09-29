@@ -14,6 +14,7 @@ export default function DeleteChargeModal() {
 		openChargeDeleteModal,
 		setOpenChargeDeleteModal,
 		setOpenSnackChargeDelete,
+		setOpenSnackChargeCannotDelete,
 	} = useContext(ModalsContext);
 
 	function closeModal() {
@@ -29,11 +30,25 @@ export default function DeleteChargeModal() {
 	}
 
 	async function handleDelete() {
-		await handleDeleteCharge();
-		getCustomer(chargeDelete.customerId);
-		getCharges();
-		setOpenSnackChargeDelete(true);
-		closeModal();
+		try {
+			await handleDeleteCharge();
+			getCustomer(chargeDelete.customerid);
+			getCharges();
+
+			const currentDate = new Date();
+			const chargeDate = new Date(chargeDelete.duedate);
+			const chargeStatus = chargeDelete.status;
+
+			if (chargeStatus === "pago" || chargeDate < currentDate) {
+				setOpenSnackChargeCannotDelete(true);
+			}
+
+			setOpenSnackChargeDelete(true);
+
+			closeModal();
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (
@@ -113,7 +128,7 @@ export default function DeleteChargeModal() {
 							fontWeight: "400",
 							backgroundColor: "#F2D6D0",
 							borderRadius: "0.25rem",
-							textTransform: "capitalize"
+							textTransform: "capitalize",
 						}}
 						type="button"
 						onClick={() => {
@@ -133,7 +148,7 @@ export default function DeleteChargeModal() {
 							fontWeight: "400",
 							backgroundColor: "#ACD9C5",
 							borderRadius: "0.25rem",
-							textTransform: "capitalize"
+							textTransform: "capitalize",
 						}}
 						onClick={() => handleDelete()}
 					>
