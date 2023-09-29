@@ -18,7 +18,8 @@ export default function useGetUserDataInfo() {
         password, setPassword,
         confirmPassword, setConfirmPassword,
         setShowPassword,
-        setPassowrdCombination
+        setPassowrdCombination,
+        handleCloseEditSucess
     } = useContext(ModalsContext)
     const { value, setReceivedEmail } = useContext(SingContext)
     const { setExistingEmailError } = useEmailValidation()
@@ -113,11 +114,18 @@ export default function useGetUserDataInfo() {
         }
     }
 
+    function timeoutSucess() {
+        setTimeout(() => {
+            handleCloseEditSucess()
+        }, 2500)
+    }
+
     return {
         handleClickShowPassword,
         handleMouseDownPassword,
         apiErrors,
         clearForm,
         handleSubmit,
+        timeoutSucess
     }
 }

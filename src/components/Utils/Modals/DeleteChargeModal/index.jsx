@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CloseIcon from "../../../../assets/closeIcon.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import Frame from "../../../../assets/Frame.svg";
+import frame from "../../../../assets/frame.svg";
 import useCharges from "../../../../hooks/useCharges";
 import useCustomers from "./../../../../hooks/useCustomers";
 
@@ -88,7 +88,7 @@ export default function DeleteChargeModal() {
 				/>
 
 				<img
-					src={Frame}
+					src={frame}
 					alt="Ícone de atenção"
 					style={{
 						alignSelf: "center",
