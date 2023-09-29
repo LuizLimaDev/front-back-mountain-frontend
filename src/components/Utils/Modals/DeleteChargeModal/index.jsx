@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CloseIcon from "../../../../assets/closeIcon.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import Frame from "../../../../assets/frame.svg";
+import Frame from "../../../../assets/Frame.svg";
 import useCharges from "../../../../hooks/useCharges";
 import useCustomers from "./../../../../hooks/useCustomers";
 
@@ -113,6 +113,7 @@ export default function DeleteChargeModal() {
 							fontWeight: "400",
 							backgroundColor: "#F2D6D0",
 							borderRadius: "0.25rem",
+							textTransform: "capitalize"
 						}}
 						type="button"
 						onClick={() => {
@@ -132,6 +133,7 @@ export default function DeleteChargeModal() {
 							fontWeight: "400",
 							backgroundColor: "#ACD9C5",
 							borderRadius: "0.25rem",
+							textTransform: "capitalize"
 						}}
 						onClick={() => handleDelete()}
 					>

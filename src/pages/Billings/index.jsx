@@ -21,6 +21,7 @@ function Billings() {
 		<Box sx={theme.layoutOutletHome} marginBottom={"3rem"}>
 			<BillingsSearch />
 			<BillingsTable charges={charges} />
+			<ChargeDetailModal />
 			<SnackBar
 				phrase={"Cobrança editada com sucesso!"}
 				openSnack={openSnackChargeEdit}

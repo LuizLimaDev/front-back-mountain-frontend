@@ -20,7 +20,7 @@ import useCharges from "../../../../hooks/useCharges";
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
 	const { setChargeEdit, openChargeDetails, setChargeDelete, chargesParams, setChargesParams } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext);
+	const { setOpenChargeEditModal, setOpenChargeDeleteModal } = useContext(ModalsContext);
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
@@ -112,8 +112,8 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-								? theme.billingsRed
-								: theme.billingsCyan;
+									? theme.billingsRed
+									: theme.billingsCyan;
 						return (
 							<TableRow
 								key={charge.id}
