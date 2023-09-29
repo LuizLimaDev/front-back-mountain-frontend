@@ -8,6 +8,8 @@ export const ModalsProvider = ({ children }) => {
 	const [openModalEditSucess, setOpenModalEditSucess] = useState(false);
 	const [openChargeModal, setOpenChargeModal] = useState(false);
 	const [openChargeEditModal, setOpenChargeEditModal] = useState(false);
+	const [openChargeDeleteModal, setOpenChargeDeleteModal] = useState(false);
+	const [openChargeDetailsModal, setOpenChargeDetailsModal] = useState(false);
 	const [customerCharges, setCustomerCharges] = useState({
 		customerId: "",
 		name: "",
@@ -20,6 +22,7 @@ export const ModalsProvider = ({ children }) => {
 	const [openSnackClientAdd, setOpenSnackClientAdd] = useState(false);
 	const [openSnackClientEdit, setOpenSnackClientEdit] = useState(false);
 	const [openSnackChargeEdit, setOpenSnackChargeEdit] = useState(false);
+	const [openSnackChargeDelete, setOpenSnackChargeDelete] = useState(false);
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -73,10 +76,16 @@ export const ModalsProvider = ({ children }) => {
 				setOpenSnackClientAdd,
 				openSnackClientEdit,
 				setOpenSnackClientEdit,
-				openChargeEditModal, 
+				openChargeEditModal,
 				setOpenChargeEditModal,
-				openSnackChargeEdit, 
+				openSnackChargeEdit,
 				setOpenSnackChargeEdit,
+				openChargeDeleteModal,
+				setOpenChargeDeleteModal,
+				openSnackChargeDelete,
+				setOpenSnackChargeDelete,
+				openChargeDetailsModal,
+				setOpenChargeDetailsModal, 
 				showErrorSearch,
 				setShowErrorSearch,
 				showErrorBilling,

@@ -90,7 +90,7 @@ function HeaderDashBoard() {
 						username={username}
 					/>
 				) : (
-					""
+					"Loading..."
 				)}
 
 				<Popover

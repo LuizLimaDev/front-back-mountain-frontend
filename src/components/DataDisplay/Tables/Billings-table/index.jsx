@@ -6,45 +6,47 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import format from "date-fns/format";
+import { format, addHours } from "date-fns";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const { setChargeEdit } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext)
-	const { chargesParams, setChargesParams } = useCharges();
+	const { setChargeEdit, openChargeDetails, setChargeDelete, chargesParams, setChargesParams } = useCharges();
+	const { setOpenChargeEditModal, setOpenChargeDeleteModal } = useContext(ModalsContext);
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
-	function handleOrderName(){
+	function handleOrderName() {
 		const localChargesParams = chargesParams;
 		setOrderName(!orderName);
 		localChargesParams.orderName = orderName ? "desc" : "asc";
 		delete localChargesParams.orderIdCharge;
 
-
-		setChargesParams((prevState) => prevState = {...localChargesParams})
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
 	}
 
-	function handleOrderID(){
+	function handleOrderID() {
 		const localChargesParams = chargesParams;
 		setOrderID(!orderID);
 		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
 		delete localChargesParams.orderName;
 
-		setChargesParams((prevState) => prevState = {...localChargesParams})
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
 	}
-
 	return (
 		<TableContainer
 			sx={{
@@ -52,18 +54,15 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				overflowY: "auto",
 				maxHeight: "42rem",
 				width: "71.25rem",
-				borderRadius: "1.875rem"
+				borderRadius: "1.875rem",
 			}}
 		>
-			<Table
-				aria-label="simple table"
-			>
+			<Table aria-label="simple table">
 				<TableHead
 					sx={{
 						position: "sticky",
 						top: 0,
 						backgroundColor: "white",
-
 					}}
 				>
 					<TableRow>
@@ -89,17 +88,30 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								ID Cob.
 							</div>
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Valor</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Valor
+						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
 							Data de venc.
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Status</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>Descrição</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}></TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Status
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Descrição
+						</TableCell>
+						<TableCell
+							align="left"
+							sx={theme.inputModalLabelStyle}
+						></TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody sx={{ backgroundColor: "white" }} >
-					{ charges.map((charge) => {
+				<TableBody sx={{ backgroundColor: "white" }}>
+					{charges.map((charge) => {
+						const chargeDate = format(
+							addHours(new Date(charge.duedate), 3),
+							"dd-MM-yyyy"
+						);
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
@@ -107,18 +119,32 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									? theme.billingsRed
 									: theme.billingsCyan;
 						return (
-							<TableRow key={charge.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableRow
+								key={charge.id}
+								sx={{
+									"&:last-child td, &:last-child th": {
+										border: 0,
+									},
+								}}
+							>
 								{isClientDetailed ? null : (
-									<TableCell sx={theme.infoBillingsTable}>
+									<TableCell
+										sx={theme.infoBillingsTable}
+										onClick={() => openChargeDetails(charge)}
+									>
 										{charge.name}
 									</TableCell>
 								)}
-								<TableCell sx={theme.infoBillingsTable}>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									onClick={() => openChargeDetails(charge)}
+								>
 									{charge.id}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									{moneyFormat
 										.format(charge.value)
@@ -127,15 +153,14 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
-									{format(
-										new Date(charge.duedate),
-										"dd/MM/yyyy"
-									)}
+									{chargeDate}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<Stack
 										component="div"
@@ -152,6 +177,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 										...theme.infoBillingsTable,
 									}}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<p
 										style={{
@@ -176,18 +202,25 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											sx={{
 												cursor: "pointer",
 											}}
-											onClick={(() => {
+											onClick={() => {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status:charge.status === "vencido" ? "pendente": charge.status,
+													status: charge.status === "vencido" ? "pendente" : charge.status,
 													value: charge.value,
-													dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
-													description: charge.description,
-													customerId: charge.customerid,
-												})
+													dueDate: format(
+														new Date(
+															charge.duedate
+														),
+														"yyyy'-'MM'-'dd"
+													),
+													description:
+														charge.description,
+													customerId:
+														charge.customerid,
+												});
 												setOpenChargeEditModal(true);
-											})}
+											}}
 										>
 											<img
 												src={EditIcon}
@@ -213,6 +246,11 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 											spacing={"0.25rem"}
 											sx={{
 												cursor: "pointer",
+											}}
+											onClick={() => {
+												console.log(charge.id);
+												setOpenChargeDeleteModal(true);
+												setChargeDelete(charge);
 											}}
 										>
 											<img
@@ -240,7 +278,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
-			{charges.length == 0 ? <ErrorSearchPage /> : null}
+			{charges.length == 0 && !isClientDetailed ? <ErrorSearchPage /> : null}
 		</TableContainer>
 	);
 }
