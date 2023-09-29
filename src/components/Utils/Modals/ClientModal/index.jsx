@@ -42,6 +42,7 @@ export default function ClientModal() {
 			cpf: false,
 			phone: false,
 		});
+		console.log(clientForm);
 	}
 
 	function cleanForm() {
@@ -83,7 +84,6 @@ export default function ClientModal() {
 			setOpenSnackClientAdd(true);
 			cleanForm();
 		} catch (error) {
-			console.log(error);
 			const errors = error.response.data.errors
 			errors.map(error => {
 				setClientErrors((prevState) => {
