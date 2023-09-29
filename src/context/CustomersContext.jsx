@@ -30,6 +30,7 @@ export const CustomersProvider = ({ children }) => {
     state: ""
   })
   const [chargesByCustomer, setChargesByCustomer] = useState([]);
+  const [customersParams, setCustomersParams] = useState({});
 
   return (
     <CustomersContext.Provider value={{
@@ -40,7 +41,9 @@ export const CustomersProvider = ({ children }) => {
         formCustomer,
         setFormCustomer,
         chargesByCustomer, 
-        setChargesByCustomer
+        setChargesByCustomer,
+        customersParams,
+        setCustomersParams
     }}
     >
       {children}

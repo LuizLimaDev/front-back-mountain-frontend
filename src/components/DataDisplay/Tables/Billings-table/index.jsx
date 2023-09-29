@@ -6,23 +6,47 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import format from "date-fns/format";
+import { format, addHours } from "date-fns";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
-import useCharges from "../../../../hooks/useCharges";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import ErrorSearchPage from "../../../Layouts/ErrorSearch";
+import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const { setChargeEdit } = useCharges();
-	const { setChargeDelete } = useCharges();
-	const { setOpenChargeEditModal } = useContext(ModalsContext);
-	const { setOpenChargeDeleteModal } = useContext(ModalsContext);
+	const { setChargeEdit, openChargeDetails, setChargeDelete, chargesParams, setChargesParams } = useCharges();
+	const { setOpenChargeEditModal, setOpenChargeDeleteModal } = useContext(ModalsContext);
+	const [orderName, setOrderName] = useState(false);
+	const [orderID, setOrderID] = useState(false);
 
+	function handleOrderName() {
+		const localChargesParams = chargesParams;
+		setOrderName(!orderName);
+		localChargesParams.orderName = orderName ? "desc" : "asc";
+		delete localChargesParams.orderIdCharge;
+
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
+	}
+
+	function handleOrderID() {
+		const localChargesParams = chargesParams;
+		setOrderID(!orderID);
+		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
+		delete localChargesParams.orderName;
+
+		setChargesParams(
+			// eslint-disable-next-line no-unused-vars
+			(prevState) => (prevState = { ...localChargesParams })
+		);
+	}
 	return (
 		<TableContainer
 			sx={{
@@ -48,6 +72,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									<img
 										style={{ cursor: "pointer" }}
 										src={ChevronUpDown}
+										onClick={() => handleOrderName()}
 									/>{" "}
 									Cliente
 								</div>
@@ -58,21 +83,16 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}
+									onClick={() => handleOrderID()}
 								/>{" "}
 								ID Cob.
 							</div>
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
-							<div className="client-icon">
-								<img
-									style={{ cursor: "pointer" }}
-									src={ChevronUpDown}
-								/>{" "}
-								Data de venc.
-							</div>
+							Valor
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
-							Valor
+							Data de venc.
 						</TableCell>
 						<TableCell align="left" sx={theme.inputModalLabelStyle}>
 							Status
@@ -88,12 +108,16 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				</TableHead>
 				<TableBody sx={{ backgroundColor: "white" }}>
 					{charges.map((charge) => {
+						const chargeDate = format(
+							addHours(new Date(charge.duedate), 3),
+							"dd-MM-yyyy"
+						);
 						const colorStatusStyled =
 							charge.status === "pendente"
 								? theme.billingsYellow
 								: charge.status === "vencido"
-								? theme.billingsRed
-								: theme.billingsCyan;
+									? theme.billingsRed
+									: theme.billingsCyan;
 						return (
 							<TableRow
 								key={charge.id}
@@ -104,16 +128,23 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								}}
 							>
 								{isClientDetailed ? null : (
-									<TableCell sx={theme.infoBillingsTable}>
+									<TableCell
+										sx={theme.infoBillingsTable}
+										onClick={() => openChargeDetails(charge)}
+									>
 										{charge.name}
 									</TableCell>
 								)}
-								<TableCell sx={theme.infoBillingsTable}>
+								<TableCell
+									sx={theme.infoBillingsTable}
+									onClick={() => openChargeDetails(charge)}
+								>
 									{charge.id}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									{moneyFormat
 										.format(charge.value)
@@ -122,15 +153,14 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
-									{format(
-										new Date(charge.duedate),
-										"dd/MM/yyyy"
-									)}
+									{chargeDate}
 								</TableCell>
 								<TableCell
 									sx={theme.infoBillingsTable}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<Stack
 										component="div"
@@ -147,6 +177,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 										...theme.infoBillingsTable,
 									}}
 									align="left"
+									onClick={() => openChargeDetails(charge)}
 								>
 									<p
 										style={{
@@ -175,11 +206,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 												setChargeEdit({
 													name: charge.name,
 													id: charge.id,
-													status:
-														charge.status ===
-														"vencido"
-															? "pendente"
-															: charge.status,
+													status: charge.status === "vencido" ? "pendente" : charge.status,
 													value: charge.value,
 													dueDate: format(
 														new Date(
@@ -251,6 +278,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
+			{charges.length == 0 ? <ErrorSearchPage /> : null}
 		</TableContainer>
 	);
 }

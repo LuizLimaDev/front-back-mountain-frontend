@@ -9,6 +9,7 @@ export const ModalsProvider = ({ children }) => {
 	const [openChargeModal, setOpenChargeModal] = useState(false);
 	const [openChargeEditModal, setOpenChargeEditModal] = useState(false);
 	const [openChargeDeleteModal, setOpenChargeDeleteModal] = useState(false);
+	const [openChargeDetailsModal, setOpenChargeDetailsModal] = useState(false);
 	const [customerCharges, setCustomerCharges] = useState({
 		customerId: "",
 		name: "",
@@ -31,6 +32,8 @@ export const ModalsProvider = ({ children }) => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [apiErrors, setApiErrors] = useState("");
 	const [editFinished, SetEditFinished] = useState(false);
+	const [showErrorSearch, setShowErrorSearch] = useState(false);
+	const [showErrorBilling, setShowErrorBilling] = useState(false);
 
 	const handleOpenEditUser = () => setOpenModalEditUser(true);
 	const handleCloseEditUser = () => setOpenModalEditUser(false);
@@ -81,6 +84,12 @@ export const ModalsProvider = ({ children }) => {
 				setOpenChargeDeleteModal,
 				openSnackChargeDelete,
 				setOpenSnackChargeDelete,
+				openChargeDetailsModal,
+				setOpenChargeDetailsModal, 
+				showErrorSearch,
+				setShowErrorSearch,
+				showErrorBilling,
+				setShowErrorBilling
 			}}
 		>
 			{children}
