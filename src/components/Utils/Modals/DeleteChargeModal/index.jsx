@@ -5,6 +5,7 @@ import { ModalsContext } from "../../../../context/ModalsContext";
 import Frame from "../../../../assets/Frame.svg";
 import useCharges from "../../../../hooks/useCharges";
 import useCustomers from "./../../../../hooks/useCustomers";
+import { format } from "date-fns";
 
 export default function DeleteChargeModal() {
 	const { chargeDelete, setChargeDelete, handleDeleteCharge, getCharges } =
@@ -14,6 +15,7 @@ export default function DeleteChargeModal() {
 		openChargeDeleteModal,
 		setOpenChargeDeleteModal,
 		setOpenSnackChargeDelete,
+		setOpenSnackChargeCannotDelete,
 	} = useContext(ModalsContext);
 
 	function closeModal() {
@@ -29,11 +31,32 @@ export default function DeleteChargeModal() {
 	}
 
 	async function handleDelete() {
-		await handleDeleteCharge();
-		getCustomer(chargeDelete.customerId);
-		getCharges();
-		setOpenSnackChargeDelete(true);
-		closeModal();
+		try {
+			await handleDeleteCharge();
+			getCustomer(chargeDelete.customerId);
+			getCharges();
+
+			const currentDate = format(new Date(), "dd-MM-yyyy");
+			const chargeDate = chargeDelete.duedate;
+			const chargeDateFormatted = format(
+				new Date(chargeDate),
+				"dd-MM-yyyy"
+			);
+
+			if (chargeDelete.status === "pago") {
+				setOpenSnackChargeCannotDelete(true);
+			}
+
+			if (chargeDateFormatted < currentDate) {
+				setOpenSnackChargeCannotDelete(true);
+			}
+
+			setOpenSnackChargeDelete(true);
+
+			closeModal();
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (
@@ -113,7 +136,7 @@ export default function DeleteChargeModal() {
 							fontWeight: "400",
 							backgroundColor: "#F2D6D0",
 							borderRadius: "0.25rem",
-							textTransform: "capitalize"
+							textTransform: "capitalize",
 						}}
 						type="button"
 						onClick={() => {
@@ -133,7 +156,7 @@ export default function DeleteChargeModal() {
 							fontWeight: "400",
 							backgroundColor: "#ACD9C5",
 							borderRadius: "0.25rem",
-							textTransform: "capitalize"
+							textTransform: "capitalize",
 						}}
 						onClick={() => handleDelete()}
 					>
