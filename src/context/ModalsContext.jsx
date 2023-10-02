@@ -23,6 +23,8 @@ export const ModalsProvider = ({ children }) => {
 	const [openSnackClientEdit, setOpenSnackClientEdit] = useState(false);
 	const [openSnackChargeEdit, setOpenSnackChargeEdit] = useState(false);
 	const [openSnackChargeDelete, setOpenSnackChargeDelete] = useState(false);
+	const [openSnackChargeCannotDelete, setOpenSnackChargeCannotDelete] =
+		useState(false);
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -34,6 +36,8 @@ export const ModalsProvider = ({ children }) => {
 	const [editFinished, SetEditFinished] = useState(false);
 	const [showErrorSearch, setShowErrorSearch] = useState(false);
 	const [showErrorBilling, setShowErrorBilling] = useState(false);
+	const [showPassword, setShowPassword] = useState(false)
+	const [passowrdCombination, setPassowrdCombination] = useState("")
 
 	const handleOpenEditUser = () => setOpenModalEditUser(true);
 	const handleCloseEditUser = () => setOpenModalEditUser(false);
@@ -85,11 +89,17 @@ export const ModalsProvider = ({ children }) => {
 				openSnackChargeDelete,
 				setOpenSnackChargeDelete,
 				openChargeDetailsModal,
-				setOpenChargeDetailsModal, 
+				setOpenChargeDetailsModal,
 				showErrorSearch,
 				setShowErrorSearch,
 				showErrorBilling,
-				setShowErrorBilling
+				setShowErrorBilling,
+				openSnackChargeCannotDelete,
+				setOpenSnackChargeCannotDelete,
+				showPassword,
+				setShowPassword,
+				passowrdCombination,
+				setPassowrdCombination,
 			}}
 		>
 			{children}
