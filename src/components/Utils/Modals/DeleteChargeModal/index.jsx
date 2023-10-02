@@ -4,58 +4,16 @@ import CloseIcon from "../../../../assets/closeIcon.svg";
 import { ModalsContext } from "../../../../context/ModalsContext";
 import frame from "../../../../assets/frame.svg";
 import useCharges from "../../../../hooks/useCharges";
-import useCustomers from "./../../../../hooks/useCustomers";
 
 export default function DeleteChargeModal() {
-	const { chargeDelete, setChargeDelete, handleDeleteCharge, getCharges } =
-		useCharges();
-	const { getCustomer } = useCustomers();
-	const {
-		openChargeDeleteModal,
-		setOpenChargeDeleteModal,
-		setOpenSnackChargeDelete,
-		setOpenSnackChargeCannotDelete,
-	} = useContext(ModalsContext);
-
-	function closeModal() {
-		setChargeDelete({
-			customerId: "",
-			name: "",
-			description: "",
-			dueDate: "",
-			value: 0,
-			status: "pago",
-		});
-		setOpenChargeDeleteModal(false);
-	}
-
-	async function handleDelete() {
-		try {
-			await handleDeleteCharge();
-			getCustomer(chargeDelete.customerid);
-			getCharges();
-
-			const currentDate = new Date();
-			const chargeDate = new Date(chargeDelete.duedate);
-			const chargeStatus = chargeDelete.status;
-
-			if (chargeStatus === "pago" || chargeDate < currentDate) {
-				setOpenSnackChargeCannotDelete(true);
-			}
-
-			setOpenSnackChargeDelete(true);
-
-			closeModal();
-		} catch (error) {
-			console.log(error);
-		}
-	}
+	const { handleDeleteCharge, closeDeleteModal } = useCharges();
+	const { openChargeDeleteModal } = useContext(ModalsContext);
 
 	return (
 		<Modal
 			open={openChargeDeleteModal}
 			onClose={() => {
-				closeModal();
+				closeDeleteModal();
 			}}
 		>
 			<Box
@@ -82,9 +40,7 @@ export default function DeleteChargeModal() {
 						margin: "1.8rem 1.5rem 0 0",
 						cursor: "pointer",
 					}}
-					onClick={() => {
-						closeModal();
-					}}
+					onClick={() => closeDeleteModal()}
 				/>
 
 				<img
@@ -131,9 +87,7 @@ export default function DeleteChargeModal() {
 							textTransform: "capitalize",
 						}}
 						type="button"
-						onClick={() => {
-							closeModal();
-						}}
+						onClick={() => closeDeleteModal()}
 					>
 						Não
 					</Button>
@@ -150,7 +104,7 @@ export default function DeleteChargeModal() {
 							borderRadius: "0.25rem",
 							textTransform: "capitalize",
 						}}
-						onClick={() => handleDelete()}
+						onClick={() => handleDeleteCharge()}
 					>
 						Sim
 					</Button>
