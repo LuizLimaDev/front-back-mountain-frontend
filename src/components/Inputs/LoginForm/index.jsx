@@ -1,27 +1,27 @@
 import { useTheme } from "@emotion/react";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Box, Button, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SingContext } from "../../../context/SingContext";
 import useSingIn from "../../../hooks/useSingIn";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function LoginForm() {
   const {
     email, setEmail,
     password, setPassword,
-    apiErrors
+    apiErrors, showPassword
   } = useContext(SingContext)
-  const { handleSubmit, emailErrors, passwordErrors } = useSingIn()
+  const {
+    handleSubmit,
+    emailErrors,
+    passwordErrors,
+    handleClickShowPassword,
+    handleMouseDownPassword
+  } = useSingIn()
   const navigate = useNavigate()
   const theme = useTheme()
-
-  const [showPassword, setShowPassword] = useState(false)
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   return (
     <Stack spacing={2} sx={{ width: "21.5rem" }}>
