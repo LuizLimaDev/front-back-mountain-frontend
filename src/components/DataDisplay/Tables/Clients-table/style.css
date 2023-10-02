@@ -1,29 +1,29 @@
 * {
-    font-family: Nunito, sans-serif;
+	font-family: Nunito, sans-serif;
 }
 
 .red {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-    border-radius: 0.5rem;
-    padding: 0 0.5rem;
-    width: 6.2rem;
+	border-radius: 0.5rem;
+	padding: 0 0.5rem;
+	width: 6.2rem;
 
-    color: rgba(151, 29, 29, 1);
-    background-color: rgba(255, 239, 239, 1);
+	color: rgba(151, 29, 29, 1);
+	background-color: rgba(255, 239, 239, 1);
 }
 
 .green {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-    border-radius: 0.5rem;
-    padding: 0 0.5rem;
-    width: 6.2rem;
+	border-radius: 0.5rem;
+	padding: 0 0.5rem;
+	width: 6.2rem;
 
-    color: rgba(31, 167, 175, 1);
-    background-color: rgba(238, 246, 246, 1);
+	color: rgba(31, 167, 175, 1);
+	background-color: rgba(238, 246, 246, 1);
 }
