@@ -26,7 +26,7 @@ export default function EditClientModal() {
 	} = useContext(SingContext);
 
 	const { customer, formCustomer, setFormCustomer, getCustomer } = useCustomers();
-	const { handleZipcodeBlur } = useZipcode()
+	const { handleZipcodeBlur } = useZipcode();
 
 	const { setOpenSnackClientEdit } = useContext(ModalsContext);
 
@@ -201,6 +201,13 @@ export default function EditClientModal() {
 							onChange={(event) => handleChange(event)}
 							error={clientErrors.email}
 							helperText={clientErrors.email}
+							onBlur={async (event) => {
+								try {
+									await api.get(`/email/${event.target.value}`);
+								} catch (error) {
+									setClientErrors((prevState) => prevState = {...prevState, email: error.response.data.message});
+								}
+							}}
 						/>
 					</Box>
 					<Box
