@@ -47,7 +47,11 @@ export default function SnackBar({
 					>
 						{phrase}
 					</p>
-					<img src={ExitSnackImage} alt="Exit Icon" />
+					<img
+						style={{ cursor: "pointer" }}
+						src={ExitSnackImage}
+						alt="Exit Icon"
+					/>
 				</div>
 			}
 			sx={{

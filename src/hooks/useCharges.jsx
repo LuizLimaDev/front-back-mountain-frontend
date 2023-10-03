@@ -4,6 +4,7 @@ import { SingContext } from "../context/SingContext";
 import { ChargesContext } from "../context/ChargesContext";
 import { format } from "date-fns";
 import { ModalsContext } from "../context/ModalsContext";
+import useCustomers from "./useCustomers";
 
 export default function useCharges() {
 	const {
@@ -21,7 +22,16 @@ export default function useCharges() {
 	} = useContext(ChargesContext);
 
 	const { value } = useContext(SingContext);
-	const { setOpenChargeDetailsModal } = useContext(ModalsContext);
+	const {
+		setOpenChargeDetailsModal,
+		setOpenSnackChargeCannotDelete,
+		setOpenChargeDeleteModal,
+	} = useContext(ModalsContext);
+	const { getCustomer } = useCustomers();
+
+	function closeDeleteModal() {
+		setOpenChargeDeleteModal(false);
+	}
 
 	async function getCharges() {
 		try {
@@ -35,6 +45,7 @@ export default function useCharges() {
 			});
 
 			setCharges(data.charges);
+			("");
 		} catch (error) {
 			console.log(error);
 		}
@@ -63,18 +74,19 @@ export default function useCharges() {
 
 	async function handleDeleteCharge() {
 		try {
-			const response = await api.delete(`/charges/${chargeDelete.id}`, {
+			await api.delete(`/charges/${chargeDelete.id}`, {
 				headers: {
 					Authorization: `Bearer ${value}`,
 				},
 			});
-			console.log(response);
+			getCustomer(chargeDelete.customerid);
+			getCustomer();
 			setChargeDelete(null);
-			setCharges((prevCharges) =>
-				prevCharges.filter((charge) => charge.id !== chargeDelete.id)
-			);
+			closeDeleteModal();
 		} catch (error) {
-			return error.response.data;
+			setOpenSnackChargeCannotDelete(error.response);
+			setOpenSnackChargeCannotDelete(true);
+			closeDeleteModal();
 		}
 	}
 
@@ -111,5 +123,6 @@ export default function useCharges() {
 		openChargeDetails,
 		chargesParams,
 		setChargesParams,
+		closeDeleteModal,
 	};
 }

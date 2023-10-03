@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import ChevronDown from "../../../assets/chevron-down.png";
 import './style.css';
 
@@ -11,8 +12,23 @@ function Avatar({ setAnchorEl, initialsName, username }) {
 	};
 	return (
 		<div className="dashboard-user" style={menuStyle}>
-			<span className="dashboard-user-icon">{`${initialsName[0]}${initialsName[2]}`}</span>
-			<span className="dashboard-user-name">{username}</span>
+			{username ?
+				(
+					<>
+						<span className="dashboard-user-icon">{`${initialsName[0]}${initialsName[2]}`}</span>
+						<span className="dashboard-user-name">{username}</span>
+					</>
+				) : (
+					<>
+						<span className="dashboard-user-icon">..</span>
+						<CircularProgress
+							color="success"
+							sx={{ marginX: "1.5rem" }}
+						/>
+					</>
+				)
+			}
+
 			<a>
 				<img
 					src={ChevronDown}
