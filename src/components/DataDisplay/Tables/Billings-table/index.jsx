@@ -222,9 +222,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 															: charge.status,
 													value: charge.value,
 													dueDate: format(
-														new Date(
-															charge.duedate
-														),
+														addHours(new Date(charge.duedate), 3),
 														"yyyy'-'MM'-'dd"
 													),
 													description:
