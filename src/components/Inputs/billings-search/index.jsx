@@ -25,6 +25,12 @@ export default function BillingsSearch() {
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
+		const localChargesParams = chargesParams;
+		// eslint-disable-next-line no-prototype-builtins
+		if(!event.target.value && localChargesParams.hasOwnProperty("search")){
+			delete localChargesParams.search;
+			setChargesParams((prevState) => prevState = {...localChargesParams});
+		}
 	};
 
 	const handleSubmit = (event) => {

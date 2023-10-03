@@ -17,6 +17,12 @@ function ClientHeader() {
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
+		const localCustomersParams = customersParams;
+		// eslint-disable-next-line no-prototype-builtins
+		if(!event.target.value && localCustomersParams.hasOwnProperty("search")){
+			delete localCustomersParams.search;
+			setCustomersParams((prevState) => prevState = {...localCustomersParams});
+		}
 	};
 
 	const handleSubmit = async (event) => {
