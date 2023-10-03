@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import api from "../services/api";
 import { SingContext } from "../context/SingContext";
 import { ChargesContext } from "../context/ChargesContext";
-import { format } from "date-fns";
+import { addHours, format } from "date-fns";
 import { ModalsContext } from "../context/ModalsContext";
 import useCustomers from "./useCustomers";
 
@@ -26,6 +26,7 @@ export default function useCharges() {
 		setOpenChargeDetailsModal,
 		setOpenSnackChargeCannotDelete,
 		setOpenChargeDeleteModal,
+		setOpenSnackChargeDelete,
 	} = useContext(ModalsContext);
 	const { getCustomer } = useCustomers();
 
@@ -80,7 +81,8 @@ export default function useCharges() {
 				},
 			});
 			getCustomer(chargeDelete.customerid);
-			getCustomer();
+			getCharges();
+			setOpenSnackChargeDelete(true);
 			setChargeDelete(null);
 			closeDeleteModal();
 		} catch (error) {
@@ -96,7 +98,7 @@ export default function useCharges() {
 			id: charge.id,
 			status: charge.status,
 			value: charge.value,
-			dueDate: format(new Date(charge.duedate), "yyyy'-'MM'-'dd"),
+			dueDate: format(addHours(new Date(charge.duedate), 3), "yyyy'-'MM'-'dd"),
 			description: charge.description,
 			customerId: charge.customerid,
 		});
