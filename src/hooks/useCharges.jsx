@@ -26,6 +26,7 @@ export default function useCharges() {
 		setOpenChargeDetailsModal,
 		setOpenSnackChargeCannotDelete,
 		setOpenChargeDeleteModal,
+		setOpenSnackChargeDelete,
 	} = useContext(ModalsContext);
 	const { getCustomer } = useCustomers();
 
@@ -80,7 +81,8 @@ export default function useCharges() {
 				},
 			});
 			getCustomer(chargeDelete.customerid);
-			getCustomer();
+			getCharges();
+			setOpenSnackChargeDelete(true);
 			setChargeDelete(null);
 			closeDeleteModal();
 		} catch (error) {
