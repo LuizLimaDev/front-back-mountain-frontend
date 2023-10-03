@@ -69,6 +69,7 @@ export default function BillingsSearch() {
 									<IconButton
 										sx={{ marginRight: "0.5rem" }}
 										edge="end"
+										onClick={handleSubmit}
 									>
 										<SearchIcon />
 									</IconButton>
