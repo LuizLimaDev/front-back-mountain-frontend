@@ -42,7 +42,6 @@ export default function ClientModal() {
 			cpf: false,
 			phone: false,
 		});
-		console.log(clientForm);
 	}
 
 	function cleanForm() {
