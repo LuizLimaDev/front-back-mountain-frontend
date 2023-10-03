@@ -17,22 +17,19 @@ function ClientHeader() {
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
-		const localCustomersParams = customersParams;
-		// eslint-disable-next-line no-prototype-builtins
-		if(!event.target.value && localCustomersParams.hasOwnProperty("search")){
-			delete localCustomersParams.search;
-			setCustomersParams((prevState) => prevState = {...localCustomersParams});
+		if(!event.target.value){
+			setCustomersParams((prevState) => prevState = {});
 		}
 	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const localCustomersParams = customersParams;
+		let localCustomersParams = customersParams;
 
 		if(search){
 			localCustomersParams.search = search;
 		}else{
-			delete localCustomersParams.search;
+			localChargesParams = {};
 		}
 		setCustomersParams((prevState) => prevState = {...localCustomersParams})
 	};
