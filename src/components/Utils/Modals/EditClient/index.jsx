@@ -62,7 +62,7 @@ export default function EditClientModal() {
 		} catch (error) {
 			const errors = error.response.data.errors;
 			errors.map((item) => {
-				setClientErrors({ ...clientErrors, [item.type]: item.message });
+				setClientErrors((prevState) => prevState = { ...prevState, [item.type]: item.message });
 			});
 		}
 	}
