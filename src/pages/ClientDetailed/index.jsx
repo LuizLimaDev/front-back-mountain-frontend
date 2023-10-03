@@ -236,7 +236,8 @@ export default function ClientDetailed() {
 							borderRadius: ".625rem",
 
 							fontFamily: "Nunito",
-							fontSize: "1.25rem",
+							fontSize: "1.125rem",
+							fontWeight: "400",
 							textTransform: "capitalize",
 
 							backgroundColor: "SCPink",

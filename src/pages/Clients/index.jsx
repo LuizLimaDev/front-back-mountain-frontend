@@ -7,6 +7,8 @@ import { Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useContext } from "react";
 import { ModalsContext } from "../../context/ModalsContext";
+import OkSnack from "../../assets/okSnack.svg";
+import ExitSnack from "../../assets/exitSnack.svg";
 
 function Clients() {
 	const theme = useTheme();
@@ -28,11 +30,19 @@ function Clients() {
 						phrase={"Cadastro concluído com sucesso"}
 						openSnack={openSnackClientAdd}
 						setOpenSnack={setOpenSnackClientAdd}
+						backgroundColor={"SCLightBlue"}
+						color={"SCDarkBlue"}
+						SnackImage={OkSnack}
+						ExitSnackImage={ExitSnack}
 					/>
 					<SnackBar
 						phrase={"Cobrança cadastrada com sucesso"}
 						openSnack={openSnackChargeAdd}
 						setOpenSnack={setOpenSnackChargeAdd}
+						backgroundColor={"SCLightBlue"}
+						color={"SCDarkBlue"}
+						SnackImage={OkSnack}
+						ExitSnackImage={ExitSnack}
 					/>
 				</div>
 			</div>

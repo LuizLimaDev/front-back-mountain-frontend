@@ -28,17 +28,20 @@ let green = (
 
 export default function ClientsTable() {
 	const { customers, customersParams, setCustomersParams } = useCustomers();
-	const { setOpenChargeModal, setCustomerCharges } = useContext(ModalsContext);
+	const { setOpenChargeModal, setCustomerCharges } =
+		useContext(ModalsContext);
 	const [order, setOrder] = useState(false);
 	const theme = useTheme();
 
-	function handleOrder(){
+	function handleOrder() {
 		setOrder(!order);
-		
+
 		const localCustomersParams = customersParams;
 		localCustomersParams.orderName = order ? "desc" : "asc";
 
-		setCustomersParams((prevState) => prevState = {...localCustomersParams})
+		setCustomersParams(
+			(prevState) => (prevState = { ...localCustomersParams })
+		);
 	}
 
 	return (
@@ -112,7 +115,7 @@ export default function ClientsTable() {
 							</TableCell>
 							<TableCell sx={theme.clientValueStyle} align="left">
 								{row.status === "pendente" ||
-									row.status === "vencido"
+								row.status === "vencido"
 									? red
 									: green}
 							</TableCell>
@@ -136,7 +139,7 @@ export default function ClientsTable() {
 					))}
 				</TableBody>
 			</Table>
-					{ customers.length === 0 ? <ErrorSearchPage /> : null }
+			{customers.length === 0 ? <ErrorSearchPage /> : null}
 			<ChargeModal />
 		</TableContainer>
 	);
