@@ -32,8 +32,21 @@ export default function ClientModal() {
 	const { handleZipcodeBlur } = useZipcode()
 
 	function handleChange(event) {
+		const inputValue = event.target.value
+		let formatedNames;
+
+		if (event.target.name === "name") {
+			const nameSplit = (inputValue.split(" "));
+
+			for (let i = 0; i < nameSplit.length; i++) {
+				nameSplit[i] = nameSplit[i].charAt(0).toUpperCase() + nameSplit[i].slice(1)
+			}
+
+			formatedNames = (nameSplit.join(" "));
+		}
+
 		setClientForm((prevState) => {
-			return { ...prevState, [event.target.name]: event.target.value };
+			return { ...prevState, [event.target.name]: inputValue, name: formatedNames };
 		});
 
 		setClientErrors({
@@ -42,7 +55,6 @@ export default function ClientModal() {
 			cpf: false,
 			phone: false,
 		});
-		console.log(clientForm);
 	}
 
 	function cleanForm() {
