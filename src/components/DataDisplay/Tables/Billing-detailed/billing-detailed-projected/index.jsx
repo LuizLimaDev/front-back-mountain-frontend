@@ -5,7 +5,6 @@ import { moneyFormat } from "../../../../../utils/moneyFormat";
 import "./style.css";
 
 function BillingDetailedProjected() {
-
 	const { metrics } = useMetricsDashboard();
 	const { setChargesParams } = useCharges();
 	const navigate = useNavigate();
@@ -26,15 +25,20 @@ function BillingDetailedProjected() {
 			</div>
 
 			{metrics.listBillings.projected.slice(0, 5).map((billing) => {
+				const formattedValue = moneyFormat
+					.format(billing.value)
+					.replace(/^(\D+)/, "$1 ");
+
+				const valueClassName =
+					formattedValue.length > 10
+						? "data-value hidden"
+						: "data-value";
+
 				return (
 					<div className="table-content" key={billing.id}>
 						<p className="data-name">{billing.name}</p>
 						<p className="data-id">{billing.id}</p>
-						<p className="data-value">
-							{moneyFormat
-								.format(billing.value)
-								.replace(/^(\D+)/, "$1 ")}
-						</p>
+						<p className={valueClassName}>{formattedValue}</p>
 					</div>
 				);
 			})}
@@ -44,7 +48,7 @@ function BillingDetailedProjected() {
 				className="table-btn"
 				onClick={(e) => {
 					e.preventDefault();
-					navigate('/billings');
+					navigate("/billings");
 					setChargesParams({ filter: '["pendente"]' });
 				}}
 			>
