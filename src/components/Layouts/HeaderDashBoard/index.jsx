@@ -1,5 +1,5 @@
-import LogoutIcon from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Box } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
@@ -10,10 +10,10 @@ import { ModalsContext } from "../../../context/ModalsContext";
 import { SingContext } from "../../../context/SingContext";
 import api from "../../../services/api";
 import Avatar from "../../DataDisplay/Avatar/index";
+import ClientBreadcrumbs from "../../Navigation/ClientBreadcrumbs/ClientBreadcrumbs";
 import EditUserModal from "../../Utils/Modals/EditUserModal";
-import "./style.css";
-import ClientBreadcrumbs from "../../Navigation/ClientBreadcrumbs/ClientBreadcrumbs"
 import ModalEditSucess from "../../Utils/Modals/EditUserModal/ModalEditSucess";
+import "./style.css";
 
 function HeaderDashBoard() {
 	const { value, remove } = useContext(SingContext);
@@ -83,87 +83,113 @@ function HeaderDashBoard() {
 				)}
 			</div>
 			<div className="dashboard-user">
-				{username ? (
-					<Avatar
-						setAnchorEl={setAnchorEl}
-						initialsName={initialsName}
-						username={username}
-					/>
-				) : (
-					"Loading..."
-				)}
+				<Avatar
+					setAnchorEl={setAnchorEl}
+					initialsName={initialsName}
+					username={username}
+				/>
+				<Box sx={{ position: "relative" }}>
+					{open && (
+						<Box
+							elevation={2}
+							sx={{
+								position: "absolute",
+								top: ".5rem",
+								left: "157px",
+								width: 0,
+								height: 0,
 
-				<Popover
-					id={id}
-					open={open}
-					anchorEl={anchorEl}
-					onClose={handleClose}
-					anchorOrigin={{
-						vertical: "bottom",
-						horizontal: "left",
-					}}
-				>
-					<Box
+								borderLeft: "8px solid transparent",
+								borderRight: "8px solid transparent",
+								borderBottom: "10px solid #FFF",
+
+								filter: "drop-shadow(0px 5px 15px #000)"
+							}}
+						>
+						</Box>
+					)}
+					<Popover
+						id={id}
+						open={open}
+						anchorEl={anchorEl}
+						onClose={handleClose}
+						anchorOrigin={{
+							vertical: "bottom",
+							horizontal: "right",
+						}}
+						transformOrigin={{
+							vertical: 'top',
+							horizontal: 'center',
+						}}
 						sx={{
-							display: "flex",
+							marginTop: ".5rem",
+						}}
+						PaperProps={{
+							style: { borderRadius: ".75rem" }
 						}}
 					>
 						<Box
 							sx={{
 								display: "flex",
-								flexDirection: "column",
-								alignItems: "center",
-								gap: ".25rem",
-
-								padding: ".625rem .937rem",
-
-								cursor: "pointer",
 							}}
-							onClick={() => handleOpenEditUser()}
 						>
-							<EditIcon sx={{ color: "SCGray3" }} />
-							<Typography
+							<Box
 								sx={{
-									fontFamily: "Nunito",
-									fontWeight: 500,
-									fontSize: ".85rem",
-									color: "SCGray3",
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									gap: ".25rem",
+
+									padding: ".625rem .937rem",
+
+									cursor: "pointer",
 								}}
+								onClick={() => handleOpenEditUser()}
 							>
-								Editar
-							</Typography>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: "column",
-								alignItems: "center",
-								gap: ".25rem",
-
-								padding: ".625rem .937rem",
-
-								cursor: "pointer",
-							}}
-							onClick={handleLogout}
-						>
-							<LogoutIcon sx={{ color: "SCGray3" }} />
-							<Typography
+								<EditIcon sx={{ color: "SCGray3" }} />
+								<Typography
+									sx={{
+										fontFamily: "Nunito",
+										fontWeight: 500,
+										fontSize: ".85rem",
+										color: "SCGray3",
+									}}
+								>
+									Editar
+								</Typography>
+							</Box>
+							<Box
 								sx={{
-									fontFamily: "Nunito",
-									fontWeight: 500,
-									fontSize: ".85rem",
-									color: "SCGray3",
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									gap: ".25rem",
+
+									padding: ".625rem .937rem",
+
+									cursor: "pointer",
 								}}
+								onClick={handleLogout}
 							>
-								Sair
-							</Typography>
+								<LogoutIcon sx={{ color: "SCGray3" }} />
+								<Typography
+									sx={{
+										fontFamily: "Nunito",
+										fontWeight: 500,
+										fontSize: ".85rem",
+										color: "SCGray3",
+									}}
+								>
+									Sair
+								</Typography>
+							</Box>
 						</Box>
-					</Box>
-				</Popover>
+					</Popover>
+				</Box>
 				<EditUserModal />
 				<ModalEditSucess />
 			</div>
-		</div>
+		</div >
 	);
 }
 
