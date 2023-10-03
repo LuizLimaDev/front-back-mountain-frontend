@@ -9,6 +9,7 @@ import billingIconActive from '../../../../assets/Menu/billings_active.svg';
 import { SingContext } from '../../../../context/SingContext';
 import './style.css';
 import useCharges from "../../../../hooks/useCharges";
+import useCustomers from "../../../../hooks/useCustomers";
 
 
 // eslint-disable-next-line react/prop-types
@@ -16,6 +17,7 @@ function MenuIcon() {
 
   const { active, setActive } = useContext(SingContext)
   const { setChargesParams } = useCharges();
+  const { setCustomersParams } = useCustomers();
   const location = useLocation();
 
   useEffect(() => {
@@ -42,7 +44,14 @@ function MenuIcon() {
 
       <div className={`menu-clients menu_icon ${active === "clients" || active === "clientDetail" ? "active_menu" : ""}`}>
         <NavLink to={"/clients"}>
-          <img src={active === "clients" || active === "clientDetail" ? clientsIconActive : clientsIcon} alt='Botão Clientes' className='menu-icon menu-clients-icon'></img>
+          <img
+            src={active === "clients" || active === "clientDetail" ? clientsIconActive : clientsIcon}
+            alt='Botão Clientes'
+            className='menu-icon menu-clients-icon'
+            onClick={() => {
+              setCustomersParams();
+            }}
+          ></img>
         </NavLink>
       </div>
 
@@ -57,7 +66,6 @@ function MenuIcon() {
             src={active === "billings" ? billingIconActive : billingIcon}
             alt='Botão Cobranças'
             className='menu-icon menu-billings-icon'
-
             onClick={() => {
               setChargesParams();
             }}
