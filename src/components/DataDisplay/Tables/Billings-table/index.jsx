@@ -23,7 +23,6 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 		setChargeEdit,
 		openChargeDetails,
 		setChargeDelete,
-		chargesParams,
 		setChargesParams,
 	} = useCharges();
 	const { setOpenChargeEditModal, setOpenChargeDeleteModal } =
@@ -32,26 +31,18 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 	const [orderID, setOrderID] = useState(false);
 
 	function handleOrderName() {
-		const localChargesParams = chargesParams;
 		setOrderName(!orderName);
-		localChargesParams.orderName = orderName ? "desc" : "asc";
-		delete localChargesParams.orderIdCharge;
-
 		setChargesParams(
 			// eslint-disable-next-line no-unused-vars
-			(prevState) => (prevState = { ...localChargesParams })
+			(prevState) => ({ ...prevState, orderID: "", orderName: orderName ? "desc" : "asc"})
 		);
 	}
 
 	function handleOrderID() {
-		const localChargesParams = chargesParams;
 		setOrderID(!orderID);
-		localChargesParams.orderIdCharge = orderID ? "desc" : "asc";
-		delete localChargesParams.orderName;
-
 		setChargesParams(
 			// eslint-disable-next-line no-unused-vars
-			(prevState) => (prevState = { ...localChargesParams })
+			(prevState) => ({ ...prevState, orderIdCharge: orderID ? "desc" : "asc", orderName: ""})
 		);
 	}
 	return (
