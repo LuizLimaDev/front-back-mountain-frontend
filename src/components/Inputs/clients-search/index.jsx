@@ -18,20 +18,13 @@ function ClientHeader() {
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
 		if(!event.target.value){
-			setCustomersParams((prevState) => prevState = {});
+			setCustomersParams({});
 		}
 	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		let localCustomersParams = customersParams;
-
-		if(search){
-			localCustomersParams.search = search;
-		}else{
-			localChargesParams = {};
-		}
-		setCustomersParams((prevState) => prevState = {...localCustomersParams})
+		setCustomersParams(({...customersParams, search}));
 	};
 
 	return (
