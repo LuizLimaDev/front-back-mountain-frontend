@@ -43,7 +43,7 @@ function BillingDetailedProjected() {
 				) : (
 					<SkeletonChargesTable />
 				)
-
+			}
 			<Link
 				to="/billings"
 				className="table-btn"
