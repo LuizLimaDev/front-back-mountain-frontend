@@ -34,7 +34,11 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 		setOrderName(!orderName);
 		setChargesParams(
 			// eslint-disable-next-line no-unused-vars
-			(prevState) => ({ ...prevState, orderID: "", orderName: orderName ? "desc" : "asc"})
+			(prevState) => ({
+				...prevState,
+				orderID: "",
+				orderName: orderName ? "desc" : "asc",
+			})
 		);
 	}
 
@@ -42,7 +46,11 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 		setOrderID(!orderID);
 		setChargesParams(
 			// eslint-disable-next-line no-unused-vars
-			(prevState) => ({ ...prevState, orderIdCharge: orderID ? "desc" : "asc", orderName: ""})
+			(prevState) => ({
+				...prevState,
+				orderIdCharge: orderID ? "desc" : "asc",
+				orderName: "",
+			})
 		);
 	}
 	return (
@@ -86,16 +94,41 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								ID Cob.
 							</div>
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+						<TableCell
+							align="left"
+							sx={{
+								...theme.inputModalLabelStyle,
+								paddingLeft: "2.5rem",
+							}}
+						>
 							Valor
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+						<TableCell
+							align="left"
+							sx={{
+								...theme.inputModalLabelStyle,
+								width: "8rem",
+								padding: 0,
+							}}
+						>
 							Data de venc.
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+						<TableCell
+							align="left"
+							sx={{
+								...theme.inputModalLabelStyle,
+								paddingLeft: "1.5rem",
+							}}
+						>
 							Status
 						</TableCell>
-						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+						<TableCell
+							align="left"
+							sx={{
+								...theme.inputModalLabelStyle,
+								paddingLeft: "2.5rem",
+							}}
+						>
 							Descrição
 						</TableCell>
 						<TableCell
@@ -108,7 +141,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					{charges.map((charge) => {
 						const chargeDate = format(
 							addHours(new Date(charge.duedate), 3),
-							"dd-MM-yyyy"
+							"dd/MM/yyyy"
 						);
 						const colorStatusStyled =
 							charge.status === "pendente"
@@ -136,13 +169,23 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									</TableCell>
 								)}
 								<TableCell
-									sx={theme.infoBillingsTable}
+									sx={{
+										...theme.infoBillingsTable,
+										paddingLeft: "2rem",
+									}}
 									onClick={() => openChargeDetails(charge)}
 								>
 									{charge.id}
 								</TableCell>
 								<TableCell
-									sx={theme.infoBillingsTable}
+									sx={{
+										...theme.infoBillingsTable,
+										maxWidth: "10rem",
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "ellipsis",
+										paddingLeft: "1.5rem",
+									}}
 									align="left"
 									onClick={() => openChargeDetails(charge)}
 								>
@@ -151,7 +194,11 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 										.replace(/^(\D+)/, "$1 ")}
 								</TableCell>
 								<TableCell
-									sx={theme.infoBillingsTable}
+									sx={{
+										...theme.infoBillingsTable,
+										maxWidth: "8rem",
+										padding: 0,
+									}}
 									align="left"
 									onClick={() => openChargeDetails(charge)}
 								>
@@ -183,8 +230,9 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 										style={{
 											whiteSpace: "nowrap",
 											overflow: "hidden",
-											width: "17rem",
 											textOverflow: "ellipsis",
+											width: "17rem",
+											paddingLeft: "1.5rem",
 										}}
 									>
 										{charge.description}
@@ -213,7 +261,12 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 															: charge.status,
 													value: charge.value,
 													dueDate: format(
-														addHours(new Date(charge.duedate), 3),
+														addHours(
+															new Date(
+																charge.duedate
+															),
+															3
+														),
 														"yyyy'-'MM'-'dd"
 													),
 													description:
@@ -279,7 +332,9 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					})}
 				</TableBody>
 			</Table>
-			{charges.length == 0 && !isClientDetailed ? <ErrorSearchPage /> : null}
+			{charges.length == 0 && !isClientDetailed ? (
+				<ErrorSearchPage />
+			) : null}
 		</TableContainer>
 	);
 }
