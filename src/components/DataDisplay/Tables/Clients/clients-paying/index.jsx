@@ -3,6 +3,7 @@ import clientsPayed from '../../../../../assets/Clients-payed.png'
 import useMetricsDashboard from '../../../../../hooks/useMetricsDashboard';
 import { Link, useNavigate } from 'react-router-dom';
 import useCustomers from '../../../../../hooks/useCustomers';
+import SkeletonChargesTable from '../../../../Feedback/Skeleton/SkeletonChargesTable';
 
 
 function ClientsPaying() {
@@ -26,13 +27,17 @@ function ClientsPaying() {
       </div>
 
       {
-        metrics.clientsList.onPayments.slice(0, 5).map((client) => {
-          return (<div className='table-big-content' key={client.id}>
-            <p className='data-name'>{client.name}</p>
-            <p className='data-id client-id'>{client.id}</p>
-            <p className='data-cpf'>{client.cpf}</p>
-          </div>)
-        })
+        metrics.clientsList.onPayments.length > 0 ? (
+          metrics.clientsList.onPayments.slice(0, 5).map((client) => {
+            return (<div className='table-big-content' key={client.id}>
+              <p className='data-name'>{client.name}</p>
+              <p className='data-id client-id'>{client.id}</p>
+              <p className='data-cpf'>{client.cpf}</p>
+            </div>)
+          })
+        ) : (
+          <SkeletonChargesTable />
+        )
       }
 
       <Link to="/clients"

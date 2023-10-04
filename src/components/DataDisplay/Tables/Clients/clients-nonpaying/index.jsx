@@ -3,6 +3,7 @@ import useMetricsDashboard from '../../../../../hooks/useMetricsDashboard';
 import clientsBilling from '../../../../../assets/Clients-billing.png';
 import './style.css';
 import useCustomers from '../../../../../hooks/useCustomers';
+import SkeletonChargesTable from '../../../../Feedback/Skeleton/SkeletonChargesTable';
 
 function ClientsNonpaying() {
 
@@ -26,13 +27,17 @@ function ClientsNonpaying() {
       </div>
 
       {
-        metrics.clientsList.noPayments.slice(0, 5).map((client) => {
-          return (<div className='table-big-content' key={client.id}>
-            <p className='data-name'>{client.name}</p>
-            <p className='data-id client-id'>{client.id}</p>
-            <p className='data-cpf'>{client.cpf}</p>
-          </div>)
-        })
+        metrics.clientsList.noPayments.length > 0 ? (
+          metrics.clientsList.noPayments.slice(0, 5).map((client) => {
+            return (<div className='table-big-content' key={client.id}>
+              <p className='data-name'>{client.name}</p>
+              <p className='data-id client-id'>{client.id}</p>
+              <p className='data-cpf'>{client.cpf}</p>
+            </div>)
+          })
+        ) : (
+          <SkeletonChargesTable />
+        )
       }
 
       <Link to="/clients"

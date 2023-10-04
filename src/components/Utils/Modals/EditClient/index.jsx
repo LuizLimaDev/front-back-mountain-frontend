@@ -73,6 +73,12 @@ export default function EditClientModal() {
 			onClose={() => {
 				setEditClientModal(!editClientModal);
 				setFormCustomer(customer);
+				setClientErrors({
+					name: false,
+					email: false,
+					cpf: false,
+					phone: false,
+				});
 			}}
 		>
 			<Box
@@ -102,6 +108,12 @@ export default function EditClientModal() {
 					onClick={() => {
 						setEditClientModal(!editClientModal);
 						setFormCustomer(customer);
+						setClientErrors({
+							name: false,
+							email: false,
+							cpf: false,
+							phone: false,
+						});
 					}}
 				/>
 				<form onSubmit={(event) => handleSubmit(event)}>
@@ -524,6 +536,12 @@ export default function EditClientModal() {
 							onClick={() => {
 								setEditClientModal(false);
 								setFormCustomer(customer);
+								setClientErrors({
+									name: false,
+									email: false,
+									cpf: false,
+									phone: false,
+								});
 							}}
 						>
 							Cancelar
