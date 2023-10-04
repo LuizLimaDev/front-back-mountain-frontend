@@ -25,18 +25,22 @@ export default function BillingsSearch() {
 
 	const handleInputChange = (event) => {
 		setSearch(event.target.value);
+		// eslint-disable-next-line no-prototype-builtins
+		if(!event.target.value){
+			setChargesParams((prevState) => prevState = {});
+		}
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const localChargesParams = chargesParams;
+		let localChargesParams = chargesParams;
 
 		if(search){
 			localChargesParams.search = search;
 		}else{
-			delete localChargesParams.search;
+			localChargesParams = {};
 		}
-		setChargesParams((prevState) => prevState = {...localChargesParams})
+		setChargesParams((prevState) => prevState = localChargesParams)
 	};
 
 	return (

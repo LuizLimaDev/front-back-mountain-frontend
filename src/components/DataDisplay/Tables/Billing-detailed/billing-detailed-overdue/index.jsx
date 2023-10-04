@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useCharges from "../../../../../hooks/useCharges";
 import useMetricsDashboard from "../../../../../hooks/useMetricsDashboard";
 import { moneyFormat } from "../../../../../utils/moneyFormat";
+import SkeletonChargesTable from "../../../../Feedback/Skeleton/SkeletonChargesTable";
 import "./style.css";
 
 function BillingDetailedOverdue() {
@@ -23,19 +24,25 @@ function BillingDetailedOverdue() {
 				<p className="table-info">Id da cob.</p>
 				<p className="table-info">Valor</p>
 			</div>
-			{metrics.listBillings.overdue.slice(0, 5).map((billing) => {
-				return (
-					<div className="table-content" key={billing.id}>
-						<p className="data-name">{billing.name}</p>
-						<p className="data-id">{billing.id}</p>
-						<p className="data-value">
-							{moneyFormat
-								.format(billing.value)
-								.replace(/^(\D+)/, "$1 ")}
-						</p>
-					</div>
-				);
-			})}
+			{
+				metrics.listBillings.overdue.length > 0 ? (
+					metrics.listBillings.overdue.slice(0, 5).map((billing) => {
+						return (
+							<div className="table-content" key={billing.id}>
+								<p className="data-name">{billing.name}</p>
+								<p className="data-id">{billing.id}</p>
+								<p className="data-value">
+									{moneyFormat
+										.format(billing.value)
+										.replace(/^(\D+)/, "$1 ")}
+								</p>
+							</div>
+						);
+					})
+				) : (
+					<SkeletonChargesTable />
+				)
+			}
 
 			<Link
 				to="/billings"

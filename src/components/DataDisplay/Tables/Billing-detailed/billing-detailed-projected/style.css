@@ -71,6 +71,10 @@
 	font-weight: 400;
 }
 
+.table-content-skeleton {
+	padding-right: 2rem;
+}
+
 .table-btn {
 	display: flex;
 	align-items: center;
@@ -88,3 +92,4 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
