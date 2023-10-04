@@ -16,7 +16,6 @@ export default function useEmailValidation() {
 
     if (!emailInput) {
       setErrorEmailMessage("O campo de E-mail não pode estar vazio!")
-      return
     }
 
     try {

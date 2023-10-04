@@ -59,7 +59,7 @@ function MenuIcon() {
         <NavLink to={"/billings"}
           className={({ isActive }) => {
             isActive ?
-              setActive("billings")
+              "billings"
               : null;
           }}>
           <img
