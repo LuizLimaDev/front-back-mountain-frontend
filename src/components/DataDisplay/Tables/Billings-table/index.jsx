@@ -73,7 +73,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 				>
 					<TableRow sx={theme.inputModalLabelStyle}>
 						{isClientDetailed ? null : (
-							<TableCell>
+							<TableCell sx={theme.inputModalLabelStyle}>
 								<div className="client-icon">
 									<img
 										style={{ cursor: "pointer" }}
