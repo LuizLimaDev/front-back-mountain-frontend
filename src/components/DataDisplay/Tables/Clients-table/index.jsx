@@ -27,7 +27,7 @@ let green = (
 );
 
 export default function ClientsTable() {
-	const { customers, customersParams, setCustomersParams } = useCustomers();
+	const { customers, setCustomersParams } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } =
 		useContext(ModalsContext);
 	const [order, setOrder] = useState(false);
@@ -35,12 +35,8 @@ export default function ClientsTable() {
 
 	function handleOrder() {
 		setOrder(!order);
-
-		const localCustomersParams = customersParams;
-		localCustomersParams.orderName = order ? "desc" : "asc";
-
 		setCustomersParams(
-			(prevState) => (prevState = { ...localCustomersParams })
+			(prevState) => ({...prevState, orderName: order ? "desc" : "asc"  })
 		);
 	}
 
