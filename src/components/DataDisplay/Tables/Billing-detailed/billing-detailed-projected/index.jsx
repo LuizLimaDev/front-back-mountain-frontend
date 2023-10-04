@@ -28,15 +28,13 @@ function BillingDetailedProjected() {
 			{
 				metrics.listBillings.projected.length > 0 ? (
 					metrics.listBillings.projected.slice(0, 5).map((billing) => {
+						const formattedValue = moneyFormat.format(billing.value).replace(/^(\D+)/, "$1 ");
+						const valueClassName = formattedValue.length > 10 ? "data-value hidden" : "data-value";
 						return (
 							<div className="table-content" key={billing.id}>
 								<p className="data-name">{billing.name}</p>
 								<p className="data-id">{billing.id}</p>
-								<p className="data-value">
-									{moneyFormat
-										.format(billing.value)
-										.replace(/^(\D+)/, "$1 ")}
-								</p>
+								<p className={valueClassName}>{formattedValue}</p>
 							</div>
 						);
 					})

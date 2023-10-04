@@ -86,3 +86,10 @@
 	font-size: 1.125rem;
 	font-weight: 400;
 }
+
+.hidden {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
