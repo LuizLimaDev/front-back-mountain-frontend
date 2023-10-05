@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useTheme } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -5,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../../assets/create-billing.png";
@@ -14,6 +15,10 @@ import useCustomers from "../../../../hooks/useCustomers";
 import ChargeModal from "../../../Utils/Modals/ChargeModal";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import "./style.css";
+import {
+	CustomersContext,
+	CustomersProvider,
+} from "../../../../context/CustomersContext";
 
 let red = (
 	<div style={{ fontWeight: "600" }} className="red">
@@ -27,19 +32,46 @@ let green = (
 );
 
 export default function ClientsTable() {
-	const { customers, setCustomersParams } = useCustomers();
+	const { customers, setCustomers, setCustomersParams } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } =
 		useContext(ModalsContext);
 	const [order, setOrder] = useState(false);
 	const theme = useTheme();
 
-	function handleOrder() {
-		setOrder(!order);
-		setCustomersParams((prevState) => ({
-			...prevState,
-			orderName: order ? "desc" : "asc",
-		}));
-	}
+	// function handleOrder() {
+	// 	// setCustomersParams((prevState) => ({
+	// 	// 	...prevState,
+	// 	// 	orderName: order ? "desc" : "asc",
+	// 	// }));
+	// 	let clientes = customers;
+
+	// 	clientes.sort((a, b) => {
+	// 		if (!order) {
+	// 			return a.name.localeCompare(b.name);
+	// 		} else {
+	// 			return b.name.localeCompare(a.name);
+	// 		}
+	// 	});
+
+	// 	setOrder(!order);
+	// 	setCustomers(clientes);
+	// 	console.log(clientes);
+	// }
+
+	useEffect(() => {
+		let clientes = customers;
+
+		clientes.sort((a, b) => {
+			if (order) {
+				return a.name.localeCompare(b.name);
+			} else {
+				return b.name.localeCompare(a.name);
+			}
+		});
+
+		setCustomers(clientes);
+		console.log(clientes);
+	}, [order]);
 
 	return (
 		<TableContainer
@@ -65,7 +97,7 @@ export default function ClientsTable() {
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}
-									onClick={() => handleOrder()}
+									onClick={() => setOrder(!order)}
 								/>{" "}
 								Cliente
 							</div>
