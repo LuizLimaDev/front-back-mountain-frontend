@@ -30,7 +30,7 @@ export default function ClientModal() {
 	const { setOpenSnackClientAdd } = useContext(ModalsContext);
 	const { customersUpdate } = useCustomers();
 	const { handleZipcodeBlur } = useZipcode()
-
+	
 	function handleChange(event) {
 		const inputValue = event.target.value
 		let formatedNames;
@@ -43,10 +43,11 @@ export default function ClientModal() {
 			}
 
 			formatedNames = (nameSplit.join(" "));
+			return setClientForm((prevState) => ({...prevState, name: formatedNames}));
 		}
 
 		setClientForm((prevState) => {
-			return { ...prevState, [event.target.name]: inputValue, name: formatedNames };
+			return { ...prevState, [event.target.name]: inputValue };
 		});
 
 		setClientErrors({
