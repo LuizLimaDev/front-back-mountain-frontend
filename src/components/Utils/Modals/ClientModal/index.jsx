@@ -43,7 +43,7 @@ export default function ClientModal() {
 			}
 
 			formatedNames = (nameSplit.join(" "));
-			clientForm.name = formatedNames;
+			return setClientForm((prevState) => ({...prevState, name: formatedNames}));
 		}
 
 		setClientForm((prevState) => {
@@ -56,7 +56,6 @@ export default function ClientModal() {
 			cpf: false,
 			phone: false,
 		});
-		console.log(clientForm)
 	}
 
 	function cleanForm() {
