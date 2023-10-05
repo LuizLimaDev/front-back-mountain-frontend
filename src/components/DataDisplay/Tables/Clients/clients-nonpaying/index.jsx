@@ -8,7 +8,7 @@ import SkeletonChargesTable from '../../../../Feedback/Skeleton/SkeletonChargesT
 function ClientsNonpaying() {
 
   const { metrics } = useMetricsDashboard();
-  const { setCustomersParams } = useCustomers();
+  const { customersUpdate, setCustomersParams } = useCustomers();
   const navigate = useNavigate();
 
   return (
@@ -42,9 +42,10 @@ function ClientsNonpaying() {
 
       <Link to="/clients"
         className="table-btn"
-        onClick={(e) => {
+        onClick={async (e) => {
           e.preventDefault();
-          setCustomersParams({ filter: 'inadimplente' });
+          await setCustomersParams({ filter: 'inadimplente' });
+          await customersUpdate();
           navigate('/clients');
         }}
       >

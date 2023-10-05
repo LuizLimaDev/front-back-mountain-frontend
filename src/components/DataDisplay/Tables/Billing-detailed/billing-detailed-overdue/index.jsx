@@ -8,7 +8,7 @@ import "./style.css";
 function BillingDetailedOverdue() {
 
 	const { metrics } = useMetricsDashboard();
-	const { setChargesParams } = useCharges();
+	const { getCharges, setChargesParams } = useCharges();
 	const navigate = useNavigate();
 
 	return (
@@ -45,12 +45,12 @@ function BillingDetailedOverdue() {
 			}
 
 			<Link
-				to="/billings"
 				className="table-btn"
-				onClick={(e) => {
+				onClick={async (e) => {
 					e.preventDefault();
+					await setChargesParams({ filter: '["vencido"]' });
+					await getCharges();
 					navigate('/billings');
-					setChargesParams({ filter: '["vencido"]' });
 				}}
 			>
 				Ver todos

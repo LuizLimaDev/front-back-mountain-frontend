@@ -8,7 +8,7 @@ import SkeletonChargesTable from '../../../../Feedback/Skeleton/SkeletonChargesT
 function BillingDetailedProjected() {
 
 	const { metrics } = useMetricsDashboard();
-	const { setChargesParams } = useCharges();
+	const { getCharges, setChargesParams } = useCharges();
 	const navigate = useNavigate();
 
 	return (
@@ -46,10 +46,11 @@ function BillingDetailedProjected() {
 			<Link
 				to="/billings"
 				className="table-btn"
-				onClick={(e) => {
+				onClick={async (e) => {
 					e.preventDefault();
+					await setChargesParams({ filter: '["pendente"]' });
+					await getCharges();
 					navigate('/billings');
-					setChargesParams({ filter: '["pendente"]' });
 				}}
 			>
 				Ver todos
