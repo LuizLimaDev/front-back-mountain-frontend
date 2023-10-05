@@ -12,47 +12,74 @@ import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import useCharges from "../../../../hooks/useCharges";
 
 // eslint-disable-next-line react/prop-types
 export default function BillingsTable({ charges, isClientDetailed }) {
 	const theme = useTheme();
-	const {
-		setChargeEdit,
-		openChargeDetails,
-		setChargeDelete,
-		setChargesParams,
-	} = useCharges();
+	const { setChargeEdit, openChargeDetails, setChargeDelete, setCharges } =
+		useCharges();
 	const { setOpenChargeEditModal, setOpenChargeDeleteModal } =
 		useContext(ModalsContext);
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
 
-	function handleOrderName() {
-		setOrderName(!orderName);
-		setChargesParams(
-			// eslint-disable-next-line no-unused-vars
-			(prevState) => ({
-				...prevState,
-				orderID: "",
-				orderName: orderName ? "desc" : "asc",
-			})
-		);
-	}
+	// function handleOrderName() {
+	// 	setOrderName(!orderName);
+	// 	setChargesParams(
+	// 		// eslint-disable-next-line no-unused-vars
+	// 		(prevState) => ({
+	// 			...prevState,
+	// 			orderID: "",
+	// 			orderName: orderName ? "desc" : "asc",
+	// 		})
+	// 	);
+	// }
 
-	function handleOrderID() {
-		setOrderID(!orderID);
-		setChargesParams(
-			// eslint-disable-next-line no-unused-vars
-			(prevState) => ({
-				...prevState,
-				orderIdCharge: orderID ? "desc" : "asc",
-				orderName: "",
-			})
-		);
-	}
+	// function handleOrderID() {
+	// 	setOrderID(!orderID);
+	// 	setChargesParams(
+	// 		// eslint-disable-next-line no-unused-vars
+	// 		(prevState) => ({
+	// 			...prevState,
+	// 			orderIdCharge: orderID ? "desc" : "asc",
+	// 			orderName: "",
+	// 		})
+	// 	);
+	// }
+
+	useEffect(() => {
+		let cobrancas = charges;
+
+		cobrancas.sort((a, b) => {
+			if (orderName) {
+				return a.name.localeCompare(b.name);
+			} else {
+				return b.name.localeCompare(a.name);
+			}
+		});
+
+		setCharges(cobrancas);
+		console.log(cobrancas);
+	}, [orderName]);
+
+	useEffect(() => {
+		let cobrancas = charges;
+
+		cobrancas.sort((a, b) => {
+			if (orderID) {
+				return a.id - b.id;
+			} else {
+				return b.id - a.id;
+			}
+		});
+
+		setCharges(cobrancas);
+		console.log(cobrancas);
+	}, [orderID]);
+
 	return (
 		<TableContainer
 			sx={{
@@ -78,7 +105,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 									<img
 										style={{ cursor: "pointer" }}
 										src={ChevronUpDown}
-										onClick={() => handleOrderName()}
+										onClick={() => setOrderName(!orderName)}
 									/>{" "}
 									Cliente
 								</div>
@@ -89,7 +116,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 								<img
 									style={{ cursor: "pointer" }}
 									src={ChevronUpDown}
-									onClick={() => handleOrderID()}
+									onClick={() => setOrderID(!orderID)}
 								/>{" "}
 								ID Cob.
 							</div>

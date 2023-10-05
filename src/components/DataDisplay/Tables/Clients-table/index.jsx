@@ -32,7 +32,7 @@ let green = (
 );
 
 export default function ClientsTable() {
-	const { customers, setCustomers, setCustomersParams } = useCustomers();
+	const { customers, setCustomers } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } =
 		useContext(ModalsContext);
 	const [order, setOrder] = useState(false);
