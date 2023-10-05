@@ -35,9 +35,10 @@ export default function ClientsTable() {
 
 	function handleOrder() {
 		setOrder(!order);
-		setCustomersParams(
-			(prevState) => ({...prevState, orderName: order ? "desc" : "asc"  })
-		);
+		setCustomersParams((prevState) => ({
+			...prevState,
+			orderName: order ? "desc" : "asc",
+		}));
 	}
 
 	return (
@@ -59,7 +60,7 @@ export default function ClientsTable() {
 					}}
 				>
 					<TableRow>
-						<TableCell>
+						<TableCell sx={theme.inputModalLabelStyle}>
 							<div className="client-icon">
 								<img
 									style={{ cursor: "pointer" }}
@@ -69,11 +70,21 @@ export default function ClientsTable() {
 								Cliente
 							</div>
 						</TableCell>
-						<TableCell align="left">CPF</TableCell>
-						<TableCell align="left">E-mail</TableCell>
-						<TableCell align="left">Telefone</TableCell>
-						<TableCell align="left">Status</TableCell>
-						<TableCell align="left">Criar Cobrança</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							CPF
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							E-mail
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Telefone
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Status
+						</TableCell>
+						<TableCell align="left" sx={theme.inputModalLabelStyle}>
+							Criar Cobrança
+						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>

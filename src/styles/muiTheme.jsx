@@ -58,8 +58,9 @@ export const theme = createTheme({
 	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
-		fontWeight: "bold",
-		fontSize: ".875rem",
+		color: "SCGray2",
+		fontWeight: "700",
+		fontSize: "1rem",
 	},
 	MUIerrorMessageStyle: {
 		fontFamily: "Inter",
@@ -72,7 +73,7 @@ export const theme = createTheme({
 	clientLabelStyle: {
 		marginBottom: ".5rem",
 		fontFamily: "Montserrat",
-		fontSize: "0.9rem",
+		fontSize: "1rem",
 		fontWeight: "700",
 	},
 	clientValueStyle: {
