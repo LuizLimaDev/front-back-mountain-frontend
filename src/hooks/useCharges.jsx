@@ -46,7 +46,7 @@ export default function useCharges() {
 			});
 
 			setCharges(data.charges);
-			("");
+
 		} catch (error) {
 			console.log(error);
 		}
