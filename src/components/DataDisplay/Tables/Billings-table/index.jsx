@@ -26,30 +26,41 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 	} = useCharges();
 	const { setOpenChargeEditModal, setOpenChargeDeleteModal } =
 		useContext(ModalsContext);
-	const [orderName, setOrderName] = useState(false);
-	const [orderID, setOrderID] = useState(false);
+	const [orderName, setOrderName] = useState({
+		state: false,
+		clicked: false
+	});
+	const [orderID, setOrderID] = useState({
+		state: false,
+		clicked: false
+	});
 	const [orderedCharges, setOrderedCharges] = useState([])
 
 	useEffect(() => {
 		const currentCustomers = [...charges];
 
-		currentCustomers.sort((a, b) => {
-			if (orderName) {
-				return b.name.localeCompare(a.name);
-			} else {
-				return a.name.localeCompare(b.name);
+		if(orderName.clicked){
+			if(orderName.state){
+				currentCustomers.sort((a, b) => {
+					return b.name.localeCompare(a.name);
+				})
+			}else {
+				currentCustomers.sort((a, b) => {
+					return a.name.localeCompare(b.name);
+				})
 			}
-		})
+		}
 
-		if (orderID) {
-			currentCustomers.sort((a, b) => {
-				if (orderID) {
+		if(orderID.clicked){
+			if(orderID.state){
+				currentCustomers.sort((a, b) => {
 					return a.id - b.id
-				} else {
+				})
+			}else {
+				currentCustomers.sort((a, b) => {
 					return b.id - a.id
-				}
-			})
-
+				})
+			}
 		}
 
 		setOrderedCharges(currentCustomers)
@@ -57,13 +68,25 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 	}, [charges, orderName, orderID])
 
 	function handleOrderName() {
-		setOrderName(!orderName);
-		setOrderID(false)
+		setOrderName({
+			state: !orderName.state,
+			clicked: true	
+		});
+		setOrderID({
+			state: false,
+			clicked: false
+		})
 	}
 
 	function handleOrderID() {
-		setOrderID(!orderID);
-		setOrderName(false);
+		setOrderID({
+			state: !orderID.state,
+			clicked: true
+		});
+		setOrderName({
+			state: false,
+			clicked: false
+		});
 	}
 	
 	return (
