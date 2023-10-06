@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ChevronUpDown from "../../../../assets/chevron-Up-Down.png";
 import CreateBilling from "../../../../assets/create-billing.png";
@@ -27,18 +27,30 @@ let green = (
 );
 
 export default function ClientsTable() {
-	const { customers, setCustomersParams } = useCustomers();
+	const { customers } = useCustomers();
 	const { setOpenChargeModal, setCustomerCharges } =
 		useContext(ModalsContext);
 	const [order, setOrder] = useState(false);
+	const [orderedCustomers, setOrderedCustomers] = useState([])
 	const theme = useTheme();
+
+	useEffect(() => {
+		const currentCustomers = [...customers];
+
+		currentCustomers.sort((a, b) => {
+			if (order) {
+				return b.name.localeCompare(a.name);
+			} else {
+				return a.name.localeCompare(b.name);
+			}
+		})
+
+		setOrderedCustomers(currentCustomers)
+
+	}, [customers, order])
 
 	function handleOrder() {
 		setOrder(!order);
-		setCustomersParams((prevState) => ({
-			...prevState,
-			orderName: order ? "desc" : "asc",
-		}));
 	}
 
 	return (
@@ -88,7 +100,7 @@ export default function ClientsTable() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{customers.map((row) => (
+					{orderedCustomers.map((row) => (
 						<TableRow
 							key={row.id}
 							sx={{

@@ -12,7 +12,7 @@ import DeleteIcon from "../../../../assets/delete-icon-billing.svg";
 import EditIcon from "../../../../assets/edit.svg";
 import { moneyFormat } from "../../../../utils/moneyFormat";
 import { ModalsContext } from "../../../../context/ModalsContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ErrorSearchPage from "../../../Layouts/ErrorSearch";
 import useCharges from "../../../../hooks/useCharges";
 
@@ -23,36 +23,49 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 		setChargeEdit,
 		openChargeDetails,
 		setChargeDelete,
-		setChargesParams,
 	} = useCharges();
 	const { setOpenChargeEditModal, setOpenChargeDeleteModal } =
 		useContext(ModalsContext);
 	const [orderName, setOrderName] = useState(false);
 	const [orderID, setOrderID] = useState(false);
+	const [orderedCharges, setOrderedCharges] = useState([])
+
+	useEffect(() => {
+		const currentCustomers = [...charges];
+
+		currentCustomers.sort((a, b) => {
+			if (orderName) {
+				return b.name.localeCompare(a.name);
+			} else {
+				return a.name.localeCompare(b.name);
+			}
+		})
+
+		if (orderID) {
+			currentCustomers.sort((a, b) => {
+				if (orderID) {
+					return a.id - b.id
+				} else {
+					return b.id - a.id
+				}
+			})
+
+		}
+
+		setOrderedCharges(currentCustomers)
+
+	}, [charges, orderName, orderID])
 
 	function handleOrderName() {
 		setOrderName(!orderName);
-		setChargesParams(
-			// eslint-disable-next-line no-unused-vars
-			(prevState) => ({
-				...prevState,
-				orderID: "",
-				orderName: orderName ? "desc" : "asc",
-			})
-		);
+		setOrderID(false)
 	}
 
 	function handleOrderID() {
 		setOrderID(!orderID);
-		setChargesParams(
-			// eslint-disable-next-line no-unused-vars
-			(prevState) => ({
-				...prevState,
-				orderIdCharge: orderID ? "desc" : "asc",
-				orderName: "",
-			})
-		);
+		setOrderName(false);
 	}
+	
 	return (
 		<TableContainer
 			sx={{
@@ -138,7 +151,7 @@ export default function BillingsTable({ charges, isClientDetailed }) {
 					</TableRow>
 				</TableHead>
 				<TableBody sx={{ backgroundColor: "white" }}>
-					{charges.map((charge) => {
+					{orderedCharges.map((charge) => {
 						const chargeDate = format(
 							addHours(new Date(charge.duedate), 3),
 							"dd/MM/yyyy"
