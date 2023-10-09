@@ -20,6 +20,8 @@ export const theme = createTheme({
 		SCGray2: "#3F3F55",
 
 		SCLightRed: "#FFEFEF",
+		SCSnackLightRed: "#F2D6D0",
+		SCSnackDarkRed: "#AE1100",
 		SCDarkRed: "#971D1D",
 
 		SCLightYellow: "#FCF6DC",
@@ -35,18 +37,30 @@ export const theme = createTheme({
 		MuiFormHelperText: {
 			styleOverrides: {
 				root: {
-					color: "#C33E32"
-				}
-			}
-		}
+					color: "#C33E32",
+				},
+			},
+		},
 	},
 	typography: {
-		fontFamily: ["Montserrat", "sans-serif", "Nunito", "Inter", "Roboto"].join(","),
+		fontFamily: [
+			"Montserrat",
+			"sans-serif",
+			"Nunito",
+			"Inter",
+			"Roboto",
+		].join(","),
+	},
+	SCmodalTile: {
+		fontFamily: "Montserrat",
+		fontWeight: "600",
+		fontSize: "1.5rem",
 	},
 	inputModalLabelStyle: {
 		fontFamily: "Nunito",
-		fontWeight: "bold",
-		fontSize: ".875rem",
+		color: "SCGray2",
+		fontWeight: "700",
+		fontSize: "1rem",
 	},
 	MUIerrorMessageStyle: {
 		fontFamily: "Inter",
@@ -59,7 +73,7 @@ export const theme = createTheme({
 	clientLabelStyle: {
 		marginBottom: ".5rem",
 		fontFamily: "Montserrat",
-		fontSize: "0.9rem",
+		fontSize: "1rem",
 		fontWeight: "700",
 	},
 	clientValueStyle: {
@@ -90,14 +104,24 @@ export const theme = createTheme({
 	},
 	statusBillings: {
 		display: "flex",
-		textAlign: "center",
+		justifyContent: "center",
+		width: "4.75rem",
 		borderRadius: "0.5rem",
+
 		fontFamily: "Nunito",
 		fontSize: "0.9rem",
 		fontStyle: "normal",
 		fontWeight: "600",
+		textAlign: "center",
 		lineHeight: "normal",
 	},
+	// statusBillingsShape: {
+	// 	width: "4.75rem",
+	// 	borderRadius: ".5rem",
+	// 	fontFamily: "Nunito",
+	// 	fontWeight: "600",
+	// 	textAlign: "center"
+	// },
 	billingsYellow: {
 		backgroundColor: "SCLightYellow",
 		color: "SCDarkYellow",

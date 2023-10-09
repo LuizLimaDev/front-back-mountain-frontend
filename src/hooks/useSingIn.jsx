@@ -9,7 +9,8 @@ export default function useSingUp() {
     password,
     setValue,
     setErrorEmailMessage,
-    apiErrors, setApiErrors
+    apiErrors, setApiErrors,
+    setShowPassword
   } = useContext(SingContext)
   const navigate = useNavigate()
 
@@ -51,9 +52,16 @@ export default function useSingUp() {
     return false
   }
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return {
     handleSubmit,
     emailErrors,
-    passwordErrors
+    passwordErrors,
+    handleClickShowPassword,
+    handleMouseDownPassword
   }
 }
