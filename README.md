@@ -40,7 +40,7 @@ Sem Calote
 
 <div align="center">
 
-![My Skills](https://skillicons.dev/icons?i=react,materialui,nodejs,express,postgrees)
+![My Skills](https://skillicons.dev/icons?i=react,materialui,nodejs,express,postgres)
 
 <div>
 
